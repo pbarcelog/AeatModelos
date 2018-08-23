@@ -84,7 +84,9 @@ namespace AeatModelos.RegistroMod300_2018
                 {++c,    new RegistroCampo(0,   0,  18,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  $"</T3030{Ejercicio}{Periodo}0000>")},
                 {++c,    new RegistroCampo(0,   0,   0,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,   '\n'                    )},
             };
-         
+
+            Paginas = RegistroCampos[14] as ConjuntoDeEmpaquetables;
+
         }
 
 

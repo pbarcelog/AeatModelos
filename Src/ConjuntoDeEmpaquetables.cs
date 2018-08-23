@@ -55,6 +55,22 @@ namespace AeatModelos
     {
 
         /// <summary>
+        /// Constructor.
+        /// </summary>
+        public ConjuntoDeEmpaquetables(): this("Paginas")
+        {            
+        }
+
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="descripcion">Descripción del conjunto de empaquetables.</param>
+        public ConjuntoDeEmpaquetables(string descripcion)
+        {
+            Descripcion = descripcion;
+        }
+
+        /// <summary>
         /// Valor del campo.
         /// </summary>
         public object Valor
@@ -72,17 +88,7 @@ namespace AeatModelos
         /// <summary>
         /// Descripción del campo.
         /// </summary>
-        public string Descripcion
-        {
-            get
-            {
-                throw new NotImplementedException("Pendiente!!!!!");
-            }
-            set
-            {
-                throw new NotImplementedException("Pendiente!!!!!");
-            }
-        }
+        public string Descripcion { get; private set; }
 
         /// <summary>
         /// Devuelve el campo que se corresponde con la descripción facilitada

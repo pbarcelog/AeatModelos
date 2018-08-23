@@ -92,6 +92,14 @@ namespace AeatModelos
         public Dictionary<decimal, IEmpaquetable> RegistroCampos { get; protected set; }
 
         /// <summary>
+        /// Si la instancia actual contiene más páginas
+        /// estas se muestran como ConjuntoDeEmpaquetables
+        /// en esta propiedad. Si no el valor de la propiedad
+        /// es null.
+        /// </summary>
+        public ConjuntoDeEmpaquetables Paginas { get; protected set; }
+
+        /// <summary>
         /// Constructor.
         /// </summary>
         /// <param name="ejercicio">AAAA: 2018</param>
