@@ -50,7 +50,8 @@ namespace AeatModelos
     {
 
         /// <summary>
-        /// Catálogo de mensajes de error.
+        /// Catálogo de mensajes de error: Contiene codificados en forma clave-valor los mensajes
+        /// para los tipos de error controlados por la librería.
         /// </summary>
         public static Dictionary<string, string> Catalogo = new Dictionary<string, string>() {
             {"Registro.Registro.000", "No existe el tipo de dato {0}." },
@@ -62,8 +63,12 @@ namespace AeatModelos
         /// <summary>
         /// Muestra el mensaje de error para la clave de 
         /// error indicada con la información adicional pasada
-        /// como params.-
+        /// como params.
         /// </summary>
+        /// <param name="claveError">Clave que identifica el error
+        /// del que se quiere recuperar el mensaje.</param>
+        /// <param name="infos">Parámetros de información adicional
+        /// que se necesitan para componer el mensaje.</param>
         /// <returns>Mensje de error.</returns>
         public static string MostrarMensaje(string claveError, params string[] infos)
         {

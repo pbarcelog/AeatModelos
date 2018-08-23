@@ -36,25 +36,38 @@
     dirección: info@irenesolutions.com
  */
 
-using System;
-
-namespace AeatModelos.Conversores
+namespace AeatModelos
 {
-
     /// <summary>
-    /// Conversor de texto para el tipo de datos
-    /// denominado por la aeat como 'Num'
+    /// <para>Este espacio de nombres contiene los componentes generales para el trabajo
+    /// con la libreria AeatModelos para la generación y carga de ficheros según las
+    /// especificaciones de la AEAT.</para> 
     /// </summary>
-    public class Num : ConversorNumero
+    [System.Runtime.CompilerServices.CompilerGenerated]
+    class NamespaceDoc
     {
-
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        /// <param name="registroCampo">Registro campo subyacente.</param>
-        public Num(RegistroCampo registroCampo) : base(registroCampo)
-        {
-        }
-
     }
 }
+namespace AeatModelos.Conversores
+{
+    /// <summary>
+    /// <para>Este espacio de nombres contiene los componenete utilizados
+    /// para la conversión de las entradas y las salidas.</para> 
+    /// </summary>
+    [System.Runtime.CompilerServices.CompilerGenerated]
+    class NamespaceDoc
+    {
+    }
+}
+namespace AeatModelos.RegistroMod300_2018
+{
+    /// <summary>
+    /// <para>Diseño de registro y utilidades para el  Modelo 303
+    /// utilizado en la autoliquidación del IVA.</para> 
+    /// </summary>
+    [System.Runtime.CompilerServices.CompilerGenerated]
+    class NamespaceDoc
+    {
+    }
+}
+

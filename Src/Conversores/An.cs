@@ -40,6 +40,11 @@ using System;
 
 namespace AeatModelos.Conversores
 {
+
+    /// <summary>
+    /// Conversor de texto para el tipo de datos
+    /// denominado por la aeat como 'An'
+    /// </summary>
     public class An : ConversorTexto
     {
         /// <summary>

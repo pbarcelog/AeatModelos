@@ -40,6 +40,12 @@ using System;
 
 namespace AeatModelos.Conversores
 {
+
+    /// <summary>
+    /// Se encarga de hacer la conversión de los datos
+    /// entrados desde fichero, y de los datos de salida
+    /// para fichero.
+    /// </summary>
     public class Conversor : IConversor
     {
 

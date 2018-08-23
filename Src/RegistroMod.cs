@@ -92,16 +92,6 @@ namespace AeatModelos
         public Dictionary<decimal, IEmpaquetable> RegistroCampos { get; protected set; }
 
         /// <summary>
-        /// Servicio de validación y pruebas.
-        /// </summary>
-        public string UrlServicioValidacion { get; protected set; }
-
-        /// <summary>
-        /// Variables y valores para el post al servicio de validación.
-        /// </summary>
-        public Dictionary<string, string> VariablesServicioValidacion { get; protected set; }
-
-        /// <summary>
         /// Constructor.
         /// </summary>
         /// <param name="ejercicio">AAAA: 2018</param>
@@ -155,10 +145,6 @@ namespace AeatModelos
                 constructorTexto.Append(entrada.Value.AFichero());
 
             string resultado = constructorTexto.ToString();
-
-            if(VariablesServicioValidacion != null)
-                if(VariablesServicioValidacion.ContainsKey("FIC"))
-                    VariablesServicioValidacion["FIC"] = resultado.Replace("\n","");
 
             return resultado;
 

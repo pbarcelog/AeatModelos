@@ -45,7 +45,11 @@ namespace AeatModelos
 {
 
     /// <summary>
-    /// Conjunto de elementos empaquetables.
+    /// Conjunto de elementos empaquetables. 
+    /// Grupo de objetos que se puede representar mediante segmentos de 
+    /// texto válidos para incluir en un resgistro de la aeat; Y que a su
+    /// vez puede ser representado también como un segmento válido generado
+    /// mediante la concatenación de sus elmentos hijo-
     /// </summary>
     public class ConjuntoDeEmpaquetables : IEmpaquetable
     {

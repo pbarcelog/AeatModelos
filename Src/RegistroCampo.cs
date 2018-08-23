@@ -160,14 +160,20 @@ namespace AeatModelos
         /// <summary>
         /// Constructor.
         /// </summary>
-        /// <param name="pagina">pagina</param>
-        /// <param name="posicion">posicion</param>
-        /// <param name="longitud">longitud</param>
-        /// <param name="tipo">tipo</param>
-        /// <param name="descripcion">descripcion</param>
-        /// <param name="clave">clave únivoca del campo en la página. Se utiliza como
+        /// <param name="pagina">Pagina del modelo que representa el fichero 
+        /// en la que se encuentra la instancia de registro de campo definida
+        /// en el diseño de registro correspondiente de la AEAT.</param>
+        /// <param name="posicion">Posición dónde empieza el registro
+        /// de la instancia en la página del modelo.</param>
+        /// <param name="longitud">Longitud del campo.</param>
+        /// <param name="tipo">Cadena que representa el tipo de dato
+        /// según la documentación del diseño de registro de la AEAT ('A',
+        /// 'An', 'N'...)</param>
+        /// <param name="descripcion">Descripción del campo en el diseño
+        /// de registro de la AEAT.</param>
+        /// <param name="clave">clave únivoca del campo en la página. Genralmente se utiliza como
         /// clave el número de casilla.</param>
-        /// <param name="valor">valor</param>
+        /// <param name="valor">Valor para el campo.</param>
         /// <param name="decimales">Número de decimales.</param>
         public RegistroCampo(int pagina, int posicion, int longitud, 
             string tipo, string descripcion, string clave = null, 
