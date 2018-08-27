@@ -138,6 +138,15 @@ namespace AeatModelos
         }
 
         /// <summary>
+        /// Actualiza el valor de todos los campos calculados.
+        /// </summary>
+        public virtual void Calcular()
+        {
+            throw new NotImplementedException("No implementado en clase base: " +
+                "A implementar en la clase derivada!!!!!");
+        }
+
+        /// <summary>
         /// Recupera la representación del 
         /// segmento de fichero preparada para incorporarse
         /// al mismo.
@@ -147,6 +156,9 @@ namespace AeatModelos
         /// al mismo.</returns>
         public string AFichero()
         {
+
+            Calcular();
+
             StringBuilder constructorTexto = new StringBuilder();
 
             foreach (KeyValuePair<decimal, IEmpaquetable> entrada in RegistroCampos)
@@ -158,6 +170,19 @@ namespace AeatModelos
 
         }
 
+        /// <summary>
+        /// Crear empaquetable para la generación de impuestos.
+        /// </summary>
+        /// <param name="clave">Nombre del empaquetable a obtener</param>
+        /// <param name="ejercicio">Nombre del empaquetable a obtener</param>
+        /// <param name="periodo">Nombre del empaquetable a obtener</param>
+        /// <returns>Empaquetable.</returns>
+        public static IEmpaquetable CrearEmpaquetable(string clave, 
+            string ejercicio, string periodo)
+        {
+            Type tipoEmpaquetable = Type.GetType($"AeatModelos.{clave}.{clave}");
+            return Activator.CreateInstance(tipoEmpaquetable, ejercicio, periodo) as IEmpaquetable;
+        }
 
     }
 }

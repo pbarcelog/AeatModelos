@@ -78,7 +78,8 @@ namespace AeatModelos.RegistroMod300_2018
                 
                 // En principio sólo se incluye la página 1.
                 {++c,    new ConjuntoDeEmpaquetables(){ Empaquetables = new List<IEmpaquetable>(){
-                            new RegistroMod300_2018p01(Ejercicio, Periodo)
+                            new RegistroMod300_2018p01(Ejercicio, Periodo),
+                            new RegistroMod300_2018p02(Ejercicio, Periodo)
                 } } },
 
                 {++c,    new RegistroCampo(0,   0,  18,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  $"</T3030{Ejercicio}{Periodo}0000>")},
@@ -87,6 +88,70 @@ namespace AeatModelos.RegistroMod300_2018
 
             Paginas = RegistroCampos[14] as ConjuntoDeEmpaquetables;
 
+        }
+
+        /// <summary>
+        /// Actualiza el valor de todos los campos calculados.
+        /// </summary>
+        public override void Calcular()
+        {
+
+            RegistroMod300_2018p01 modPagina1 = Paginas.Empaquetables[0] as RegistroMod300_2018p01;
+            RegistroMod300_2018p02 modPagina2 = Paginas.Empaquetables[1] as RegistroMod300_2018p02;
+            RegistroMod300_2018p03 modPagina3 = null;
+         
+            for (int p = Paginas.Empaquetables.Count - 1; p > -1; p--)
+                modPagina3 = Paginas.Empaquetables[Paginas.Empaquetables.Count - 1] as RegistroMod300_2018p03;
+
+            if (modPagina3 == null)
+            {
+                modPagina3 = new RegistroMod300_2018p03(Ejercicio, Periodo);
+                Paginas.Empaquetables.Add(modPagina3);
+            }
+
+
+            decimal suma = 0;
+            string[] clavesASumar = null;
+
+            // Total cuota devengada ( [03] + [06] + [09] + [11] + [13] + [15] + [18] + [21] + [24] + [26])
+
+            clavesASumar = new string[] { "03", "06", "09", "11", "13", "15", "18", "21", "24", "26" };               
+
+            foreach (var clave in clavesASumar)
+                suma += Convert.ToDecimal(modPagina1[clave]?.Valor);
+
+            modPagina1["27"].Valor = suma;
+
+            // Total a deducir ( [29] + [31] + [33] + [35] + [37] + [39] + [41] + [42] + [43] + [44] )
+
+            suma = 0;
+            clavesASumar = new string[] { "29", "31", "33", "35", "37", "39", "41", "42", "43", "44" };
+
+            foreach (var clave in clavesASumar)
+                suma += Convert.ToDecimal(modPagina1[clave]?.Valor);
+
+            modPagina1["45"].Valor = suma;
+
+            // Resultado régimen general ( [27] - [45] )
+
+            modPagina1["46"].Valor = Convert.ToDecimal(modPagina1["27"].Valor) - suma;
+
+            // Suma de resultados ( [46] + [58] + [76] )
+            modPagina3["64"].Valor = Convert.ToDecimal(modPagina1["46"].Valor) + 
+                Convert.ToDecimal(modPagina2["58"].Valor) + 
+                Convert.ToDecimal(modPagina3["76"].Valor);
+
+            // Atribuible a la Administración del Estado
+            modPagina3["66"].Valor = Math.Round(Convert.ToDecimal(modPagina3["65"].Valor) / 100 *
+                Convert.ToDecimal(modPagina3["64"].Valor), 2);
+
+            // Resultado ( [66] + [77] - [67] + [68] )
+            modPagina3["69"].Valor = Convert.ToDecimal(modPagina3["66"].Valor) +
+            Convert.ToDecimal(modPagina3["77"].Valor) -
+            Convert.ToDecimal(modPagina3["67"].Valor) +
+            Convert.ToDecimal(modPagina3["68"].Valor);
+
+          
         }
 
 

@@ -142,8 +142,17 @@ namespace AeatModelos.RegistroMod300_2018
                 {++c,    new RegistroCampo(1, 1418, 13,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                                )},
                 {++c,    new RegistroCampo(1, 1431, 12,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,      "</T30301000>"          )}
             };
+
         }
 
 
-    }
+        /// <summary>
+        /// Actualiza el valor de todos los campos calculados.
+        /// </summary>
+        public override void Calcular()
+        {
+        }
+
+
+     }
 }

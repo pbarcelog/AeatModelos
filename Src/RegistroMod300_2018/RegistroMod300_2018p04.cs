@@ -133,6 +133,12 @@ namespace AeatModelos.RegistroMod300_2018
             };
         }
 
+        /// <summary>
+        /// Actualiza el valor de todos los campos calculados.
+        /// </summary>
+        public override void Calcular()
+        {
+        }
 
     }
 }
