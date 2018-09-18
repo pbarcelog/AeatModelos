@@ -78,8 +78,7 @@ namespace AeatModelos.RegistroMod300_2018
                 
                 // En principio sólo se incluye la página 1.
                 {++c,    new ConjuntoDeEmpaquetables(){ Empaquetables = new List<IEmpaquetable>(){
-                            new RegistroMod300_2018p01(Ejercicio, Periodo),
-                            new RegistroMod300_2018p02(Ejercicio, Periodo)
+                            new RegistroMod300_2018p01(Ejercicio, Periodo)
                 } } },
 
                 {++c,    new RegistroCampo(0,   0,  18,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  $"</T3030{Ejercicio}{Periodo}0000>")},
@@ -97,7 +96,11 @@ namespace AeatModelos.RegistroMod300_2018
         {
 
             RegistroMod300_2018p01 modPagina1 = Paginas.Empaquetables[0] as RegistroMod300_2018p01;
-            RegistroMod300_2018p02 modPagina2 = Paginas.Empaquetables[1] as RegistroMod300_2018p02;
+            RegistroMod300_2018p02 modPagina2 = null;
+
+            if (Paginas.Empaquetables.Count > 1)
+                modPagina2 = Paginas.Empaquetables[1] as RegistroMod300_2018p02;
+
             RegistroMod300_2018p03 modPagina3 = null;
          
             for (int p = Paginas.Empaquetables.Count - 1; p > -1; p--)
@@ -138,8 +141,11 @@ namespace AeatModelos.RegistroMod300_2018
 
             // Suma de resultados ( [46] + [58] + [76] )
             modPagina3["64"].Valor = Convert.ToDecimal(modPagina1["46"].Valor) + 
-                Convert.ToDecimal(modPagina2["58"].Valor) + 
+                ((modPagina2==null)?0:Convert.ToDecimal(modPagina2["58"].Valor)) + 
                 Convert.ToDecimal(modPagina3["76"].Valor);
+
+            // Atribuible a la Administracion del Estado
+            modPagina3["65"].Valor = 100;
 
             // Atribuible a la Administración del Estado
             modPagina3["66"].Valor = Math.Round(Convert.ToDecimal(modPagina3["65"].Valor) / 100 *
@@ -151,7 +157,10 @@ namespace AeatModelos.RegistroMod300_2018
             Convert.ToDecimal(modPagina3["67"].Valor) +
             Convert.ToDecimal(modPagina3["68"].Valor);
 
-          
+           modPagina3["71"].Valor = Convert.ToDecimal(modPagina3["69"].Valor) -
+           Convert.ToDecimal(modPagina3["70"].Valor);
+
+
         }
 
 
