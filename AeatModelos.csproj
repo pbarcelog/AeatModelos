@@ -57,22 +57,33 @@
     <Compile Include="Src\Errores.cs" />
     <Compile Include="Src\Conversores\IConversor.cs" />
     <Compile Include="Src\IEmpaquetable.cs" />
+    <Compile Include="Src\Mod130e15v11\Mod130e15v11.cs" />
+    <Compile Include="Src\Mod130e15v11\Mod130e15v11p01.cs" />
+    <Compile Include="Src\Mod130e15v11\Txt.cs" />
+    <Compile Include="Src\Mod303e18v10_20\Mod303e18v10_20.cs" />
+    <Compile Include="Src\Mod303e18v10_20\Mod303e18v10_20p02.cs" />
+    <Compile Include="Src\Mod303e18v10_20\Mod303e18v10_20p01.cs" />
+    <Compile Include="Src\Mod303e18v10_20\Mod303e18v10_20p03.cs" />
+    <Compile Include="Src\Mod303e18v10_20\Mod303e18v10_20p04.cs" />
+    <Compile Include="Src\Mod303e18v10_20\Txt.cs" />
     <Compile Include="Src\NamespaceDoc.cs" />
     <Compile Include="Src\RegistroCampo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Src\RegistroCampoTipo.cs" />
     <Compile Include="Src\RegistroMod.cs" />
-    <Compile Include="Src\RegistroMod300_2018\RegistroMod300_2018p04.cs" />
-    <Compile Include="Src\RegistroMod300_2018\RegistroMod300_2018p03.cs" />
-    <Compile Include="Src\RegistroMod300_2018\RegistroMod300_2018p02.cs" />
-    <Compile Include="Src\RegistroMod300_2018\RegistroMod300_2018p01.cs" />
-    <Compile Include="Src\RegistroMod300_2018\RegistroMod300_2018.cs" />
-    <Compile Include="Src\RegistroMod300_2018\Txt.cs" />
+    <Compile Include="Src\Mod303e18v10_10\Mod303e18v10_10p04.cs" />
+    <Compile Include="Src\Mod303e18v10_10\Mod303e18v10_10p03.cs" />
+    <Compile Include="Src\Mod303e18v10_10\Mod303e18v10_10p02.cs" />
+    <Compile Include="Src\Mod303e18v10_10\Mod303e18v10_10p01.cs" />
+    <Compile Include="Src\Mod303e18v10_10\Mod303e18v10_10.cs" />
+    <Compile Include="Src\Mod303e18v10_10\Txt.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
     <None Include="Doc\Help\AeatModelos.chm" />
+    <None Include="Doc\Specs\DR130e15v11.xls" />
     <None Include="Doc\Specs\DR303e18v10_10.xlsx" />
+    <None Include="Doc\Specs\DR303e18v10_20.xlsx" />
     <None Include="Doc\Specs\IVA303-CoordColabora-3.3.doc" />
   </ItemGroup>
   <ItemGroup>

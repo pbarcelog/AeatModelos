@@ -38,13 +38,13 @@
 
 using System.Collections.Generic;
 
-namespace AeatModelos.RegistroMod300_2018
+namespace AeatModelos.Mod303e18v10_10
 {
 
     /// <summary>
     /// Página 2 modelo 303. Diseño de registro: DR303e18v10_10.xlsx.
     /// </summary>
-    public class RegistroMod300_2018p02 : RegistroMod
+    public class Mod303e18v10_10p02 : RegistroMod
     {
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace AeatModelos.RegistroMod300_2018
         /// </summary>
         /// <param name="ejercicio">AAAA: 2018</param>
         /// <param name="periodo">Periodo: 1T, 2T...01, 02...12</param>
-        public RegistroMod300_2018p02(string ejercicio, string periodo) : base(ejercicio, periodo)
+        public Mod303e18v10_10p02(string ejercicio, string periodo) : base(ejercicio, periodo)
         {
 
             string p = "P02";   // clave página

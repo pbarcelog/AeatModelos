@@ -92,6 +92,12 @@ namespace AeatModelos
         public Dictionary<decimal, IEmpaquetable> RegistroCampos { get; protected set; }
 
         /// <summary>
+        /// Mapa con la equivalencia entre número de página y nombre
+        /// del tipo empaquetable que la representa.
+        /// </summary>
+        public virtual Dictionary<int, string> PaginasMapa { get; protected set; }
+
+        /// <summary>
         /// Si la instancia actual contiene más páginas
         /// estas se muestran como ConjuntoDeEmpaquetables
         /// en esta propiedad. Si no el valor de la propiedad
@@ -135,6 +141,51 @@ namespace AeatModelos
                    
                 return null;
             }
+        }
+
+        /// <summary>
+        /// Añade una página del índice específicado.
+        /// </summary>
+        /// <param name="indicePagina">Indice de la página a añadir.</param>
+        /// <returns>Página añadida.</returns>
+        public RegistroMod InsertaPagina(int indicePagina)
+        {
+
+            if (!PaginasMapa.ContainsKey(indicePagina))
+                throw new ArgumentException($"No existe ningún tipo en el mapa para el índice {indicePagina}.");
+
+            string typeName = PaginasMapa[indicePagina];
+
+            Type tipoEmpaquetable = Type.GetType(typeName);
+            RegistroMod pagina =  Activator.CreateInstance(tipoEmpaquetable, Ejercicio, Periodo) as RegistroMod;
+
+            Paginas.Empaquetables.Add(pagina);
+
+            return pagina;
+
+        }
+
+        /// <summary>
+        /// Recupera la página del índice específicado.
+        /// </summary>
+        /// <param name="indicePagina">Indice de la página a añadir.</param>
+        /// <returns>Página añadida.</returns>
+        public RegistroMod RecuperaPagina(int indicePagina)
+        {
+
+            if (!PaginasMapa.ContainsKey(indicePagina))
+                throw new ArgumentException($"No existe ningún tipo en el mapa para el índice {indicePagina}.");
+
+            string typeName = PaginasMapa[indicePagina];
+
+            Type tipoObjetivo = Type.GetType(typeName);
+
+            foreach (var pagina in Paginas.Empaquetables)
+                if (pagina.GetType().IsAssignableFrom(tipoObjetivo))
+                    return pagina as RegistroMod;
+
+            return null;
+
         }
 
         /// <summary>

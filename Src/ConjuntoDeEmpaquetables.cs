@@ -94,7 +94,7 @@ namespace AeatModelos
         /// Devuelve el campo que se corresponde con la descripción facilitada
         /// o null si no lo encuentra.
         /// </summary>
-        /// <param name="descripcion">Descipción del campo.</param>
+        /// <param name="descripcion">Descripción del campo.</param>
         /// <returns>Devuelve el campo que se corresponde con la descripción facilitada
         /// o null si no lo encuentra.</returns>
         public RegistroCampo this[string descripcion]

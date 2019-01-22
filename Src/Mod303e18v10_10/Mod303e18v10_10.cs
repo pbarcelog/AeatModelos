@@ -40,13 +40,13 @@
 using System;
 using System.Collections.Generic;
 
-namespace AeatModelos.RegistroMod300_2018
+namespace AeatModelos.Mod303e18v10_10
 {
 
     /// <summary>
     /// Página 0 modelo 303. Diseño de registro: DR303e18v10_10.xlsx.
     /// </summary>
-    public class RegistroMod300_2018 : RegistroMod
+    public class Mod303e18v10_10 : RegistroMod
     { 
 
         /// <summary>
@@ -54,8 +54,16 @@ namespace AeatModelos.RegistroMod300_2018
         /// </summary>
         /// <param name="ejercicio">AAAA: 2018</param>
         /// <param name="periodo">Periodo: 1T, 2T...01, 02...12</param>
-        public RegistroMod300_2018(string ejercicio, string periodo) : base(ejercicio, periodo)
+        public Mod303e18v10_10(string ejercicio, string periodo) : base(ejercicio, periodo)
         {
+
+            PaginasMapa = new Dictionary<int, string>()
+            {
+                {1, "AeatModelos.Mod303e18v10_10.Mod303e18v10_10p01"},
+                {2, "AeatModelos.Mod303e18v10_10.Mod303e18v10_10p02"},
+                {3, "AeatModelos.Mod303e18v10_10.Mod303e18v10_10p03"},
+                {4, "AeatModelos.Mod303e18v10_10.Mod303e18v10_10p04"}
+            };
 
             string p = "000";   // clave página
             int c = 0;          // contador
@@ -78,7 +86,7 @@ namespace AeatModelos.RegistroMod300_2018
                 
                 // En principio sólo se incluye la página 1.
                 {++c,    new ConjuntoDeEmpaquetables(){ Empaquetables = new List<IEmpaquetable>(){
-                            new RegistroMod300_2018p01(Ejercicio, Periodo)
+                            new Mod303e18v10_10p01(Ejercicio, Periodo)
                 } } },
 
                 {++c,    new RegistroCampo(0,   0,  18,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  $"</T3030{Ejercicio}{Periodo}0000>")},
@@ -95,20 +103,20 @@ namespace AeatModelos.RegistroMod300_2018
         public override void Calcular()
         {
 
-            RegistroMod300_2018p01 modPagina1 = Paginas.Empaquetables[0] as RegistroMod300_2018p01;
-            RegistroMod300_2018p02 modPagina2 = null;
+            Mod303e18v10_10p01 modPagina1 = Paginas.Empaquetables[0] as Mod303e18v10_10p01;
+            Mod303e18v10_10p02 modPagina2 = null;
 
             if (Paginas.Empaquetables.Count > 1)
-                modPagina2 = Paginas.Empaquetables[1] as RegistroMod300_2018p02;
+                modPagina2 = Paginas.Empaquetables[1] as Mod303e18v10_10p02;
 
-            RegistroMod300_2018p03 modPagina3 = null;
+            Mod303e18v10_10p03 modPagina3 = null;
          
             for (int p = Paginas.Empaquetables.Count - 1; p > -1; p--)
-                modPagina3 = Paginas.Empaquetables[Paginas.Empaquetables.Count - 1] as RegistroMod300_2018p03;
+                modPagina3 = Paginas.Empaquetables[Paginas.Empaquetables.Count - 1] as Mod303e18v10_10p03;
 
             if (modPagina3 == null)
             {
-                modPagina3 = new RegistroMod300_2018p03(Ejercicio, Periodo);
+                modPagina3 = new Mod303e18v10_10p03(Ejercicio, Periodo);
                 Paginas.Empaquetables.Add(modPagina3);
             }
 

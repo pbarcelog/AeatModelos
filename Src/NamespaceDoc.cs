@@ -59,7 +59,7 @@ namespace AeatModelos.Conversores
     {
     }
 }
-namespace AeatModelos.RegistroMod300_2018
+namespace AeatModelos.Mod303e18v10_10
 {
     /// <summary>
     /// <para>Diseño de registro y utilidades para el  Modelo 303

@@ -38,7 +38,7 @@
 
 using System.Collections.Generic;
 
-namespace AeatModelos.RegistroMod300_2018
+namespace AeatModelos.Mod303e18v10_10
 {
 
     /// <summary>

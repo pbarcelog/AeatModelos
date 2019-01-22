@@ -39,13 +39,13 @@
 
 using System.Collections.Generic;
 
-namespace AeatModelos.RegistroMod300_2018
+namespace AeatModelos.Mod303e18v10_10
 {
 
     /// <summary>
     /// Página 1 modelo 303.  Diseño de registro: DR303e18v10_10.xlsx.
     /// </summary>
-    public class RegistroMod300_2018p01 : RegistroMod
+    public class Mod303e18v10_10p01 : RegistroMod
     {
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace AeatModelos.RegistroMod300_2018
         /// </summary>
         /// <param name="ejercicio">AAAA: 2018</param>
         /// <param name="periodo">Periodo: 1T, 2T...01, 02...12</param>
-        public RegistroMod300_2018p01(string ejercicio, string periodo) : base(ejercicio, periodo)
+        public Mod303e18v10_10p01(string ejercicio, string periodo) : base(ejercicio, periodo)
         {
 
             string p = "P01";   // clave página
@@ -76,7 +76,7 @@ namespace AeatModelos.RegistroMod300_2018
                 {++c,    new RegistroCampo(1,  23,  60,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ApellidosRazonSocial"              )},
                 {++c,    new RegistroCampo(1,  83,  20,  "A",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "Nombre"                            )},
                 {++c,    new RegistroCampo(1, 103,   4,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "Ejercicio" ,           Ejercicio, 0)},
-                {++c,    new RegistroCampo(1, 107,   2,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "Periodo", Periodo)},
+                {++c,    new RegistroCampo(1, 107,   2,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "Periodo", Periodo                   )},
                 //'1' SI, '2' NO.
                 {++c,    new RegistroCampo(1, 109,   1,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "RegDevolMensual" ,     2,      0   )},
                 // '1' SI (sólo RS),  '2' NO (RG + RS),'3' NO (sólo RG).
