@@ -109,7 +109,8 @@ namespace AeatModelos.Mod130e15v11
                 modPagina1["03"].Valor = rendimientoAeEds;
                 modPagina1["04"].Valor = Math.Round(rendimientoAeEds * 0.2m, 2);
 
-                modPagina1["07"].Valor = Convert.ToDecimal(modPagina1["04"]?.Valor) - 
+                modPagina1["07"].Valor = Convert.ToDecimal(modPagina1["04"]?.Valor) -
+                    Convert.ToDecimal(modPagina1["05"]?.Valor) -
                     Convert.ToDecimal(modPagina1["06"]?.Valor);
             }
 
