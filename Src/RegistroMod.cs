@@ -89,7 +89,7 @@ namespace AeatModelos
         /// <summary>
         /// Diccionario de campos del modelo.
         /// </summary>
-        public Dictionary<decimal, IEmpaquetable> RegistroCampos { get; protected set; }
+        public virtual Dictionary<decimal, IEmpaquetable> RegistroCampos { get; protected set; }
 
         /// <summary>
         /// Mapa con la equivalencia entre número de página y nombre

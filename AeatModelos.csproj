@@ -66,6 +66,16 @@
     <Compile Include="Src\Mod303e18v10_20\Mod303e18v10_20p03.cs" />
     <Compile Include="Src\Mod303e18v10_20\Mod303e18v10_20p04.cs" />
     <Compile Include="Src\Mod303e18v10_20\Txt.cs" />
+    <Compile Include="Src\Mod303e18v10_40\Mod303e18v10_40.cs" />
+    <Compile Include="Src\Mod303e18v10_40\Mod303e18v10_40p01.cs" />
+    <Compile Include="Src\Mod303e18v10_40\Mod303e18v10_40p02.cs" />
+    <Compile Include="Src\Mod303e18v10_40\Mod303e18v10_40p03.cs" />
+    <Compile Include="Src\Mod303e18v10_40\Mod303e18v10_40p04.cs" />
+    <Compile Include="Src\Mod303e19v10_10\Mod303e19v10_10.cs" />
+    <Compile Include="Src\Mod303e19v10_10\Mod303e19v10_10p01.cs" />
+    <Compile Include="Src\Mod303e19v10_10\Mod303e19v10_10p02.cs" />
+    <Compile Include="Src\Mod303e19v10_10\Mod303e19v10_10p03.cs" />
+    <Compile Include="Src\Mod303e19v10_10\Mod303e19v10_10p04.cs" />
     <Compile Include="Src\NamespaceDoc.cs" />
     <Compile Include="Src\RegistroCampo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
