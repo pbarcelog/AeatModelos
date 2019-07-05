@@ -124,6 +124,22 @@ namespace AeatModelos.Mod303e18v10_20
             decimal suma = 0;
             string[] clavesASumar = null;
 
+            // Me aseguro de informar los tipos necesarios
+
+            int[] clavesCuota = new int[] { 3, 4, 9, 18, 21 };
+            decimal[] tipos = new decimal[] { 4m, 10m, 21m, 5.2m, 1.4m };
+
+            for (int k = 0; k < clavesCuota.Length; k++) {
+
+                string claveCuota = $"{clavesCuota[k]}".PadLeft(2, '0');
+                string claveTipo = $"{clavesCuota[k] + 1}".PadLeft(2, '0');
+
+                if (Convert.ToDecimal(modPagina1[claveCuota]?.Valor) != 0 &&
+                    Convert.ToDecimal(modPagina1[claveTipo]?.Valor) == 0)
+                    modPagina1[claveTipo].Valor = tipos[k];
+
+            }
+
             // Total cuota devengada ( [03] + [06] + [09] + [11] + [13] + [15] + [18] + [21] + [24] + [26])
 
             clavesASumar = new string[] { "03", "06", "09", "11", "13", "15", "18", "21", "24", "26" };               
@@ -160,10 +176,13 @@ namespace AeatModelos.Mod303e18v10_20
                 Convert.ToDecimal(modPagina3["64"].Valor), 2);
 
             // Resultado ( [66] + [77] - [67] + [68] )
-            modPagina3["69"].Valor = Convert.ToDecimal(modPagina3["66"].Valor) +
+
+            decimal resultado = Convert.ToDecimal(modPagina3["66"].Valor) +
             Convert.ToDecimal(modPagina3["77"].Valor) -
             Convert.ToDecimal(modPagina3["67"].Valor) +
             Convert.ToDecimal(modPagina3["68"].Valor);
+
+            modPagina3["69"].Valor = resultado;
 
            modPagina3["71"].Valor = Convert.ToDecimal(modPagina3["69"].Valor) -
            Convert.ToDecimal(modPagina3["70"].Valor);

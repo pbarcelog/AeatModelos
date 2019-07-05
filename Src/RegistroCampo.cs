@@ -137,6 +137,11 @@ namespace AeatModelos
         public int Decimales { get; private set; }
 
         /// <summary>
+        /// Indica si el valor acepta números negativos.
+        /// </summary>
+        public bool Negativo { get; private set; }
+
+        /// <summary>
         /// Devuelve el campo que se corresponde con la descripción facilitada
         /// o null si no lo encuentra.
         /// </summary>
@@ -175,14 +180,15 @@ namespace AeatModelos
         /// clave el número de casilla.</param>
         /// <param name="valor">Valor para el campo.</param>
         /// <param name="decimales">Número de decimales.</param>
+        /// <param name="negativo">Indica si acepta número negativos.</param> 
         public RegistroCampo(int pagina, int posicion, int longitud, 
             string tipo, string descripcion, string clave = null, 
-            object valor = null, int decimales = 2)
+            object valor = null, int decimales = 2, bool negativo = false)
         {
 
             RegistroCampoTipo registroTipo;
 
-            if (!Enum.TryParse<RegistroCampoTipo>(tipo, out registroTipo))
+            if (!Enum.TryParse(tipo, out registroTipo))
                 throw new ArgumentException(
                     Errores.MostrarMensaje("Registro.Registro.000", tipo));
 
@@ -206,6 +212,7 @@ namespace AeatModelos
             Descripcion = descripcion;
             Clave = clave;
             Decimales = decimales;
+            Negativo = negativo;
 
             string nombreTipoConversor = $"AeatModelos.Conversores.{Tipo}";
             Type tipoConversor = Configuracion.AeatModelos.GetType(nombreTipoConversor);

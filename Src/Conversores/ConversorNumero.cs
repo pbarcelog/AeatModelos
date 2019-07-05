@@ -55,8 +55,17 @@ namespace AeatModelos.Conversores
                 int largoPendiente = _RegistroCampo.Longitud - resultado.Length;
                 string relleno = null;
 
-                if (largoPendiente > 0)
+                if (_RegistroCampo.Negativo && numero < 0)
+                    largoPendiente = largoPendiente - 1;
+
+                if (largoPendiente > 0) 
                     relleno = new string('0', largoPendiente);
+
+                if (_RegistroCampo.Negativo && numero < 0)
+                    if (largoPendiente == -1)
+                        throw new Exception($"No existe espacio suficiente para el signo negativo");
+                    else
+                        relleno = $"N{relleno}";
 
                 resultado = $"{relleno}{resultado}";
             }
@@ -79,11 +88,21 @@ namespace AeatModelos.Conversores
         /// procedente de su representación en un fichero.</returns>
         public override object DeFichero()
         {
-            decimal.TryParse(_RegistroCampo.ValorFichero, out decimal resultado);
+
+            var valorFichero = _RegistroCampo.ValorFichero;
+            int mult = 1;
+
+            if (valorFichero.StartsWith("N"))
+            {
+                valorFichero = valorFichero.Replace("N", "");
+                mult = -1;
+            }                
+
+            decimal.TryParse(valorFichero, out decimal resultado);
 
             double divisor = Math.Pow(10, _RegistroCampo.Decimales);
 
-            resultado = resultado / (decimal)divisor;
+            resultado = mult * resultado / (decimal)divisor;
 
             if(_RegistroCampo.Valor != null && !_RegistroCampo.Valor.Equals(resultado))
                 _RegistroCampo.Valor = resultado;
