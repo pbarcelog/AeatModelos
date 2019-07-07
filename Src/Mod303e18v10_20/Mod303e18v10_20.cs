@@ -126,13 +126,13 @@ namespace AeatModelos.Mod303e18v10_20
 
             // Me aseguro de informar los tipos necesarios
 
-            int[] clavesCuota = new int[] { 3, 4, 9, 18, 21 };
+            int[] clavesCuota = new int[] { 3, 6, 9, 18, 21 };
             decimal[] tipos = new decimal[] { 4m, 10m, 21m, 5.2m, 1.4m };
 
             for (int k = 0; k < clavesCuota.Length; k++) {
 
                 string claveCuota = $"{clavesCuota[k]}".PadLeft(2, '0');
-                string claveTipo = $"{clavesCuota[k] + 1}".PadLeft(2, '0');
+                string claveTipo = $"{clavesCuota[k] - 1}".PadLeft(2, '0');
 
                 if (Convert.ToDecimal(modPagina1[claveCuota]?.Valor) != 0 &&
                     Convert.ToDecimal(modPagina1[claveTipo]?.Valor) == 0)
