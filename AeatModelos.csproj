@@ -57,6 +57,9 @@
     <Compile Include="Src\Errores.cs" />
     <Compile Include="Src\Conversores\IConversor.cs" />
     <Compile Include="Src\IEmpaquetable.cs" />
+    <Compile Include="Src\Mod111e16v18\Mod111e16v18.cs" />
+    <Compile Include="Src\Mod111e16v18\Mod111e16v18p01.cs" />
+    <Compile Include="Src\Mod111e16v18\Txt.cs" />
     <Compile Include="Src\Mod130e15v11\Mod130e15v11.cs" />
     <Compile Include="Src\Mod130e15v11\Mod130e15v11p01.cs" />
     <Compile Include="Src\Mod130e15v11\Txt.cs" />
