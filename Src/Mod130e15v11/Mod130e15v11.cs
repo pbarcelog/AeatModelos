@@ -106,27 +106,48 @@ namespace AeatModelos.Mod130e15v11
 
             if (rendimientoAeEds != 0)
             {
-                modPagina1["03"].Valor = rendimientoAeEds;
-                modPagina1["04"].Valor = Math.Round(rendimientoAeEds * 0.2m, 2);
+                if (Convert.ToDecimal(modPagina1["03"]?.Valor) == 0)
+                    modPagina1["03"].Valor = rendimientoAeEds;
 
-                modPagina1["07"].Valor = Convert.ToDecimal(modPagina1["04"]?.Valor) -
-                    Convert.ToDecimal(modPagina1["05"]?.Valor) -
-                    Convert.ToDecimal(modPagina1["06"]?.Valor);
+                if (Convert.ToDecimal(modPagina1["04"]?.Valor) == 0)
+                    modPagina1["04"].Valor = Math.Round(rendimientoAeEds * 0.2m, 2);
+
+                if (Convert.ToDecimal(modPagina1["04"]?.Valor) == 0)
+                    modPagina1["07"].Valor = Convert.ToDecimal(modPagina1["04"]?.Valor) -
+                        Convert.ToDecimal(modPagina1["05"]?.Valor) -
+                        Convert.ToDecimal(modPagina1["06"]?.Valor);
             }
 
             decimal rendimientoAagfp = Convert.ToDecimal(modPagina1["08"]?.Valor) * 0.02m;
 
             if (rendimientoAagfp != 0)
             {
-                modPagina1["09"].Valor = rendimientoAagfp;               
 
-                modPagina1["11"].Valor = Convert.ToDecimal(modPagina1["09"]?.Valor) -
+                if(Convert.ToDecimal(modPagina1["09"]?.Valor) == 0)
+                    modPagina1["09"].Valor = rendimientoAagfp;
+
+                if (Convert.ToDecimal(modPagina1["11"]?.Valor) == 0)
+                    modPagina1["11"].Valor = Convert.ToDecimal(modPagina1["09"]?.Valor) -
                     Convert.ToDecimal(modPagina1["10"]?.Valor);
             }
-          
 
-            modPagina1["12"].Valor = Convert.ToDecimal(modPagina1["07"]?.Valor) +
+            if (Convert.ToDecimal(modPagina1["12"]?.Valor) == 0)
+                modPagina1["12"].Valor = Convert.ToDecimal(modPagina1["07"]?.Valor) +
                     Convert.ToDecimal(modPagina1["11"]?.Valor);
+
+
+            if(Convert.ToDecimal(modPagina1["14"]?.Valor) == 0)
+                modPagina1["14"].Valor = Convert.ToDecimal(modPagina1["12"]?.Valor) -
+                    Convert.ToDecimal(modPagina1["13"]?.Valor);
+
+            if (Convert.ToDecimal(modPagina1["17"]?.Valor) == 0)
+                modPagina1["17"].Valor = Convert.ToDecimal(modPagina1["14"]?.Valor) -
+                    Convert.ToDecimal(modPagina1["15"]?.Valor) -
+                    Convert.ToDecimal(modPagina1["16"]?.Valor); 
+
+            if (Convert.ToDecimal(modPagina1["19"]?.Valor) == 0)
+                modPagina1["19"].Valor =  Convert.ToDecimal(modPagina1["17"]?.Valor) -
+                    Convert.ToDecimal(modPagina1["18"]?.Valor);
 
         }
 
