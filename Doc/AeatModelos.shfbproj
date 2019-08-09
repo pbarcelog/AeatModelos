@@ -7,7 +7,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{9916bb58-dd31-46ea-83bc-91a08e2911f4}</ProjectGuid>
-    <SHFBSchemaVersion>2015.6.5.0</SHFBSchemaVersion>
+    <SHFBSchemaVersion>2017.9.26.0</SHFBSchemaVersion>
     <!-- AssemblyName, Name, and RootNamespace are not used by SHFB but Visual Studio adds them anyway -->
     <AssemblyName>Documentation</AssemblyName>
     <RootNamespace>Documentation</RootNamespace>
@@ -19,8 +19,9 @@
     <Language>es-ES</Language>
     <DocumentationSources>
       <DocumentationSource sourceFile="..\bin\Debug\AeatModelos.dll" />
-<DocumentationSource sourceFile="..\bin\Debug\AeatModelos.xml" /></DocumentationSources>
-    <HelpFileVersion>1.0.0.0</HelpFileVersion>
+      <DocumentationSource sourceFile="..\bin\Debug\AeatModelos.xml" />
+    </DocumentationSources>
+    <HelpFileVersion>1.0.0.9</HelpFileVersion>
     <MaximumGroupParts>2</MaximumGroupParts>
     <NamespaceGrouping>False</NamespaceGrouping>
     <SyntaxFilters>Standard</SyntaxFilters>

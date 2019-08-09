@@ -59,11 +59,80 @@ namespace AeatModelos.Conversores
     {
     }
 }
+namespace AeatModelos.Mod111e16v18
+{
+    /// <summary>
+    /// <para>Diseño de registro y utilidades para el  Modelo 111
+    /// utilizado en la autoliquidación de retenciones rendimientos
+    /// del trabajo y profesionales.</para> 
+    /// </summary>
+    [System.Runtime.CompilerServices.CompilerGenerated]
+    class NamespaceDoc
+    {
+    }
+}
+namespace AeatModelos.Mod115e15v13
+{
+    /// <summary>
+    /// <para>Diseño de registro y utilidades para el  Modelo 115
+    /// utilizado en la autoliquidación las retenciones
+    /// arrendamientos inmuebles urbanos.</para> 
+    /// </summary>
+    [System.Runtime.CompilerServices.CompilerGenerated]
+    class NamespaceDoc
+    {
+    }
+}
+namespace AeatModelos.Mod130e15v11
+{
+    /// <summary>
+    /// <para>Diseño de registro y utilidades para el  Modelo 130
+    /// utilizado en la autoliquidación del pago a cuenta
+    /// rendimientos actividades empresariales.</para> 
+    /// </summary>
+    [System.Runtime.CompilerServices.CompilerGenerated]
+    class NamespaceDoc
+    {
+    }
+}
 namespace AeatModelos.Mod303e18v10_10
 {
     /// <summary>
     /// <para>Diseño de registro y utilidades para el  Modelo 303
-    /// utilizado en la autoliquidación del IVA.</para> 
+    /// utilizado en la autoliquidación del IVA. Año 2018 versión 10.10.</para> 
+    /// </summary>
+    [System.Runtime.CompilerServices.CompilerGenerated]
+    class NamespaceDoc
+    {
+    }
+}
+namespace AeatModelos.Mod303e18v10_20
+{
+    /// <summary>
+    /// <para>Diseño de registro y utilidades para el  Modelo 303
+    /// utilizado en la autoliquidación del IVA. Año 2018 versión 10.20.</para> 
+    /// </summary>
+    [System.Runtime.CompilerServices.CompilerGenerated]
+    class NamespaceDoc
+    {
+    }
+}
+namespace AeatModelos.Mod303e18v10_40
+{
+    /// <summary>
+    /// <para>Diseño de registro y utilidades para el  Modelo 303
+    /// utilizado en la autoliquidación del IVA. Año 2018 versión 10.40.</para> 
+    /// </summary>
+    [System.Runtime.CompilerServices.CompilerGenerated]
+    class NamespaceDoc
+    {
+    }
+}
+namespace AeatModelos.Mod303e19v10_10
+{
+    /// <summary>
+    /// <para>Diseño de registro y utilidades para el  Modelo 303
+    /// utilizado en la autoliquidación del IVA. Año 2019 versión 10.10.</para> 
     /// </summary>
     [System.Runtime.CompilerServices.CompilerGenerated]
     class NamespaceDoc
