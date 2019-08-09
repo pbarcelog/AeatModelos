@@ -60,6 +60,9 @@
     <Compile Include="Src\Mod111e16v18\Mod111e16v18.cs" />
     <Compile Include="Src\Mod111e16v18\Mod111e16v18p01.cs" />
     <Compile Include="Src\Mod111e16v18\Txt.cs" />
+    <Compile Include="Src\Mod115e15v13\Mod115e15v13p01.cs" />
+    <Compile Include="Src\Mod115e15v13\Mod115e15v13.cs" />
+    <Compile Include="Src\Mod115e15v13\Txt.cs" />
     <Compile Include="Src\Mod130e15v11\Mod130e15v11.cs" />
     <Compile Include="Src\Mod130e15v11\Mod130e15v11p01.cs" />
     <Compile Include="Src\Mod130e15v11\Txt.cs" />
