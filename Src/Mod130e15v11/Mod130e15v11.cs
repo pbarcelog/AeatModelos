@@ -105,9 +105,11 @@ namespace AeatModelos.Mod130e15v11
                 Convert.ToDecimal(modPagina1["02"]?.Valor);
 
             if (rendimientoAeEds != 0)
-            {
                 if (Convert.ToDecimal(modPagina1["03"]?.Valor) == 0)
                     modPagina1["03"].Valor = rendimientoAeEds;
+
+            if (rendimientoAeEds > 0)
+            {           
 
                 if (Convert.ToDecimal(modPagina1["04"]?.Valor) == 0)
                     modPagina1["04"].Valor = Math.Round(rendimientoAeEds * 0.2m, 2);
@@ -143,9 +145,12 @@ namespace AeatModelos.Mod130e15v11
             if (Convert.ToDecimal(modPagina1["17"]?.Valor) == 0)
                 modPagina1["17"].Valor = Convert.ToDecimal(modPagina1["14"]?.Valor) -
                     Convert.ToDecimal(modPagina1["15"]?.Valor) -
-                    Convert.ToDecimal(modPagina1["16"]?.Valor); 
+                    Convert.ToDecimal(modPagina1["16"]?.Valor);
 
-            if (Convert.ToDecimal(modPagina1["19"]?.Valor) == 0)
+            decimal resultadoAutoliquidacion = Convert.ToDecimal(modPagina1["17"]?.Valor) -
+                    Convert.ToDecimal(modPagina1["18"]?.Valor);
+
+            if (Convert.ToDecimal(modPagina1["19"]?.Valor) == 0 && resultadoAutoliquidacion > 0)
                 modPagina1["19"].Valor =  Convert.ToDecimal(modPagina1["17"]?.Valor) -
                     Convert.ToDecimal(modPagina1["18"]?.Valor);
 
