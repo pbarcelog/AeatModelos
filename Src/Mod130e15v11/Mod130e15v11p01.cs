@@ -43,7 +43,7 @@ namespace AeatModelos.Mod130e15v11
 {
 
     /// <summary>
-    /// Página 1 modelo 303.  Diseño de registro: DR303e18v10_10.xlsx.
+    /// Página 1 modelo 130. Diseño de registro: DR130e15v11.xlsx.
     /// </summary>
     public class Mod130e15v11p01 : RegistroMod
     {
