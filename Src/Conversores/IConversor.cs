@@ -46,7 +46,7 @@ namespace AeatModelos.Conversores
     {
 
         /// <summary>
-        /// Obtiene un datos formateado procedente de un fichero.
+        /// Obtiene un dato formateado procedente de un fichero.
         /// </summary>
         /// <returns> Dato utilizable por la aplicación
         /// procedente de su representación en un fichero.</returns>

@@ -96,6 +96,7 @@
     <Compile Include="Src\Mod303e18v10_10\Mod303e18v10_10p01.cs" />
     <Compile Include="Src\Mod303e18v10_10\Mod303e18v10_10.cs" />
     <Compile Include="Src\Mod303e18v10_10\Txt.cs" />
+    <Compile Include="Src\RegistroModPagina.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

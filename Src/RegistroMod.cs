@@ -40,6 +40,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace AeatModelos
 {
@@ -50,6 +51,21 @@ namespace AeatModelos
     public class RegistroMod : IEmpaquetable
     {
 
+        string _Valor;
+
+        /// <summary>
+        /// Mapa de texto inicial para la determinación del modelo en un archivo determinado.
+        /// </summary>
+        static Dictionary<string, string> _MagicTokens = new Dictionary<string, string>()
+        {
+
+            {"<T111", "AeatModelos.Mod111e16v18.Mod111e16v18" },
+            {"<T115", "AeatModelos.Mod115e15v13.Mod115e15v13" },
+            {"<T130", "AeatModelos.Mod130e15v11.Mod130e15v11" },
+            {"<T131", "AeatModelos.Mod131e2019v1_00.Mod131e2019v1_00" },
+            {"<T303", "AeatModelos.Mod303e19v10_10.Mod303e19v10_10" },
+        };
+
         /// <summary>
         /// Valor del campo.
         /// </summary>
@@ -57,11 +73,14 @@ namespace AeatModelos
         {
             get
             {
-                throw new NotImplementedException("Pendiente!!!!!");
+                if (_Valor == null)
+                    _Valor = AFichero();
+               
+                 return _Valor;
             }
             set
             {
-                throw new NotImplementedException("Pendiente!!!!!");
+                _Valor = $"{value}";
             }
         }
 
@@ -72,7 +91,7 @@ namespace AeatModelos
         {
             get
             {
-                throw new NotImplementedException("Pendiente!!!!!");
+                return $"{GetType()}";
             }          
         }
 
@@ -84,7 +103,7 @@ namespace AeatModelos
         /// <summary>
         /// Periodo de la autoliquidación.
         /// </summary>
-        public string Periodo { get; private set; }
+        public string Periodo { get; protected set; }
 
         /// <summary>
         /// Diccionario de campos del modelo.
@@ -222,6 +241,79 @@ namespace AeatModelos
         }
 
         /// <summary>
+        /// Compone un empaquetable a partir de su forma
+        /// en texto de fichero.
+        /// </summary>
+        /// <param name="texto">Segmento de texto.</param>
+        /// <returns>Objeto representado 
+        /// por el segmento de texto</returns>
+        public virtual object DeFichero(string texto)
+        {
+            return CrearEmpaquetable(texto);
+        }
+
+        /// <summary>
+        /// Genera una expresión para poder extraer el texto de cada página mediante regex.
+        /// </summary>
+        /// <returns>Patrón para regex inicio página</returns>
+        private string GenerarPatronRegexInicioPagina()
+        {
+
+            RegistroCampo inicio = null;
+            RegistroCampo modelo = null;
+            RegistroCampo pagina = null;
+            RegistroCampo final = null;
+
+            foreach (var reg in RegistroCampos)
+            {
+                if (Regex.Match(reg.Value.Descripcion, @"\s*Inicio\s+del\s+identificador\s+de\s+modelo\s+y\s+p[^\d]{1}gina\s*").Success)
+                    inicio = (reg.Value as RegistroCampo);
+                else if (reg.Value.Descripcion.Trim()== "Modelo")
+                    modelo = (reg.Value as RegistroCampo);
+                else if (reg.Value.Descripcion.Trim() == "Página")
+                    pagina = (reg.Value as RegistroCampo);
+                else if (Regex.Match(reg.Value.Descripcion, @"\s*Fin\s+de\s+identificador\s+de\s+modelo\s*").Success)
+                    final = (reg.Value as RegistroCampo);
+            }
+
+            string patronPagina = $"\\d{{{pagina.Longitud}}}";
+
+            string patronInicio = $"{inicio.ValorFichero}{modelo.ValorFichero}{patronPagina}{final.ValorFichero}";
+
+            return patronInicio;
+
+        }
+
+        /// <summary>
+        /// Genera una expresión para poder extraer el texto de cada página mediante regex.
+        /// </summary>
+        /// <returns>Patrón para regex inicio página</returns>
+        private string GenerarPatronRegexFinalPagina()
+        {
+
+            RegistroCampo final = null;
+
+            foreach (var reg in RegistroCampos)
+                if (Regex.Match(reg.Value.Descripcion, @"\s*Indicador\s+de\s+fin\s+de\s+registro\s*").Success)
+                    final = (reg.Value as RegistroCampo);
+
+
+            return $"{final.ValorFichero}";
+
+
+        }
+
+        /// <summary>
+        /// Genera una expresión para poder extraer el texto de cada página mediante regex.
+        /// </summary>
+        /// <returns>Patrón para regex extracción páginas</returns>
+        public string GenerarPatronRegexPagina()
+        {
+            return $"{GenerarPatronRegexInicioPagina()}[\\s\\S]+{GenerarPatronRegexFinalPagina()}";
+        }
+
+
+        /// <summary>
         /// Crear empaquetable para la generación de impuestos.
         /// </summary>
         /// <param name="clave">Nombre del empaquetable a obtener</param>
@@ -233,6 +325,70 @@ namespace AeatModelos
         {
             Type tipoEmpaquetable = Type.GetType($"AeatModelos.{clave}.{clave}");
             return Activator.CreateInstance(tipoEmpaquetable, ejercicio, periodo) as IEmpaquetable;
+        }
+
+        /// <summary>
+        /// Compone un empaquetable a partir de su forma
+        /// en texto de fichero.
+        /// </summary>
+        /// <param name="texto">Segmento de texto.</param>
+        /// <returns>Objeto representado 
+        /// por el segmento de texto</returns>
+        public static IEmpaquetable CrearEmpaquetable(string texto)
+        {
+
+            IEmpaquetable modelo = null;
+            string ejercicio = null;
+            string periodo = null;
+
+            // Recorro los modelos a ver encuentro que tipo de archivo es
+            foreach (KeyValuePair<string, string> magicToken in _MagicTokens)
+            {
+                if (texto.StartsWith(magicToken.Key))
+                {
+                    modelo = Activator.CreateInstance(Type.GetType(magicToken.Value), $"{DateTime.Now.Year}", "") as IEmpaquetable;
+                    ejercicio = texto.Substring(magicToken.Key.Length + 1, 4);
+                    periodo = texto.Substring(magicToken.Key.Length + 5, 2);
+                }
+            }
+           
+
+            // primero recupero el punto de inserción de las páginas
+            var paginas = (modelo as RegistroMod).Paginas;
+
+            if (paginas == null)
+                return modelo;
+
+            paginas.Empaquetables.Clear();
+
+            foreach (var kvpPagina in (modelo as RegistroMod).PaginasMapa)
+            {
+
+                var pagina = Activator.CreateInstance(Type.GetType(kvpPagina.Value), ejercicio, periodo) as RegistroMod;
+                var patron = (pagina as RegistroMod).GenerarPatronRegexPagina();
+
+                foreach (Match match in Regex.Matches(texto, patron))
+                {
+                    var textoPagina = match.Value;
+
+                    if (textoPagina != null)
+                    {
+                        // He encontrado una página, la creo
+                        IEmpaquetable paginaModelo = Activator.CreateInstance(pagina.GetType(), $"{DateTime.Now.Year}", "") as IEmpaquetable;
+                        var p = (paginaModelo as RegistroModPagina).DeFichero(textoPagina);
+                        paginas.Empaquetables.Add(p as IEmpaquetable);
+                        texto = texto.Replace(textoPagina, "");
+                    }
+                }
+            }
+
+            // Una vez cargadas las páginas cargo la página 0.
+            modelo = (modelo as RegistroModPagina).DeFichero(texto) as IEmpaquetable;
+
+            var mod = (modelo as RegistroModPagina);
+
+            return modelo;
+
         }
 
     }

@@ -239,13 +239,26 @@ namespace AeatModelos
         }
 
         /// <summary>
+        /// Compone un empaquetable a partir de su forma
+        /// en texto de fichero.
+        /// </summary>
+        /// <param name="texto">Segmento de texto.</param>
+        /// <returns>Objeto representado 
+        /// por el segmento de texto</returns>
+        public object DeFichero(string texto)
+        {
+            ValorFichero = texto;
+            return Valor;
+        }
+
+        /// <summary>
         /// Representación textual de la instancia.
         /// </summary>
         /// <returns>Representación textual de la instancia.</returns>
         public override string ToString()
         {
             return $"{Descripcion}, {Valor}";
-        }
+        }     
 
     }
 }

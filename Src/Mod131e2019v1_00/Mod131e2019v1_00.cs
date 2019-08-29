@@ -46,7 +46,7 @@ namespace AeatModelos.Mod131e2019v1_00
     /// <summary>
     /// Página 0 modelo 131. Diseño de registro: DR131e2019_v1.00.xlsx.
     /// </summary>
-    public class Mod131e2019v1_00 : RegistroMod
+    public class Mod131e2019v1_00 : RegistroModPagina
     { 
 
         /// <summary>

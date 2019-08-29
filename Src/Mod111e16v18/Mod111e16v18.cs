@@ -46,7 +46,7 @@ namespace AeatModelos.Mod111e16v18
     /// <summary>
     /// Página 0 modelo 111. Diseño de registro: dr111e16v18.xlsx.
     /// </summary>
-    public class Mod111e16v18 : RegistroMod
+    public class Mod111e16v18 : RegistroModPagina
     { 
 
         /// <summary>

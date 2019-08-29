@@ -44,7 +44,7 @@ namespace AeatModelos.Mod303e18v10_10
     /// <summary>
     /// Página 3 modelo 303. Diseño de registro: DR303e18v10_10.xlsx.
     /// </summary>
-    public class Mod303e18v10_10p03 : RegistroMod
+    public class Mod303e18v10_10p03 : RegistroModPagina
     {
 
         /// <summary>

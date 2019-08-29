@@ -85,11 +85,10 @@ namespace AeatModelos.Mod115e15v13
             {"P01.016", "Retenciones e ingresos a cuenta. Resultado a ingresar [03] - [04]"},
             {"P01.017", "Declaración complementaria"},
             {"P01.018", "Número de justificante de la declaración anterior"},
-            {"P01.019", "Reservado. Administración presentando declaración de Colegio Concertado (CC)"},
-            {"P01.020", "Domiciliación - IBAN"},
-            {"P01.021", "Reservado para la Administración"},
-            {"P01.022", "Reservado para el sello electrónico de la AEAT"},
-            {"P01.023", "Indicador de fin de registro"}
+            {"P01.019", "Domiciliación - IBAN"},
+            {"P01.020", "Reservado para la Administración"},
+            {"P01.021", "Reservado para el sello electrónico de la AEAT"},
+            {"P01.022", "Indicador de fin de registro"}
         };
 
     }

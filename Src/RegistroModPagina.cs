@@ -36,70 +36,51 @@
     dirección: info@irenesolutions.com
  */
 
-namespace AeatModelos.Conversores
+namespace AeatModelos
 {
-
     /// <summary>
-    /// Se encarga de las funciones de conversión de valores
-    /// apara un campo.
+    /// Representa un registro de modelo que tiene contenido de texto
+    /// o constutiye una página del modelo
     /// </summary>
-    public class ConversorTexto : Conversor
+    public class RegistroModPagina : RegistroMod
     {
 
         /// <summary>
         /// Constructor.
         /// </summary>
-        /// <param name="registroCampo">Registro campo subyacente.</param>
-        public ConversorTexto(RegistroCampo registroCampo) : base(registroCampo)
+        /// <param name="ejercicio">AAAA: 2018</param>
+        /// <param name="periodo">Periodo: 1T, 2T...01, 02...12</param>
+        public RegistroModPagina(string ejercicio, string periodo) : base(ejercicio, periodo)
         {
         }
 
         /// <summary>
-        /// Recupera la representación del 
-        /// segmento de fichero preparada para incorporarse
-        /// al mismo.
+        /// Compone un empaquetable a partir de su forma
+        /// en texto de fichero.
         /// </summary>
-        /// <returns> Representación del 
-        /// segmento de fichero preparada para incorporarse
-        /// al mismo.</returns>
-        public override string AFichero()
+        /// <param name="texto">Segmento de texto.</param>
+        /// <returns>Objeto representado 
+        /// por el segmento de texto</returns>
+        public override object DeFichero(string texto)
         {
+            foreach (var regKvp in RegistroCampos)
+            {
+                var reg = (regKvp.Value as RegistroCampo);
+                if (reg !=null && reg.Posicion != 0)
+                {
+                    int start = reg.Posicion - 1; // de base 1 a base 0
 
-            string resultado = $"{_RegistroCampo.Valor}";
-            int largoPendiente = _RegistroCampo.Longitud - resultado.Length;
-            string relleno = null;
+                    if (texto.Length > start + reg.Longitud)
+                    {
+                        var token = texto.Substring(start, reg.Longitud);
+                        reg.ValorFichero = token;
+                        if (reg.Descripcion == "Periodo")
+                            Periodo = reg.ValorFichero;
+                    }
+                }
+            }
 
-            if (largoPendiente > 0)
-                relleno = new string(' ', largoPendiente);
-
-            resultado = $"{resultado}{relleno}";
-
-            if(_RegistroCampo.ValorFichero != resultado)
-                _RegistroCampo.ValorFichero = resultado;
-
-            if (resultado.Length > _RegistroCampo.Longitud)
-                resultado = resultado.Substring(resultado.Length - 
-                    _RegistroCampo.Longitud, _RegistroCampo.Longitud);
-
-            return resultado;
-
+            return this;
         }
-
-        /// <summary>
-        /// Obtiene un datos formateado procedente de un fichero.
-        /// </summary>
-        /// <returns> Dato utilizable por la aplicación
-        /// procedente de su representación en un fichero.</returns>
-        public override object DeFichero()
-        {
-            string resultado = $"{_RegistroCampo.ValorFichero}";
-            resultado = resultado.Trim();
-
-            if ((_RegistroCampo.Valor == null) || (_RegistroCampo.Valor != null && !_RegistroCampo.Valor.Equals(resultado)))
-                _RegistroCampo.Valor = resultado;
-          
-            return resultado;
-        }
-
     }
 }

@@ -129,5 +129,17 @@ namespace AeatModelos
             return constructorTexto.ToString();
 
         }
+
+        /// <summary>
+        /// Compone un empaquetable a partir de su forma
+        /// en texto de fichero.
+        /// </summary>
+        /// <param name="texto">Segmento de texto.</param>
+        /// <returns>Objeto IEmpaquetable representado 
+        /// por el segmento de texto</returns>
+        public object DeFichero(string texto)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

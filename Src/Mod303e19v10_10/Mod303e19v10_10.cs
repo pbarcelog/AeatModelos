@@ -37,7 +37,6 @@
  */
 
 
-using System;
 using System.Collections.Generic;
 
 namespace AeatModelos.Mod303e19v10_10
