@@ -114,7 +114,7 @@ namespace AeatModelos.Mod130e15v11
                 if (Convert.ToDecimal(modPagina1["04"]?.Valor) == 0)
                     modPagina1["04"].Valor = Math.Round(rendimientoAeEds * 0.2m, 2);
 
-                if (Convert.ToDecimal(modPagina1["04"]?.Valor) == 0)
+                if (Convert.ToDecimal(modPagina1["07"]?.Valor) == 0)
                     modPagina1["07"].Valor = Convert.ToDecimal(modPagina1["04"]?.Valor) -
                         Convert.ToDecimal(modPagina1["05"]?.Valor) -
                         Convert.ToDecimal(modPagina1["06"]?.Valor);
