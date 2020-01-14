@@ -13,7 +13,7 @@ También podemos realizar las presentaciones telemáticas mediante el sistema de
 
 [IVA modelo 303 a pagar con domiciliación](https://github.com/mdiago/AeatModelos/wiki/001-Ejemplo:-IVA-Modelo-303-a%C3%B1o-2019-versi%C3%B3n-10.10-(Declaraci%C3%B3n-domiciliada))
 
-[IVA modelo 303 a compensar](/https://github.com/mdiago/AeatModelos/wiki/002-Ejemplo:-IVA-Modelo-303-a%C3%B1o-2019-versi%C3%B3n-10.10-(Declaraci%C3%B3n-a-compensar))
+[IVA modelo 303 a compensar](https://github.com/mdiago/AeatModelos/wiki/002-Ejemplo:-IVA-Modelo-303-a%C3%B1o-2019-versi%C3%B3n-10.10-(Declaraci%C3%B3n-a-compensar))
 
 [IRPF modelo 111 a pagar con domiciliación](https://github.com/mdiago/AeatModelos/wiki/003-Ejemplo:-IRPF-Modelo-111-a%C3%B1o-2016-versi%C3%B3n-18)
 
