@@ -7,6 +7,8 @@ AeatModelos es una herramienta escrita en C# para la generación y carga de los 
 
 También podemos realizar las presentaciones telemáticas mediante el sistema de firma básica establecido por la AEAT.
 
+Con AeatModelos confeccionar y presentar una autoliquidación de impuestos es algo muy sencillo.
+
 # Contenido
 
 ## Ejemplos
