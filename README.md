@@ -27,4 +27,4 @@ También podemos realizar las presentaciones telemáticas mediante el sistema de
 
 [Cargar fichero declaración](/mdiago/AeatModelos/wiki/008-Ejemplo:-Cargar-un-fichero-de-declaración)
 
-[IVA modelo 303 presentación telemática](/mdiago/AeatModelos/wiki/009-Ejemplo:-Modelo-303-4T-a-devolver-con-presentación-telemática)
+[IVA modelo 303 presentación telemática](https://github.com/mdiago/AeatModelos/wiki/009-Ejemplo:-Modelo-303-4T-a-devolver-con-presentaci%C3%B3n-telem%C3%A1tica)
