@@ -36,47 +36,32 @@
     dirección: info@irenesolutions.com
  */
 
-
-using System;
-using System.Collections.Generic;
-
-namespace AeatModelos
+namespace AeatModelos.Comunicaciones
 {
 
     /// <summary>
-    /// Soporte para errores.
+    /// Representa al titular de un certificado digital.
     /// </summary>
-    public class Errores
+    public class CertificadoTitular
     {
 
         /// <summary>
-        /// Catálogo de mensajes de error: Contiene codificados en forma clave-valor los mensajes
-        /// para los tipos de error controlados por la librería.
+        /// NIF del titular del certificado.
         /// </summary>
-        public static Dictionary<string, string> Catalogo = new Dictionary<string, string>() {
-            {"Registro.Registro.000", "No existe el tipo de dato {0}." },
-            {"Registro.Registro.001", "La propiedad Pagina sólo puede ser un entero de 0 a 30. Valor inválido {0}." },
-            {"Registro.Registro.002", "La propiedad Posicion sólo puede ser un entero de 0 a 10000. Valor inválido {0}." },
-            {"Registro.Registro.003", "La propiedad Longitud sólo puede ser un entero de 1 a 2000. Valor inválido {0}." },
-        };
+        public string NIF { get; set; }
 
         /// <summary>
-        /// Muestra el mensaje de error para la clave de 
-        /// error indicada con la información adicional pasada
-        /// como params.
+        /// Nombre del titular del certificado.
         /// </summary>
-        /// <param name="claveError">Clave que identifica el error
-        /// del que se quiere recuperar el mensaje.</param>
-        /// <param name="infos">Parámetros de información adicional
-        /// que se necesitan para componer el mensaje.</param>
-        /// <returns>Mensje de error.</returns>
-        public static string MostrarMensaje(string claveError, params string[] infos)
+        public string Nombre { get; set; }
+
+        /// <summary>
+        /// Representación textual de la instancia.
+        /// </summary>
+        /// <returns>Representación textual de la instancia.</returns>
+        public override string ToString()
         {
-            if (!Catalogo.ContainsKey(claveError))
-                throw new ArgumentException($"No existe la clave de mensaje de error {claveError}");
-
-            return string.Format(Catalogo[claveError], infos);
+            return $"{NIF}, {Nombre}";
         }
-
     }
 }

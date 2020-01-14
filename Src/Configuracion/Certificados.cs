@@ -36,47 +36,61 @@
     dirección: info@irenesolutions.com
  */
 
-
 using System;
-using System.Collections.Generic;
+using System.Xml.Serialization;
 
-namespace AeatModelos
+namespace AeatModelos.Configuracion
 {
-
     /// <summary>
-    /// Soporte para errores.
+    /// Configuración del certificado de cliente a utilizar
+    /// en las comunicaciones con la AEAT.
     /// </summary>
-    public class Errores
+    [Serializable]
+    [XmlRoot("Parametros")]
+    public class Certificados
     {
 
         /// <summary>
-        /// Catálogo de mensajes de error: Contiene codificados en forma clave-valor los mensajes
-        /// para los tipos de error controlados por la librería.
+        /// Indica el sistema de trabajo que se va a utilizar
+        /// con el certificado de cliente necesario para la conexión
+        /// TLS con la la web de la aeat.
         /// </summary>
-        public static Dictionary<string, string> Catalogo = new Dictionary<string, string>() {
-            {"Registro.Registro.000", "No existe el tipo de dato {0}." },
-            {"Registro.Registro.001", "La propiedad Pagina sólo puede ser un entero de 0 a 30. Valor inválido {0}." },
-            {"Registro.Registro.002", "La propiedad Posicion sólo puede ser un entero de 0 a 10000. Valor inválido {0}." },
-            {"Registro.Registro.003", "La propiedad Longitud sólo puede ser un entero de 1 a 2000. Valor inválido {0}." },
-        };
+        [XmlElement("CertificadoModo")]
+        public CertificadosModos CertificadoModo { get; set; }
+
 
         /// <summary>
-        /// Muestra el mensaje de error para la clave de 
-        /// error indicada con la información adicional pasada
-        /// como params.
+        /// Hash o Huella digital del certificado a utilizar.
+        /// Valor utilizado para cargar el certificado desde
+        /// el almacén de certificados de windows.
         /// </summary>
-        /// <param name="claveError">Clave que identifica el error
-        /// del que se quiere recuperar el mensaje.</param>
-        /// <param name="infos">Parámetros de información adicional
-        /// que se necesitan para componer el mensaje.</param>
-        /// <returns>Mensje de error.</returns>
-        public static string MostrarMensaje(string claveError, params string[] infos)
+        [XmlElement("HuellaDigital")]
+        public string HuellaDigital { get; set; }
+
+        /// <summary>
+        /// Ruta al archivo del certificado a utilizar.
+        /// </summary>
+        [XmlElement("RutaArchivo")]
+        public string RutaArchivo { get; set; }
+
+        /// <summary>
+        /// Clave para el archivo del certificado a utilizar.
+        /// </summary>
+        [XmlElement("Clave")]
+        public string Clave { get; set; }
+
+        /// <summary>
+        /// Devuelve la configuración por defecto.
+        /// </summary>
+        /// <returns>Configuración por defecto.</returns>
+        internal static Certificados CargarPredeterminados()
         {
-            if (!Catalogo.ContainsKey(claveError))
-                throw new ArgumentException($"No existe la clave de mensaje de error {claveError}");
+            return new Certificados{
+                CertificadoModo = CertificadosModos.Archivo,
+                RutaArchivo = @"C:\mi_certificado.pfx",
+                Clave = "mi_contraseña"
+            };
 
-            return string.Format(Catalogo[claveError], infos);
         }
-
     }
 }

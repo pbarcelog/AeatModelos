@@ -1,6 +1,6 @@
 ﻿/*
     Este archivo es parte del proyecto AeatModelos.
-    Copyright (c) 2018 Irene Solutions SL
+    Copyright (c) 2020 Irene Solutions SL
     Autores: Irene Solutions SL.
 
     Este programa es software libre; usted puede redistribuirlo y/o modificarlo
@@ -67,8 +67,19 @@ namespace AeatModelos.Mod303e19v10_10
                 {4, "AeatModelos.Mod303e19v10_10.Mod303e19v10_10p04"}
             };
 
+
+            RegistroCampos[14] = new ConjuntoDeEmpaquetables()
+            {
+                Empaquetables = new List<IEmpaquetable>() {
+                    new Mod303e19v10_10p01(Ejercicio, Periodo) }
+            };
+
+            Paginas = RegistroCampos[14] as ConjuntoDeEmpaquetables;
+
             RegistroCampos.Remove(16);
 
+            // Cambia el orden de las variables en la presentación telemática.
+            OrdenVariablesEnvio = new string[6] { "FIRNIF", "FIRNOMBRE", "NRC", "IDI", "F01", "FIR" };
 
         }
 
@@ -78,6 +89,13 @@ namespace AeatModelos.Mod303e19v10_10
         public override void Calcular()
         {
             base.Calcular();
+
+            RegistroModPagina modPagina1 = Paginas.Empaquetables[0] as RegistroModPagina;
+            
+            // Último perido no válido valor 0 (establecemos por defecto el valor 2, no exonerado de 390)
+            if($"{modPagina1["Periodo"].Valor}" == "4T" || $"{modPagina1["Periodo"].Valor}" == "12")
+                modPagina1["Exonerado390"].Valor = 2; // (1=SI, 2=NO)
+
         }
 
     }

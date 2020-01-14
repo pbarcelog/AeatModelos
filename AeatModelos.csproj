@@ -45,7 +45,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Src\Comunicaciones\Certificado.cs" />
+    <Compile Include="Src\Comunicaciones\CertificadoTitular.cs" />
+    <Compile Include="Src\Comunicaciones\Enlaces.cs" />
+    <Compile Include="Src\Comunicaciones\Peticion.cs" />
+    <Compile Include="Src\Comunicaciones\Respuesta.cs" />
+    <Compile Include="Src\Comunicaciones\RespuestaError.cs" />
     <Compile Include="Src\Configuracion.cs" />
+    <Compile Include="Src\Configuracion\Certificados.cs" />
+    <Compile Include="Src\Configuracion\CertificadosModos.cs" />
+    <Compile Include="Src\Configuracion\Parametros.cs" />
     <Compile Include="Src\ConjuntoDeEmpaquetables.cs" />
     <Compile Include="Src\Conversores\Conversor.cs" />
     <Compile Include="Src\Conversores\ConversorNumero.cs" />

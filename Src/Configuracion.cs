@@ -1,6 +1,6 @@
 ﻿/*
     Este archivo es parte del proyecto AeatModelos.
-    Copyright (c) 2018 Irene Solutions SL
+    Copyright (c) 2020 Irene Solutions SL
     Autores: Irene Solutions SL.
 
     Este programa es software libre; usted puede redistribuirlo y/o modificarlo
@@ -45,7 +45,7 @@ namespace AeatModelos
     /// <summary>
     /// Datos generales de AeatModelos.
     /// </summary>
-    public class Configuracion
+    public class AeatModelosContexto
     {
 
         /// <summary>

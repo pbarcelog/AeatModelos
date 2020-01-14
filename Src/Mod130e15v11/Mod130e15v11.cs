@@ -1,6 +1,6 @@
 ﻿/*
     Este archivo es parte del proyecto AeatModelos.
-    Copyright (c) 2018 Irene Solutions SL
+    Copyright (c) 2020 Irene Solutions SL
     Autores: Irene Solutions SL.
 
     Este programa es software libre; usted puede redistribuirlo y/o modificarlo
@@ -47,7 +47,7 @@ namespace AeatModelos.Mod130e15v11
     /// Página 0 modelo 130. Diseño de registro: DR130e15v11.xlsx.
     /// </summary>
     public class Mod130e15v11 : RegistroModPagina
-    { 
+    {
 
         /// <summary>
         /// Constructor.
@@ -75,9 +75,9 @@ namespace AeatModelos.Mod130e15v11
                 {++c,    new RegistroCampo(0,  13,   5,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  "0000>"                 )},
                 {++c,    new RegistroCampo(0,  18,   5,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  "<AUX>"                 )},
                 {++c,    new RegistroCampo(0,  23,  70,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  new string(' ', 70)     )},
-                {++c,    new RegistroCampo(0,  93,   4,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  Configuracion.VersionDelPrograma)},
+                {++c,    new RegistroCampo(0,  93,   4,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  AeatModelosContexto.VersionDelPrograma)},
                 {++c,    new RegistroCampo(0,  97,   4,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  new string(' ', 4)      )},
-                {++c,    new RegistroCampo(0, 101,   9,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  Configuracion.NIFEmpresaDesarrollo)},
+                {++c,    new RegistroCampo(0, 101,   9,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  AeatModelosContexto.NIFEmpresaDesarrollo)},
                 {++c,    new RegistroCampo(0, 110, 213,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  new string(' ', 213)    )},
                 {++c,    new RegistroCampo(0, 323,   6,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  "</AUX>"                )},
                 
@@ -114,11 +114,13 @@ namespace AeatModelos.Mod130e15v11
                 if (Convert.ToDecimal(modPagina1["04"]?.Valor) == 0)
                     modPagina1["04"].Valor = Math.Round(rendimientoAeEds * 0.2m, 2);
 
-                if (Convert.ToDecimal(modPagina1["07"]?.Valor) == 0)
-                    modPagina1["07"].Valor = Convert.ToDecimal(modPagina1["04"]?.Valor) -
-                        Convert.ToDecimal(modPagina1["05"]?.Valor) -
-                        Convert.ToDecimal(modPagina1["06"]?.Valor);
             }
+
+            if (Convert.ToDecimal(modPagina1["07"]?.Valor) == 0)
+                modPagina1["07"].Valor = Convert.ToDecimal(modPagina1["04"]?.Valor) -
+                    Convert.ToDecimal(modPagina1["05"]?.Valor) -
+                    Convert.ToDecimal(modPagina1["06"]?.Valor);
+
 
             decimal rendimientoAagfp = Convert.ToDecimal(modPagina1["08"]?.Valor) * 0.02m;
 
@@ -133,9 +135,10 @@ namespace AeatModelos.Mod130e15v11
                     Convert.ToDecimal(modPagina1["10"]?.Valor);
             }
 
-            if (Convert.ToDecimal(modPagina1["12"]?.Valor) == 0)
-                modPagina1["12"].Valor = Convert.ToDecimal(modPagina1["07"]?.Valor) +
+            decimal pagosPreviosTrim = Convert.ToDecimal(modPagina1["07"]?.Valor) +
                     Convert.ToDecimal(modPagina1["11"]?.Valor);
+
+            modPagina1["12"].Valor = pagosPreviosTrim > 0 ? pagosPreviosTrim : 0;
 
 
             if(Convert.ToDecimal(modPagina1["14"]?.Valor) == 0)

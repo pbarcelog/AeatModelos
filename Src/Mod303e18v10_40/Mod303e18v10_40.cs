@@ -1,6 +1,6 @@
 ﻿/*
     Este archivo es parte del proyecto AeatModelos.
-    Copyright (c) 2018 Irene Solutions SL
+    Copyright (c) 2020 Irene Solutions SL
     Autores: Irene Solutions SL.
 
     Este programa es software libre; usted puede redistribuirlo y/o modificarlo
@@ -57,7 +57,7 @@ namespace AeatModelos.Mod303e18v10_40
         /// <param name="ejercicio">AAAA: 2018</param>
         /// <param name="periodo">Periodo: 1T, 2T...01, 02...12</param>
         public Mod303e18v10_40(string ejercicio, string periodo) : base(ejercicio, periodo)
-        {
+        {       
 
             PaginasMapa = new Dictionary<int, string>()
             {
@@ -66,6 +66,14 @@ namespace AeatModelos.Mod303e18v10_40
                 {3, "AeatModelos.Mod303e18v10_40.Mod303e18v10_40p03"},
                 {4, "AeatModelos.Mod303e18v10_40.Mod303e18v10_40p04"}
             };
+
+            RegistroCampos[14] = new ConjuntoDeEmpaquetables()
+            {
+                Empaquetables = new List<IEmpaquetable>() {
+                    new Mod303e18v10_40p01(Ejercicio, Periodo) }
+            };
+
+            Paginas = RegistroCampos[14] as ConjuntoDeEmpaquetables;
 
         }
 

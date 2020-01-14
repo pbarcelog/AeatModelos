@@ -1,6 +1,6 @@
 ﻿/*
     Este archivo es parte del proyecto AeatModelos.
-    Copyright (c) 2018 Irene Solutions SL
+    Copyright (c) 2020 Irene Solutions SL
     Autores: Irene Solutions SL.
 
     Este programa es software libre; usted puede redistribuirlo y/o modificarlo
@@ -78,12 +78,12 @@ namespace AeatModelos.Mod130e15v11
                 {++c,    new RegistroCampo(1,   160,   17,  "Num",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],      "04",                  0, 2             )},
                 {++c,    new RegistroCampo(1,   177,   17,  "Num",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],      "05",                  0, 2             )},
                 {++c,    new RegistroCampo(1,   194,   17,  "Num",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],      "06",                  0, 2             )},
-                {++c,    new RegistroCampo(1,   211,   17,  "N",        Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],      "07",                  0, 2             )},
+                {++c,    new RegistroCampo(1,   211,   17,  "N",        Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],      "07",                  0, 2,        true)},
                 {++c,    new RegistroCampo(1,   228,   17,  "Num",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],      "08",                  0, 2             )},
                 {++c,    new RegistroCampo(1,   245,   17,  "Num",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],      "09",                  0, 2             )},
                 {++c,    new RegistroCampo(1,   262,   17,  "Num",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],      "10",                  0, 2             )},
                 {++c,    new RegistroCampo(1,   279,   17,  "N",        Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],      "11",                  0, 2             )},
-                {++c,    new RegistroCampo(1,   296,   17,  "Num",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],      "12",                  0, 2             )},
+                {++c,    new RegistroCampo(1,   296,   17,  "Num",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],      "12",                  0, 2,       false)},
                 {++c,    new RegistroCampo(1,   313,   17,  "Num",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],      "13",                  0, 2             )},
                 {++c,    new RegistroCampo(1,   330,   17,  "N",        Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],      "14",                  0, 2,        true)},
                 {++c,    new RegistroCampo(1,   347,   17,  "Num",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],      "15",                  0, 2             )},

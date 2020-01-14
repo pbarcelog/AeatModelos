@@ -1,6 +1,6 @@
 ﻿/*
     Este archivo es parte del proyecto AeatModelos.
-    Copyright (c) 2018 Irene Solutions SL
+    Copyright (c) 2020 Irene Solutions SL
     Autores: Irene Solutions SL.
 
     Este programa es software libre; usted puede redistribuirlo y/o modificarlo
@@ -215,7 +215,7 @@ namespace AeatModelos
             Negativo = negativo;
 
             string nombreTipoConversor = $"AeatModelos.Conversores.{Tipo}";
-            Type tipoConversor = Configuracion.AeatModelos.GetType(nombreTipoConversor);
+            Type tipoConversor = AeatModelosContexto.AeatModelos.GetType(nombreTipoConversor);
 
             _Conversor = Activator.CreateInstance(tipoConversor, this) as IConversor;
 

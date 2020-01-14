@@ -36,46 +36,53 @@
     dirección: info@irenesolutions.com
  */
 
-
 using System;
-using System.Collections.Generic;
+using System.Text;
+using System.Text.RegularExpressions;
 
-namespace AeatModelos
+namespace AeatModelos.Comunicaciones
 {
 
     /// <summary>
-    /// Soporte para errores.
+    /// Representa un error contenido en una respuesta a una petición
+    /// de presentación de declaración.
     /// </summary>
-    public class Errores
+    public class RespuestaError
     {
 
-        /// <summary>
-        /// Catálogo de mensajes de error: Contiene codificados en forma clave-valor los mensajes
-        /// para los tipos de error controlados por la librería.
-        /// </summary>
-        public static Dictionary<string, string> Catalogo = new Dictionary<string, string>() {
-            {"Registro.Registro.000", "No existe el tipo de dato {0}." },
-            {"Registro.Registro.001", "La propiedad Pagina sólo puede ser un entero de 0 a 30. Valor inválido {0}." },
-            {"Registro.Registro.002", "La propiedad Posicion sólo puede ser un entero de 0 a 10000. Valor inválido {0}." },
-            {"Registro.Registro.003", "La propiedad Longitud sólo puede ser un entero de 1 a 2000. Valor inválido {0}." },
-        };
+        string _TextoError;
 
         /// <summary>
-        /// Muestra el mensaje de error para la clave de 
-        /// error indicada con la información adicional pasada
-        /// como params.
+        /// Código de error.
         /// </summary>
-        /// <param name="claveError">Clave que identifica el error
-        /// del que se quiere recuperar el mensaje.</param>
-        /// <param name="infos">Parámetros de información adicional
-        /// que se necesitan para componer el mensaje.</param>
-        /// <returns>Mensje de error.</returns>
-        public static string MostrarMensaje(string claveError, params string[] infos)
+        public string Codigo { get; private set; }
+
+        /// <summary>
+        /// Descripción de error.
+        /// </summary>
+        public string Descripcion { get; private set; }
+
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="textoError">Texto devuelto en el documento
+        /// html que representa el error.</param>
+        public RespuestaError(string textoError) 
         {
-            if (!Catalogo.ContainsKey(claveError))
-                throw new ArgumentException($"No existe la clave de mensaje de error {claveError}");
+            _TextoError = textoError;
 
-            return string.Format(Catalogo[claveError], infos);
+            Codigo = Regex.Match(_TextoError, @"^[^-]+").Value;
+            Descripcion = Regex.Match(_TextoError, @"(?<=-)[^-]+$").Value;
+
+        }
+
+        /// <summary>
+        /// Representación textual de la instancia.
+        /// </summary>
+        /// <returns>Representación textual de la instancia.</returns>
+        public override string ToString()
+        {
+            return $"{Codigo}, {Descripcion}";
         }
 
     }

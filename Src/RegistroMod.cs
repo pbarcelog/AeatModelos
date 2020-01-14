@@ -1,6 +1,6 @@
 ﻿/*
     Este archivo es parte del proyecto AeatModelos.
-    Copyright (c) 2018 Irene Solutions SL
+    Copyright (c) 2020 Irene Solutions SL
     Autores: Irene Solutions SL.
 
     Este programa es software libre; usted puede redistribuirlo y/o modificarlo
@@ -37,10 +37,12 @@
  */
 
 
+using AeatModelos.Comunicaciones;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Web;
 
 namespace AeatModelos
 {
@@ -51,6 +53,14 @@ namespace AeatModelos
     public class RegistroMod : IEmpaquetable
     {
 
+        /// <summary>
+        /// Indica si el usuario a confirmado la declaración.
+        /// </summary>
+        bool _Confirmado = false;
+
+        /// <summary>
+        /// Almacena el valor del fichero del modelo.
+        /// </summary>
         string _Valor;
 
         /// <summary>
@@ -117,6 +127,17 @@ namespace AeatModelos
         public virtual Dictionary<int, string> PaginasMapa { get; protected set; }
 
         /// <summary>
+        /// Variables para el envío de declaraciones.
+        /// </summary>
+        public virtual Dictionary<string, string> VariablesEnvio { get; protected set; }
+
+        /// <summary>
+        /// Matriz con los nombres de las variables de envío a utilizar en
+        /// la petición al servicio de presentación en orden de aparación.
+        /// </summary>
+        public virtual string[] OrdenVariablesEnvio { get; protected set; }
+
+        /// <summary>
         /// Si la instancia actual contiene más páginas
         /// estas se muestran como ConjuntoDeEmpaquetables
         /// en esta propiedad. Si no el valor de la propiedad
@@ -133,6 +154,18 @@ namespace AeatModelos
         {
             Ejercicio = ejercicio;
             Periodo = periodo;
+
+            VariablesEnvio = new Dictionary<string, string>() {
+                {"FIRNIF",          null },
+                {"FIRNOMBRE",       null },
+                {"FIR",             "FirmaBasica" },
+                {"IDI",             "ES" },
+                {"F01",             null },
+                {"NRC",             null }
+            };
+
+            OrdenVariablesEnvio = new string[6] { "FIRNIF", "FIRNOMBRE", "FIR", "IDI", "F01", "NRC" };
+
         }
 
         /// <summary>
@@ -388,6 +421,83 @@ namespace AeatModelos
             var mod = (modelo as RegistroModPagina);
 
             return modelo;
+
+        }
+
+        /// <summary>
+        /// Devuelve una cadena con la representación del titular del
+        /// certificado que va a realizar la presentación.
+        /// </summary>
+        public string Presentador() 
+        {
+            var certificado = Certificado.Cargar();
+
+           var titular = Certificado.Titular(certificado);
+
+            if (titular == null)
+                throw new Exception($"No se ha podido determinar el titular del certificado {certificado.Subject}.");
+
+            return $"{titular}";
+        }
+
+        /// <summary>
+        /// Devuelve una cadena con la representación del titular del
+        /// certificado que va a realizar la presentación.
+        /// </summary>
+        public virtual string Declarante()
+        {
+
+            string NIF = $"{Paginas.Empaquetables[0]["NIF"].Valor}";
+            string apellidos = $"{Paginas.Empaquetables[0]["ApellidosRazonSocial"].Valor}";
+            string nombre = $"{Paginas.Empaquetables[0]["Nombre"].Valor}";
+
+            return $"{NIF}, {apellidos} {nombre}".Trim();
+        }
+
+        /// <summary>
+        /// Confirma la declaración según las especificaciones de la AEAT
+        /// en cuanto a la firma básica. El usuario debe confirmar la declaración
+        /// una vez ha revisado el fichero a enviar el presentador y el declarante.
+        /// </summary>
+        public void Confirmar() 
+        {            
+            _Confirmado = true;
+        }
+
+        /// <summary>
+        /// Presenta la declaración.
+        /// </summary>
+        /// <returns>Respuesta a la operación de presentación.</returns>
+        public Respuesta Presentar() 
+        {
+
+            if (!_Confirmado)
+                throw new InvalidOperationException("Antes de presentar, debe confirmar la declaración.");
+
+            return new Peticion(this).Presentar();
+        }
+
+        /// <summary>
+        /// Obtiene los datos de presentación para la petición de presentación
+        /// de un modelo concreto al servicio de presentación de la AEAT.
+        /// </summary>
+        /// <returns>Datos de presentación para la petición de presentación
+        /// de un modelo concreto al servicio de presentación de la AEAT.</returns>
+        internal virtual string DatosPeticionPresentacion() 
+        {
+
+            string[] segmentos = new string[OrdenVariablesEnvio.Length];
+            var segmentoIndice = 0;
+
+            foreach (var variable in OrdenVariablesEnvio) 
+            {
+                var valor = VariablesEnvio[variable];
+                var valorCodificado = string.IsNullOrEmpty(valor) ? "" : HttpUtility.UrlEncode(valor);
+                var segmento = $"{variable}={valorCodificado}";
+                segmentos[segmentoIndice++] = segmento;
+            }           
+
+            return string.Join("&", segmentos);
 
         }
 
