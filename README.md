@@ -7,7 +7,67 @@ AeatModelos es una herramienta escrita en C# para la generación y carga de los 
 
 También podemos realizar las presentaciones telemáticas mediante el sistema de firma básica establecido por la AEAT.
 
-Con AeatModelos confeccionar y presentar una autoliquidación de impuestos es algo muy sencillo.
+Con AeatModelos confeccionar y presentar una autoliquidación de impuestos es algo muy sencillo. Por ejemplo, confeccionar y enviar a los servicios telemáticos de la AEAT una declaración a devolver del modelo 303 del periodo 4T se haría con estos pasos:
+
+# Modelo 303 año 2019 versión 10.10
+## Devolución IVA 
+### Se genera un fichero para la presentación la última autoliquidación del año y se presenta telemáticamente
+
+```C#
+var taxFormID = "Mod303e19v10_10";
+
+dynamic modelo = RegistroMod.CrearEmpaquetable(taxFormID,
+    "2019", "4T");
+
+dynamic pagina1 = modelo.Paginas.Empaquetables[0];
+
+pagina1["TipoDeclaracion"].Valor = "D"; // A DEVOLVER
+
+// Iva soportado bienes corrientes
+pagina1["28"].Valor = 3292.90;   // Base
+pagina1["29"].Valor = 691.51;   // Cuota
+
+
+pagina1["NIF"].Valor = "12334455L";
+pagina1["Nombre"].Valor = "FULANO";
+pagina1["ApellidosRazonSocial"].Valor = "SOTANEZ MENGANEZ";
+
+var pagina3 = modelo.InsertaPagina(3);
+
+// Iva a compensar
+pagina3["67"].Valor = 2196.13;   // Cuota
+
+// Cuenta del banco
+pagina3["IBAN"].Valor = "ES4500330888310002009999";
+
+// Debemos mostrar esta info al usuario y que confirme
+string fichero = modelo.AFichero();
+string declarante = modelo.Declarante();
+string presentador = modelo.Presentador();
+
+// Trans la confirmación del usuario
+modelo.Confirmar();
+
+// Realizamos el envío
+Respuesta respuesta = modelo.Presentar();
+
+if (respuesta.Erronea) 
+{
+    var msg = "";
+    foreach (RespuestaError error in respuesta.Errores)
+    {
+        msg = error.Descripcion;
+    }
+}
+else 
+{
+
+    string csv = respuesta.CSV;
+    // Guardamos el fichero
+    File.WriteAllBytes($"C:\\Users\\usuario\\Downloads\\{csv}.pdf", respuesta.DatosPdf);
+}
+
+```
 
 # Contenido
 
