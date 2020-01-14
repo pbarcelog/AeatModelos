@@ -1,6 +1,6 @@
 ![Irene Solutions SL](http://www.irenesolutions.com/archive/img/logo-irene-solutions-transparent-sm.png)
 
-Bienvenidos a la wiki de AeatModelos!
+Bienvenidos a la herramienta AeatModelos!
 [By Irene Solutions SL](https://www.irenesolutions.com)
 
 AeatModelos es una herramienta escrita en C# para la generación y carga de los ficheros más habituales en el cumplimiento de las obligaciones fiscales en España. Con ella podremos generar de forma sencilla los ficheros necesarios para presentar las declaraciones del IVA, IRPF, IS, Censales...
