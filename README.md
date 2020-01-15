@@ -45,7 +45,7 @@ string fichero = modelo.AFichero();
 string declarante = modelo.Declarante();
 string presentador = modelo.Presentador();
 
-// Trans la confirmación del usuario
+// Tras la confirmación del usuario
 modelo.Confirmar();
 
 // Realizamos el envío
