@@ -11,7 +11,7 @@ Con AeatModelos confeccionar y presentar una autoliquidación de impuestos es al
 
 # Modelo 303 año 2019 versión 10.10
 ## Devolución IVA 
-### Se genera un fichero para la presentación la última autoliquidación del año y se presenta telemáticamente
+### Se genera un fichero para la presentación de la última autoliquidación del año y se presenta telemáticamente
 
 ```C#
 var taxFormID = "Mod303e19v10_10";
