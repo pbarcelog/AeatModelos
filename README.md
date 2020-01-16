@@ -7,6 +7,8 @@ AeatModelos es una herramienta escrita en C# para la generación y carga de los 
 
 También podemos realizar las presentaciones telemáticas mediante el sistema de firma básica establecido por la AEAT.
 
+Antes de comenzar a probar con la librería es conveniente revisar la [configuración del sistema](https://github.com/mdiago/AeatModelos/wiki/000-Archivo-de-configuraci%C3%B3n)
+
 Con AeatModelos confeccionar y presentar una autoliquidación de impuestos es algo muy sencillo. Por ejemplo, confeccionar y enviar a los servicios telemáticos de la AEAT una declaración a devolver del modelo 303 del periodo 4T se haría con estos pasos:
 
 # Modelo 303 año 2019 versión 10.10
