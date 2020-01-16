@@ -36,6 +36,8 @@
     dirección: info@irenesolutions.com
  */
 
+using System;
+
 namespace AeatModelos.Conversores
 {
 
@@ -67,6 +69,12 @@ namespace AeatModelos.Conversores
 
             string resultado = $"{_RegistroCampo.Valor}";
             int largoPendiente = _RegistroCampo.Longitud - resultado.Length;
+
+            if (largoPendiente < 0)
+                throw new InvalidCastException($"Ha intentado asignar el valor '{resultado}'" +
+                    $" con una longitud de {resultado.Length} al registro '{_RegistroCampo.Descripcion}'" +
+                    $" que sólo admite una longitud de {_RegistroCampo.Longitud}.");
+
             string relleno = null;
 
             if (largoPendiente > 0)

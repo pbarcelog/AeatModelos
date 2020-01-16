@@ -46,7 +46,7 @@ namespace AeatModelos
     /// Datos generales de AeatModelos.
     /// </summary>
     public class AeatModelosContexto
-    {
+    {        
 
         /// <summary>
         /// NIF de Irene Solutions SL. Empresa que
@@ -62,7 +62,14 @@ namespace AeatModelos
         /// <summary>
         /// Versión de la biblioteca.
         /// </summary>
-        public static string VersionDelPrograma = $"{AeatModelos.GetName().Version}".Replace(".", "");
+        public static string AeatModelosVersion = $"{AeatModelos.GetName().Version}".Replace(".", "");
+
+        /// <summary>
+        /// Versión de la biblioteca transformada para incluir
+        /// en los ficheros.
+        /// </summary>
+        public static string VersionDelPrograma = 
+            $"{(AeatModelosVersion.Length > 4 ? AeatModelosVersion.Substring(AeatModelosVersion.Length - 4, 4) : AeatModelosVersion)}";
 
         
 

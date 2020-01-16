@@ -145,7 +145,7 @@ namespace AeatModelos.Comunicaciones
             _HttpWebRequest.Method = "POST";
             _HttpWebRequest.ClientCertificates.Add(_Certificado);
 
-            _TextoFichero = modelo.AFichero();
+            _TextoFichero = modelo.AFichero().Replace("\n", ""); 
 
             modelo.VariablesEnvio["FIRNIF"] = _CertificadoTitular.NIF;
             modelo.VariablesEnvio["FIRNOMBRE"] = _CertificadoTitular.Nombre;

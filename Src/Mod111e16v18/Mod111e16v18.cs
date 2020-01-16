@@ -87,7 +87,7 @@ namespace AeatModelos.Mod111e16v18
                 } } },
 
                 {++c,    new RegistroCampo(0,   0,  18,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  $"</T1110{Ejercicio}{Periodo}0000>")},
-                {++c,    new RegistroCampo(0,   0,   0,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,   '\n'                    )},
+                {++c,    new RegistroCampo(0,   0,   1,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,   '\n'                    )},
             };
 
             Paginas = RegistroCampos[14] as ConjuntoDeEmpaquetables;
