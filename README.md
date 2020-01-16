@@ -36,9 +36,6 @@ pagina1["ApellidosRazonSocial"].Valor = "SOTANEZ MENGANEZ";
 
 var pagina3 = modelo.InsertaPagina(3);
 
-// Iva a compensar
-pagina3["67"].Valor = 2196.13;   // Cuota
-
 // Cuenta del banco
 pagina3["IBAN"].Valor = "ES4500330888310002009999";
 
