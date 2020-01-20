@@ -95,6 +95,9 @@
     <Compile Include="Src\Mod303e19v10_10\Mod303e19v10_10p03.cs" />
     <Compile Include="Src\Mod303e19v10_10\Mod303e19v10_10p04.cs" />
     <Compile Include="NamespaceDoc.cs" />
+    <Compile Include="Src\Mod390e2019v100\Mod390e2019v100.cs" />
+    <Compile Include="Src\Mod390e2019v100\Mod390e2019v100p01.cs" />
+    <Compile Include="Src\Mod390e2019v100\Txt.cs" />
     <Compile Include="Src\RegistroCampo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Src\RegistroCampoTipo.cs" />
