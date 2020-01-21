@@ -354,7 +354,7 @@ namespace AeatModelos
         /// <param name="periodo">Nombre del empaquetable a obtener</param>
         /// <returns>Empaquetable.</returns>
         public static IEmpaquetable CrearEmpaquetable(string clave, 
-            string ejercicio, string periodo)
+            string ejercicio, string periodo = "0A")
         {
             Type tipoEmpaquetable = Type.GetType($"AeatModelos.{clave}.{clave}");
             return Activator.CreateInstance(tipoEmpaquetable, ejercicio, periodo) as IEmpaquetable;
@@ -501,5 +501,14 @@ namespace AeatModelos
 
         }
 
+        /// <summary>
+        /// Implementación de IComparable.
+        /// </summary>
+        /// <param name="obj">Objeto a comparar.</param>
+        /// <returns>Resultado de la comparación.</returns>
+        public virtual int CompareTo(object obj)
+        {
+            return 0;
+        }
     }
 }

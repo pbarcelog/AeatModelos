@@ -82,5 +82,20 @@ namespace AeatModelos
 
             return this;
         }
+
+        /// <summary>
+        /// Comparación entre 2 objetos de página.
+        /// </summary>
+        /// <param name="obj">Página a comparar.</param>
+        /// <returns>Resultado de la comparación.</returns>
+        public override int CompareTo(object obj)
+        {
+            RegistroModPagina onePage = (RegistroModPagina)obj;
+
+            string thisName = this.GetType().Name;
+            string objName = obj.GetType().Name;
+
+            return thisName.CompareTo(objName);
+        }
     }
 }

@@ -141,5 +141,15 @@ namespace AeatModelos
         {
             throw new NotImplementedException();
         }
+
+        /// <summary>
+        /// Implementación del IComparable.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public int CompareTo(object obj)
+        {
+            return 0;
+        }
     }
 }

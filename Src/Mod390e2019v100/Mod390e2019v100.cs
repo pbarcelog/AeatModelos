@@ -59,14 +59,14 @@ namespace AeatModelos.Mod390e2019v100
 
             PaginasMapa = new Dictionary<int, string>()
             {
-                {1, "AeatModelos.Mod390e2019v100.Mod303e18v10_20p01"},
-                {2, "AeatModelos.Mod390e2019v100.Mod303e18v10_20p02"},
-                {3, "AeatModelos.Mod390e2019v100.Mod303e18v10_20p03"},
-                {4, "AeatModelos.Mod390e2019v100.Mod303e18v10_20p04"},
-                {5, "AeatModelos.Mod390e2019v100.Mod303e18v10_20p05"},
-                {6, "AeatModelos.Mod390e2019v100.Mod303e18v10_20p06"},
-                {7, "AeatModelos.Mod390e2019v100.Mod303e18v10_20p07"},
-                {8, "AeatModelos.Mod390e2019v100.Mod303e18v10_20p08"}
+                {1, "AeatModelos.Mod390e2019v100.Mod390e2019v100p01"},
+                {2, "AeatModelos.Mod390e2019v100.Mod390e2019v100p02"},
+                {3, "AeatModelos.Mod390e2019v100.Mod390e2019v100p03"},
+                {4, "AeatModelos.Mod390e2019v100.Mod390e2019v100p04"},
+                {5, "AeatModelos.Mod390e2019v100.Mod390e2019v100p05"},
+                {6, "AeatModelos.Mod390e2019v100.Mod390e2019v100p06"},
+                {7, "AeatModelos.Mod390e2019v100.Mod390e2019v100p07"},
+                {8, "AeatModelos.Mod390e2019v100.Mod390e2019v100p08"}
             };
 
             string p = "000";   // clave página
@@ -90,11 +90,11 @@ namespace AeatModelos.Mod390e2019v100
                 
                 // En principio sólo se incluye la página 1.
                 {++c,    new ConjuntoDeEmpaquetables(){ Empaquetables = new List<IEmpaquetable>(){
-                            new Mod303e18v10_20p01(Ejercicio, Periodo)
+                            new Mod390e2019v100p01(Ejercicio, Periodo)
                 } } },
 
-                {++c,    new RegistroCampo(0,   0,  18,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  $"</T3900{Ejercicio}{Periodo}0000>")},
-                {++c,    new RegistroCampo(0,   0,   1,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,   '\n'                    )},
+                {++c,    new RegistroCampo(0,   0,  18,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  $"</T3900{Ejercicio}{Periodo}0000>")}, //014
+                {++c,    new RegistroCampo(0,   0,   1,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,   '\n'                    )}, //015
             };
 
             Paginas = RegistroCampos[14] as ConjuntoDeEmpaquetables;
@@ -107,8 +107,68 @@ namespace AeatModelos.Mod390e2019v100
         public override void Calcular()
         {
 
-            base.Calcular();   
+            Mod390e2019v100p01 modPagina1 = Paginas.Empaquetables[0] as Mod390e2019v100p01;
+            Mod390e2019v100p02 modPagina2 = null;
 
+            if (Paginas.Empaquetables.Count > 1)
+                modPagina2 = Paginas.Empaquetables[1] as Mod390e2019v100p02;
+
+            Mod390e2019v100p03 modPagina3 = null;
+            Mod390e2019v100p04 modPagina4 = null;
+
+            for (int p = Paginas.Empaquetables.Count - 1; p > -1; p--)
+            {
+                if (modPagina3 == null)
+                    modPagina3 = Paginas.Empaquetables[p] as Mod390e2019v100p03;
+
+                if (modPagina4 == null)
+                    modPagina4 = Paginas.Empaquetables[p] as Mod390e2019v100p04;
+            }
+
+
+            if (modPagina3 == null)
+            {
+                modPagina3 = new Mod390e2019v100p03(Ejercicio, Periodo);
+                Paginas.Empaquetables.Add(modPagina3);
+            }
+
+            if (modPagina4 == null)
+            {
+                modPagina4 = new Mod390e2019v100p04(Ejercicio, Periodo);
+                Paginas.Empaquetables.Add(modPagina4);
+            }
+
+
+            // Suma de deducciones ( [49] + [513] + [51] + [521] + [53] + [55] + [57] + [59] + [598] + [61] + [661] + [62] + [652] + [63] + [522] )
+            
+            decimal sumaDeducciones = 0;
+            string[] deduccionesASumar = new string[] 
+            {
+                "49", "513", "51", "521", "53", "55", "57", "59", "598", "61", "661", "62",
+                "652", "63", "522"
+            };
+
+            foreach (var clave in deduccionesASumar)
+            {
+                if(modPagina2[clave] != null)
+                    sumaDeducciones += Convert.ToDecimal(modPagina2[clave]?.Valor);
+
+                else if (modPagina3[clave] != null)
+                    sumaDeducciones += Convert.ToDecimal(modPagina3[clave]?.Valor);
+
+                else if(modPagina4[clave] != null)
+                    sumaDeducciones += Convert.ToDecimal(modPagina4[clave]?.Valor);
+            }
+
+            modPagina4["64"].Valor = sumaDeducciones;
+
+
+            //Resultado régimen general ( [47] - [64] )
+
+            if (Convert.ToDecimal(modPagina2["47"].Valor) != 0)
+                modPagina4["65"].Valor = Convert.ToDecimal(modPagina2["47"].Valor) - Convert.ToDecimal(modPagina4["64"].Valor);
+
+            Paginas.Empaquetables.Sort();
         }
 
 

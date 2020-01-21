@@ -39,7 +39,6 @@
 
 using AeatModelos.Conversores;
 using System;
-using System.Reflection;
 
 namespace AeatModelos
 {
@@ -258,7 +257,16 @@ namespace AeatModelos
         public override string ToString()
         {
             return $"{Descripcion}, {Valor}";
-        }     
+        }
 
+        /// <summary>
+        /// Implementación del IComparable.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public int CompareTo(object obj)
+        {
+            return 0;
+        }
     }
 }

@@ -138,5 +138,15 @@ namespace AeatModelos.Conversores
         {
             throw new NotImplementedException();
         }
+
+        /// <summary>
+        /// Implementación del icomparable
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public int CompareTo(object obj)
+        {
+            return 0;
+        }
     }
 }

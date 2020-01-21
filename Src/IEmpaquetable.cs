@@ -37,6 +37,8 @@
  */
 
 
+using System;
+
 namespace AeatModelos
 {
 
@@ -44,7 +46,7 @@ namespace AeatModelos
     /// Objeto que se puede representar mediante segmentos de 
     /// texto válidos para incluir en un resgistro de la aeat.
     /// </summary>
-    public interface IEmpaquetable
+    public interface IEmpaquetable : IComparable
     {
 
         /// <summary>

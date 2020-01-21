@@ -57,7 +57,7 @@ namespace AeatModelos.Mod390e2019v100
         public Mod390e2019v100p06(string ejercicio, string periodo) : base(ejercicio, periodo)
         {
 
-            string p = "001";   // clave página
+            string p = "006";   // clave página
             int c = 0;          // contador
 
             RegistroCampos = new Dictionary<decimal, IEmpaquetable>()
@@ -68,45 +68,45 @@ namespace AeatModelos.Mod390e2019v100
                 {++c, new RegistroCampo(6,       6,      5,     "Num",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,                  6000,   0   )}, //003
                 {++c, new RegistroCampo(6,      11,      1,     "An",       Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,                  ">"         )}, //004
                 {++c, new RegistroCampo(6,      12,      1,     "A",        Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )}, //005
-                {++c, new RegistroCampo(6,      13,     17,     "N",        Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,      null,       2,      true)}, //006
-                {++c, new RegistroCampo(6,      30,     17,     "N",        Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,      null,       2,      true)}, //007
-                {++c, new RegistroCampo(6,      47,     17,     "Num",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )}, //008
-                {++c, new RegistroCampo(6,      64,     17,     "Num",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )}, //009
-                {++c, new RegistroCampo(6,      81,     17,     "N",        Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,      null,       2,      true)}, //010
-                {++c, new RegistroCampo(6,      98,      5,     "Num",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )}, //011
-                {++c, new RegistroCampo(6,     103,      5,     "Num",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )}, //012
-                {++c, new RegistroCampo(6,     108,      5,     "Num",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )}, //013
-                {++c, new RegistroCampo(6,     113,      5,     "Num",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )}, //014
-                {++c, new RegistroCampo(6,     118,      5,     "Num",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )}, //015
-                {++c, new RegistroCampo(6,     123,     17,     "N",        Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,      null,       2,      true)}, //016
-                {++c, new RegistroCampo(6,     140,     17,     "N",        Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,      null,       2,      true)}, //017
-                {++c, new RegistroCampo(6,     157,     17,     "N",        Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,      null,       2,      true)}, //018
-                {++c, new RegistroCampo(6,     174,     17,     "Num",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )}, //019
-                {++c, new RegistroCampo(6,     191,     17,     "Num",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )}, //020
-                {++c, new RegistroCampo(6,     208,     17,     "N",        Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,      null,       2,      true)}, //021
-                {++c, new RegistroCampo(6,     225,     17,     "Num",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )}, //022
-                {++c, new RegistroCampo(6,     242,     17,     "Num",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )}, //023
-                {++c, new RegistroCampo(6,     259,     17,     "Num",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )}, //024
-                {++c, new RegistroCampo(6,     276,     17,     "Num",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )}, //025
-                {++c, new RegistroCampo(6,     293,     17,     "Num",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )}, //026
-                {++c, new RegistroCampo(6,     310,     17,     "Num",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )}, //027
-                {++c, new RegistroCampo(6,     327,     17,     "Num",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )}, //028
-                {++c, new RegistroCampo(6,     344,     17,     "Num",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )}, //029
-                {++c, new RegistroCampo(6,     361,     17,     "N",        Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,      null,       2,      true)}, //030
-                {++c, new RegistroCampo(6,     378,     17,     "N",        Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,      null,       2,      true)}, //031
-                {++c, new RegistroCampo(6,     395,     17,     "N",        Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,      null,       2,      true)}, //032
-                {++c, new RegistroCampo(6,     412,     17,     "N",        Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,      null,       2,      true)}, //033
-                {++c, new RegistroCampo(6,     429,     17,     "N",        Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,      null,       2,      true)}, //034
-                {++c, new RegistroCampo(6,     446,     17,     "N",        Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,      null,       2,      true)}, //035
-                {++c, new RegistroCampo(6,     463,     17,     "N",        Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,      null,       2,      true)}, //036
-                {++c, new RegistroCampo(6,     480,     17,     "N",        Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,      null,       2,      true)}, //037
-                {++c, new RegistroCampo(6,     497,     17,     "N",        Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,      null,       2,      true)}, //038
-                {++c, new RegistroCampo(6,     514,     17,     "N",        Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,      null,       2,      true)}, //039
-                {++c, new RegistroCampo(6,     531,     17,     "N",        Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,      null,       2,      true)}, //040
-                {++c, new RegistroCampo(6,     548,     17,     "N",        Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,      null,       2,      true)}, //041
-                {++c, new RegistroCampo(6,     565,     17,     "N",        Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,      null,       2,      true)}, //042
-                {++c, new RegistroCampo(6,     582,     17,     "N",        Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,      null,       2,      true)}, //043
-                {++c, new RegistroCampo(6,     599,     17,     "N",        Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,      null,       2,      true)}, //044
+                {++c, new RegistroCampo(6,      13,     17,     "N",        Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "7.658",   null,       2,      true)}, //006
+                {++c, new RegistroCampo(6,      30,     17,     "N",        Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "7.84",     null,       2,      true)}, //007
+                {++c, new RegistroCampo(6,      47,     17,     "Num",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "7.659"                            )}, //008
+                {++c, new RegistroCampo(6,      64,     17,     "Num",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "85"                               )}, //009
+                {++c, new RegistroCampo(6,      81,     17,     "N",        Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "86",      null,       2,      true)}, //010
+                {++c, new RegistroCampo(6,      98,      5,     "Num",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "87"                               )}, //011
+                {++c, new RegistroCampo(6,     103,      5,     "Num",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "88"                               )}, //012
+                {++c, new RegistroCampo(6,     108,      5,     "Num",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "89"                               )}, //013
+                {++c, new RegistroCampo(6,     113,      5,     "Num",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "90"                               )}, //014
+                {++c, new RegistroCampo(6,     118,      5,     "Num",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "91"                               )}, //015
+                {++c, new RegistroCampo(6,     123,     17,     "N",        Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "8.658",   null,       2,      true)}, //016
+                {++c, new RegistroCampo(6,     140,     17,     "N",        Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "8.84",    null,       2,      true)}, //017
+                {++c, new RegistroCampo(6,     157,     17,     "N",        Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "92",      null,       2,      true)}, //018
+                {++c, new RegistroCampo(6,     174,     17,     "Num",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "8.659"                            )}, //019
+                {++c, new RegistroCampo(6,     191,     17,     "Num",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "93"                               )}, //020
+                {++c, new RegistroCampo(6,     208,     17,     "N",        Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "94",      null,       2,      true)}, //021
+                {++c, new RegistroCampo(6,     225,     17,     "Num",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "95"                               )}, //022
+                {++c, new RegistroCampo(6,     242,     17,     "Num",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "96"                               )}, //023
+                {++c, new RegistroCampo(6,     259,     17,     "Num",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "524"                              )}, //024
+                {++c, new RegistroCampo(6,     276,     17,     "Num",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "97"                               )}, //025
+                {++c, new RegistroCampo(6,     293,     17,     "Num",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "98"                               )}, //026
+                {++c, new RegistroCampo(6,     310,     17,     "Num",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "662"                              )}, //027
+                {++c, new RegistroCampo(6,     327,     17,     "Num",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "525"                              )}, //028
+                {++c, new RegistroCampo(6,     344,     17,     "Num",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "526"                              )}, //029
+                {++c, new RegistroCampo(6,     361,     17,     "N",        Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "99",      null,       2,      true)}, //030
+                {++c, new RegistroCampo(6,     378,     17,     "N",        Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "653",     null,       2,      true)}, //031
+                {++c, new RegistroCampo(6,     395,     17,     "N",        Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "103",     null,       2,      true)}, //032
+                {++c, new RegistroCampo(6,     412,     17,     "N",        Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "104",     null,       2,      true)}, //033
+                {++c, new RegistroCampo(6,     429,     17,     "N",        Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "105",     null,       2,      true)}, //034
+                {++c, new RegistroCampo(6,     446,     17,     "N",        Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "110",     null,       2,      true)}, //035
+                {++c, new RegistroCampo(6,     463,     17,     "N",        Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "112",     null,       2,      true)}, //036
+                {++c, new RegistroCampo(6,     480,     17,     "N",        Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "100",     null,       2,      true)}, //037
+                {++c, new RegistroCampo(6,     497,     17,     "N",        Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "101",     null,       2,      true)}, //038
+                {++c, new RegistroCampo(6,     514,     17,     "N",        Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "102",     null,       2,      true)}, //039
+                {++c, new RegistroCampo(6,     531,     17,     "N",        Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "227",     null,       2,      true)}, //040
+                {++c, new RegistroCampo(6,     548,     17,     "N",        Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "228",     null,       2,      true)}, //041
+                {++c, new RegistroCampo(6,     565,     17,     "N",        Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "106",     null,       2,      true)}, //042
+                {++c, new RegistroCampo(6,     582,     17,     "N",        Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "107",     null,       2,      true)}, //043
+                {++c, new RegistroCampo(6,     599,     17,     "N",        Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "108",     null,       2,      true)}, //044
                 {++c, new RegistroCampo(6,     616,    150,     "An",       Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )}, //045
                 {++c, new RegistroCampo(6,     766,     12,     "An",       Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,        "</T39006000>"        )}, //046
 
