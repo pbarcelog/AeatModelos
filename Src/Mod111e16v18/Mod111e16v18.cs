@@ -109,9 +109,11 @@ namespace AeatModelos.Mod111e16v18
                 totalRetenciones += Convert.ToDecimal(modPagina1[claveRetencion]?.Valor);            
 
             if (totalRetenciones != 0)
-                modPagina1["28"].Valor = totalRetenciones; 
+                if (Convert.ToDecimal(modPagina1["28"]?.Valor) == 0)
+                    modPagina1["28"].Valor = totalRetenciones;
 
-            modPagina1["30"].Valor = Convert.ToDecimal(modPagina1["28"]?.Valor) -
+            if (Convert.ToDecimal(modPagina1["30"]?.Valor) == 0)
+                modPagina1["30"].Valor = Convert.ToDecimal(modPagina1["28"]?.Valor) -
                     Convert.ToDecimal(modPagina1["29"]?.Valor);
 
         }

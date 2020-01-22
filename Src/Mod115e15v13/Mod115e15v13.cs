@@ -104,7 +104,8 @@ namespace AeatModelos.Mod115e15v13
             decimal totalRetenciones = Convert.ToDecimal(modPagina1["03"]?.Valor) -
                     Convert.ToDecimal(modPagina1["04"]?.Valor);
 
-            modPagina1["05"].Valor = totalRetenciones;
+            if (Convert.ToDecimal(modPagina1["05"]?.Valor) == 0)
+                modPagina1["05"].Valor = totalRetenciones;
 
         }
 

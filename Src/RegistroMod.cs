@@ -269,7 +269,7 @@ namespace AeatModelos
 
             string resultado = constructorTexto.ToString();
 
-            return resultado;
+            return $"{resultado}".Replace("\n", "");
 
         }
 

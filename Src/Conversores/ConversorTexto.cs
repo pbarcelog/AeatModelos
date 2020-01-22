@@ -101,7 +101,7 @@ namespace AeatModelos.Conversores
         public override object DeFichero()
         {
             string resultado = $"{_RegistroCampo.ValorFichero}";
-            resultado = resultado.Trim();
+            resultado = resultado.Trim(" ".ToCharArray());
 
             if ((_RegistroCampo.Valor == null) || (_RegistroCampo.Valor != null && !_RegistroCampo.Valor.Equals(resultado)))
                 _RegistroCampo.Valor = resultado;

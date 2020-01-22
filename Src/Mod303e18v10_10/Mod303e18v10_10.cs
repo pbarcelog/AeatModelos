@@ -131,7 +131,8 @@ namespace AeatModelos.Mod303e18v10_10
             foreach (var clave in clavesASumar)
                 suma += Convert.ToDecimal(modPagina1[clave]?.Valor);
 
-            modPagina1["27"].Valor = suma;
+            if (Convert.ToDecimal(modPagina1["27"]?.Valor) == 0)
+                modPagina1["27"].Valor = suma;
 
             // Total a deducir ( [29] + [31] + [33] + [35] + [37] + [39] + [41] + [42] + [43] + [44] )
 
@@ -141,32 +142,43 @@ namespace AeatModelos.Mod303e18v10_10
             foreach (var clave in clavesASumar)
                 suma += Convert.ToDecimal(modPagina1[clave]?.Valor);
 
-            modPagina1["45"].Valor = suma;
+            if (Convert.ToDecimal(modPagina1["45"]?.Valor) == 0)
+                modPagina1["45"].Valor = suma;
 
             // Resultado régimen general ( [27] - [45] )
 
-            modPagina1["46"].Valor = Convert.ToDecimal(modPagina1["27"].Valor) - suma;
+            if (Convert.ToDecimal(modPagina1["46"]?.Valor) == 0)
+                modPagina1["46"].Valor = Convert.ToDecimal(modPagina1["27"].Valor) - suma;
 
             // Suma de resultados ( [46] + [58] + [76] )
-            modPagina3["64"].Valor = Convert.ToDecimal(modPagina1["46"].Valor) + 
+
+            if (Convert.ToDecimal(modPagina3["64"]?.Valor) == 0)
+                modPagina3["64"].Valor = Convert.ToDecimal(modPagina1["46"].Valor) + 
                 ((modPagina2==null)?0:Convert.ToDecimal(modPagina2["58"].Valor)) + 
                 Convert.ToDecimal(modPagina3["76"].Valor);
 
             // Atribuible a la Administracion del Estado
-            modPagina3["65"].Valor = 100;
+
+            if (Convert.ToDecimal(modPagina3["65"]?.Valor) == 0)
+                modPagina3["65"].Valor = 100;
 
             // Atribuible a la Administración del Estado
-            modPagina3["66"].Valor = Math.Round(Convert.ToDecimal(modPagina3["65"].Valor) / 100 *
+
+            if (Convert.ToDecimal(modPagina3["66"]?.Valor) == 0)
+                modPagina3["66"].Valor = Math.Round(Convert.ToDecimal(modPagina3["65"].Valor) / 100 *
                 Convert.ToDecimal(modPagina3["64"].Valor), 2);
 
             // Resultado ( [66] + [77] - [67] + [68] )
-            modPagina3["69"].Valor = Convert.ToDecimal(modPagina3["66"].Valor) +
-            Convert.ToDecimal(modPagina3["77"].Valor) -
-            Convert.ToDecimal(modPagina3["67"].Valor) +
-            Convert.ToDecimal(modPagina3["68"].Valor);
 
-           modPagina3["71"].Valor = Convert.ToDecimal(modPagina3["69"].Valor) -
-           Convert.ToDecimal(modPagina3["70"].Valor);
+            if (Convert.ToDecimal(modPagina3["69"]?.Valor) == 0)
+                modPagina3["69"].Valor = Convert.ToDecimal(modPagina3["66"].Valor) +
+                Convert.ToDecimal(modPagina3["77"].Valor) -
+                Convert.ToDecimal(modPagina3["67"].Valor) +
+                Convert.ToDecimal(modPagina3["68"].Valor);
+
+            if (Convert.ToDecimal(modPagina3["71"]?.Valor) == 0)
+                modPagina3["71"].Valor = Convert.ToDecimal(modPagina3["69"].Valor) -
+                Convert.ToDecimal(modPagina3["70"].Valor);
 
 
         }

@@ -113,6 +113,60 @@ namespace AeatModelos.Mod390e2019v100
             if (Paginas.Empaquetables.Count > 1)
                 modPagina2 = Paginas.Empaquetables[1] as Mod390e2019v100p02;
 
+
+            // Suma bases devengado
+
+            decimal sumaBasesDevengado = 0;
+            string[] basesDevengadoASumar = new string[] 
+            {
+                "01", "03", "05", "500", "502", "504", "643", "645", "647", "07", "09", "11",
+                "13", "21", "23", "25", "545", "547", "551", "27", "29", "649", "31"
+            };
+
+            foreach (var clave in basesDevengadoASumar)
+            {
+                sumaBasesDevengado += Convert.ToDecimal(modPagina2[clave]?.Valor);
+            }
+
+            if (Convert.ToDecimal(modPagina2["33"]?.Valor) == 0)
+                modPagina2["33"].Valor = sumaBasesDevengado;
+
+
+            // Suma cuotas devengado
+
+            decimal sumaCuotasDevengado = 0;
+            string[] cuotasDevengadoASumar = new string[]
+            {
+                "02", "04", "06", "501", "503", "505", "644", "646", "648", "08", "10", "12",
+                "14", "22", "24", "26", "546", "548", "552", "28", "30", "650", "32"
+            };
+
+            foreach (var clave in cuotasDevengadoASumar)
+            {
+                sumaCuotasDevengado += Convert.ToDecimal(modPagina2[clave]?.Valor);
+            }
+
+            if (Convert.ToDecimal(modPagina2["34"]?.Valor) == 0)
+                modPagina2["34"].Valor = sumaCuotasDevengado;
+
+
+            // Total cuotas IVA y recargo de equivalencia ( [34] + [36] + [600] + [602] + [42] + [44] + [46] )
+
+            decimal sumaTotalesDevengado = 0;
+            string[] totalesDevengadoASumar = new string[]
+            {
+                "34", "36", "600", "602", "42", "44", "46"
+            };
+
+            foreach (var clave in totalesDevengadoASumar)
+            {
+                sumaTotalesDevengado += Convert.ToDecimal(modPagina2[clave]?.Valor);
+            }
+
+            if (Convert.ToDecimal(modPagina2["47"]?.Valor) == 0)
+                modPagina2["47"].Valor = sumaTotalesDevengado;
+
+
             Mod390e2019v100p03 modPagina3 = null;
             Mod390e2019v100p04 modPagina4 = null;
 
@@ -139,8 +193,68 @@ namespace AeatModelos.Mod390e2019v100
             }
 
 
+            // Total bases imponibles y cuotas deducibles en operaciones interiores de bienes y servicios corrientes
+
+            decimal sumaOperacionesBienesCorrientesBases = 0;
+            string[] basesOperacionesBienesCorrientesASumar = new string[]
+            {
+                "190", "603", "605"
+            };
+
+            foreach (var clave in basesOperacionesBienesCorrientesASumar)
+            {
+                sumaOperacionesBienesCorrientesBases += Convert.ToDecimal(modPagina3[clave]?.Valor);
+            }
+
+            modPagina3["48"].Valor = sumaOperacionesBienesCorrientesBases;
+
+            decimal sumaOperacionesBienesCorrientesCuotas = 0;
+            string[] cuotasOperacionesBienesCorrientesASumar = new string[]
+            {
+                "191", "604", "606"
+            };
+
+            foreach (var clave in cuotasOperacionesBienesCorrientesASumar)
+            {
+                sumaOperacionesBienesCorrientesCuotas += Convert.ToDecimal(modPagina3[clave]?.Valor);
+            }
+
+            if (Convert.ToDecimal(modPagina3["49"]?.Valor) == 0)
+                modPagina3["49"].Valor = sumaOperacionesBienesCorrientesCuotas;
+
+
+            // Total bases imponibles y cuotas deducibles en operaciones interiores de bienes de inversión
+
+            decimal sumaOperacionesBienesInversionBases = 0;
+            string[] basesOperacionesBienesInversionASumar = new string[]
+            {
+                "196", "611", "613"
+            };
+
+            foreach (var clave in basesOperacionesBienesInversionASumar)
+            {
+                sumaOperacionesBienesInversionBases += Convert.ToDecimal(modPagina3[clave]?.Valor);
+            }
+
+            modPagina3["50"].Valor = sumaOperacionesBienesInversionBases;
+
+            decimal sumaOperacionesBienesInversionCuotas = 0;
+            string[] cuotasOperacionesBienesInversionASumar = new string[]
+            {
+                "197", "612", "614"
+            };
+
+            foreach (var clave in cuotasOperacionesBienesInversionASumar)
+            {
+                sumaOperacionesBienesInversionCuotas += Convert.ToDecimal(modPagina3[clave]?.Valor);
+            }
+
+            if (Convert.ToDecimal(modPagina3["51"]?.Valor) == 0)
+                modPagina3["51"].Valor = sumaOperacionesBienesInversionCuotas;
+
+
             // Suma de deducciones ( [49] + [513] + [51] + [521] + [53] + [55] + [57] + [59] + [598] + [61] + [661] + [62] + [652] + [63] + [522] )
-            
+
             decimal sumaDeducciones = 0;
             string[] deduccionesASumar = new string[] 
             {
@@ -160,13 +274,61 @@ namespace AeatModelos.Mod390e2019v100
                     sumaDeducciones += Convert.ToDecimal(modPagina4[clave]?.Valor);
             }
 
-            modPagina4["64"].Valor = sumaDeducciones;
+            if (Convert.ToDecimal(modPagina4["64"]?.Valor) == 0)
+                modPagina4["64"].Valor = sumaDeducciones;
 
 
             //Resultado régimen general ( [47] - [64] )
 
             if (Convert.ToDecimal(modPagina2["47"].Valor) != 0)
-                modPagina4["65"].Valor = Convert.ToDecimal(modPagina2["47"].Valor) - Convert.ToDecimal(modPagina4["64"].Valor);
+                modPagina4["65"].Valor = Convert.ToDecimal(modPagina2["47"]?.Valor) - Convert.ToDecimal(modPagina4["64"]?.Valor);
+
+
+
+            Mod390e2019v100p06 modPagina6 = null;
+
+            for (int p = Paginas.Empaquetables.Count - 1; p > -1; p--)
+            {
+                if (modPagina6 == null)
+                    modPagina6 = Paginas.Empaquetables[p] as Mod390e2019v100p06;
+            }
+
+
+            if (modPagina6 == null)
+            {
+                modPagina6 = new Mod390e2019v100p06(Ejercicio, Periodo);
+                Paginas.Empaquetables.Add(modPagina6);
+            }
+
+            // Suma de resultados ( [65] + [83] + [658] )
+
+            var n65 = Convert.ToDecimal(modPagina4["65"]?.Valor);
+
+            var n83 = Convert.ToDecimal(0);
+
+            Mod390e2019v100p05 modPagina5 = null;
+
+            for (int p = Paginas.Empaquetables.Count - 1; p > -1; p--)
+                if (modPagina5 == null)
+                    modPagina5 = Paginas.Empaquetables[p] as Mod390e2019v100p05;
+
+            if (modPagina5 != null)
+                n83 = Convert.ToDecimal(modPagina5["83"]?.Valor);
+
+            var n658 = Convert.ToDecimal(modPagina6["7.658"]?.Valor);
+
+            if (Convert.ToDecimal(modPagina6["7.84"]?.Valor) == 0)
+                modPagina6["7.84"].Valor = n65 + n83 + n658;
+
+            // Resultado de la liquidación ( [84] + [659] - [85] )
+
+            var n84 = Convert.ToDecimal(modPagina6["7.84"]?.Valor);
+            var n659 = Convert.ToDecimal(modPagina6["7.659"]?.Valor);
+            var n85 = Convert.ToDecimal(modPagina6["85"]?.Valor);
+
+            if (Convert.ToDecimal(modPagina6["86"]?.Valor) == 0)
+                modPagina6["86"].Valor = n84 + n659 - n85;
+
 
             Paginas.Empaquetables.Sort();
         }
