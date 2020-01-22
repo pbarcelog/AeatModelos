@@ -68,6 +68,7 @@ namespace AeatModelos.Comunicaciones
         public static Dictionary<string, string> Modelos = new Dictionary<string, string>() {
             { "Mod303e19v10_10",        PftwPicwPresBasica },
             { "Mod130e15v11",           PftwPicwPresBasica },
+            { "Mod390e2019v100",        PftwPicwPresBasica }
         };
 
         /// <summary>
@@ -78,6 +79,7 @@ namespace AeatModelos.Comunicaciones
         public static Dictionary<string, string> ModelosPruebas = new Dictionary<string, string>() {
             { "Mod303e19v10_10",        PftwPicwPresBasicaPruebas },
             { "Mod130e15v11",           PftwPicwPresBasicaPruebas },
+            { "Mod390e2019v100",        PftwPicwPresBasicaPruebas }
         };
 
         /// <summary>

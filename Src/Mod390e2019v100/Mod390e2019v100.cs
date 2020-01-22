@@ -329,6 +329,31 @@ namespace AeatModelos.Mod390e2019v100
             if (Convert.ToDecimal(modPagina6["86"]?.Valor) == 0)
                 modPagina6["86"].Valor = n84 + n659 - n85;
 
+            // Total volumen de operaciones (Art. 121 Ley IVA) (99 + 653 + 103 + 104 + 105 + 110 + 112 + 100 + 101 + 102 +
+            // 227 + 228 - 106 - 107) 
+
+            decimal sumaVolumenOperaciones = 0;
+            string[] volumenOperacionesASumar = new string[]
+            {
+                "99", "653", "103", "104", "105", "110", "112", "100", "101", "102", "227", "228"
+            };
+            string[] volumenOperacionesARestar = new string[]
+            {
+                "106", "107"
+            };
+
+            foreach (var clave in volumenOperacionesASumar)
+            {
+                sumaVolumenOperaciones += Convert.ToDecimal(modPagina6[clave]?.Valor);
+            }
+
+            foreach (var clave in volumenOperacionesARestar)
+            {
+                sumaVolumenOperaciones -= Convert.ToDecimal(modPagina6[clave]?.Valor);
+            }
+
+            if (Convert.ToDecimal(modPagina6["108"]?.Valor) == 0)
+                modPagina6["108"].Valor = sumaVolumenOperaciones;
 
             Paginas.Empaquetables.Sort();
         }

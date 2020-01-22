@@ -78,6 +78,8 @@
     <Compile Include="Src\Mod130e15v11\Mod130e15v11.cs" />
     <Compile Include="Src\Mod130e15v11\Mod130e15v11p01.cs" />
     <Compile Include="Src\Mod130e15v11\Txt.cs" />
+    <Compile Include="Src\Mod190e2017v00\Mod190e2017v00.cs" />
+    <Compile Include="Src\Mod190e2017v00\Txt.cs" />
     <Compile Include="Src\Mod303e18v10_20\Mod303e18v10_20.cs" />
     <Compile Include="Src\Mod303e18v10_20\Mod303e18v10_20p02.cs" />
     <Compile Include="Src\Mod303e18v10_20\Mod303e18v10_20p01.cs" />

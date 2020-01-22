@@ -113,7 +113,7 @@ namespace AeatModelos.Mod390e2019v100
                 {++c,    new RegistroCampo(1,    413,     1,  "Num",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )},  //041
                 {++c,    new RegistroCampo(1,    414,     4,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )},  //042
                 // Declaración anual operaciones por terceras personas. "0" - No, "1" .- Sí
-                {++c,    new RegistroCampo(1,    418,     1,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,     "1"                      )},  //043
+                {++c,    new RegistroCampo(1,    418,     1,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "Obligado347",     "1"             )},  //043
                 {++c,    new RegistroCampo(1,    419,     9,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )},  //044
                 {++c,    new RegistroCampo(1,    428,    37,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )},  //045
                 {++c,    new RegistroCampo(1,    465,     9,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )},  //046
