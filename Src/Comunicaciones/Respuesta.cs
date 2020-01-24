@@ -37,10 +37,10 @@
  */
 
 
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace AeatModelos.Comunicaciones
@@ -53,11 +53,6 @@ namespace AeatModelos.Comunicaciones
     /// </summary>
     public class Respuesta
     {
-
-        /// <summary>
-        /// Codificación utilizada por la AEAT.
-        /// </summary>
-        static Encoding _Encoding = Encoding.GetEncoding("ISO-8859-1");
 
         /// <summary>
         /// Expresión regular para determinar si el texto de la respuesta indica
@@ -82,6 +77,12 @@ namespace AeatModelos.Comunicaciones
         /// autoliquidación realizada en su caso.
         /// </summary>
         static Regex _RgPdfEnlace = new Regex("(?<=var\\s+urlPdf\\s*=\\s*\")[^\"]+");
+
+        /// <summary>
+        /// Números mágicos del pdf para verificar posibles errores en el
+        /// enlace devuelto por la aeat (bug conocido en el entorno de pruebas).
+        /// </summary>
+        static byte[] _PdfNumerosMagicos = new byte[4] { 0x25, 0x50, 0x44, 0x46 };
 
         /// <summary>
         /// Respuesta http de la AEAT.
@@ -151,7 +152,7 @@ namespace AeatModelos.Comunicaciones
             Estado = _HttpWebResponse.StatusDescription;
 
             LeeContenido();
-            _ContenidoTexto = _Encoding.GetString(_ContenidoBinario);
+            _ContenidoTexto = RegistroMod.Encoding.GetString(_ContenidoBinario);
 
             Erronea = _RgError.IsMatch(_ContenidoTexto);
 
@@ -200,8 +201,64 @@ namespace AeatModelos.Comunicaciones
             CSV = _RgCsv.Match(_ContenidoTexto).Value;
             EnlacePdf = _RgPdfEnlace.Match(_ContenidoTexto).Value;
 
+            byte[] binarioRespuesta = null;
+
             using (WebClient webClient = new WebClient())
-                DatosPdf = webClient.DownloadData(EnlacePdf);
+                binarioRespuesta = webClient.DownloadData(EnlacePdf);
+
+
+            bool esPdf = (binarioRespuesta[0] == _PdfNumerosMagicos[0]) &&
+                (binarioRespuesta[1] == _PdfNumerosMagicos[1]) &&
+                (binarioRespuesta[2] == _PdfNumerosMagicos[2]) &&
+                (binarioRespuesta[3] == _PdfNumerosMagicos[3]);
+
+            if (esPdf)
+            {
+                DatosPdf = binarioRespuesta;
+            }
+            else 
+            {
+                // Esto es un 'hack - chapuzilla' para solucionar un bug en el entorno de pruebas
+                // de la aeat (resulta que en ocasiones devuelven una url de producción en el entorno
+                // de pruebas en la que no está el documento pdf)
+                var enlaceTest = EnlacePdf.Replace("https://www2.agenciatributaria.gob.es", "https://www7.aeat.es");
+                binarioRespuesta = DescargaPdfEnlaceTest(enlaceTest);
+
+                esPdf = (binarioRespuesta[0] == _PdfNumerosMagicos[0]) &&
+                (binarioRespuesta[1] == _PdfNumerosMagicos[1]) &&
+                (binarioRespuesta[2] == _PdfNumerosMagicos[2]) &&
+                (binarioRespuesta[3] == _PdfNumerosMagicos[3]);
+
+                if (!esPdf)
+                    throw new Exception("Error al descargar el documento pdf.");
+
+                DatosPdf = binarioRespuesta;
+
+            }
+
+        }
+
+        /// <summary>
+        /// Prueba la descarga con certificado desde pruebas.
+        /// </summary>
+        /// <param name="enlace">Url del pdf a descargar.</param>
+        /// <returns>Datos binarios de la respuesta.</returns>
+        private byte[] DescargaPdfEnlaceTest(string enlace) 
+        {
+
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create(enlace);
+            httpWebRequest.Method = "GET";
+            httpWebRequest.ClientCertificates.Add(Certificado.Cargar());
+
+            var httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+
+            byte[] result = null;
+
+            using (var stream = httpWebResponse.GetResponseStream())
+            using (BinaryReader lectorBinario = new BinaryReader(stream))
+                result = lectorBinario.ReadBytes((int)_HttpWebResponse.ContentLength);
+
+            return result;
 
         }
 

@@ -497,7 +497,7 @@ namespace AeatModelos
             foreach (var variable in OrdenVariablesEnvio) 
             {
                 var valor = VariablesEnvio[variable];
-                var valorCodificado = string.IsNullOrEmpty(valor) ? "" : HttpUtility.UrlEncode(valor, RegistroMod.Encoding);
+                var valorCodificado = string.IsNullOrEmpty(valor) ? "" : HttpUtility.UrlEncode(valor, Encoding);
                 var segmento = $"{variable}={valorCodificado}";
                 segmentos[segmentoIndice++] = segmento;
             }           
