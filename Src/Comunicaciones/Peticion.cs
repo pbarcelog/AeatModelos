@@ -141,8 +141,9 @@ namespace AeatModelos.Comunicaciones
                     $" de presentación de la AEAT para el modelo {modelo.GetType().Name}.");
 
             _HttpWebRequest = (HttpWebRequest)WebRequest.Create(_Enlace);
-            _HttpWebRequest.ContentType = "application/x-www-form-urlencoded";
+            _HttpWebRequest.ContentType = "application/x-www-form-urlencoded;charset=ISO-8859-1";
             _HttpWebRequest.Method = "POST";
+            _HttpWebRequest.Headers.Add("Accept-Charset", "ISO-8859-1");
             _HttpWebRequest.ClientCertificates.Add(_Certificado);
 
             _TextoFichero = modelo.AFichero().Replace("\n", ""); 

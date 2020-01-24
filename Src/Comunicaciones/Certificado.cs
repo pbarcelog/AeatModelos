@@ -124,8 +124,8 @@ namespace AeatModelos.Comunicaciones
 
                     return new CertificadoTitular 
                     { 
-                        NIF = Regex.Match(cn, @"(?<=-\s*)[^\s]+$").Value, 
-                        Nombre = Regex.Match(cn, @"^[^-]+").Value 
+                        NIF = Regex.Match(cn, @"(?<=-\s*)[^\s]+$").Value.Trim(), 
+                        Nombre = Regex.Match(cn, @"^[^-]+").Value.Trim()
                     };
 
                 case "C=ES, O=ACCV, OU=PKIACCV, CN=ACCVCA-120":
@@ -134,8 +134,8 @@ namespace AeatModelos.Comunicaciones
 
                     return new CertificadoTitular
                     {
-                        NIF = Regex.Match(cn, @"(?<=-\s*NIF:\s*)[^\s]+$").Value,
-                        Nombre = Regex.Match(cn, @"^[^-]+").Value
+                        NIF = Regex.Match(cn, @"(?<=-\s*NIF:\s*)[^\s]+$").Value.Trim(),
+                        Nombre = Regex.Match(cn, @"^[^-]+").Value.Trim()
                     };
 
                 case "CN=AC Representación, OU=CERES, O=FNMT-RCM, C=ES":
@@ -144,8 +144,8 @@ namespace AeatModelos.Comunicaciones
 
                     return new CertificadoTitular
                     {
-                        NIF = Regex.Match(certificado.Subject, @"(?<=VATES\s*-\s*)[^,]+").Value,
-                        Nombre = Regex.Match(certificado.Subject, @"(?<=O=)[^,]+").Value
+                        NIF = Regex.Match(certificado.Subject, @"(?<=VATES\s*-\s*)[^,]+").Value.Trim(),
+                        Nombre = Regex.Match(certificado.Subject, @"(?<=O=)[^,]+").Value.Trim()
                     };
 
             }

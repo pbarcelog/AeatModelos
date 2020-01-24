@@ -99,6 +99,9 @@ namespace AeatModelos.Mod390e2019v100
 
             Paginas = RegistroCampos[14] as ConjuntoDeEmpaquetables;
 
+            // Cambia el orden de las variables en la presentación telemática.
+            OrdenVariablesEnvio = new string[5] { "FIRNIF", "FIRNOMBRE", "IDI", "F01", "FIR" };
+
         }
 
         /// <summary>

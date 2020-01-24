@@ -110,12 +110,17 @@ namespace AeatModelos.Mod190e2017v00
                 // ANUALIDADES POR ALIMENTOS. Solo para percepciones correspondientes a las claves A, B.01, B.03 y C.
                 {++c,    new RegistroCampo(1, 210,  13,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                           )}, //028
                 // HIJOS Y OTROS DESCENDIENTES. Solo para percepciones correspondientes a las claves A, B.01, B.03 y C.
-                {++c,    new RegistroCampo(1, 223,   6,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "08" ,                  21          )}, //029
-                {++c,    new RegistroCampo(1, 226,  17,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "09" ,                  0           )}, //030
-                {++c,    new RegistroCampo(1, 243,  17,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "10" ,                  0           )}, //031
-                {++c,    new RegistroCampo(1, 260,  17,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "11" ,                  0           )}, //032
-                {++c,    new RegistroCampo(1, 277,  17,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "12" ,                  0           )}, //033
-                {++c,    new RegistroCampo(1, 294,  17,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "13" ,                  0           )}, //034
+                {++c,    new RegistroCampo(1, 229,  12,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                           )}, //029
+                // ASCENDIENTES. Solo para percepciones correspondientes a las claves A, B.01, B.03 y C.
+                {++c,    new RegistroCampo(1, 241,   4,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                           )}, //030
+                // ASCENDIENTES CON DISCAPACIDAD. Solo para percepciones correspondientes a las claves A, B.01, B.03 y C.
+                {++c,    new RegistroCampo(1, 245,   6,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                           )}, //031
+                // CÓMPUTO DE LOS 3 PRIMEROS HIJOS. Solo para percepciones correspondientes a las claves A, B.01, B.03 y C.
+                {++c,    new RegistroCampo(1, 251,   3,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                           )}, //032
+                // COMUNICACIÓN PRÉSTAMOS VIVIENDA HABITUAL. Solo para percepciones correspondientes a las claves A, B.01, B.03 y C.
+                {++c,    new RegistroCampo(1, 254,   1,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                           )}, //033
+                // PERCEPCIONES DINERARIAS DERIVADAS DE INCAPACIDAD LABORAL. Solo para percepciones correspondientes a las claves A y B.01.
+                {++c,    new RegistroCampo(1, 255,  27,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                           )}, //034
                 {++c,    new RegistroCampo(1, 311,  17,  "N",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "14" ,                  0,   2, true)}, //035
                 {++c,    new RegistroCampo(1, 328,  17,  "N",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "15" ,                  0,   2, true)}, //036
                 {++c,    new RegistroCampo(1, 345,  17,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "16" ,                  0           )}, //037
