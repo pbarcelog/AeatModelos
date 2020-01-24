@@ -77,6 +77,11 @@ namespace AeatModelos
         };
 
         /// <summary>
+        /// Codificación utilizada por la AEAT.
+        /// </summary>
+        public static Encoding Encoding = Encoding.GetEncoding("ISO-8859-1");
+
+        /// <summary>
         /// Valor del campo.
         /// </summary>
         public object Valor
@@ -492,7 +497,7 @@ namespace AeatModelos
             foreach (var variable in OrdenVariablesEnvio) 
             {
                 var valor = VariablesEnvio[variable];
-                var valorCodificado = string.IsNullOrEmpty(valor) ? "" : HttpUtility.UrlEncode(valor);
+                var valorCodificado = string.IsNullOrEmpty(valor) ? "" : HttpUtility.UrlEncode(valor, RegistroMod.Encoding);
                 var segmento = $"{variable}={valorCodificado}";
                 segmentos[segmentoIndice++] = segmento;
             }           
