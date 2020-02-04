@@ -35,6 +35,7 @@
     Para más información, por favor contacte a Irene Solutions SL. en la
     dirección: info@irenesolutions.com
  */
+using System;
 using System.Collections.Generic;
 
 namespace AeatModelos.Mod190e2017v00
@@ -61,44 +62,45 @@ namespace AeatModelos.Mod190e2017v00
 
             RegistroCampos = new Dictionary<decimal, IEmpaquetable>()
             {
-                {++c,    new RegistroCampo(0,   1,   1,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  "1"                     )}, // 01
-                {++c,    new RegistroCampo(0,   2,   3,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  "190"                   )}, // 02
-                {++c,    new RegistroCampo(0,   5,   4,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  Ejercicio               )}, // 03
+                {++c,    new RegistroCampo(0,   1,   1,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  1,           0          )}, // 01
+                {++c,    new RegistroCampo(0,   2,   3,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  190,         0          )}, // 02
+                {++c,    new RegistroCampo(0,   5,   4,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  Ejercicio,   0          )}, // 03
                 {++c,    new RegistroCampo(0,   9,   9,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "NIF"                          )}, // 04
                 // Primer apellido, espacio, segundo apellido, espacio, nombre, necesariamente en este orden.
                 {++c,    new RegistroCampo(0,  18,  40,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ApellidosNombreRazonSocial"   )}, // 05
                 // TIPO DE SOPORTE. ‘T’: Transmisión telemática.
                 {++c,    new RegistroCampo(0,  58,   1,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  "T"                     )}, // 06
                 // PERSONA CON QUIÉN RELACIONARSE. Campo 1: Teléfono
-                {++c,    new RegistroCampo(0,  59,   9,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                           )}, // 07
+                {++c,    new RegistroCampo(0,  59,   9,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ContactoTelefono"             )}, // 07
                 // PERSONA CON QUIÉN RELACIONARSE. Campo 2: Primer apellido, espacio, segundo apellido, espacio, nombre, en este orden.
-                {++c,    new RegistroCampo(0,  68,  40,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                           )}, // 08
+                {++c,    new RegistroCampo(0,  68,  40,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ContactoApellidosNombre"      )}, // 08
                 // NÚMERO IDENTIFICATIVO DE LA DECLARACIÓN.
-                {++c,    new RegistroCampo(0, 108,  13,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                           )}, // 09
+                {++c,    new RegistroCampo(0, 108,  13,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,    null,     0           )}, // 09
                 // DECLARACIÓN COMPLEMENTARIA O SUSTITUTIVA. "C ": DECLARACIÓN COMPLEMENTARIA. " S": DECLARACIÓN SUSTITUTIVA.
                 {++c,    new RegistroCampo(0, 121,   2,  "A",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                           )}, // 10
                 // NÚMERO IDENTIFICATIVO DE LA DECLARACIÓN ANTERIOR.
-                {++c,    new RegistroCampo(0, 123,  13,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                           )}, // 11
+                {++c,    new RegistroCampo(0, 123,  13,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,    null,     0           )}, // 11
                 // NÚMERO TOTAL DE PERCEPCIONES.
-                {++c,    new RegistroCampo(0, 136,   9,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                           )}, // 12
+                {++c,    new RegistroCampo(0, 136,   9,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "01",    null,     0           )}, // 12
+                // IMPORTE TOTAL DE LAS PERCEPCIONES. SIGNO NEGATIVO: "N". EN OTRO CASO EL CAMPO SERÁ UN ESPACIO.
+                {++c,    new RegistroCampo(0, 145,  1,   "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "02N",   null                  )}, // 13
                 // IMPORTE TOTAL DE LAS PERCEPCIONES.
-                {++c,    new RegistroCampo(0, 145,  16,  "N",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,    null,     2,      true)}, // 13
+                {++c,    new RegistroCampo(0, 146,  15,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "02",    null,     2           )}, // 14
                 // IMPORTE TOTAL DE LAS RETENCIONES E INGRESOS A CUENTA.
-                {++c,    new RegistroCampo(0, 161,  15,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,    null,     2           )}, // 14
+                {++c,    new RegistroCampo(0, 161,  15,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "03",    null,     2           )}, // 15
                 // CORREO ELECTRÓNICO DE LA PERSONA CON QUIEN RELACIONARSE.
-                {++c,    new RegistroCampo(0, 176,  50,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                           )}, // 15
+                {++c,    new RegistroCampo(0, 176,  50,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "CorreoContacto"               )}, // 16
                 // BLANCOS.
-                {++c,    new RegistroCampo(0, 226, 262,  "A",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                           )}, // 16
+                {++c,    new RegistroCampo(0, 226, 262,  "A",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                           )}, // 17
                 // SELLO ELECTRÓNICO.
-                {++c,    new RegistroCampo(0, 488,   13, "A",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                           )}, // 17
+                {++c,    new RegistroCampo(0, 488,   13, "A",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                           )}, // 18
 
-                // En principio sólo se incluye la página 1.
+                // No se incluye ninguna página por defecto. Éstas se van añadiendo conforme al número de perceptores.
                 {++c,    new ConjuntoDeEmpaquetables(){ Empaquetables = new List<IEmpaquetable>(){
-                            new Mod190e2017v00p01(Ejercicio, Periodo)
-                } } }, // 18
+                } } }, // 19
             };
 
-            Paginas = RegistroCampos[17] as ConjuntoDeEmpaquetables;
+            Paginas = RegistroCampos[19] as ConjuntoDeEmpaquetables;
         }
 
         /// <summary>
@@ -106,6 +108,37 @@ namespace AeatModelos.Mod190e2017v00
         /// </summary>
         public override void Calcular()
         {
+            // *************************** !Importante ********************************
+            // Comprobamos para unos campos numéricos concretos si a éstos les debe
+            // preceder una "N", con tal de señalar que se trata de un número negativo.
+            // (Se trata de un modelo con diseño viejo y no admite los tipos N)
+            // ************************************************************************
+
+            dynamic modPagina1 = this;
+
+            if (Convert.ToDecimal(modPagina1["02"]?.Valor) < 0)
+                modPagina1["02N"].Valor = "N";
+
+            for (int i = 0; i < Paginas.Empaquetables.Count; i++)
+            {
+                dynamic modPaginaPerceptor = Paginas.Empaquetables[i] as Mod190e2017v00p01;
+
+                if (Convert.ToDecimal(modPaginaPerceptor["IMPORTE TOTAL DE LAS PERCEPCIONES."]?.Valor) < 0)
+                    modPaginaPerceptor["IMPORTE TOTAL DE LAS PERCEPCIONES. SIGNO NEGATIVO."].Valor = "N";
+
+                if (Convert.ToDecimal(modPaginaPerceptor["PERCEPCIONES DINERARIAS NO DERIVADAS DE INCAPACIDAD LABORAL. PERCEPCIÓN ÍNTEGRA"]?.Valor) < 0)
+                    modPaginaPerceptor["PERCEPCIONES DINERARIAS NO DERIVADAS DE INCAPACIDAD LABORAL. PERCEPCIÓN ÍNTEGRA. SIGNO NEGATIVO"].Valor = "N";
+
+                if (Convert.ToDecimal(modPaginaPerceptor["PERCEPCIONES EN ESPECIE NO DERIVADAS DE INCAPACIDAD LABORAL: VALORACIÓN"]?.Valor) < 0)
+                    modPaginaPerceptor["PERCEPCIONES EN ESPECIE NO DERIVADAS DE INCAPACIDAD LABORAL: VALORACIÓN. SIGNO NEGATIVO"].Valor = "N";
+
+                if (Convert.ToDecimal(modPaginaPerceptor["PERCEPCIONES DINERARIAS DERIVADAS DE INCAPACIDAD LABORAL. PERCEPCIÓN ÍNTEGRA (Dineraria) DERIVADA DE INCAPACIDAD LABORAL"]?.Valor) < 0)
+                    modPaginaPerceptor["PERCEPCIONES DINERARIAS DERIVADAS DE INCAPACIDAD LABORAL. PERCEPCIÓN ÍNTEGRA (Dineraria) DERIVADA DE INCAPACIDAD LABORAL. SIGNO NEGATIVO"].Valor = "N";
+
+                if (Convert.ToDecimal(modPaginaPerceptor["PERCEPCIONES EN ESPECIE DERIVADAS DE INCAPACIDAD LABORAL: VALORACIÓN DE LA PERCEPCIÓN EN ESPECIE DERIVADA DE INCAPACIDAD LABORAL"]?.Valor) < 0)
+                    modPaginaPerceptor["PERCEPCIONES EN ESPECIE DERIVADAS DE INCAPACIDAD LABORAL: VALORACIÓN DE LA PERCEPCIÓN EN ESPECIE DERIVADA DE INCAPACIDAD LABORAL. SIGNO NEGATIVO"].Valor = "N";
+            }
+
         }
     }
 }
