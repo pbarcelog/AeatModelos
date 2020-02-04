@@ -114,14 +114,14 @@ namespace AeatModelos.Mod190e2017v00
             // (Se trata de un modelo con diseño viejo y no admite los tipos N)
             // ************************************************************************
 
-            dynamic modPagina1 = this;
+            Mod190e2017v00 modPagina1 = this;
 
             if (Convert.ToDecimal(modPagina1["02"]?.Valor) < 0)
                 modPagina1["02N"].Valor = "N";
 
             for (int i = 0; i < Paginas.Empaquetables.Count; i++)
             {
-                dynamic modPaginaPerceptor = Paginas.Empaquetables[i] as Mod190e2017v00p01;
+                Mod190e2017v00p01 modPaginaPerceptor = Paginas.Empaquetables[i] as Mod190e2017v00p01;
 
                 if (Convert.ToDecimal(modPaginaPerceptor["IMPORTE TOTAL DE LAS PERCEPCIONES."]?.Valor) < 0)
                     modPaginaPerceptor["IMPORTE TOTAL DE LAS PERCEPCIONES. SIGNO NEGATIVO."].Valor = "N";
