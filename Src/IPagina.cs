@@ -41,70 +41,25 @@
     Para más información, contacte con la dirección: info@irenesolutions.com    
  */
 
-using System.Text.RegularExpressions;
-
-namespace AeatModelos.Comunicaciones
+namespace AeatModelos
 {
 
     /// <summary>
-    /// Representa un error contenido en una respuesta a una petición
-    /// de presentación de declaración.
+    /// Representa una página de un modelo.
     /// </summary>
-    public class RespuestaError
+    public interface IPagina
     {
 
-        #region Variables Privadas
+        #region Indexadores
 
         /// <summary>
-        /// Texto devuelto en el documento html de respuesta
-        /// de la aeat para un error.
+        /// Devuelve el campo que se corresponde con la descripción facilitada
+        /// o null si no lo encuentra.
         /// </summary>
-        string _TextoError;
-
-        #endregion
-
-        #region Construtores de Instancia
-
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        /// <param name="textoError">Texto devuelto en el documento
-        /// html que representa el error.</param>
-        public RespuestaError(string textoError)
-        {
-            _TextoError = textoError;
-
-            Codigo = Regex.Match(_TextoError, @"^[^-]+").Value;
-            Descripcion = Regex.Match(_TextoError, @"(?<=-)[^-]+$").Value;
-
-        }
-
-        #endregion
-
-        #region Propiedades Públicas de Instancia
-
-        /// <summary>
-        /// Código de error.
-        /// </summary>
-        public string Codigo { get; private set; }
-
-        /// <summary>
-        /// Descripción de error.
-        /// </summary>
-        public string Descripcion { get; private set; }
-
-        #endregion
-
-        #region Métodos Públicos de Instancia
-
-        /// <summary>
-        /// Representación textual de la instancia.
-        /// </summary>
-        /// <returns>Representación textual de la instancia.</returns>
-        public override string ToString()
-        {
-            return $"{Codigo}, {Descripcion}";
-        }
+        /// <param name="descripcion">Descipción del campo o clave del campo.</param>
+        /// <returns>Devuelve el campo que se corresponde con la descripción facilitada
+        /// o null si no lo encuentra.</returns>
+        RegistroCampo this[string descripcion] { get; }
 
         #endregion
 

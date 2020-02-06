@@ -35,11 +35,7 @@
     Para más información, por favor contacte a Irene Solutions SL. en la
     dirección: info@irenesolutions.com
  */
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AeatModelos.Mod390e2019v100
 {
@@ -48,6 +44,8 @@ namespace AeatModelos.Mod390e2019v100
     /// </summary>
     public class Mod390e2019v100p07 : RegistroModPagina
     {
+
+        #region Construtores de Instancia
 
         /// <summary>
         /// Constructor.
@@ -117,12 +115,18 @@ namespace AeatModelos.Mod390e2019v100
 
         }
 
+        #endregion
+
+        #region Métodos Públicos de Instancia
+
         /// <summary>
         /// Actualiza el valor de todos los campos calculados.
         /// </summary>
         public override void Calcular()
         {
         }
+
+        #endregion
 
     }
 }

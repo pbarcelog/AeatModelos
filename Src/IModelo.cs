@@ -41,31 +41,55 @@
     Para más información, contacte con la dirección: info@irenesolutions.com    
  */
 
-using System;
-
-namespace AeatModelos.Conversores
+namespace AeatModelos
 {
 
     /// <summary>
-    /// Se encarga de las funciones de conversión de valores
-    /// apara un campo.
+    /// Representa un  modelo de la Agencia Tributaria.
     /// </summary>
-    public class ConversorTexto : Conversor
+    public interface IModelo
     {
 
-        #region Construtores de Instancia
+        #region Propiedades Públicas de Instancia
 
         /// <summary>
-        /// Constructor.
+        /// Si la instancia actual contiene más páginas
+        /// estas se muestran como ConjuntoDeEmpaquetables
+        /// en esta propiedad. Si no el valor de la propiedad
+        /// es null.
         /// </summary>
-        /// <param name="registroCampo">Registro campo subyacente.</param>
-        public ConversorTexto(RegistroCampo registroCampo) : base(registroCampo)
-        {
-        }
+        ConjuntoDeEmpaquetables Paginas { get; }
 
         #endregion
 
         #region Métodos Públicos de Instancia
+
+        /// <summary>
+        /// Añade una página del índice específicado.
+        /// </summary>
+        /// <param name="indicePagina">Indice de la página a añadir.</param>
+        /// <returns>Página añadida.</returns>
+        RegistroMod InsertaPagina(int indicePagina);
+
+        /// <summary>
+        /// Recupera la página del índice específicado.
+        /// </summary>
+        /// <param name="indicePagina">Indice de la página a añadir.</param>
+        /// <param name="indiceGrupo">Cuando existen varía páginas
+        /// del mimo número de página en el modelo, aquí se indica
+        /// el indice en base 0 de la página que se quiere recuperar 
+        /// (si no se especifica se devuelve la primera coincidencia).</param>
+        /// <param name="crear">Si es true y no se encuentra la página
+        /// entre los empaquetables, la crea.</param>
+        /// <returns>Página recuperada si existe, recién creada
+        /// si no existe y crear=true o null si no existe e índiceGrupo no
+        /// es igual a 0 o crear es false.</returns>
+        RegistroMod RecuperaPagina(int indicePagina, int indiceGrupo = 0, bool crear = false);
+
+        /// <summary>
+        /// Actualiza el valor de todos los campos calculados.
+        /// </summary>
+        void Calcular();
 
         /// <summary>
         /// Recupera la representación del 
@@ -75,55 +99,9 @@ namespace AeatModelos.Conversores
         /// <returns> Representación del 
         /// segmento de fichero preparada para incorporarse
         /// al mismo.</returns>
-        public override string AFichero()
-        {
-
-            string resultado = $"{_RegistroCampo.Valor}";
-            int largoPendiente = _RegistroCampo.Longitud - resultado.Length;
-            
-            if (largoPendiente < 0)
-                throw new InvalidCastException(
-                    Errores.MostrarMensaje("ConversorTexto.000", 
-                    $"'{resultado}'", $"{resultado.Length}", 
-                    $"'{_RegistroCampo.Descripcion}'", $"{_RegistroCampo.Longitud}")
-                );
-
-            string relleno = null;
-
-            if (largoPendiente > 0)
-                relleno = new string(' ', largoPendiente);
-
-            resultado = $"{resultado}{relleno}";
-
-            if (_RegistroCampo.ValorFichero != resultado)
-                _RegistroCampo.ValorFichero = resultado;
-
-            if (resultado.Length > _RegistroCampo.Longitud)
-                resultado = resultado.Substring(resultado.Length -
-                    _RegistroCampo.Longitud, _RegistroCampo.Longitud);
-
-            return resultado;
-
-        }
-
-        /// <summary>
-        /// Obtiene un datos formateado procedente de un fichero.
-        /// </summary>
-        /// <returns> Dato utilizable por la aplicación
-        /// procedente de su representación en un fichero.</returns>
-        public override object DeFichero()
-        {
-            string resultado = $"{_RegistroCampo.ValorFichero}";
-            resultado = resultado.Trim(" ".ToCharArray());
-
-            if ((_RegistroCampo.Valor == null) || (_RegistroCampo.Valor != null && !_RegistroCampo.Valor.Equals(resultado)))
-                _RegistroCampo.Valor = resultado;
-
-            return resultado;
-        }
+        string AFichero();
 
         #endregion
-
 
     }
 }

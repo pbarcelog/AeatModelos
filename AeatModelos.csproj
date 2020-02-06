@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Src\ICasilla.cs" />
     <Compile Include="Src\Comunicaciones\Certificado.cs" />
     <Compile Include="Src\Comunicaciones\CertificadoTitular.cs" />
     <Compile Include="Src\Comunicaciones\Enlaces.cs" />
@@ -66,6 +67,8 @@
     <Compile Include="Src\Errores.cs" />
     <Compile Include="Src\Conversores\IConversor.cs" />
     <Compile Include="Src\IEmpaquetable.cs" />
+    <Compile Include="Src\IModelo.cs" />
+    <Compile Include="Src\IPagina.cs" />
     <Compile Include="Src\Mod111e16v18\Mod111e16v18.cs" />
     <Compile Include="Src\Mod111e16v18\Mod111e16v18p01.cs" />
     <Compile Include="Src\Mod111e16v18\Txt.cs" />

@@ -1,39 +1,44 @@
 ﻿/*
-    Este archivo es parte del proyecto AeatModelos.
+    Este archivo forma parte del proyecto AeatModelos(R).
     Copyright (c) 2020 Irene Solutions SL
-    Autores: Irene Solutions SL.
+    Autores: Manuel Diago García, Juan Bautista Garcia Traver.
 
-    Este programa es software libre; usted puede redistribuirlo y/o modificarlo
-    bajo los términos establecidos en GNU Affero General Public License versión 3
-    tal y como han sido publicados por la Free Software Foundation.
+    Este programa es software libre; lo puede distribuir y/o modificar
+    según los terminos de la licencia GNU Affero General Public License
+    versión 3 según su redacción de la Free Software Foundation con la
+    siguiente condición añadida en la sección 15 según se establece en
+    la sección 7(a):
 
-    Este programa se distribuye con la intención de que sea útil, pero SIN
-    NIGÚN TIPO DE GARANTÍA.
+    PARA CUALQUIER PARTE DEL CÓGIO PROPIEDAD DE IRENE SOLUTIONS. IRENE 
+    SOLUTIONS NO SE HACE RESPONSABLE DE LA VULNERACIÓN DE DERECHOS 
+    DE TERCEROS.
 
-    Para más detalles consulte la licencia GNU Affero General Public.
-    Debe se haber recibido una copia de la misma con el presente programa;
-    en caso contrario, consulte http://www.gnu.org/licenses o escriba a la 
-    Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-    Boston, MA, 02110-1301 USA, o descargue la licencia en la URL:
-        http://www.irenesolutions.com/terms-of-use.pdf
+    Este programa se distribuye con la esperanza de que sea útil, pero
+    SIN GARANTÍA DE NINGÚN TIPO; ni siquiera la derivada de un acuerdo
+    comercial o utilización para un propósito particular.
+   
+    Para más información puede consultar la licencia GNU Affero General
+    Public http://www.gnu.org/licenses o escribir a la Free Software 
+    Foundation, Inc. , 51 Franklin Street, Fifth Floor,
+    Boston, MA, 02110-1301 USA, o descargarla en la siguiente URL:
+        http://www.irenesolutions.com/terms-of-use.pdf 
+
+    Las interfaces de usuario con versiones del código fuente del presente 
+    proyecto, modificado o no, o código de objeto del mismo, deben incluir
+    de manera visible los correspondientes avisos legales exigidos en la
+    sección 5 de la licencia GNU Affero General Public.
     
-    Las interfaces de ususario con código modificado y versiones de los
-    objetos contenidos en el presente programa deben mostrar las advertencias
-    legaels apropiadas, como se requiere en la secion 5 de la licencia GNU Affero
-    General Public.
-
-    Usted puede ser liberado de los requerimiento de la licencia mediante
-    la compra de una licencia comercial. La compra de la licencia es
-    obligatoria en caso de que vaya a desarrollar actividades comerciales
-    con el software AeatModelos sin publicar el código fuente de sus 
-    propias aplicaciones.
-    Estas actividades incluyen: ofrecer servicios de pago como mediante ASP,
-    sirviendo los resultados obtenidos mediante el presente software mediante
-    aplicaciones web, o empaquetando AeatModelos con un producto de código
-    fuente no público.    
-       
-    Para más información, por favor contacte a Irene Solutions SL. en la
-    dirección: info@irenesolutions.com
+    uede evitar el cumplimiento de lo establecido de lo establecido 
+    anteriormente comprando una licencia comercial. 
+    La compra de una licencia comercial es obligatoria
+    desde el momento en que usted desarrolle software comercial incluyendo
+    funcionalidades de AeatModelos sin la publicación del código fuente
+    de sus propias aplicaciones.
+    Estas actividades incluyen: La oferta de servicios de pago mediante
+    aplicaciones web de cualquier tipo que incluyan la funcionalidad
+    de AeatModelos.
+    
+    Para más información, contacte con la dirección: info@irenesolutions.com    
  */
 
 using AeatModelos.Configuracion;
@@ -48,38 +53,43 @@ namespace AeatModelos.Comunicaciones
     /// <summary>
     /// Funcionalidades trabajo certificado cliente. 
     /// </summary>
-    public class Certificado
+    public static class Certificado
     {
+
+        #region Métodos Públicos Estáticos
 
         /// <summary>
         /// Devuelve el certificado establecido en la configuración. 
         /// </summary>
         /// <returns>Devuelve el certificado de la 
         /// configuración.</returns>
-        public static X509Certificate2 Cargar() 
+        public static X509Certificate2 Cargar()
         {
 
             bool isWindows = (Environment.OSVersion.Platform == PlatformID.Win32NT) ||
                                 (Environment.OSVersion.Platform == PlatformID.Win32S) ||
                                 (Environment.OSVersion.Platform == PlatformID.Win32Windows) ||
                                 (Environment.OSVersion.Platform == PlatformID.WinCE);
-
+           
             if (Parametros.Actuales?.Certificados?.CertificadoModo == CertificadosModos.AlmacenWindows && !isWindows)
-                throw new PlatformNotSupportedException($"El modo de gestión de certificados" +
-                    $" '{Parametros.Actuales?.Certificados?.CertificadoModo}'" +
-                    $" no es compatible con la plataforma {Environment.OSVersion.Platform}.");
+                throw new PlatformNotSupportedException(
+                    Errores.MostrarMensaje("Certificado.000", 
+                    $"'{Parametros.Actuales?.Certificados?.CertificadoModo}'", 
+                    $"{Environment.OSVersion.Platform}")
+                );
 
             X509Certificate2 certificado = null;
 
-            if (Parametros.Actuales?.Certificados?.CertificadoModo == CertificadosModos.AlmacenWindows) 
+            if (Parametros.Actuales?.Certificados?.CertificadoModo == CertificadosModos.AlmacenWindows)
             {
 
                 certificado = CargarPorHuella();
-
-                if (certificado == null) 
-                    throw new Exception($"No se ha encontrado un certificado con la huella digital" +
-                        $" '{Parametros.Actuales?.Certificados?.HuellaDigital}' ni en el" +
-                        $"almacén de certificados del usuario ni en el de la máquina local.");
+                
+                if (certificado == null)
+                    throw new Exception(
+                        Errores.MostrarMensaje("Certificado.001", 
+                        $"'{Parametros.Actuales?.Certificados?.HuellaDigital}'")
+                    );
 
             }
 
@@ -87,18 +97,19 @@ namespace AeatModelos.Comunicaciones
             {
 
                 certificado = CargarPorArchivo();
-
+                
                 if (certificado == null)
-                    throw new Exception($"No se ha podido cargar el archivo de certificado" +
-                        $" '{Parametros.Actuales?.Certificados?.RutaArchivo}'. Revise la ruta" +
-                        $"al archivo y la contraseña.");
+                    throw new Exception(
+                        Errores.MostrarMensaje("Certificado.002", 
+                        $"'{Parametros.Actuales?.Certificados?.RutaArchivo}'")
+                    );
 
             }
-
+            
             if (certificado.NotAfter < DateTime.Now)
                 throw new ArgumentNullException(
-                  $"El certificado establecido en la configuración dejó de" +
-                  $"ser válido después de {certificado.NotAfter}.");
+                  Errores.MostrarMensaje("Certificado.003", $"{certificado.NotAfter}")
+                );
 
             return certificado;
 
@@ -110,26 +121,26 @@ namespace AeatModelos.Comunicaciones
         /// </summary>
         /// <param name="certificado">Certificado a analizar.</param>
         /// <returns>Titular.</returns>
-        public static CertificadoTitular Titular(X509Certificate2 certificado) 
-        {            
+        public static CertificadoTitular Titular(X509Certificate2 certificado)
+        {
 
             string cn = null;
 
-            switch (certificado.Issuer) 
+            switch (certificado.Issuer)
             {
 
                 case "CN=AC FNMT Usuarios, OU=Ceres, O=FNMT-RCM, C=ES":
 
                     cn = Regex.Match(certificado.Subject, @"(?<=CN=)[^,]+").Value;
 
-                    return new CertificadoTitular 
-                    { 
-                        NIF = Regex.Match(cn, @"(?<=-\s*)[^\s]+$").Value.Trim(), 
+                    return new CertificadoTitular
+                    {
+                        NIF = Regex.Match(cn, @"(?<=-\s*)[^\s]+$").Value.Trim(),
                         Nombre = Regex.Match(cn, @"^[^-]+").Value.Trim()
                     };
 
                 case "C=ES, O=ACCV, OU=PKIACCV, CN=ACCVCA-120":
-                    
+
                     cn = Regex.Match(certificado.Subject, @"(?<=CN=)[^,]+").Value;
 
                     return new CertificadoTitular
@@ -200,5 +211,8 @@ namespace AeatModelos.Comunicaciones
             return null;
 
         }
+
+        #endregion
+
     }
 }

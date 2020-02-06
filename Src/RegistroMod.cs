@@ -1,41 +1,45 @@
 ﻿/*
-    Este archivo es parte del proyecto AeatModelos.
+    Este archivo forma parte del proyecto AeatModelos(R).
     Copyright (c) 2020 Irene Solutions SL
-    Autores: Irene Solutions SL.
+    Autores: Manuel Diago García, Juan Bautista Garcia Traver.
 
-    Este programa es software libre; usted puede redistribuirlo y/o modificarlo
-    bajo los términos establecidos en GNU Affero General Public License versión 3
-    tal y como han sido publicados por la Free Software Foundation.
+    Este programa es software libre; lo puede distribuir y/o modificar
+    según los terminos de la licencia GNU Affero General Public License
+    versión 3 según su redacción de la Free Software Foundation con la
+    siguiente condición añadida en la sección 15 según se establece en
+    la sección 7(a):
 
-    Este programa se distribuye con la intención de que sea útil, pero SIN
-    NIGÚN TIPO DE GARANTÍA.
+    PARA CUALQUIER PARTE DEL CÓGIO PROPIEDAD DE IRENE SOLUTIONS. IRENE 
+    SOLUTIONS NO SE HACE RESPONSABLE DE LA VULNERACIÓN DE DERECHOS 
+    DE TERCEROS.
 
-    Para más detalles consulte la licencia GNU Affero General Public.
-    Debe se haber recibido una copia de la misma con el presente programa;
-    en caso contrario, consulte http://www.gnu.org/licenses o escriba a la 
-    Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-    Boston, MA, 02110-1301 USA, o descargue la licencia en la URL:
-        http://www.irenesolutions.com/terms-of-use.pdf
+    Este programa se distribuye con la esperanza de que sea útil, pero
+    SIN GARANTÍA DE NINGÚN TIPO; ni siquiera la derivada de un acuerdo
+    comercial o utilización para un propósito particular.
+   
+    Para más información puede consultar la licencia GNU Affero General
+    Public http://www.gnu.org/licenses o escribir a la Free Software 
+    Foundation, Inc. , 51 Franklin Street, Fifth Floor,
+    Boston, MA, 02110-1301 USA, o descargarla en la siguiente URL:
+        http://www.irenesolutions.com/terms-of-use.pdf 
+
+    Las interfaces de usuario con versiones del código fuente del presente 
+    proyecto, modificado o no, o código de objeto del mismo, deben incluir
+    de manera visible los correspondientes avisos legales exigidos en la
+    sección 5 de la licencia GNU Affero General Public.
     
-    Las interfaces de ususario con código modificado y versiones de los
-    objetos contenidos en el presente programa deben mostrar las advertencias
-    legaels apropiadas, como se requiere en la secion 5 de la licencia GNU Affero
-    General Public.
-
-    Usted puede ser liberado de los requerimiento de la licencia mediante
-    la compra de una licencia comercial. La compra de la licencia es
-    obligatoria en caso de que vaya a desarrollar actividades comerciales
-    con el software AeatModelos sin publicar el código fuente de sus 
-    propias aplicaciones.
-    Estas actividades incluyen: ofrecer servicios de pago como mediante ASP,
-    sirviendo los resultados obtenidos mediante el presente software mediante
-    aplicaciones web, o empaquetando AeatModelos con un producto de código
-    fuente no público.    
-       
-    Para más información, por favor contacte a Irene Solutions SL. en la
-    dirección: info@irenesolutions.com
+    uede evitar el cumplimiento de lo establecido de lo establecido 
+    anteriormente comprando una licencia comercial. 
+    La compra de una licencia comercial es obligatoria
+    desde el momento en que usted desarrolle software comercial incluyendo
+    funcionalidades de AeatModelos sin la publicación del código fuente
+    de sus propias aplicaciones.
+    Estas actividades incluyen: La oferta de servicios de pago mediante
+    aplicaciones web de cualquier tipo que incluyan la funcionalidad
+    de AeatModelos.
+    
+    Para más información, contacte con la dirección: info@irenesolutions.com    
  */
-
 
 using AeatModelos.Comunicaciones;
 using System;
@@ -50,18 +54,10 @@ namespace AeatModelos
     /// <summary>
     /// Modelo de un resgistro.
     /// </summary>
-    public class RegistroMod : IEmpaquetable
+    public class RegistroMod : IEmpaquetable, IModelo
     {
 
-        /// <summary>
-        /// Indica si el usuario a confirmado la declaración.
-        /// </summary>
-        bool _Confirmado = false;
-
-        /// <summary>
-        /// Almacena el valor del fichero del modelo.
-        /// </summary>
-        string _Valor;
+        #region Variables Privadas Estáticas
 
         /// <summary>
         /// Mapa de texto inicial para la determinación del modelo en un archivo determinado.
@@ -76,10 +72,170 @@ namespace AeatModelos
             {"<T303", "AeatModelos.Mod303e19v10_10.Mod303e19v10_10" },
         };
 
+        #endregion
+
+        #region Variables Privadas de Instancia
+
+        /// <summary>
+        /// Indica si el usuario a confirmado la declaración.
+        /// </summary>
+        bool _Confirmado = false;
+
+        /// <summary>
+        /// Almacena el valor del fichero del modelo.
+        /// </summary>
+        string _Valor;
+
+        #endregion
+
+        #region Construtores de Instancia
+
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="ejercicio">AAAA: 2018</param>
+        /// <param name="periodo">Periodo: 1T, 2T...01, 02...12</param>
+        public RegistroMod(string ejercicio, string periodo)
+        {
+            Ejercicio = ejercicio;
+            Periodo = periodo;
+
+            VariablesEnvio = new Dictionary<string, string>() {
+                {"FIRNIF",          null },
+                {"FIRNOMBRE",       null },
+                {"FIR",             "FirmaBasica" },
+                {"IDI",             "ES" },
+                {"F01",             null },
+                {"NRC",             null }
+            };
+
+            OrdenVariablesEnvio = new string[6] { "FIRNIF", "FIRNOMBRE", "FIR", "IDI", "F01", "NRC" };
+
+        }
+
+        #endregion
+
+        #region Indexadores
+
+        /// <summary>
+        /// Devuelve el campo que se corresponde con la descripción facilitada
+        /// o null si no lo encuentra.
+        /// </summary>
+        /// <param name="descripcion">Descipción del campo o clave del campo.</param>
+        /// <returns>Devuelve el campo que se corresponde con la descripción facilitada
+        /// o null si no lo encuentra.</returns>
+        public RegistroCampo this[string descripcion]
+        {
+            get
+            {
+
+                foreach (var parClaveValor in RegistroCampos)
+                {
+                    RegistroCampo campo = parClaveValor.Value as RegistroCampo;
+
+                    if (campo != null && campo?.Descripcion == descripcion)
+                        return campo;
+
+                    if (campo != null && campo?.Clave != null && campo?.Clave == descripcion)
+                        return campo;
+                }
+
+                return null;
+            }
+        }
+
+        #endregion
+
+        #region Métodos Privados de Instancia
+
+        /// <summary>
+        /// Genera una expresión para poder extraer el texto de cada página mediante regex.
+        /// </summary>
+        /// <returns>Patrón para regex inicio página</returns>
+        private string GenerarPatronRegexInicioPagina()
+        {
+
+            RegistroCampo inicio = null;
+            RegistroCampo modelo = null;
+            RegistroCampo pagina = null;
+            RegistroCampo final = null;
+
+            foreach (var reg in RegistroCampos)
+            {
+                if (Regex.Match(reg.Value.Descripcion, @"\s*Inicio\s+del\s+identificador\s+de\s+modelo\s+y\s+p[^\d]{1}gina\s*").Success)
+                    inicio = (reg.Value as RegistroCampo);
+                else if (reg.Value.Descripcion.Trim() == "Modelo")
+                    modelo = (reg.Value as RegistroCampo);
+                else if (reg.Value.Descripcion.Trim() == "Página")
+                    pagina = (reg.Value as RegistroCampo);
+                else if (Regex.Match(reg.Value.Descripcion, @"\s*Fin\s+de\s+identificador\s+de\s+modelo\s*").Success)
+                    final = (reg.Value as RegistroCampo);
+            }
+
+            string patronPagina = $"\\d{{{pagina.Longitud}}}";
+
+            string patronInicio = $"{inicio.ValorFichero}{modelo.ValorFichero}{patronPagina}{final.ValorFichero}";
+
+            return patronInicio;
+
+        }
+
+        /// <summary>
+        /// Genera una expresión para poder extraer el texto de cada página mediante regex.
+        /// </summary>
+        /// <returns>Patrón para regex inicio página</returns>
+        private string GenerarPatronRegexFinalPagina()
+        {
+
+            RegistroCampo final = null;
+
+            foreach (var reg in RegistroCampos)
+                if (Regex.Match(reg.Value.Descripcion, @"\s*Indicador\s+de\s+fin\s+de\s+registro\s*").Success)
+                    final = (reg.Value as RegistroCampo);
+
+
+            return $"{final.ValorFichero}";
+
+
+        }
+
+        /// <summary>
+        /// Obtiene los datos de presentación para la petición de presentación
+        /// de un modelo concreto al servicio de presentación de la AEAT.
+        /// </summary>
+        /// <returns>Datos de presentación para la petición de presentación
+        /// de un modelo concreto al servicio de presentación de la AEAT.</returns>
+        internal virtual string DatosPeticionPresentacion()
+        {
+
+            string[] segmentos = new string[OrdenVariablesEnvio.Length];
+            var segmentoIndice = 0;
+
+            foreach (var variable in OrdenVariablesEnvio)
+            {
+                var valor = VariablesEnvio[variable];
+                var valorCodificado = string.IsNullOrEmpty(valor) ? "" : HttpUtility.UrlEncode(valor, Encoding);
+                var segmento = $"{variable}={valorCodificado}";
+                segmentos[segmentoIndice++] = segmento;
+            }
+
+            return string.Join("&", segmentos);
+
+        }
+
+        #endregion
+
+        #region Propiedades Públicas Estáticas
+
         /// <summary>
         /// Codificación utilizada por la AEAT.
         /// </summary>
         public static Encoding Encoding = Encoding.GetEncoding("ISO-8859-1");
+
+
+        #endregion
+
+        #region Propiedades Públicas de Instancia
 
         /// <summary>
         /// Valor del campo.
@@ -90,8 +246,8 @@ namespace AeatModelos
             {
                 if (_Valor == null)
                     _Valor = AFichero();
-               
-                 return _Valor;
+
+                return _Valor;
             }
             set
             {
@@ -107,7 +263,7 @@ namespace AeatModelos
             get
             {
                 return $"{GetType()}";
-            }          
+            }
         }
 
         /// <summary>
@@ -150,55 +306,105 @@ namespace AeatModelos
         /// </summary>
         public ConjuntoDeEmpaquetables Paginas { get; protected set; }
 
+        #endregion
+
+        #region Métodos Públicos Estáticos
+
         /// <summary>
-        /// Constructor.
+        /// Crear un modelo para la generación de impuestos.
         /// </summary>
-        /// <param name="ejercicio">AAAA: 2018</param>
-        /// <param name="periodo">Periodo: 1T, 2T...01, 02...12</param>
-        public RegistroMod(string ejercicio, string periodo)
+        /// <param name="clave">Nombre del modelo a obtener</param>
+        /// <param name="ejercicio">Nombre del modelo a obtener</param>
+        /// <param name="periodo">Nombre del modelo a obtener</param>
+        /// <returns>Modelo tributario determinado por la clave.</returns>
+        public static IModelo CrearModelo(string clave,
+            string ejercicio, string periodo = "0A")
         {
-            Ejercicio = ejercicio;
-            Periodo = periodo;
+            return CrearEmpaquetable(clave, ejercicio, periodo) as IModelo;
+        }
 
-            VariablesEnvio = new Dictionary<string, string>() {
-                {"FIRNIF",          null },
-                {"FIRNOMBRE",       null },
-                {"FIR",             "FirmaBasica" },
-                {"IDI",             "ES" },
-                {"F01",             null },
-                {"NRC",             null }
-            };
 
-            OrdenVariablesEnvio = new string[6] { "FIRNIF", "FIRNOMBRE", "FIR", "IDI", "F01", "NRC" };
-
+        /// <summary>
+        /// Crear empaquetable para la generación de impuestos.
+        /// </summary>
+        /// <param name="clave">Nombre del empaquetable a obtener</param>
+        /// <param name="ejercicio">Nombre del empaquetable a obtener</param>
+        /// <param name="periodo">Nombre del empaquetable a obtener</param>
+        /// <returns>Empaquetable.</returns>
+        public static IEmpaquetable CrearEmpaquetable(string clave,
+            string ejercicio, string periodo = "0A")
+        {
+            Type tipoEmpaquetable = Type.GetType($"AeatModelos.{clave}.{clave}");
+            return Activator.CreateInstance(tipoEmpaquetable, ejercicio, periodo) as IEmpaquetable;
         }
 
         /// <summary>
-        /// Devuelve el campo que se corresponde con la descripción facilitada
-        /// o null si no lo encuentra.
+        /// Compone un empaquetable a partir de su forma
+        /// en texto de fichero.
         /// </summary>
-        /// <param name="descripcion">Descipción del campo o clave del campo.</param>
-        /// <returns>Devuelve el campo que se corresponde con la descripción facilitada
-        /// o null si no lo encuentra.</returns>
-        public RegistroCampo this[string descripcion]
+        /// <param name="texto">Segmento de texto.</param>
+        /// <returns>Objeto representado 
+        /// por el segmento de texto</returns>
+        public static IEmpaquetable CrearEmpaquetable(string texto)
         {
-            get
+
+            IEmpaquetable modelo = null;
+            string ejercicio = null;
+            string periodo = null;
+
+            // Recorro los modelos a ver encuentro que tipo de archivo es
+            foreach (KeyValuePair<string, string> magicToken in _MagicTokens)
+            {
+                if (texto.StartsWith(magicToken.Key))
+                {
+                    modelo = Activator.CreateInstance(Type.GetType(magicToken.Value), $"{DateTime.Now.Year}", "") as IEmpaquetable;
+                    ejercicio = texto.Substring(magicToken.Key.Length + 1, 4);
+                    periodo = texto.Substring(magicToken.Key.Length + 5, 2);
+                }
+            }
+
+
+            // primero recupero el punto de inserción de las páginas
+            var paginas = (modelo as RegistroMod).Paginas;
+
+            if (paginas == null)
+                return modelo;
+
+            paginas.Empaquetables.Clear();
+
+            foreach (var kvpPagina in (modelo as RegistroMod).PaginasMapa)
             {
 
-                foreach (var parClaveValor in RegistroCampos)
+                var pagina = Activator.CreateInstance(Type.GetType(kvpPagina.Value), ejercicio, periodo) as RegistroMod;
+                var patron = (pagina as RegistroMod).GenerarPatronRegexPagina();
+
+                foreach (Match match in Regex.Matches(texto, patron))
                 {
-                    RegistroCampo campo = parClaveValor.Value as RegistroCampo;
+                    var textoPagina = match.Value;
 
-                    if (campo != null && campo?.Descripcion == descripcion)                 
-                        return campo;
-
-                    if (campo != null && campo?.Clave != null && campo?.Clave == descripcion)
-                        return campo;
+                    if (textoPagina != null)
+                    {
+                        // He encontrado una página, la creo
+                        IEmpaquetable paginaModelo = Activator.CreateInstance(pagina.GetType(), $"{DateTime.Now.Year}", "") as IEmpaquetable;
+                        var p = (paginaModelo as RegistroModPagina).DeFichero(textoPagina);
+                        paginas.Empaquetables.Add(p as IEmpaquetable);
+                        texto = texto.Replace(textoPagina, "");
+                    }
                 }
-                   
-                return null;
             }
+
+            // Una vez cargadas las páginas cargo la página 0.
+            modelo = (modelo as RegistroModPagina).DeFichero(texto) as IEmpaquetable;
+
+            var mod = (modelo as RegistroModPagina);
+
+            return modelo;
+
         }
+
+        #endregion
+
+        #region Métodos Públicos de Instancia
 
         /// <summary>
         /// Añade una página del índice específicado.
@@ -207,14 +413,15 @@ namespace AeatModelos
         /// <returns>Página añadida.</returns>
         public RegistroMod InsertaPagina(int indicePagina)
         {
-
+            
             if (!PaginasMapa.ContainsKey(indicePagina))
-                throw new ArgumentException($"No existe ningún tipo en el mapa para el índice {indicePagina}.");
+                throw new ArgumentException(
+                    Errores.MostrarMensaje("RegistroMod.000", $"{indicePagina}"));
 
             string typeName = PaginasMapa[indicePagina];
 
             Type tipoEmpaquetable = Type.GetType(typeName);
-            RegistroMod pagina =  Activator.CreateInstance(tipoEmpaquetable, Ejercicio, Periodo) as RegistroMod;
+            RegistroMod pagina = Activator.CreateInstance(tipoEmpaquetable, Ejercicio, Periodo) as RegistroMod;
 
             Paginas.Empaquetables.Add(pagina);
 
@@ -226,20 +433,34 @@ namespace AeatModelos
         /// Recupera la página del índice específicado.
         /// </summary>
         /// <param name="indicePagina">Indice de la página a añadir.</param>
-        /// <returns>Página añadida.</returns>
-        public RegistroMod RecuperaPagina(int indicePagina)
+        /// <param name="indiceGrupo">Cuando existen varía páginas
+        /// del mimo número de página en el modelo, aquí se indica
+        /// el indice en base 0 de la página que se quiere recuperar 
+        /// (si no se especifica se devuelve la primera coincidencia).</param>
+        /// <param name="crear">Si es true y no se encuentra la página
+        /// entre los empaquetables, la crea.</param>
+        /// <returns>Página recuperada si existe, recién creada
+        /// si no existe y crear=true o null si no existe e índiceGrupo no
+        /// es igual a 0 o crear es false.</returns>
+        public RegistroMod RecuperaPagina(int indicePagina, int indiceGrupo = 0, bool crear = false)
         {
 
             if (!PaginasMapa.ContainsKey(indicePagina))
-                throw new ArgumentException($"No existe ningún tipo en el mapa para el índice {indicePagina}.");
+                throw new ArgumentException(
+                    Errores.MostrarMensaje("RegistroMod.000", $"{indicePagina}"));
+
+            int count = 0;
 
             string typeName = PaginasMapa[indicePagina];
 
             Type tipoObjetivo = Type.GetType(typeName);
 
             foreach (var pagina in Paginas.Empaquetables)
-                if (pagina.GetType().IsAssignableFrom(tipoObjetivo))
+                if (pagina.GetType().IsAssignableFrom(tipoObjetivo) && indiceGrupo == count++)
                     return pagina as RegistroMod;
+
+            if (count == 0 && crear)
+                return InsertaPagina(indicePagina);
 
             return null;
 
@@ -250,8 +471,8 @@ namespace AeatModelos
         /// </summary>
         public virtual void Calcular()
         {
-            throw new NotImplementedException("No implementado en clase base: " +
-                "A implementar en la clase derivada!!!!!");
+            throw new NotImplementedException(Errores.MostrarMensaje("RegistroMod.001",
+                  "método Calcular() de la clase RegistroMod"));
         }
 
         /// <summary>
@@ -293,154 +514,25 @@ namespace AeatModelos
         /// <summary>
         /// Genera una expresión para poder extraer el texto de cada página mediante regex.
         /// </summary>
-        /// <returns>Patrón para regex inicio página</returns>
-        private string GenerarPatronRegexInicioPagina()
-        {
-
-            RegistroCampo inicio = null;
-            RegistroCampo modelo = null;
-            RegistroCampo pagina = null;
-            RegistroCampo final = null;
-
-            foreach (var reg in RegistroCampos)
-            {
-                if (Regex.Match(reg.Value.Descripcion, @"\s*Inicio\s+del\s+identificador\s+de\s+modelo\s+y\s+p[^\d]{1}gina\s*").Success)
-                    inicio = (reg.Value as RegistroCampo);
-                else if (reg.Value.Descripcion.Trim()== "Modelo")
-                    modelo = (reg.Value as RegistroCampo);
-                else if (reg.Value.Descripcion.Trim() == "Página")
-                    pagina = (reg.Value as RegistroCampo);
-                else if (Regex.Match(reg.Value.Descripcion, @"\s*Fin\s+de\s+identificador\s+de\s+modelo\s*").Success)
-                    final = (reg.Value as RegistroCampo);
-            }
-
-            string patronPagina = $"\\d{{{pagina.Longitud}}}";
-
-            string patronInicio = $"{inicio.ValorFichero}{modelo.ValorFichero}{patronPagina}{final.ValorFichero}";
-
-            return patronInicio;
-
-        }
-
-        /// <summary>
-        /// Genera una expresión para poder extraer el texto de cada página mediante regex.
-        /// </summary>
-        /// <returns>Patrón para regex inicio página</returns>
-        private string GenerarPatronRegexFinalPagina()
-        {
-
-            RegistroCampo final = null;
-
-            foreach (var reg in RegistroCampos)
-                if (Regex.Match(reg.Value.Descripcion, @"\s*Indicador\s+de\s+fin\s+de\s+registro\s*").Success)
-                    final = (reg.Value as RegistroCampo);
-
-
-            return $"{final.ValorFichero}";
-
-
-        }
-
-        /// <summary>
-        /// Genera una expresión para poder extraer el texto de cada página mediante regex.
-        /// </summary>
         /// <returns>Patrón para regex extracción páginas</returns>
         public string GenerarPatronRegexPagina()
         {
             return $"{GenerarPatronRegexInicioPagina()}[\\s\\S]+{GenerarPatronRegexFinalPagina()}";
         }
 
-
-        /// <summary>
-        /// Crear empaquetable para la generación de impuestos.
-        /// </summary>
-        /// <param name="clave">Nombre del empaquetable a obtener</param>
-        /// <param name="ejercicio">Nombre del empaquetable a obtener</param>
-        /// <param name="periodo">Nombre del empaquetable a obtener</param>
-        /// <returns>Empaquetable.</returns>
-        public static IEmpaquetable CrearEmpaquetable(string clave, 
-            string ejercicio, string periodo = "0A")
-        {
-            Type tipoEmpaquetable = Type.GetType($"AeatModelos.{clave}.{clave}");
-            return Activator.CreateInstance(tipoEmpaquetable, ejercicio, periodo) as IEmpaquetable;
-        }
-
-        /// <summary>
-        /// Compone un empaquetable a partir de su forma
-        /// en texto de fichero.
-        /// </summary>
-        /// <param name="texto">Segmento de texto.</param>
-        /// <returns>Objeto representado 
-        /// por el segmento de texto</returns>
-        public static IEmpaquetable CrearEmpaquetable(string texto)
-        {
-
-            IEmpaquetable modelo = null;
-            string ejercicio = null;
-            string periodo = null;
-
-            // Recorro los modelos a ver encuentro que tipo de archivo es
-            foreach (KeyValuePair<string, string> magicToken in _MagicTokens)
-            {
-                if (texto.StartsWith(magicToken.Key))
-                {
-                    modelo = Activator.CreateInstance(Type.GetType(magicToken.Value), $"{DateTime.Now.Year}", "") as IEmpaquetable;
-                    ejercicio = texto.Substring(magicToken.Key.Length + 1, 4);
-                    periodo = texto.Substring(magicToken.Key.Length + 5, 2);
-                }
-            }
-           
-
-            // primero recupero el punto de inserción de las páginas
-            var paginas = (modelo as RegistroMod).Paginas;
-
-            if (paginas == null)
-                return modelo;
-
-            paginas.Empaquetables.Clear();
-
-            foreach (var kvpPagina in (modelo as RegistroMod).PaginasMapa)
-            {
-
-                var pagina = Activator.CreateInstance(Type.GetType(kvpPagina.Value), ejercicio, periodo) as RegistroMod;
-                var patron = (pagina as RegistroMod).GenerarPatronRegexPagina();
-
-                foreach (Match match in Regex.Matches(texto, patron))
-                {
-                    var textoPagina = match.Value;
-
-                    if (textoPagina != null)
-                    {
-                        // He encontrado una página, la creo
-                        IEmpaquetable paginaModelo = Activator.CreateInstance(pagina.GetType(), $"{DateTime.Now.Year}", "") as IEmpaquetable;
-                        var p = (paginaModelo as RegistroModPagina).DeFichero(textoPagina);
-                        paginas.Empaquetables.Add(p as IEmpaquetable);
-                        texto = texto.Replace(textoPagina, "");
-                    }
-                }
-            }
-
-            // Una vez cargadas las páginas cargo la página 0.
-            modelo = (modelo as RegistroModPagina).DeFichero(texto) as IEmpaquetable;
-
-            var mod = (modelo as RegistroModPagina);
-
-            return modelo;
-
-        }
-
         /// <summary>
         /// Devuelve una cadena con la representación del titular del
         /// certificado que va a realizar la presentación.
         /// </summary>
-        public string Presentador() 
+        public string Presentador()
         {
             var certificado = Certificado.Cargar();
 
-           var titular = Certificado.Titular(certificado);
+            var titular = Certificado.Titular(certificado);
 
             if (titular == null)
-                throw new Exception($"No se ha podido determinar el titular del certificado {certificado.Subject}.");
+                throw new Exception(
+                    Errores.MostrarMensaje("RegistroMod.002", $"{ certificado.Subject}"));
 
             return $"{titular}";
         }
@@ -464,8 +556,8 @@ namespace AeatModelos
         /// en cuanto a la firma básica. El usuario debe confirmar la declaración
         /// una vez ha revisado el fichero a enviar el presentador y el declarante.
         /// </summary>
-        public void Confirmar() 
-        {            
+        public void Confirmar()
+        {
             _Confirmado = true;
         }
 
@@ -473,37 +565,13 @@ namespace AeatModelos
         /// Presenta la declaración.
         /// </summary>
         /// <returns>Respuesta a la operación de presentación.</returns>
-        public Respuesta Presentar() 
+        public Respuesta Presentar()
         {
 
             if (!_Confirmado)
-                throw new InvalidOperationException("Antes de presentar, debe confirmar la declaración.");
+                throw new InvalidOperationException(Errores.MostrarMensaje("RegistroMod.003"));
 
             return new Peticion(this).Presentar();
-        }
-
-        /// <summary>
-        /// Obtiene los datos de presentación para la petición de presentación
-        /// de un modelo concreto al servicio de presentación de la AEAT.
-        /// </summary>
-        /// <returns>Datos de presentación para la petición de presentación
-        /// de un modelo concreto al servicio de presentación de la AEAT.</returns>
-        internal virtual string DatosPeticionPresentacion() 
-        {
-
-            string[] segmentos = new string[OrdenVariablesEnvio.Length];
-            var segmentoIndice = 0;
-
-            foreach (var variable in OrdenVariablesEnvio) 
-            {
-                var valor = VariablesEnvio[variable];
-                var valorCodificado = string.IsNullOrEmpty(valor) ? "" : HttpUtility.UrlEncode(valor, Encoding);
-                var segmento = $"{variable}={valorCodificado}";
-                segmentos[segmentoIndice++] = segmento;
-            }           
-
-            return string.Join("&", segmentos);
-
         }
 
         /// <summary>
@@ -515,5 +583,8 @@ namespace AeatModelos
         {
             return 0;
         }
+
+        #endregion
+
     }
 }

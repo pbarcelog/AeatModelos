@@ -41,70 +41,22 @@
     Para más información, contacte con la dirección: info@irenesolutions.com    
  */
 
-using System.Text.RegularExpressions;
-
-namespace AeatModelos.Comunicaciones
+namespace AeatModelos
 {
 
     /// <summary>
-    /// Representa un error contenido en una respuesta a una petición
-    /// de presentación de declaración.
+    /// Representa una casilla determinada de un página
+    /// de modelo tributario de la aeat.
     /// </summary>
-    public class RespuestaError
+    public interface ICasilla
     {
-
-        #region Variables Privadas
-
-        /// <summary>
-        /// Texto devuelto en el documento html de respuesta
-        /// de la aeat para un error.
-        /// </summary>
-        string _TextoError;
-
-        #endregion
-
-        #region Construtores de Instancia
-
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        /// <param name="textoError">Texto devuelto en el documento
-        /// html que representa el error.</param>
-        public RespuestaError(string textoError)
-        {
-            _TextoError = textoError;
-
-            Codigo = Regex.Match(_TextoError, @"^[^-]+").Value;
-            Descripcion = Regex.Match(_TextoError, @"(?<=-)[^-]+$").Value;
-
-        }
-
-        #endregion
 
         #region Propiedades Públicas de Instancia
 
         /// <summary>
-        /// Código de error.
+        /// Valor del campo.
         /// </summary>
-        public string Codigo { get; private set; }
-
-        /// <summary>
-        /// Descripción de error.
-        /// </summary>
-        public string Descripcion { get; private set; }
-
-        #endregion
-
-        #region Métodos Públicos de Instancia
-
-        /// <summary>
-        /// Representación textual de la instancia.
-        /// </summary>
-        /// <returns>Representación textual de la instancia.</returns>
-        public override string ToString()
-        {
-            return $"{Codigo}, {Descripcion}";
-        }
+        object Valor { get; set; }
 
         #endregion
 

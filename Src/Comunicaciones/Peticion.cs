@@ -1,39 +1,44 @@
 ﻿/*
-    Este archivo es parte del proyecto AeatModelos.
+    Este archivo forma parte del proyecto AeatModelos(R).
     Copyright (c) 2020 Irene Solutions SL
-    Autores: Irene Solutions SL.
+    Autores: Manuel Diago García, Juan Bautista Garcia Traver.
 
-    Este programa es software libre; usted puede redistribuirlo y/o modificarlo
-    bajo los términos establecidos en GNU Affero General Public License versión 3
-    tal y como han sido publicados por la Free Software Foundation.
+    Este programa es software libre; lo puede distribuir y/o modificar
+    según los terminos de la licencia GNU Affero General Public License
+    versión 3 según su redacción de la Free Software Foundation con la
+    siguiente condición añadida en la sección 15 según se establece en
+    la sección 7(a):
 
-    Este programa se distribuye con la intención de que sea útil, pero SIN
-    NIGÚN TIPO DE GARANTÍA.
+    PARA CUALQUIER PARTE DEL CÓGIO PROPIEDAD DE IRENE SOLUTIONS. IRENE 
+    SOLUTIONS NO SE HACE RESPONSABLE DE LA VULNERACIÓN DE DERECHOS 
+    DE TERCEROS.
 
-    Para más detalles consulte la licencia GNU Affero General Public.
-    Debe se haber recibido una copia de la misma con el presente programa;
-    en caso contrario, consulte http://www.gnu.org/licenses o escriba a la 
-    Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-    Boston, MA, 02110-1301 USA, o descargue la licencia en la URL:
-        http://www.irenesolutions.com/terms-of-use.pdf
+    Este programa se distribuye con la esperanza de que sea útil, pero
+    SIN GARANTÍA DE NINGÚN TIPO; ni siquiera la derivada de un acuerdo
+    comercial o utilización para un propósito particular.
+   
+    Para más información puede consultar la licencia GNU Affero General
+    Public http://www.gnu.org/licenses o escribir a la Free Software 
+    Foundation, Inc. , 51 Franklin Street, Fifth Floor,
+    Boston, MA, 02110-1301 USA, o descargarla en la siguiente URL:
+        http://www.irenesolutions.com/terms-of-use.pdf 
+
+    Las interfaces de usuario con versiones del código fuente del presente 
+    proyecto, modificado o no, o código de objeto del mismo, deben incluir
+    de manera visible los correspondientes avisos legales exigidos en la
+    sección 5 de la licencia GNU Affero General Public.
     
-    Las interfaces de ususario con código modificado y versiones de los
-    objetos contenidos en el presente programa deben mostrar las advertencias
-    legaels apropiadas, como se requiere en la secion 5 de la licencia GNU Affero
-    General Public.
-
-    Usted puede ser liberado de los requerimiento de la licencia mediante
-    la compra de una licencia comercial. La compra de la licencia es
-    obligatoria en caso de que vaya a desarrollar actividades comerciales
-    con el software AeatModelos sin publicar el código fuente de sus 
-    propias aplicaciones.
-    Estas actividades incluyen: ofrecer servicios de pago como mediante ASP,
-    sirviendo los resultados obtenidos mediante el presente software mediante
-    aplicaciones web, o empaquetando AeatModelos con un producto de código
-    fuente no público.    
-       
-    Para más información, por favor contacte a Irene Solutions SL. en la
-    dirección: info@irenesolutions.com
+    uede evitar el cumplimiento de lo establecido de lo establecido 
+    anteriormente comprando una licencia comercial. 
+    La compra de una licencia comercial es obligatoria
+    desde el momento en que usted desarrolle software comercial incluyendo
+    funcionalidades de AeatModelos sin la publicación del código fuente
+    de sus propias aplicaciones.
+    Estas actividades incluyen: La oferta de servicios de pago mediante
+    aplicaciones web de cualquier tipo que incluyan la funcionalidad
+    de AeatModelos.
+    
+    Para más información, contacte con la dirección: info@irenesolutions.com    
  */
 
 using System;
@@ -52,10 +57,17 @@ namespace AeatModelos.Comunicaciones
     public class Peticion
     {
 
-        ///// <summary>
-        ///// Codificación utilizada por la AEAT.
-        ///// </summary>
-        //static Encoding _Encoding = Encoding.GetEncoding("ISO-8859-1");
+        #region Variables Privadas
+
+        /// <summary>
+        /// Valor para el head ContentType de la petición.
+        /// </summary>
+        string _ContentType = "application/x-www-form-urlencoded";
+
+        /// <summary>
+        /// Valor para el método utilizado en la petición http.
+        /// </summary>
+        string _Method = "POST";
 
         /// <summary>
         /// Certificado de cliente para la conexión con los servicios
@@ -105,17 +117,25 @@ namespace AeatModelos.Comunicaciones
         /// </summary>
         Respuesta _Respuesta;
 
+        #endregion
+
+        #region Propiedades Privadas
+
         /// <summary>
         /// Objeto HttpWebRequest base para la realización
         /// de la petición.
         /// </summary>
-        internal HttpWebRequest PeticionHttp 
+        internal HttpWebRequest PeticionHttp
         {
-            get 
+            get
             {
                 return _HttpWebRequest;
             }
         }
+
+        #endregion
+
+        #region Construtores de Instancia
 
         /// <summary>
         /// Copnstruye una instancia de la clase
@@ -123,29 +143,28 @@ namespace AeatModelos.Comunicaciones
         /// </summary>
         /// <param name="modelo">Modelo para el que se ha construido la 
         /// petición.</param>
-        public Peticion(RegistroMod modelo) 
+        public Peticion(RegistroMod modelo)
         {
 
             _Certificado = Certificado.Cargar();
 
             _CertificadoTitular = Certificado.Titular(_Certificado);
-
+            
             if (_CertificadoTitular == null)
-                throw new Exception($"No se ha podido determinar el titular del certificado {_Certificado.Subject}.");
+                throw new Exception(Errores.MostrarMensaje("Peticion.000", $"{_Certificado.Subject}"));
 
 
             _Enlace = Enlaces.BuscaEnlaceModelo(modelo);
-
+            
             if (_Enlace == null)
-                throw new Exception($"No se ha podido determinar el enlace al servicio" +
-                    $" de presentación de la AEAT para el modelo {modelo.GetType().Name}.");
+                throw new Exception(Errores.MostrarMensaje("Peticion.001", $"{modelo.GetType().Name}"));
 
             _HttpWebRequest = (HttpWebRequest)WebRequest.Create(_Enlace);
-            _HttpWebRequest.ContentType = "application/x-www-form-urlencoded";
-            _HttpWebRequest.Method = "POST";
+            _HttpWebRequest.ContentType = _ContentType;
+            _HttpWebRequest.Method = _Method;
             _HttpWebRequest.ClientCertificates.Add(_Certificado);
 
-            _TextoFichero = modelo.AFichero().Replace("\n", ""); 
+            _TextoFichero = modelo.AFichero().Replace("\n", "");
 
             modelo.VariablesEnvio["FIRNIF"] = _CertificadoTitular.NIF;
             modelo.VariablesEnvio["FIRNOMBRE"] = _CertificadoTitular.Nombre;
@@ -156,15 +175,23 @@ namespace AeatModelos.Comunicaciones
 
         }
 
+        #endregion
+
+        #region Métodos Privados de Instancia
+
         /// <summary>
         /// Escribe los datos a envíar en el stream de la 
         /// petición.
         /// </summary>
-        private void EscribePeticion() 
+        private void EscribePeticion()
         {
             using (Stream stream = _HttpWebRequest.GetRequestStream())
                 stream.Write(_BytesPeticion, 0, _BytesPeticion.Length);
         }
+
+        #endregion      
+
+        #region Métodos Públicos de Instancia
 
         /// <summary>
         /// Intenta presentar la declaración mediante el envío de la petición
@@ -172,15 +199,17 @@ namespace AeatModelos.Comunicaciones
         /// la misma.
         /// </summary>
         /// <returns>Respuesta a una petición de presentación</returns>
-        public Respuesta Presentar() 
+        public Respuesta Presentar()
         {
-            
+
             EscribePeticion();
 
             _Respuesta = new Respuesta(this);
 
             return _Respuesta;
         }
+
+        #endregion
 
 
     }

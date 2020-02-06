@@ -1,39 +1,44 @@
 ﻿/*
-    Este archivo es parte del proyecto AeatModelos.
+    Este archivo forma parte del proyecto AeatModelos(R).
     Copyright (c) 2020 Irene Solutions SL
-    Autores: Irene Solutions SL.
+    Autores: Manuel Diago García, Juan Bautista Garcia Traver.
 
-    Este programa es software libre; usted puede redistribuirlo y/o modificarlo
-    bajo los términos establecidos en GNU Affero General Public License versión 3
-    tal y como han sido publicados por la Free Software Foundation.
+    Este programa es software libre; lo puede distribuir y/o modificar
+    según los terminos de la licencia GNU Affero General Public License
+    versión 3 según su redacción de la Free Software Foundation con la
+    siguiente condición añadida en la sección 15 según se establece en
+    la sección 7(a):
 
-    Este programa se distribuye con la intención de que sea útil, pero SIN
-    NIGÚN TIPO DE GARANTÍA.
+    PARA CUALQUIER PARTE DEL CÓGIO PROPIEDAD DE IRENE SOLUTIONS. IRENE 
+    SOLUTIONS NO SE HACE RESPONSABLE DE LA VULNERACIÓN DE DERECHOS 
+    DE TERCEROS.
 
-    Para más detalles consulte la licencia GNU Affero General Public.
-    Debe se haber recibido una copia de la misma con el presente programa;
-    en caso contrario, consulte http://www.gnu.org/licenses o escriba a la 
-    Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-    Boston, MA, 02110-1301 USA, o descargue la licencia en la URL:
-        http://www.irenesolutions.com/terms-of-use.pdf
+    Este programa se distribuye con la esperanza de que sea útil, pero
+    SIN GARANTÍA DE NINGÚN TIPO; ni siquiera la derivada de un acuerdo
+    comercial o utilización para un propósito particular.
+   
+    Para más información puede consultar la licencia GNU Affero General
+    Public http://www.gnu.org/licenses o escribir a la Free Software 
+    Foundation, Inc. , 51 Franklin Street, Fifth Floor,
+    Boston, MA, 02110-1301 USA, o descargarla en la siguiente URL:
+        http://www.irenesolutions.com/terms-of-use.pdf 
+
+    Las interfaces de usuario con versiones del código fuente del presente 
+    proyecto, modificado o no, o código de objeto del mismo, deben incluir
+    de manera visible los correspondientes avisos legales exigidos en la
+    sección 5 de la licencia GNU Affero General Public.
     
-    Las interfaces de ususario con código modificado y versiones de los
-    objetos contenidos en el presente programa deben mostrar las advertencias
-    legaels apropiadas, como se requiere en la secion 5 de la licencia GNU Affero
-    General Public.
-
-    Usted puede ser liberado de los requerimiento de la licencia mediante
-    la compra de una licencia comercial. La compra de la licencia es
-    obligatoria en caso de que vaya a desarrollar actividades comerciales
-    con el software AeatModelos sin publicar el código fuente de sus 
-    propias aplicaciones.
-    Estas actividades incluyen: ofrecer servicios de pago como mediante ASP,
-    sirviendo los resultados obtenidos mediante el presente software mediante
-    aplicaciones web, o empaquetando AeatModelos con un producto de código
-    fuente no público.    
-       
-    Para más información, por favor contacte a Irene Solutions SL. en la
-    dirección: info@irenesolutions.com
+    uede evitar el cumplimiento de lo establecido de lo establecido 
+    anteriormente comprando una licencia comercial. 
+    La compra de una licencia comercial es obligatoria
+    desde el momento en que usted desarrolle software comercial incluyendo
+    funcionalidades de AeatModelos sin la publicación del código fuente
+    de sus propias aplicaciones.
+    Estas actividades incluyen: La oferta de servicios de pago mediante
+    aplicaciones web de cualquier tipo que incluyan la funcionalidad
+    de AeatModelos.
+    
+    Para más información, contacte con la dirección: info@irenesolutions.com    
  */
 
 
@@ -46,13 +51,14 @@ using System.Text.RegularExpressions;
 namespace AeatModelos.Comunicaciones
 {
 
-
     /// <summary>
     /// Representa una respuesta de la AEAT a una petición de presentación
     /// envíada.
     /// </summary>
     public class Respuesta
     {
+
+        #region Variables Privadas
 
         /// <summary>
         /// Expresión regular para determinar si el texto de la respuesta indica
@@ -104,6 +110,144 @@ namespace AeatModelos.Comunicaciones
         /// </summary>
         string _ContenidoTexto;
 
+        #endregion     
+
+        #region Construtores de Instancia
+
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="peticion">Petición a la que pertenece la respuesta.</param>
+        public Respuesta(Peticion peticion)
+        {
+
+            _Peticion = peticion;
+
+            Errores = new List<RespuestaError>();
+
+            _HttpWebResponse = (HttpWebResponse)peticion.PeticionHttp.GetResponse();
+
+            Estado = _HttpWebResponse.StatusDescription;
+
+            LeeContenido();
+            _ContenidoTexto = RegistroMod.Encoding.GetString(_ContenidoBinario);
+
+            Erronea = _RgError.IsMatch(_ContenidoTexto);
+
+            _HttpWebResponse.Close();
+
+            if (Erronea)
+                TratarErrores();
+            else
+                TratarExito();
+
+
+        }
+
+        #endregion
+
+        #region Métodos Privados de Instancia
+
+        /// <summary>
+        /// Lee los bytes de la respuesta del stream del objeto
+        /// HttpWebResponse utilizado para recoger la respuesta de
+        /// la AEAT.
+        /// </summary>
+        private void LeeContenido()
+        {
+
+            using (var stream = _HttpWebResponse.GetResponseStream())
+            using (BinaryReader lectorBinario = new BinaryReader(stream))
+                _ContenidoBinario = lectorBinario.ReadBytes((int)_HttpWebResponse.ContentLength);
+
+        }
+
+        /// <summary>
+        /// Realiza las labores necesarias en caso de que la respuesta
+        /// se errónea.
+        /// </summary>
+        private void TratarErrores()
+        {
+
+            foreach (Match error in _RgErrores.Matches(_ContenidoTexto))
+                Errores.Add(new RespuestaError(error.Value));
+        }
+
+        /// <summary>
+        /// Realiza las labores necesarias en caso de que la respuesta
+        /// se satisfactoria.
+        /// </summary>
+        private void TratarExito()
+        {
+
+            CSV = _RgCsv.Match(_ContenidoTexto).Value;
+            EnlacePdf = _RgPdfEnlace.Match(_ContenidoTexto).Value;
+
+            byte[] binarioRespuesta = null;
+
+            using (WebClient webClient = new WebClient())
+                binarioRespuesta = webClient.DownloadData(EnlacePdf);
+
+
+            bool esPdf = (binarioRespuesta[0] == _PdfNumerosMagicos[0]) &&
+                (binarioRespuesta[1] == _PdfNumerosMagicos[1]) &&
+                (binarioRespuesta[2] == _PdfNumerosMagicos[2]) &&
+                (binarioRespuesta[3] == _PdfNumerosMagicos[3]);
+
+            if (esPdf)
+            {
+                DatosPdf = binarioRespuesta;
+            }
+            else
+            {
+                // Esto es un 'hack - chapuzilla' para solucionar un bug en el entorno de pruebas
+                // de la aeat (resulta que en ocasiones devuelven una url de producción en el entorno
+                // de pruebas en la que no está el documento pdf)
+                var enlaceTest = EnlacePdf.Replace("https://www2.agenciatributaria.gob.es", "https://www7.aeat.es");
+                binarioRespuesta = DescargaPdfEnlaceTest(enlaceTest);
+
+                esPdf = (binarioRespuesta[0] == _PdfNumerosMagicos[0]) &&
+                (binarioRespuesta[1] == _PdfNumerosMagicos[1]) &&
+                (binarioRespuesta[2] == _PdfNumerosMagicos[2]) &&
+                (binarioRespuesta[3] == _PdfNumerosMagicos[3]);
+
+                if (!esPdf)
+                    throw new Exception(AeatModelos.Errores.MostrarMensaje("Respuesta.000"));
+
+                DatosPdf = binarioRespuesta;
+
+            }
+
+        }
+
+        /// <summary>
+        /// Prueba la descarga con certificado desde pruebas.
+        /// </summary>
+        /// <param name="enlace">Url del pdf a descargar.</param>
+        /// <returns>Datos binarios de la respuesta.</returns>
+        private byte[] DescargaPdfEnlaceTest(string enlace)
+        {
+
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create(enlace);
+            httpWebRequest.Method = "GET";
+            httpWebRequest.ClientCertificates.Add(Certificado.Cargar());
+
+            var httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+
+            byte[] result = null;
+
+            using (var stream = httpWebResponse.GetResponseStream())
+            using (BinaryReader lectorBinario = new BinaryReader(stream))
+                result = lectorBinario.ReadBytes((int)_HttpWebResponse.ContentLength);
+
+            return result;
+
+        }
+
+        #endregion
+
+        #region Propiedades Públicas de Instancia
+
         /// <summary>
         /// Estado de la petición.
         /// </summary>
@@ -136,131 +280,7 @@ namespace AeatModelos.Comunicaciones
         /// </summary>
         public byte[] DatosPdf { get; private set; }
 
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        /// <param name="peticion">Petición a la que pertenece la respuesta.</param>
-        public Respuesta(Peticion peticion) 
-        {
-
-            _Peticion = peticion;
-
-            Errores = new List<RespuestaError>();
-
-            _HttpWebResponse = (HttpWebResponse)peticion.PeticionHttp.GetResponse();
-
-            Estado = _HttpWebResponse.StatusDescription;
-
-            LeeContenido();
-            _ContenidoTexto = RegistroMod.Encoding.GetString(_ContenidoBinario);
-
-            Erronea = _RgError.IsMatch(_ContenidoTexto);
-
-            _HttpWebResponse.Close();
-
-            if (Erronea)
-                TratarErrores();
-            else
-                TratarExito();
-
-
-        }
-
-        /// <summary>
-        /// Lee los bytes de la respuesta del stream del objeto
-        /// HttpWebResponse utilizado para recoger la respuesta de
-        /// la AEAT.
-        /// </summary>
-        private void LeeContenido() 
-        {
-
-            using (var stream = _HttpWebResponse.GetResponseStream()) 
-                using (BinaryReader lectorBinario = new BinaryReader(stream)) 
-                    _ContenidoBinario = lectorBinario.ReadBytes((int)_HttpWebResponse.ContentLength);
-        
-        }
-
-        /// <summary>
-        /// Realiza las labores necesarias en caso de que la respuesta
-        /// se errónea.
-        /// </summary>
-        private void TratarErrores() 
-        {
-
-            foreach(Match error in _RgErrores.Matches(_ContenidoTexto))
-                Errores.Add(new RespuestaError(error.Value));
-        }
-
-        /// <summary>
-        /// Realiza las labores necesarias en caso de que la respuesta
-        /// se satisfactoria.
-        /// </summary>
-        private void TratarExito() 
-        {
-            
-            CSV = _RgCsv.Match(_ContenidoTexto).Value;
-            EnlacePdf = _RgPdfEnlace.Match(_ContenidoTexto).Value;
-
-            byte[] binarioRespuesta = null;
-
-            using (WebClient webClient = new WebClient())
-                binarioRespuesta = webClient.DownloadData(EnlacePdf);
-
-
-            bool esPdf = (binarioRespuesta[0] == _PdfNumerosMagicos[0]) &&
-                (binarioRespuesta[1] == _PdfNumerosMagicos[1]) &&
-                (binarioRespuesta[2] == _PdfNumerosMagicos[2]) &&
-                (binarioRespuesta[3] == _PdfNumerosMagicos[3]);
-
-            if (esPdf)
-            {
-                DatosPdf = binarioRespuesta;
-            }
-            else 
-            {
-                // Esto es un 'hack - chapuzilla' para solucionar un bug en el entorno de pruebas
-                // de la aeat (resulta que en ocasiones devuelven una url de producción en el entorno
-                // de pruebas en la que no está el documento pdf)
-                var enlaceTest = EnlacePdf.Replace("https://www2.agenciatributaria.gob.es", "https://www7.aeat.es");
-                binarioRespuesta = DescargaPdfEnlaceTest(enlaceTest);
-
-                esPdf = (binarioRespuesta[0] == _PdfNumerosMagicos[0]) &&
-                (binarioRespuesta[1] == _PdfNumerosMagicos[1]) &&
-                (binarioRespuesta[2] == _PdfNumerosMagicos[2]) &&
-                (binarioRespuesta[3] == _PdfNumerosMagicos[3]);
-
-                if (!esPdf)
-                    throw new Exception("Error al descargar el documento pdf.");
-
-                DatosPdf = binarioRespuesta;
-
-            }
-
-        }
-
-        /// <summary>
-        /// Prueba la descarga con certificado desde pruebas.
-        /// </summary>
-        /// <param name="enlace">Url del pdf a descargar.</param>
-        /// <returns>Datos binarios de la respuesta.</returns>
-        private byte[] DescargaPdfEnlaceTest(string enlace) 
-        {
-
-            var httpWebRequest = (HttpWebRequest)WebRequest.Create(enlace);
-            httpWebRequest.Method = "GET";
-            httpWebRequest.ClientCertificates.Add(Certificado.Cargar());
-
-            var httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-
-            byte[] result = null;
-
-            using (var stream = httpWebResponse.GetResponseStream())
-            using (BinaryReader lectorBinario = new BinaryReader(stream))
-                result = lectorBinario.ReadBytes((int)_HttpWebResponse.ContentLength);
-
-            return result;
-
-        }
-
+        #endregion
+ 
     }
 }

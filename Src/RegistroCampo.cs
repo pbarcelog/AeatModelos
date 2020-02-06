@@ -1,41 +1,45 @@
 ﻿/*
-    Este archivo es parte del proyecto AeatModelos.
+    Este archivo forma parte del proyecto AeatModelos(R).
     Copyright (c) 2020 Irene Solutions SL
-    Autores: Irene Solutions SL.
+    Autores: Manuel Diago García, Juan Bautista Garcia Traver.
 
-    Este programa es software libre; usted puede redistribuirlo y/o modificarlo
-    bajo los términos establecidos en GNU Affero General Public License versión 3
-    tal y como han sido publicados por la Free Software Foundation.
+    Este programa es software libre; lo puede distribuir y/o modificar
+    según los terminos de la licencia GNU Affero General Public License
+    versión 3 según su redacción de la Free Software Foundation con la
+    siguiente condición añadida en la sección 15 según se establece en
+    la sección 7(a):
 
-    Este programa se distribuye con la intención de que sea útil, pero SIN
-    NIGÚN TIPO DE GARANTÍA.
+    PARA CUALQUIER PARTE DEL CÓGIO PROPIEDAD DE IRENE SOLUTIONS. IRENE 
+    SOLUTIONS NO SE HACE RESPONSABLE DE LA VULNERACIÓN DE DERECHOS 
+    DE TERCEROS.
 
-    Para más detalles consulte la licencia GNU Affero General Public.
-    Debe se haber recibido una copia de la misma con el presente programa;
-    en caso contrario, consulte http://www.gnu.org/licenses o escriba a la 
-    Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-    Boston, MA, 02110-1301 USA, o descargue la licencia en la URL:
-        http://www.irenesolutions.com/terms-of-use.pdf
+    Este programa se distribuye con la esperanza de que sea útil, pero
+    SIN GARANTÍA DE NINGÚN TIPO; ni siquiera la derivada de un acuerdo
+    comercial o utilización para un propósito particular.
+   
+    Para más información puede consultar la licencia GNU Affero General
+    Public http://www.gnu.org/licenses o escribir a la Free Software 
+    Foundation, Inc. , 51 Franklin Street, Fifth Floor,
+    Boston, MA, 02110-1301 USA, o descargarla en la siguiente URL:
+        http://www.irenesolutions.com/terms-of-use.pdf 
+
+    Las interfaces de usuario con versiones del código fuente del presente 
+    proyecto, modificado o no, o código de objeto del mismo, deben incluir
+    de manera visible los correspondientes avisos legales exigidos en la
+    sección 5 de la licencia GNU Affero General Public.
     
-    Las interfaces de ususario con código modificado y versiones de los
-    objetos contenidos en el presente programa deben mostrar las advertencias
-    legaels apropiadas, como se requiere en la secion 5 de la licencia GNU Affero
-    General Public.
-
-    Usted puede ser liberado de los requerimiento de la licencia mediante
-    la compra de una licencia comercial. La compra de la licencia es
-    obligatoria en caso de que vaya a desarrollar actividades comerciales
-    con el software AeatModelos sin publicar el código fuente de sus 
-    propias aplicaciones.
-    Estas actividades incluyen: ofrecer servicios de pago como mediante ASP,
-    sirviendo los resultados obtenidos mediante el presente software mediante
-    aplicaciones web, o empaquetando AeatModelos con un producto de código
-    fuente no público.    
-       
-    Para más información, por favor contacte a Irene Solutions SL. en la
-    dirección: info@irenesolutions.com
+    uede evitar el cumplimiento de lo establecido de lo establecido 
+    anteriormente comprando una licencia comercial. 
+    La compra de una licencia comercial es obligatoria
+    desde el momento en que usted desarrolle software comercial incluyendo
+    funcionalidades de AeatModelos sin la publicación del código fuente
+    de sus propias aplicaciones.
+    Estas actividades incluyen: La oferta de servicios de pago mediante
+    aplicaciones web de cualquier tipo que incluyan la funcionalidad
+    de AeatModelos.
+    
+    Para más información, contacte con la dirección: info@irenesolutions.com    
  */
-
 
 using AeatModelos.Conversores;
 using System;
@@ -49,6 +53,8 @@ namespace AeatModelos
     /// </summary>
     public class RegistroCampo : IEmpaquetable
     {
+
+        #region Variables Privadas de Instancia
 
         /// <summary>
         /// Convierte datos obtenido de un archivo al formato
@@ -66,6 +72,102 @@ namespace AeatModelos
         /// Valor del campo procedente del fichero.
         /// </summary>
         string _ValorFichero;
+
+        #endregion
+
+        #region Construtores de Instancia
+
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="pagina">Pagina del modelo que representa el fichero 
+        /// en la que se encuentra la instancia de registro de campo definida
+        /// en el diseño de registro correspondiente de la AEAT.</param>
+        /// <param name="posicion">Posición dónde empieza el registro
+        /// de la instancia en la página del modelo.</param>
+        /// <param name="longitud">Longitud del campo.</param>
+        /// <param name="tipo">Cadena que representa el tipo de dato
+        /// según la documentación del diseño de registro de la AEAT ('A',
+        /// 'An', 'N'...)</param>
+        /// <param name="descripcion">Descripción del campo en el diseño
+        /// de registro de la AEAT.</param>
+        /// <param name="clave">clave únivoca del campo en la página. Genralmente se utiliza como
+        /// clave el número de casilla.</param>
+        /// <param name="valor">Valor para el campo.</param>
+        /// <param name="decimales">Número de decimales.</param>
+        /// <param name="negativo">Indica si acepta número negativos.</param> 
+        public RegistroCampo(int pagina, int posicion, int longitud,
+            string tipo, string descripcion, string clave = null,
+            object valor = null, int decimales = 2, bool negativo = false)
+        {
+
+            RegistroCampoTipo registroTipo;
+
+            if (!Enum.TryParse(tipo, out registroTipo))
+                throw new ArgumentException(
+                    Errores.MostrarMensaje("RegistroCampo.000", tipo));
+
+            Tipo = registroTipo;
+
+            if (pagina < 0 || pagina > 30)
+                throw new ArgumentException(
+                    Errores.MostrarMensaje("RegistroCampo.001", $"{pagina}"));
+
+            if (posicion < 0 || posicion > 10000)
+                throw new ArgumentException(
+                    Errores.MostrarMensaje("RegistroCampo.002", $"{posicion}"));
+
+            if (longitud < 0 || longitud > 2000)
+                throw new ArgumentException(
+                    Errores.MostrarMensaje("RegistroCampo.003", $"{longitud}"));
+
+            Pagina = pagina;
+            Posicion = posicion;
+            Longitud = longitud;
+            Descripcion = descripcion;
+            Clave = clave;
+            Decimales = decimales;
+            Negativo = negativo;
+
+            string nombreTipoConversor = $"AeatModelos.Conversores.{Tipo}";
+            Type tipoConversor = AeatModelosContexto.AeatModelos.GetType(nombreTipoConversor);
+
+            _Conversor = Activator.CreateInstance(tipoConversor, this) as IConversor;
+
+
+            Valor = valor;
+
+        }
+
+
+        #endregion
+
+        #region Indexadores
+
+        /// <summary>
+        /// Devuelve el campo que se corresponde con la descripción facilitada
+        /// o null si no lo encuentra.
+        /// </summary>
+        /// <param name="descripcion">Descripción del campo o clave si la tiene.</param>
+        /// <returns>Devuelve el campo que se corresponde con la descripción facilitada
+        /// o null si no lo encuentra.</returns>
+        public RegistroCampo this[string descripcion]
+        {
+            get
+            {
+                if (Descripcion == descripcion)
+                    return this;
+
+                if (Clave != null && Clave == descripcion)
+                    return this;
+
+                return null;
+            }
+        }
+
+        #endregion
+
+        #region Propiedades Públicas de Instancia
 
         /// <summary>
         /// Pagína del Registro
@@ -140,89 +242,9 @@ namespace AeatModelos
         /// </summary>
         public bool Negativo { get; private set; }
 
-        /// <summary>
-        /// Devuelve el campo que se corresponde con la descripción facilitada
-        /// o null si no lo encuentra.
-        /// </summary>
-        /// <param name="descripcion">Descripción del campo o clave si la tiene.</param>
-        /// <returns>Devuelve el campo que se corresponde con la descripción facilitada
-        /// o null si no lo encuentra.</returns>
-        public RegistroCampo this[string descripcion]
-        {
-            get
-            {
-                if(Descripcion == descripcion)
-                    return this;
+        #endregion
 
-                if(Clave != null && Clave == descripcion)
-                    return this;
-
-                return null;
-            }
-        }
-
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        /// <param name="pagina">Pagina del modelo que representa el fichero 
-        /// en la que se encuentra la instancia de registro de campo definida
-        /// en el diseño de registro correspondiente de la AEAT.</param>
-        /// <param name="posicion">Posición dónde empieza el registro
-        /// de la instancia en la página del modelo.</param>
-        /// <param name="longitud">Longitud del campo.</param>
-        /// <param name="tipo">Cadena que representa el tipo de dato
-        /// según la documentación del diseño de registro de la AEAT ('A',
-        /// 'An', 'N'...)</param>
-        /// <param name="descripcion">Descripción del campo en el diseño
-        /// de registro de la AEAT.</param>
-        /// <param name="clave">clave únivoca del campo en la página. Genralmente se utiliza como
-        /// clave el número de casilla.</param>
-        /// <param name="valor">Valor para el campo.</param>
-        /// <param name="decimales">Número de decimales.</param>
-        /// <param name="negativo">Indica si acepta número negativos.</param> 
-        public RegistroCampo(int pagina, int posicion, int longitud, 
-            string tipo, string descripcion, string clave = null, 
-            object valor = null, int decimales = 2, bool negativo = false)
-        {
-
-            RegistroCampoTipo registroTipo;
-
-            if (!Enum.TryParse(tipo, out registroTipo))
-                throw new ArgumentException(
-                    Errores.MostrarMensaje("Registro.Registro.000", tipo));
-
-            Tipo = registroTipo;
-
-            if(pagina < 0 || pagina > 30)
-                throw new ArgumentException(
-                    Errores.MostrarMensaje("Registro.Registro.001", $"{pagina}"));
-
-            if (posicion < 0 || posicion > 10000)
-                throw new ArgumentException(
-                    Errores.MostrarMensaje("Registro.Registro.002", $"{posicion}"));
-
-            if (longitud < 0 || longitud > 2000)
-                throw new ArgumentException(
-                    Errores.MostrarMensaje("Registro.Registro.003", $"{longitud}"));
-
-            Pagina = pagina;
-            Posicion = posicion;
-            Longitud = longitud;
-            Descripcion = descripcion;
-            Clave = clave;
-            Decimales = decimales;
-            Negativo = negativo;
-
-            string nombreTipoConversor = $"AeatModelos.Conversores.{Tipo}";
-            Type tipoConversor = AeatModelosContexto.AeatModelos.GetType(nombreTipoConversor);
-
-            _Conversor = Activator.CreateInstance(tipoConversor, this) as IConversor;
-
-
-            Valor = valor;
-
-        }
-
+        #region Métodos Públicos de Instancia
 
         /// <summary>
         /// Recupera la representación del 
@@ -268,5 +290,8 @@ namespace AeatModelos
         {
             return 0;
         }
+
+        #endregion
+
     }
 }
