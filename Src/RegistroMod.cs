@@ -488,6 +488,8 @@ namespace AeatModelos
 
             Calcular();
 
+            Paginas.Empaquetables.Sort();
+
             StringBuilder constructorTexto = new StringBuilder();
 
             foreach (KeyValuePair<decimal, IEmpaquetable> entrada in RegistroCampos)
