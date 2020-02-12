@@ -83,9 +83,9 @@ namespace AeatModelos.Mod190e2017v00
                 // PERCEPCIONES DINERARIAS NO DERIVADAS DE INCAPACIDAD LABORAL. PERCEPCIÓN ÍNTEGRA. SIGNO NEGATIVO: "N". EN OTRO CASO SERÁ UN ESPACIO.
                 {++c,    new RegistroCampo(1,  81,   1,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                           )}, //011
                 // PERCEPCIONES DINERARIAS NO DERIVADAS DE INCAPACIDAD LABORAL. PERCEPCIÓN ÍNTEGRA
-                {++c,    new RegistroCampo(1,  82,  13,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,    null,     2           )}, //012
+                {++c,    new RegistroCampo(1,  82,  13,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"], "NoIncapacidadPercepcion", null, 2)}, //012
                 // PERCEPCIONES DINERARIAS NO DERIVADAS DE INCAPACIDAD LABORAL. RETENCIONES PRACTICADAS
-                {++c,    new RegistroCampo(1,  95,  13,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                           )}, //013
+                {++c,    new RegistroCampo(1,  95,  13,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "NoIncapacidadRetencion"       )}, //013
                 // PERCEPCIONES EN ESPECIE NO DERIVADAS DE INCAPACIDAD LABORAL: VALORACIÓN. SIGNO NEGATIVO: "N". EN OTRO CASO SERÁ UN ESPACIO.
                 {++c,    new RegistroCampo(1, 108,   1,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                           )}, //014
                 // PERCEPCIONES EN ESPECIE NO DERIVADAS DE INCAPACIDAD LABORAL: VALORACIÓN
