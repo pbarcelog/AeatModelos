@@ -51,7 +51,7 @@ namespace AeatModelos
     /// Representa un registro de un diseño de registro
     /// de la AEAT para un modelo determina..
     /// </summary>
-    public class RegistroCampo : IEmpaquetable
+    public class RegistroCampo : IEmpaquetable, ICasilla
     {
 
         #region Variables Privadas de Instancia
