@@ -238,7 +238,7 @@ namespace AeatModelos.Comunicaciones
 
             using (var stream = httpWebResponse.GetResponseStream())
             using (BinaryReader lectorBinario = new BinaryReader(stream))
-                result = lectorBinario.ReadBytes((int)_HttpWebResponse.ContentLength);
+                result = lectorBinario.ReadBytes((int)httpWebResponse.ContentLength);
 
             return result;
 

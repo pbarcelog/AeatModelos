@@ -41,6 +41,8 @@
     Para más información, contacte con la dirección: info@irenesolutions.com    
  */
 
+using AeatModelos.Comunicaciones;
+
 namespace AeatModelos
 {
 
@@ -100,6 +102,32 @@ namespace AeatModelos
         /// segmento de fichero preparada para incorporarse
         /// al mismo.</returns>
         string AFichero();
+
+
+        /// <summary>
+        /// Devuelve una cadena con la representación del titular del
+        /// certificado que va a realizar la presentación.
+        /// </summary>
+        string Declarante();
+
+        /// <summary>
+        /// Devuelve una cadena con la representación del titular del
+        /// certificado que va a realizar la presentación.
+        /// </summary>
+        string Presentador();
+
+        /// <summary>
+        /// Confirma la declaración según las especificaciones de la AEAT
+        /// en cuanto a la firma básica. El usuario debe confirmar la declaración
+        /// una vez ha revisado el fichero a enviar el presentador y el declarante.
+        /// </summary>
+        void Confirmar();
+
+        /// <summary>
+        /// Presenta la declaración.
+        /// </summary>
+        /// <returns>Respuesta a la operación de presentación.</returns>
+        Respuesta Presentar();
 
         #endregion
 

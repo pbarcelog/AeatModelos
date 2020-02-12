@@ -488,7 +488,8 @@ namespace AeatModelos
 
             Calcular();
 
-            Paginas.Empaquetables.Sort();
+            if(Paginas?.Empaquetables != null)
+                Paginas.Empaquetables.Sort();
 
             StringBuilder constructorTexto = new StringBuilder();
 
