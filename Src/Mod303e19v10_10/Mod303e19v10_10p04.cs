@@ -28,7 +28,7 @@
     de manera visible los correspondientes avisos legales exigidos en la
     sección 5 de la licencia GNU Affero General Public.
     
-    uede evitar el cumplimiento de lo establecido de lo establecido 
+    Puede evitar el cumplimiento de lo establecido de lo establecido 
     anteriormente comprando una licencia comercial. 
     La compra de una licencia comercial es obligatoria
     desde el momento en que usted desarrolle software comercial incluyendo
