@@ -83,8 +83,8 @@ namespace AeatModelos.Mod115e15v13
                 {++c,    new RegistroCampo(1,   141,    17, "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],      "03",                  0, 2             )}, // 014
                 {++c,    new RegistroCampo(1,   158,    17, "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],      "04",                  0, 2             )}, // 015
                 {++c,    new RegistroCampo(1,   175,    17, "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],      "05",                  0, 2             )}, // 016
-                {++c,    new RegistroCampo(1,   192,    1,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],      null,                  " "              )}, // 017
-                {++c,    new RegistroCampo(1,   193,    13, "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"]                                               )}, // 018
+                {++c,    new RegistroCampo(1,   192,    1,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],      "Complementaria",      " "              )}, // 017
+                {++c,    new RegistroCampo(1,   193,    13, "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],      "JustificanteAnterior"                  )}, // 018
                 {++c,    new RegistroCampo(1,   206,    34, "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],      "IBAN"                                  )}, // 019
                 {++c,    new RegistroCampo(1,   240,    236,"An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],      null,  new string(' ', 96)              )}, // 020
                 {++c,    new RegistroCampo(1,   476,    13, "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],      null,  new string(' ', 13)              )}, // 021
