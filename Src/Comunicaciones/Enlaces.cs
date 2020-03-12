@@ -100,14 +100,15 @@ namespace AeatModelos.Comunicaciones
         /// el modelo facilitado como parámetro
         /// </summary>
         /// <param name="modelo">Instancia del modelo a consultar.</param>
+        /// <param name="test">Testigo para indicar si el enlace devuelto debe ser para el modo "Test".</param>
         /// <returns>Enlace encontrado o nulo si no hay éxito.</returns>
-        public static string BuscaEnlaceModelo(RegistroMod modelo)
+        public static string BuscaEnlaceModelo(RegistroMod modelo, bool test = false)
         {
 
             if (modelo == null)
                 throw new ArgumentNullException(Errores.MostrarMensaje("Enlaces.000"));
 
-            return BuscaEnlaceModelo(modelo.GetType());
+            return BuscaEnlaceModelo(modelo.GetType(), test);
         }
 
         /// <summary>
@@ -115,14 +116,15 @@ namespace AeatModelos.Comunicaciones
         /// el modelo facilitado como parámetro
         /// </summary>
         /// <param name="tipoModelo">Tipo del modelo a consultar.</param>
+        /// <param name="test">Testigo para indicar si el enlace devuelto debe ser para el modo "Test".</param>
         /// <returns>Enlace encontrado o nulo si no hay éxito.</returns>
-        public static string BuscaEnlaceModelo(Type tipoModelo)
+        public static string BuscaEnlaceModelo(Type tipoModelo, bool test = false)
         {
 
             string enlace = null;
 
             var name = tipoModelo.Name;
-            var modelos = (Parametros.Actuales.Pruebas) ? ModelosPruebas : Modelos;
+            var modelos = (Parametros.Actuales.Pruebas) ? ModelosPruebas : (test ? ModelosPruebas : Modelos);
 
             if (Modelos.ContainsKey(name))
                 return modelos[name];

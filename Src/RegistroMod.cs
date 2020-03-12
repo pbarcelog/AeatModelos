@@ -568,13 +568,13 @@ namespace AeatModelos
         /// Presenta la declaración.
         /// </summary>
         /// <returns>Respuesta a la operación de presentación.</returns>
-        public Respuesta Presentar()
+        public Respuesta Presentar(bool test = false)
         {
 
             if (!_Confirmado)
                 throw new InvalidOperationException(Errores.MostrarMensaje("RegistroMod.003"));
 
-            return new Peticion(this).Presentar();
+            return new Peticion(this, test).Presentar();
         }
 
         /// <summary>

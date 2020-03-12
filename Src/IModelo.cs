@@ -125,9 +125,11 @@ namespace AeatModelos
 
         /// <summary>
         /// Presenta la declaración.
+        /// <param name="test">Si es true, realiza la presentación en
+        /// modo de pruebas.</param>
         /// </summary>
         /// <returns>Respuesta a la operación de presentación.</returns>
-        Respuesta Presentar();
+        Respuesta Presentar(bool test = false);
 
         #endregion
 

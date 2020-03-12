@@ -143,7 +143,8 @@ namespace AeatModelos.Comunicaciones
         /// </summary>
         /// <param name="modelo">Modelo para el que se ha construido la 
         /// petición.</param>
-        public Peticion(RegistroMod modelo)
+        /// <param name="test">Testigo para indicar si la petición debe realizarse en modo "Test".</param>
+        public Peticion(RegistroMod modelo, bool test = false)
         {
 
             _Certificado = Certificado.Cargar();
@@ -154,7 +155,7 @@ namespace AeatModelos.Comunicaciones
                 throw new Exception(Errores.MostrarMensaje("Peticion.000", $"{_Certificado.Subject}"));
 
 
-            _Enlace = Enlaces.BuscaEnlaceModelo(modelo);
+            _Enlace = test ? Enlaces.BuscaEnlaceModelo(modelo, true) : Enlaces.BuscaEnlaceModelo(modelo);
             
             if (_Enlace == null)
                 throw new Exception(Errores.MostrarMensaje("Peticion.001", $"{modelo.GetType().Name}"));
@@ -199,10 +200,12 @@ namespace AeatModelos.Comunicaciones
         /// la misma.
         /// </summary>
         /// <returns>Respuesta a una petición de presentación</returns>
-        public Respuesta Presentar()
+        public Respuesta Presentar(bool test = false)
         {
 
             EscribePeticion();
+
+            this.
 
             _Respuesta = new Respuesta(this);
 
