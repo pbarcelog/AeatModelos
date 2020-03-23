@@ -90,7 +90,8 @@ namespace AeatModelos.Comunicaciones
             { "Mod130e15v11",           PftwPicwPresBasicaPruebas },
             { "Mod390e2019v100",        PftwPicwPresBasicaPruebas },
             { "Mod123e15v13",           PftwPicwPresBasicaPruebas },
-            { "Mod115e15v13",        PftwPicwPresBasicaPruebas },
+            { "Mod115e15v13",           PftwPicwPresBasicaPruebas },
+            { "Mod111e16v18",           PftwPicwPresBasicaPruebas },
         };
 
         #endregion
@@ -128,7 +129,7 @@ namespace AeatModelos.Comunicaciones
             var name = tipoModelo.Name;
             var modelos = (Parametros.Actuales.Pruebas) ? ModelosPruebas : (test ? ModelosPruebas : Modelos);
 
-            if (Modelos.ContainsKey(name))
+            if (modelos.ContainsKey(name))
                 return modelos[name];
 
             return enlace;
