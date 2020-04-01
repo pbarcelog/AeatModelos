@@ -78,6 +78,7 @@ namespace AeatModelos.Comunicaciones
             { "Mod390e2019v100",        PftwPicwPresBasica },
             { "Mod123e15v13",           PftwPicwPresBasica },
             { "Mod115e15v13",           PftwPicwPresBasica },
+            { "Mod111e16v18",           PftwPicwPresBasica },
         };
 
         /// <summary>

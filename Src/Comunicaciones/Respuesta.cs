@@ -183,6 +183,10 @@ namespace AeatModelos.Comunicaciones
             CSV = _RgCsv.Match(_ContenidoTexto).Value;
             EnlacePdf = _RgPdfEnlace.Match(_ContenidoTexto).Value;
 
+            if (string.IsNullOrEmpty(EnlacePdf))
+                throw new InvalidDataException($"Enlace a PDF de declaración no encontrado para el CSV: {CSV}.\nCompruebe " + 
+                    "la validación del CSV en la página web de la AEAT.");
+
             byte[] binarioRespuesta = null;
 
             using (WebClient webClient = new WebClient())
