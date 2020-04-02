@@ -102,8 +102,10 @@ namespace AeatModelos
         {
             RegistroModPagina onePage = (RegistroModPagina)obj;
 
-            string thisName = GetType().Name;
-            string objName = obj.GetType().Name;
+            // Obtenemos del modelo la parte en la que pone "p01", 
+            // ya que el año puede hacer que un "2018p03" vaya antes que un "2019p01". 
+            string thisName = GetType().Name.Substring(GetType().Name.Length - 3);
+            string objName = obj.GetType().Name.Substring(obj.GetType().Name.Length - 3);
 
             return thisName.CompareTo(objName);
         }

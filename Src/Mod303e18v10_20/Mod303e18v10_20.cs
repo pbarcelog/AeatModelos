@@ -208,7 +208,7 @@ namespace AeatModelos.Mod303e18v10_20
                 modPagina3["71"].Valor = Convert.ToDecimal(modPagina3["69"].Valor) -
             Convert.ToDecimal(modPagina3["70"].Valor);
 
-
+            Paginas.Empaquetables.Sort(); // Ordenamos las páginas para evitar problemas indeseados.
         }
 
         #endregion
