@@ -216,7 +216,8 @@ namespace AeatModelos.Comunicaciones
                 (binarioRespuesta[3] == _PdfNumerosMagicos[3]);
 
                 if (!esPdf)
-                    throw new Exception(AeatModelos.Errores.MostrarMensaje("Respuesta.000"));
+                    throw new Exception(AeatModelos.Errores.MostrarMensaje("Respuesta.000", 
+                        RegistroMod.Encoding.GetString(binarioRespuesta)));
 
                 DatosPdf = binarioRespuesta;
 

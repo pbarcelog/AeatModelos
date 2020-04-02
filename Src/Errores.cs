@@ -72,7 +72,7 @@ namespace AeatModelos
             {"Enlaces.000",                 "El método estático BuscaEnlaceModelo de la clase Enlaces requiere un parámetro modelo no nulo." },
             {"Peticion.000",                "No se ha podido determinar el titular del certificado {0}." },
             {"Peticion.001",                "No se ha podido determinar el enlace al servicio  de presentación de la AEAT para el modelo {0}." },
-            {"Respuesta.000",               "Error al descargar el documento pdf." },
+            {"Respuesta.000",               "Error al descargar el documento pdf:\n{0}" },
             {"Conversor.000",               "El {0} no está implementado en la clase base Conversor." },
             {"ConversorNumero.000",         "No existe espacio suficiente para el signo negativo." },
             {"ConversorTexto.000",          "Ha intentado asignar el valor {0} con una longitud de {1} al registro  que sólo admite una longitud de {2}." },
