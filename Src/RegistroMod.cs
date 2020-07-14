@@ -44,6 +44,8 @@
 using AeatModelos.Comunicaciones;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
@@ -585,6 +587,46 @@ namespace AeatModelos
         public virtual int CompareTo(object obj)
         {
             return 0;
+        }
+
+        /// <summary>
+        /// Prueba la descarga con certificado sobre el enlace de entrada.
+        /// </summary>
+        /// <param name="enlace">Url del pdf a descargar.</param>
+        /// <returns>Datos binarios de la respuesta.</returns>
+        public static byte[] DescargaPdfMedianteEnlace(string enlace)
+        {
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create(enlace);
+            httpWebRequest.Method = "GET";
+            httpWebRequest.ClientCertificates.Add(Certificado.Cargar());
+
+            var httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+
+            byte[] result = null;
+
+            using (var stream = httpWebResponse.GetResponseStream())
+            using (BinaryReader lectorBinario = new BinaryReader(stream))
+                result = lectorBinario.ReadBytes((int)httpWebResponse.ContentLength);
+
+            return result;
+        }
+
+        /// <summary>
+        /// Prueba la descarga del PDF de liquidación asociado al CSV.
+        /// Esto es un 'hack - chapuzilla' para cuando la presentación en real tiene el servidor parado.
+        /// Probamos a descargar el documento PDF desde otro repositorio de la AEAT (disponible dentro del
+        /// apartado de colaboradores con el certificado de colaborador para un CSV presentado).
+        /// </summary>
+        /// <param name="csv">Código seguro de verificación asociado al documento PDF de liquidación.</param>
+        /// <returns>Documento PDF de liquidación.</returns>
+        public static byte[] DescargarPdfMedianteCSV(string csv)
+        {
+            string enlaceSegundoRepositorio = "https://www1.agenciatributaria.gob.es/wlpl/inwinvoc/" +
+                "es.aeat.dit.adu.eeca.catalogo.vis.Visualiza?COMPLETA=SI&ORIGEN=C&CLAVE_CAT=&NIF=&ANAGRAMA=&CSV=" +
+                csv +
+                "&CLAVE_EE=&PAGE=&SEARCH=";
+
+            return DescargaPdfMedianteEnlace(enlaceSegundoRepositorio);
         }
 
         #endregion

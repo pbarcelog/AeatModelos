@@ -200,7 +200,7 @@ namespace AeatModelos.Comunicaciones
                 // de pruebas en la que no está el documento pdf)
 
                 var enlaceTest = EnlacePdf.Replace("https://www2.agenciatributaria.gob.es", "https://www7.aeat.es");
-                binarioRespuesta = DescargaPdfEnlaceTest(enlaceTest);
+                binarioRespuesta = RegistroMod.DescargaPdfMedianteEnlace(enlaceTest);
 
                 esPdf = EsFormatoPDF(binarioRespuesta);
 
@@ -208,14 +208,9 @@ namespace AeatModelos.Comunicaciones
                 {
                     // Esto es otro 'hack - chapuzilla' para cuando la presentación en real tiene el servidor parado.
                     // Probamos a descargar el documento PDF desde otro repositorio de la AEAT (disponible dentro del
-                    // apartado de colaboradores).
+                    // apartado de colaboradores con el certificado de colaborador para un CSV presentado).
 
-                    string enlaceSegundoRepositorio = "https://www1.agenciatributaria.gob.es/wlpl/inwinvoc/"+
-                        "es.aeat.dit.adu.eeca.catalogo.vis.Visualiza?COMPLETA=SI&ORIGEN=C&CLAVE_CAT=&NIF=&ANAGRAMA=&CSV=" +
-                        CSV +
-                        "&CLAVE_EE=&PAGE=&SEARCH=";
-
-                    binarioRespuesta = DescargaPdfEnlaceTest(enlaceSegundoRepositorio);
+                    binarioRespuesta = RegistroMod.DescargarPdfMedianteCSV(CSV);
 
                     esPdf = EsFormatoPDF(binarioRespuesta);
 
@@ -245,11 +240,11 @@ namespace AeatModelos.Comunicaciones
         }
 
         /// <summary>
-        /// Prueba la descarga con certificado desde pruebas.
+        /// Prueba la descarga con certificado.
         /// </summary>
         /// <param name="enlace">Url del pdf a descargar.</param>
         /// <returns>Datos binarios de la respuesta.</returns>
-        private byte[] DescargaPdfEnlaceTest(string enlace)
+        private byte[] DescargaPdfEnlace(string enlace)
         {
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(enlace);
             httpWebRequest.Method = "GET";
