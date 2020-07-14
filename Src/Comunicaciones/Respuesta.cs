@@ -179,7 +179,6 @@ namespace AeatModelos.Comunicaciones
         /// </summary>
         private void TratarExito()
         {
-
             CSV = _RgCsv.Match(_ContenidoTexto).Value;
             EnlacePdf = _RgPdfEnlace.Match(_ContenidoTexto).Value;
 
@@ -192,37 +191,57 @@ namespace AeatModelos.Comunicaciones
             using (WebClient webClient = new WebClient())
                 binarioRespuesta = webClient.DownloadData(EnlacePdf);
 
+            bool esPdf = EsFormatoPDF(binarioRespuesta);
 
-            bool esPdf = (binarioRespuesta[0] == _PdfNumerosMagicos[0]) &&
-                (binarioRespuesta[1] == _PdfNumerosMagicos[1]) &&
-                (binarioRespuesta[2] == _PdfNumerosMagicos[2]) &&
-                (binarioRespuesta[3] == _PdfNumerosMagicos[3]);
-
-            if (esPdf)
-            {
-                DatosPdf = binarioRespuesta;
-            }
-            else
+            if (!esPdf)
             {
                 // Esto es un 'hack - chapuzilla' para solucionar un bug en el entorno de pruebas
                 // de la aeat (resulta que en ocasiones devuelven una url de producción en el entorno
                 // de pruebas en la que no está el documento pdf)
+
                 var enlaceTest = EnlacePdf.Replace("https://www2.agenciatributaria.gob.es", "https://www7.aeat.es");
                 binarioRespuesta = DescargaPdfEnlaceTest(enlaceTest);
 
-                esPdf = (binarioRespuesta[0] == _PdfNumerosMagicos[0]) &&
-                (binarioRespuesta[1] == _PdfNumerosMagicos[1]) &&
-                (binarioRespuesta[2] == _PdfNumerosMagicos[2]) &&
-                (binarioRespuesta[3] == _PdfNumerosMagicos[3]);
+                esPdf = EsFormatoPDF(binarioRespuesta);
 
                 if (!esPdf)
-                    throw new Exception(AeatModelos.Errores.MostrarMensaje("Respuesta.000", 
-                        RegistroMod.Encoding.GetString(binarioRespuesta)));
+                {
+                    // Esto es otro 'hack - chapuzilla' para cuando la presentación en real tiene el servidor parado.
+                    // Probamos a descargar el documento PDF desde otro repositorio de la AEAT (disponible dentro del
+                    // apartado de colaboradores).
 
-                DatosPdf = binarioRespuesta;
+                    string enlaceSegundoRepositorio = "https://www1.agenciatributaria.gob.es/wlpl/inwinvoc/"+
+                        "es.aeat.dit.adu.eeca.catalogo.vis.Visualiza?COMPLETA=SI&ORIGEN=C&CLAVE_CAT=&NIF=&ANAGRAMA=&CSV=" +
+                        CSV +
+                        "&CLAVE_EE=&PAGE=&SEARCH=";
 
+                    binarioRespuesta = DescargaPdfEnlaceTest(enlaceSegundoRepositorio);
+
+                    esPdf = EsFormatoPDF(binarioRespuesta);
+
+                    if (!esPdf)
+                        throw new Exception(AeatModelos.Errores.MostrarMensaje("Respuesta.000",
+                            RegistroMod.Encoding.GetString(binarioRespuesta)));
+                }                    
             }
 
+            DatosPdf = binarioRespuesta;
+        }
+
+        /// <summary>
+        /// Comprueba si el archivo binario es un documento PDF.
+        /// </summary>
+        /// <param name="binario">Bytes con un posible documento PDF.</param>
+        /// <returns>True en caso de ser un fichero PDF.</returns>
+        private bool EsFormatoPDF(byte[] binario)
+        {
+            bool esPdf = 
+                (binario[0] == _PdfNumerosMagicos[0]) &&
+                (binario[1] == _PdfNumerosMagicos[1]) &&
+                (binario[2] == _PdfNumerosMagicos[2]) &&
+                (binario[3] == _PdfNumerosMagicos[3]);
+
+            return esPdf;
         }
 
         /// <summary>
@@ -232,7 +251,6 @@ namespace AeatModelos.Comunicaciones
         /// <returns>Datos binarios de la respuesta.</returns>
         private byte[] DescargaPdfEnlaceTest(string enlace)
         {
-
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(enlace);
             httpWebRequest.Method = "GET";
             httpWebRequest.ClientCertificates.Add(Certificado.Cargar());
@@ -246,7 +264,6 @@ namespace AeatModelos.Comunicaciones
                 result = lectorBinario.ReadBytes((int)httpWebResponse.ContentLength);
 
             return result;
-
         }
 
         #endregion
