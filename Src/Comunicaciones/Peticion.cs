@@ -144,10 +144,10 @@ namespace AeatModelos.Comunicaciones
         /// <param name="modelo">Modelo para el que se ha construido la 
         /// petición.</param>
         /// <param name="test">Testigo para indicar si la petición debe realizarse en modo "Test".</param>
-        public Peticion(RegistroMod modelo, bool test = false)
+        public Peticion(RegistroMod modelo, bool test = false, string certRef = null, string certClave = null)
         {
 
-            _Certificado = Certificado.Cargar();
+            _Certificado = Certificado.Cargar(certRef, certClave);
 
             _CertificadoTitular = Certificado.Titular(_Certificado);
             

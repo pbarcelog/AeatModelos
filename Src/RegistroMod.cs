@@ -529,9 +529,9 @@ namespace AeatModelos
         /// Devuelve una cadena con la representación del titular del
         /// certificado que va a realizar la presentación.
         /// </summary>
-        public string Presentador()
+        public string Presentador(string certRef = null, string certClave = null)
         {
-            var certificado = Certificado.Cargar();
+            var certificado = Certificado.Cargar(certRef, certClave);
 
             var titular = Certificado.Titular(certificado);
 
@@ -570,13 +570,13 @@ namespace AeatModelos
         /// Presenta la declaración.
         /// </summary>
         /// <returns>Respuesta a la operación de presentación.</returns>
-        public Respuesta Presentar(bool test = false)
+        public Respuesta Presentar(bool test = false, string certRef = null, string certClave = null)
         {
 
             if (!_Confirmado)
                 throw new InvalidOperationException(Errores.MostrarMensaje("RegistroMod.003"));
 
-            return new Peticion(this, test).Presentar();
+            return new Peticion(this, test, certRef, certClave).Presentar();
         }
 
         /// <summary>

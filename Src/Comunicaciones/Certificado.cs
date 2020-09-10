@@ -61,9 +61,14 @@ namespace AeatModelos.Comunicaciones
         /// <summary>
         /// Devuelve el certificado establecido en la configuración. 
         /// </summary>
+        /// <param name="certRef">>Referencia para la carga del certificado,
+        /// según el modo:
+        /// <para>AlmacenWindows: Huella del certificado.</para>
+        /// <para>Archivo: Ruta al cerfificado.</para> 
+        /// </param>
         /// <returns>Devuelve el certificado de la 
         /// configuración.</returns>
-        public static X509Certificate2 Cargar()
+        public static X509Certificate2 Cargar(string certRef = null, string certClave = null)
         {
 
             bool isWindows = (Environment.OSVersion.Platform == PlatformID.Win32NT) ||
@@ -195,9 +200,10 @@ namespace AeatModelos.Comunicaciones
         /// Devuelve el certificado establecido en la configuración
         /// mediante una ruta a un fichero de certificado.
         /// </summary>
+        /// <param name="clave">Clave</param>
         /// <returns>Devuelve el certificado de la 
         /// configuración para las comunicaciones.</returns>
-        internal static X509Certificate2 CargarPorArchivo()
+        internal static X509Certificate2 CargarPorArchivo(string clave = null)
         {
 
             if (!string.IsNullOrEmpty(Parametros.Actuales?.Certificados?.RutaArchivo) &&
