@@ -113,8 +113,10 @@ namespace AeatModelos
         /// <summary>
         /// Devuelve una cadena con la representación del titular del
         /// certificado que va a realizar la presentación.
+        /// <param name="certRef">Referencia explícita a certificado externo.</param>
+        /// <param name="certClave">Clave para el certificado referido.</param>
         /// </summary>
-        string Presentador();
+        string Presentador(string certRef = null, string certClave = null);
 
         /// <summary>
         /// Confirma la declaración según las especificaciones de la AEAT
@@ -127,9 +129,11 @@ namespace AeatModelos
         /// Presenta la declaración.
         /// <param name="test">Si es true, realiza la presentación en
         /// modo de pruebas.</param>
+        /// <param name="certRef">Referencia explícita a certificado externo.</param>
+        /// <param name="certClave">Clave para el certificado referido.</param>
         /// </summary>
         /// <returns>Respuesta a la operación de presentación.</returns>
-        Respuesta Presentar(bool test = false);
+        Respuesta Presentar(bool test = false, string certRef = null, string certClave = null);
 
         #endregion
 

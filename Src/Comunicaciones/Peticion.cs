@@ -143,7 +143,9 @@ namespace AeatModelos.Comunicaciones
         /// </summary>
         /// <param name="modelo">Modelo para el que se ha construido la 
         /// petición.</param>
-        /// <param name="test">Testigo para indicar si la petición debe realizarse en modo "Test".</param>
+        /// <param name="test">Indica si la presentación se realiza en el entorno en pruebas de la AEAT.</param>
+        /// <param name="certRef">Ruta de certificado para la presentación, en caso de que se utilice uno externo.</param>
+        /// <param name="certClave">Contraseña del certificado.</param>
         public Peticion(RegistroMod modelo, bool test = false, string certRef = null, string certClave = null)
         {
 

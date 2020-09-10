@@ -66,11 +66,10 @@ namespace AeatModelos.Comunicaciones
         /// <para>AlmacenWindows: Huella del certificado.</para>
         /// <para>Archivo: Ruta al cerfificado.</para> 
         /// </param>
-        /// <returns>Devuelve el certificado de la 
-        /// configuración.</returns>
+        /// <param name="certClave">Contraseña del certificado.</param>
+        /// <returns>Devuelve el certificado de la configuración.</returns>
         public static X509Certificate2 Cargar(string certRef = null, string certClave = null)
         {
-
             bool isWindows = (Environment.OSVersion.Platform == PlatformID.Win32NT) ||
                                 (Environment.OSVersion.Platform == PlatformID.Win32S) ||
                                 (Environment.OSVersion.Platform == PlatformID.Win32Windows) ||
@@ -87,28 +86,24 @@ namespace AeatModelos.Comunicaciones
 
             if (Parametros.Actuales?.Certificados?.CertificadoModo == CertificadosModos.AlmacenWindows)
             {
-
-                certificado = CargarPorHuella();
+                certificado = CargarPorHuella(certRef, certClave);
                 
                 if (certificado == null)
                     throw new Exception(
                         Errores.MostrarMensaje("Certificado.001", 
                         $"'{Parametros.Actuales?.Certificados?.HuellaDigital}'")
                     );
-
             }
 
             if (Parametros.Actuales?.Certificados?.CertificadoModo == CertificadosModos.Archivo)
             {
-
-                certificado = CargarPorArchivo();
+                certificado = CargarPorArchivo(certRef, certClave);
                 
                 if (certificado == null)
                     throw new Exception(
                         Errores.MostrarMensaje("Certificado.002", 
                         $"'{Parametros.Actuales?.Certificados?.RutaArchivo}'")
                     );
-
             }
             
             if (certificado.NotAfter < DateTime.Now)
@@ -117,8 +112,6 @@ namespace AeatModelos.Comunicaciones
                 );
 
             return certificado;
-
-
         }
 
         /// <summary>
@@ -163,34 +156,37 @@ namespace AeatModelos.Comunicaciones
                         NIF = Regex.Match(certificado.Subject, @"(?<=VATES\s*-\s*)[^,]+").Value.Trim(),
                         Nombre = Regex.Match(certificado.Subject, @"(?<=O=)[^,]+").Value.Trim()
                     };
-
             }
 
             return null;
-
-
         }
 
         /// <summary>
         /// Devuelve el certificado establecido en la configuración por su
         /// hash o huella digital. 
         /// </summary>
+        /// <param name="certRef">Huella de certificado, en caso de utilizar certificado externo.</param>
+        /// <param name="certClave">Contraseña del certificado.</param>
         /// <returns>Devuelve el certificado de la 
         /// configuración por hash para las comunicaciones.
         /// Si no existe devuelve null.</returns>
-        internal static X509Certificate2 CargarPorHuella()
+        internal static X509Certificate2 CargarPorHuella(string certRef = null, string certClave = null)
         {
+            string huellaDigital = Parametros.Actuales?.Certificados?.HuellaDigital;
+            if (!String.IsNullOrWhiteSpace(certRef))
+                huellaDigital = certRef;
+
             X509Store store = new X509Store();
             store.Open(OpenFlags.ReadOnly);
             foreach (X509Certificate2 cert in store.Certificates)
-                if (cert.Thumbprint.ToUpper() == $"{Parametros.Actuales?.Certificados?.HuellaDigital}".ToUpper())
+                if (cert.Thumbprint.ToUpper() == $"{huellaDigital}".ToUpper())
                     return cert;
 
             // Probamos en LocalMachine
             X509Store storeLM = new X509Store(StoreLocation.LocalMachine);
             storeLM.Open(OpenFlags.ReadOnly);
             foreach (X509Certificate2 cert in storeLM.Certificates)
-                if (cert.Thumbprint.ToUpper() == $"{Parametros.Actuales?.Certificados?.HuellaDigital}".ToUpper())
+                if (cert.Thumbprint.ToUpper() == $"{huellaDigital}".ToUpper())
                     return cert;
 
             return null;
@@ -200,25 +196,31 @@ namespace AeatModelos.Comunicaciones
         /// Devuelve el certificado establecido en la configuración
         /// mediante una ruta a un fichero de certificado.
         /// </summary>
-        /// <param name="clave">Clave</param>
+        /// <param name="certRef">Ruta del certificado, en caso de utilizar certificado externo.</param>
+        /// <param name="certClave">Contraseña del certificado.</param>
         /// <returns>Devuelve el certificado de la 
         /// configuración para las comunicaciones.</returns>
-        internal static X509Certificate2 CargarPorArchivo(string clave = null)
+        internal static X509Certificate2 CargarPorArchivo(string certRef = null, string certClave = null)
         {
+            string rutaCertificado = Parametros.Actuales?.Certificados?.RutaArchivo;
+            if (!String.IsNullOrWhiteSpace(certRef))
+                rutaCertificado = certRef;
 
-            if (!string.IsNullOrEmpty(Parametros.Actuales?.Certificados?.RutaArchivo) &&
-                File.Exists(Parametros.Actuales?.Certificados?.RutaArchivo))
-                if (string.IsNullOrEmpty(Parametros.Actuales?.Certificados?.Clave))
-                    return new X509Certificate2(Parametros.Actuales?.Certificados?.RutaArchivo);
+            string claveCertificado = Parametros.Actuales?.Certificados?.Clave;
+            if (!String.IsNullOrWhiteSpace(certRef)) // En caso de que se indique certificado, paso su correspondiente clave.
+                claveCertificado = certClave;
+
+            if (!string.IsNullOrEmpty(rutaCertificado) && File.Exists(rutaCertificado))
+            {
+                if (string.IsNullOrEmpty(claveCertificado))
+                    return new X509Certificate2(rutaCertificado);
                 else
-                    return new X509Certificate2(Parametros.Actuales?.Certificados?.RutaArchivo,
-                        Parametros.Actuales?.Certificados?.Clave);
+                    return new X509Certificate2(rutaCertificado, claveCertificado);
+            }
 
             return null;
-
         }
 
         #endregion
-
     }
 }

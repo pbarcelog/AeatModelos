@@ -568,11 +568,13 @@ namespace AeatModelos
 
         /// <summary>
         /// Presenta la declaración.
+        /// <param name="test">Indica si la presentación se realiza en el entorno en pruebas de la AEAT.</param>
+        /// <param name="certRef">Ruta de certificado para la presentación, en caso de que se utilice uno externo.</param>
+        /// <param name="certClave">Contraseña del certificado.</param>
         /// </summary>
         /// <returns>Respuesta a la operación de presentación.</returns>
         public Respuesta Presentar(bool test = false, string certRef = null, string certClave = null)
         {
-
             if (!_Confirmado)
                 throw new InvalidOperationException(Errores.MostrarMensaje("RegistroMod.003"));
 
