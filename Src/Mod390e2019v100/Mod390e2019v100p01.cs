@@ -94,55 +94,61 @@ namespace AeatModelos.Mod390e2019v100
                 {++c,    new RegistroCampo(1,    131,     1,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "RegimenEspecialCriterioCaja",  "2")},  //020
                 // Ha sido destinatario del régimen especial del criterio de caja: "0" - blanco, "1" - Si, "2" .- No
                 {++c,    new RegistroCampo(1,    132,     1,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "DestinatarioRegEspCriterioCaj","2")},  //021
-                {++c,    new RegistroCampo(1,    133,     1,  "Num",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )},  //022
-                {++c,    new RegistroCampo(1,    134,     1,  "Num",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )},  //023
-                {++c,    new RegistroCampo(1,    135,    13,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )},  //024
+                // Sustitutiva "0" No, "1" Sí.
+                {++c,    new RegistroCampo(1,    133,     1,  "Num",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "Sustitutiva",            0,  0    )},  //022
+                // Sustitutiva por rectificación de cuotas "0" No, "1" Sí.
+                {++c,    new RegistroCampo(1,    134,     1,  "Num",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "SustRectificaCuotas",    0,  0    )},  //023
+                {++c,    new RegistroCampo(1,    135,    13,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "JustificanteAnterior"             )},  //024
+                // Actividad principal de la entidad declarante.
                 {++c,    new RegistroCampo(1,    148,    40,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "DescripActividad"                 )},  //025
                 {++c,    new RegistroCampo(1,    188,     1,  "Num",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ClaveActividad",     null,   0    )},  //026
                 {++c,    new RegistroCampo(1,    189,     4,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "EpigrafeActividad"                )},  //027
-                {++c,    new RegistroCampo(1,    193,    40,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )},  //028
-                {++c,    new RegistroCampo(1,    233,     1,  "Num",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )},  //029
-                {++c,    new RegistroCampo(1,    234,     4,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )},  //030
-                {++c,    new RegistroCampo(1,    238,    40,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )},  //031
-                {++c,    new RegistroCampo(1,    278,     1,  "Num",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )},  //032
-                {++c,    new RegistroCampo(1,    279,     4,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )},  //033
-                {++c,    new RegistroCampo(1,    283,    40,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )},  //034
-                {++c,    new RegistroCampo(1,    323,     1,  "Num",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )},  //035
-                {++c,    new RegistroCampo(1,    324,     4,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )},  //036
-                {++c,    new RegistroCampo(1,    328,    40,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )},  //037
-                {++c,    new RegistroCampo(1,    368,     1,  "Num",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )},  //038
-                {++c,    new RegistroCampo(1,    369,     4,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )},  //039
-                {++c,    new RegistroCampo(1,    373,    40,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )},  //040
-                {++c,    new RegistroCampo(1,    413,     1,  "Num",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )},  //041
-                {++c,    new RegistroCampo(1,    414,     4,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )},  //042
+                // Resto de actividades de la entidad declarante.
+                {++c,    new RegistroCampo(1,    193,    40,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "DescripActividad2"                )},  //028
+                {++c,    new RegistroCampo(1,    233,     1,  "Num",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ClaveActividad2",    null,   0    )},  //029
+                {++c,    new RegistroCampo(1,    234,     4,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "EpigrafeActividad2"               )},  //030
+                {++c,    new RegistroCampo(1,    238,    40,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "DescripActividad3"                )},  //031
+                {++c,    new RegistroCampo(1,    278,     1,  "Num",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ClaveActividad3",    null,   0    )},  //032
+                {++c,    new RegistroCampo(1,    279,     4,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "EpigrafeActividad3"               )},  //033
+                {++c,    new RegistroCampo(1,    283,    40,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "DescripActividad4"                )},  //034
+                {++c,    new RegistroCampo(1,    323,     1,  "Num",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ClaveActividad4",    null,   0    )},  //035
+                {++c,    new RegistroCampo(1,    324,     4,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "EpigrafeActividad4"               )},  //036
+                {++c,    new RegistroCampo(1,    328,    40,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "DescripActividad5"                )},  //037
+                {++c,    new RegistroCampo(1,    368,     1,  "Num",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ClaveActividad5",    null,   0    )},  //038
+                {++c,    new RegistroCampo(1,    369,     4,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "EpigrafeActividad5"               )},  //039
+                {++c,    new RegistroCampo(1,    373,    40,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "DescripActividad6"                )},  //040
+                {++c,    new RegistroCampo(1,    413,     1,  "Num",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ClaveActividad6",    null,   0    )},  //041
+                {++c,    new RegistroCampo(1,    414,     4,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "EpigrafeActividad6"               )},  //042
                 // Declaración anual operaciones por terceras personas. "0" - No, "1" .- Sí
                 {++c,    new RegistroCampo(1,    418,     1,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "Obligado347",     "1"             )},  //043
                 {++c,    new RegistroCampo(1,    419,     9,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )},  //044
                 {++c,    new RegistroCampo(1,    428,    37,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )},  //045
-                {++c,    new RegistroCampo(1,    465,     9,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )},  //046
-                {++c,    new RegistroCampo(1,    474,    80,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )},  //047
-                {++c,    new RegistroCampo(1,    554,     2,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )},  //048
-                {++c,    new RegistroCampo(1,    556,    17,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )},  //049
-                {++c,    new RegistroCampo(1,    573,     5,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )},  //050
-                {++c,    new RegistroCampo(1,    578,     2,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )},  //051
-                {++c,    new RegistroCampo(1,    580,     2,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )},  //052
-                {++c,    new RegistroCampo(1,    582,     2,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )},  //053
-                {++c,    new RegistroCampo(1,    584,     9,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )},  //054
-                {++c,    new RegistroCampo(1,    593,    20,  "A",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )},  //055
-                {++c,    new RegistroCampo(1,    613,    15,  "A",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )},  //056
-                {++c,    new RegistroCampo(1,    628,     5,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )},  //057
-                {++c,    new RegistroCampo(1,    633,    80,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )},  //058
-                {++c,    new RegistroCampo(1,    713,     9,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )},  //059
-                {++c,    new RegistroCampo(1,    722,     8,  "Num",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )},  //060
-                {++c,    new RegistroCampo(1,    730,    12,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )},  //061
-                {++c,    new RegistroCampo(1,    742,    80,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )},  //062
-                {++c,    new RegistroCampo(1,    822,     9,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )},  //063
-                {++c,    new RegistroCampo(1,    831,     8,  "Num",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )},  //064
-                {++c,    new RegistroCampo(1,    839,    12,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )},  //065
-                {++c,    new RegistroCampo(1,    851,    80,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )},  //066
-                {++c,    new RegistroCampo(1,    931,     9,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )},  //067
-                {++c,    new RegistroCampo(1,    940,     8,  "Num",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )},  //068
-                {++c,    new RegistroCampo(1,    948,    12,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )},  //069
+                // Datos representante persona física/comunidad de bienes.
+                {++c,    new RegistroCampo(1,    465,     9,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ReprPersonaFisicaNIF"             )},  //046
+                {++c,    new RegistroCampo(1,    474,    80,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ReprPersonaFisicaApellNombre"     )},  //047
+                {++c,    new RegistroCampo(1,    554,     2,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ReprPersonaFisicaTipoVia"         )},  //048
+                {++c,    new RegistroCampo(1,    556,    17,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ReprPersonaFisicaNombreVia"       )},  //049
+                {++c,    new RegistroCampo(1,    573,     5,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ReprPersonaFisicaNumVia"          )},  //050
+                {++c,    new RegistroCampo(1,    578,     2,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ReprPersonaFisicaEscalera"        )},  //051
+                {++c,    new RegistroCampo(1,    580,     2,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ReprPersonaFisicaNumPiso"         )},  //052
+                {++c,    new RegistroCampo(1,    582,     2,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ReprPersonaFisicaNumPuerta"       )},  //053
+                {++c,    new RegistroCampo(1,    584,     9,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ReprPersonaFisicaTelefono"        )},  //054
+                {++c,    new RegistroCampo(1,    593,    20,  "A",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ReprPersonaFisicaMunicipio"       )},  //055
+                {++c,    new RegistroCampo(1,    613,    15,  "A",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ReprPersonaFisicaProvincia"       )},  //056
+                {++c,    new RegistroCampo(1,    628,     5,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ReprPersonaFisicaCodPostal"       )},  //057
+                // Datos representantes personas jurídicas.
+                {++c,    new RegistroCampo(1,    633,    80,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ReprPersonaJuridicaNombreApell1"  )},  //058
+                {++c,    new RegistroCampo(1,    713,     9,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ReprPersonaJuridicaNIF1"          )},  //059
+                {++c,    new RegistroCampo(1,    722,     8,  "Num",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ReprPersonaJuridicaFechaPoder1"   )},  //060
+                {++c,    new RegistroCampo(1,    730,    12,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ReprPersonaJuridicaNotaria1"      )},  //061
+                {++c,    new RegistroCampo(1,    742,    80,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ReprPersonaJuridicaNombreApell2"  )},  //062
+                {++c,    new RegistroCampo(1,    822,     9,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ReprPersonaJuridicaNIF2"          )},  //063
+                {++c,    new RegistroCampo(1,    831,     8,  "Num",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ReprPersonaJuridicaFechaPoder2"   )},  //064
+                {++c,    new RegistroCampo(1,    839,    12,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ReprPersonaJuridicaNotaria2"      )},  //065
+                {++c,    new RegistroCampo(1,    851,    80,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ReprPersonaJuridicaNombreApell3"  )},  //066
+                {++c,    new RegistroCampo(1,    931,     9,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ReprPersonaJuridicaNIF3"          )},  //067
+                {++c,    new RegistroCampo(1,    940,     8,  "Num",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ReprPersonaJuridicaFechaPoder3"   )},  //068
+                {++c,    new RegistroCampo(1,    948,    12,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ReprPersonaJuridicaNotaria3"      )},  //069
                 {++c,    new RegistroCampo(1,    960,    21,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )},  //070
                 {++c,    new RegistroCampo(1,    981,    13,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )},  //071
                 {++c,    new RegistroCampo(1,    994,    20,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                               )},  //072
@@ -150,8 +156,6 @@ namespace AeatModelos.Mod390e2019v100
                 {++c,    new RegistroCampo(1,   1164,    12,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,        "</T39001000>"        )}   //074
 
             };
-
-
         }
 
         #endregion
@@ -166,6 +170,5 @@ namespace AeatModelos.Mod390e2019v100
         }
 
         #endregion
-
     }
 }
