@@ -123,9 +123,16 @@ namespace AeatModelos.Mod390e2019v100
             Mod390e2019v100p01 modPagina1 = Paginas.Empaquetables[0] as Mod390e2019v100p01;
             Mod390e2019v100p02 modPagina2 = null;
 
+            Paginas.Empaquetables.Sort(); // Ordenamos las páginas para evitar problemas indeseados.
+
             if (Paginas.Empaquetables.Count > 1)
                 modPagina2 = Paginas.Empaquetables[1] as Mod390e2019v100p02;
 
+            if (modPagina2 == null)
+            {
+                modPagina2 = new Mod390e2019v100p02(Ejercicio, Periodo);
+                Paginas.Empaquetables.Add(modPagina2);
+            }
 
             // Suma bases devengado
 
