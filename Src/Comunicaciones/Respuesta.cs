@@ -93,12 +93,12 @@ namespace AeatModelos.Comunicaciones
         /// <summary>
         /// Respuesta http de la AEAT.
         /// </summary>
-        HttpWebResponse _HttpWebResponse;
+        protected HttpWebResponse _HttpWebResponse;
 
         /// <summary>
         /// Petición a la que pertenece la respuesta.
         /// </summary>
-        Peticion _Peticion;
+        protected Peticion _Peticion;
 
         /// <summary>
         /// Bytes de la respuesta.
@@ -132,7 +132,7 @@ namespace AeatModelos.Comunicaciones
             LeeContenido();
             _ContenidoTexto = RegistroMod.Encoding.GetString(_ContenidoBinario);
 
-            Erronea = _RgError.IsMatch(_ContenidoTexto);
+            Erronea = CompruebaErronea();
 
             _HttpWebResponse.Close();
 
@@ -149,11 +149,21 @@ namespace AeatModelos.Comunicaciones
         #region Métodos Privados de Instancia
 
         /// <summary>
+        /// Devuelve true si la respuesta de la aeat indica que la
+        /// presentación ha sido errónea.
+        /// </summary>
+        /// <returns>True si errónea y false si correcta.</returns>
+        protected virtual bool CompruebaErronea() 
+        { 
+            return _RgError.IsMatch(_ContenidoTexto);
+        }
+
+        /// <summary>
         /// Lee los bytes de la respuesta del stream del objeto
         /// HttpWebResponse utilizado para recoger la respuesta de
         /// la AEAT.
         /// </summary>
-        private void LeeContenido()
+        protected virtual void LeeContenido()
         {
 
             using (var stream = _HttpWebResponse.GetResponseStream())
@@ -166,7 +176,7 @@ namespace AeatModelos.Comunicaciones
         /// Realiza las labores necesarias en caso de que la respuesta
         /// se errónea.
         /// </summary>
-        private void TratarErrores()
+        protected virtual void TratarErrores()
         {
 
             foreach (Match error in _RgErrores.Matches(_ContenidoTexto))
@@ -177,7 +187,7 @@ namespace AeatModelos.Comunicaciones
         /// Realiza las labores necesarias en caso de que la respuesta
         /// se satisfactoria.
         /// </summary>
-        private void TratarExito()
+        protected virtual void TratarExito()
         {
             CSV = _RgCsv.Match(_ContenidoTexto).Value;
             EnlacePdf = _RgPdfEnlace.Match(_ContenidoTexto).Value;
@@ -244,7 +254,7 @@ namespace AeatModelos.Comunicaciones
         /// </summary>
         /// <param name="enlace">Url del pdf a descargar.</param>
         /// <returns>Datos binarios de la respuesta.</returns>
-        private byte[] DescargaPdfEnlace(string enlace)
+        internal virtual byte[] DescargaPdfEnlace(string enlace)
         {
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(enlace);
             httpWebRequest.Method = "GET";
@@ -283,19 +293,19 @@ namespace AeatModelos.Comunicaciones
         /// <summary>
         /// Código seguro de verificación en caso de éxito.
         /// </summary>
-        public string CSV { get; private set; }
+        public string CSV { get; protected set; }
 
         /// <summary>
         /// Enlace al pdf de la autoliquidación en caso
         /// de éxito.
         /// </summary>
-        public string EnlacePdf { get; private set; }
+        public string EnlacePdf { get; protected set; }
 
         /// <summary>
         /// Datos binarios del pdf de la autoliquidación en caso
         /// de éxito.
         /// </summary>
-        public byte[] DatosPdf { get; private set; }
+        public byte[] DatosPdf { get; protected set; }
 
         #endregion
  

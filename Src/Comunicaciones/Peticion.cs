@@ -45,7 +45,6 @@ using System;
 using System.IO;
 using System.Net;
 using System.Security.Cryptography.X509Certificates;
-using System.Text;
 
 namespace AeatModelos.Comunicaciones
 {
@@ -62,7 +61,7 @@ namespace AeatModelos.Comunicaciones
         /// <summary>
         /// Valor para el head ContentType de la petición.
         /// </summary>
-        string _ContentType = "application/x-www-form-urlencoded";
+        protected string _ContentType = "application/x-www-form-urlencoded";
 
         /// <summary>
         /// Valor para el método utilizado en la petición http.
@@ -115,7 +114,18 @@ namespace AeatModelos.Comunicaciones
         /// Respuesta recibida una vez presentada la
         /// petición.
         /// </summary>
-        Respuesta _Respuesta;
+        protected Respuesta _Respuesta;
+
+        /// <summary>
+        /// Modelo sobre el cual se ha construido la petición.
+        /// </summary>
+        RegistroMod _Modelo;
+
+        /// <summary>
+        /// Indica si la petición es para el entorno de
+        /// pruebas (true) o de producción (false).
+        /// </summary>
+        bool _Test;
 
         #endregion
 
@@ -131,6 +141,19 @@ namespace AeatModelos.Comunicaciones
             {
                 return _HttpWebRequest;
             }
+        }
+
+        /// <summary>
+        /// Titular del certificado de cliente para la conexión 
+        /// con los servicios
+        /// de la aeat.
+        /// </summary>        
+        internal CertificadoTitular CertificadoTitular 
+        { 
+            get
+            {
+                return _CertificadoTitular;
+            } 
         }
 
         #endregion
@@ -149,29 +172,15 @@ namespace AeatModelos.Comunicaciones
         public Peticion(RegistroMod modelo, bool test = false, string certRef = null, string certClave = null)
         {
 
-            _Certificado = Certificado.Cargar(certRef, certClave);
 
-            _CertificadoTitular = Certificado.Titular(_Certificado);
-            
-            if (_CertificadoTitular == null)
-                throw new Exception(Errores.MostrarMensaje("Peticion.000", $"{_Certificado.Subject}"));
+            _Modelo = modelo;
+            _Test = test;
 
-
-            _Enlace = test ? Enlaces.BuscaEnlaceModelo(modelo, true) : Enlaces.BuscaEnlaceModelo(modelo);
-            
-            if (_Enlace == null)
-                throw new Exception(Errores.MostrarMensaje("Peticion.001", $"{modelo.GetType().Name}"));
-
-            _HttpWebRequest = (HttpWebRequest)WebRequest.Create(_Enlace);
-            _HttpWebRequest.ContentType = _ContentType;
-            _HttpWebRequest.Method = _Method;
-            _HttpWebRequest.ClientCertificates.Add(_Certificado);
+            InicializaCertificado(certRef, certClave);
 
             _TextoFichero = modelo.AFichero().Replace("\n", "");
 
-            modelo.VariablesEnvio["FIRNIF"] = _CertificadoTitular.NIF;
-            modelo.VariablesEnvio["FIRNOMBRE"] = _CertificadoTitular.Nombre;
-            modelo.VariablesEnvio["F01"] = _TextoFichero;
+            InicializaFirmaBasica();
 
             _TextoPeticion = modelo.DatosPeticionPresentacion();
             _BytesPeticion = RegistroMod.Encoding.GetBytes(_TextoPeticion);
@@ -183,13 +192,75 @@ namespace AeatModelos.Comunicaciones
         #region Métodos Privados de Instancia
 
         /// <summary>
+        /// Inicializa el certificado a utilizar para transmitir la
+        /// petición a la aeat.
+        /// </summary>
+        /// <param name="certRef">Ruta de certificado para la presentación, en caso de que se utilice uno externo.</param>
+        /// <param name="certClave">Contraseña del certificado.</param>
+        private void InicializaCertificado(string certRef, string certClave) 
+        {
+            _Certificado = Certificado.Cargar(certRef, certClave);
+
+            _CertificadoTitular = Certificado.Titular(_Certificado);
+
+            if (_CertificadoTitular == null)
+                throw new Exception(Errores.MostrarMensaje("Peticion.000", $"{_Certificado.Subject}"));
+        }
+
+        /// <summary>
+        /// Recupera la url donde se encuentra el servicio de la aeat requerido
+        /// por la petición y su modelo.
+        /// </summary>
+        /// <param name="test">True para pruebas y false para produccíón.</param>
+        /// <returns>Url del servicio de la aeat correspondiente al modelo de la petición.</returns>
+        protected virtual string GeneraEnlace(bool test) 
+        {
+            var enlace = test ? Enlaces.BuscaEnlaceModelo(_Modelo, true) : Enlaces.BuscaEnlaceModelo(_Modelo);
+
+            if (enlace == null)
+                throw new Exception(Errores.MostrarMensaje("Peticion.001", $"{_Modelo.GetType().Name}"));
+
+            return enlace;
+
+        }
+
+        /// <summary>
+        /// Establece los valores de las variables de envío necesarias para la
+        /// firma básica.
+        /// </summary>
+        protected virtual void InicializaFirmaBasica() 
+        {
+            _Modelo.VariablesEnvio["FIRNIF"] = _CertificadoTitular.NIF;
+            _Modelo.VariablesEnvio["FIRNOMBRE"] = _CertificadoTitular.Nombre;
+            _Modelo.VariablesEnvio["F01"] = _TextoFichero;
+        }
+
+        /// <summary>
         /// Escribe los datos a envíar en el stream de la 
         /// petición.
         /// </summary>
-        private void EscribePeticion()
+        protected void EscribePeticion()
         {
             using (Stream stream = _HttpWebRequest.GetRequestStream())
                 stream.Write(_BytesPeticion, 0, _BytesPeticion.Length);
+        }
+
+        /// <summary>
+        /// Inicializa el objeto HttpWebRequest para mandar la petición.
+        /// </summary>
+        internal void PreparaPeticion() 
+        {
+
+            if (PeticionHttp != null)
+                return;
+
+            _Enlace = GeneraEnlace(_Test);
+
+            _HttpWebRequest = (HttpWebRequest)WebRequest.Create(_Enlace);
+            _HttpWebRequest.ContentType = _ContentType;
+            _HttpWebRequest.Method = _Method;
+            _HttpWebRequest.ClientCertificates.Add(_Certificado);
+
         }
 
         #endregion      
@@ -202,12 +273,11 @@ namespace AeatModelos.Comunicaciones
         /// la misma.
         /// </summary>
         /// <returns>Respuesta a una petición de presentación</returns>
-        public Respuesta Presentar(bool test = false)
+        public virtual Respuesta Presentar(bool test = false)
         {
 
+            PreparaPeticion();
             EscribePeticion();
-
-            this.
 
             _Respuesta = new Respuesta(this);
 

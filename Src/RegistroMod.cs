@@ -81,7 +81,7 @@ namespace AeatModelos
         /// <summary>
         /// Indica si el usuario a confirmado la declaración.
         /// </summary>
-        bool _Confirmado = false;
+        protected bool _Confirmado = false;
 
         /// <summary>
         /// Almacena el valor del fichero del modelo.
@@ -217,7 +217,7 @@ namespace AeatModelos
             {
                 var valor = VariablesEnvio[variable];
                 var valorCodificado = string.IsNullOrEmpty(valor) ? "" : HttpUtility.UrlEncode(valor, Encoding);
-                var segmento = $"{variable}={valorCodificado}";
+                var segmento = string.IsNullOrEmpty(variable) ? valor : $"{variable}={valorCodificado}";
                 segmentos[segmentoIndice++] = segmento;
             }
 
@@ -579,6 +579,7 @@ namespace AeatModelos
                 throw new InvalidOperationException(Errores.MostrarMensaje("RegistroMod.003"));
 
             return new Peticion(this, test, certRef, certClave).Presentar();
+
         }
 
         /// <summary>

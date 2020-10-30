@@ -45,6 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Src\Comunicaciones\PeticionTgvi.cs" />
+    <Compile Include="Src\Comunicaciones\RespuestaTgvi.cs" />
     <Compile Include="Src\ICasilla.cs" />
     <Compile Include="Src\Comunicaciones\Certificado.cs" />
     <Compile Include="Src\Comunicaciones\CertificadoTitular.cs" />

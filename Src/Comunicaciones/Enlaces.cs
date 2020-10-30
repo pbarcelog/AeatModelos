@@ -66,7 +66,21 @@ namespace AeatModelos.Comunicaciones
         /// Enlace al servicios de presentación de declaraciones del modelo 130,
         /// 303...
         /// </summary>
+        public static string PftwPicwPresBasicaTgvi = "https://www1.agenciatributaria.gob.es/wlpl/OVPT-NTGV/";
+
+
+        /// <summary>
+        /// Enlace al servicios de presentación de declaraciones del modelo 130,
+        /// 303...
+        /// </summary>
         public static string PftwPicwPresBasicaPruebas = "https://www7.aeat.es/wlpl/PFTW-PICW/PresBasica";
+
+        /// <summary>
+        /// Enlace al servicios de presentación de declaraciones del modelo 130,
+        /// 303...
+        /// </summary>
+        public static string PftwPicwPresBasicaPruebasTgvi = "https://www7.aeat.es/wlpl/OVPT-NTGV/";
+
 
         /// <summary>
         /// Diccionario de enlaces por modelos referenciados por
@@ -79,7 +93,7 @@ namespace AeatModelos.Comunicaciones
             { "Mod123e15v13",           PftwPicwPresBasica },
             { "Mod115e15v13",           PftwPicwPresBasica },
             { "Mod111e16v18",           PftwPicwPresBasica },
-            { "Mod180e14v00",           PftwPicwPresBasica },
+            { "Mod180e14v00",           PftwPicwPresBasicaTgvi },
         };
 
         /// <summary>
@@ -94,7 +108,7 @@ namespace AeatModelos.Comunicaciones
             { "Mod123e15v13",           PftwPicwPresBasicaPruebas },
             { "Mod115e15v13",           PftwPicwPresBasicaPruebas },
             { "Mod111e16v18",           PftwPicwPresBasicaPruebas },
-            { "Mod180e14v00",           PftwPicwPresBasicaPruebas },
+            { "Mod180e14v00",           PftwPicwPresBasicaPruebasTgvi },
         };
 
         #endregion
@@ -130,7 +144,7 @@ namespace AeatModelos.Comunicaciones
             string enlace = null;
 
             var name = tipoModelo.Name;
-            var modelos = (Parametros.Actuales.Pruebas) ? ModelosPruebas : (test ? ModelosPruebas : Modelos);
+            var modelos = (test) ? ModelosPruebas : (test ? ModelosPruebas : Modelos);
 
             if (modelos.ContainsKey(name))
                 return modelos[name];
