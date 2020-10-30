@@ -573,7 +573,7 @@ namespace AeatModelos
         /// <param name="certClave">Contraseña del certificado.</param>
         /// </summary>
         /// <returns>Respuesta a la operación de presentación.</returns>
-        public Respuesta Presentar(bool test = false, string certRef = null, string certClave = null)
+        public virtual Respuesta Presentar(bool test = false, string certRef = null, string certClave = null)
         {
             if (!_Confirmado)
                 throw new InvalidOperationException(Errores.MostrarMensaje("RegistroMod.003"));
