@@ -50,7 +50,6 @@ namespace AeatModelos.Mod190e2017v00
     /// </summary>
     public class Mod190e2017v00p01 : RegistroModPagina
     {
-
         #region Construtores de Instancia
 
         /// <summary>
