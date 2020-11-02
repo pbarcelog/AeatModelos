@@ -283,7 +283,7 @@ namespace AeatModelos.Comunicaciones
         /// <summary>
         /// Indica si no se ha realizado la presentación debido a errores.
         /// </summary>
-        public bool Erronea { get; private set; }
+        public bool Erronea { get; protected set; }
 
         /// <summary>
         /// Errors producidos en la presentación.

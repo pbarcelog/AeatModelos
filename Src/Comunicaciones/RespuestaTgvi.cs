@@ -176,6 +176,13 @@ namespace AeatModelos.Comunicaciones
                     RegistrosEnviadosErroneos = Convert.ToInt32(_HttpWebResponse.Headers["TOTALT2KO"].Trim());
                     RegistrosEnvioCorrectos = Convert.ToInt32(_HttpWebResponse.Headers["BLOQUET2OK"].Trim());
                     RegistrosEnvioErroneos = Convert.ToInt32(_HttpWebResponse.Headers["BLOQUET2KO"].Trim());
+
+                    if (RegistrosEnviadosErroneos > 0)
+                    {
+                        Erronea = true;
+                        Errores.Add(new RespuestaError($"Existen {RegistrosEnviadosErroneos} registros erróneos en el envío."));
+                    }                        
+
                     break;
 
                 case "PresentarEnvio":
