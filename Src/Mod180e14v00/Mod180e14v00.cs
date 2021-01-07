@@ -83,7 +83,7 @@ namespace AeatModelos.Mod180e14v00
                 // PERSONA CON QUIÉN RELACIONARSE. Campo 2: Primer apellido, espacio, segundo apellido, espacio, nombre, en este orden.
                 {++c,    new RegistroCampo(0,  68,  40,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ContactoApellidosNombre"      )}, // 08
                 // NÚMERO IDENTIFICATIVO DE LA DECLARACIÓN.
-                {++c,    new RegistroCampo(0, 108,  13,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "NumeroIdentificativoDeclaracion",    1800000000000,     0  )}, // 09
+                {++c,    new RegistroCampo(0, 108,  13,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "NumeroIdentificativoDeclaracion", 1800000000001,     0  )}, // 09
                 // DECLARACIÓN COMPLEMENTARIA O SUSTITUTIVA. "C": DECLARACIÓN COMPLEMENTARIA o blanco.
                 {++c,    new RegistroCampo(0, 121,   1,  "A",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "Complementaria"               )}, // 10
                 // DECLARACIÓN COMPLEMENTARIA O SUSTITUTIVA. "S": DECLARACIÓN SUSTITUTIVA o blanco.
@@ -191,7 +191,7 @@ namespace AeatModelos.Mod180e14v00
             peticionInicializarEnvio.PeticionHttp.Headers.Add("NDC", $"{this["NIF"].Valor}");
             peticionInicializarEnvio.PeticionHttp.Headers.Add("IDIOMA", "ES");
             peticionInicializarEnvio.PeticionHttp.Headers.Add("NUMBLOQUES", "1");
-            peticionInicializarEnvio.PeticionHttp.Headers.Add("CODIFICACION", "UTF-8");
+            peticionInicializarEnvio.PeticionHttp.Headers.Add("CODIFICACION", "ISO8859-1");
 
             var respuestaTgvi = peticionInicializarEnvio.Presentar() as RespuestaTgvi;
 
@@ -241,11 +241,10 @@ namespace AeatModelos.Mod180e14v00
             if (respuestaTgvi.Erronea)
                 return respuestaTgvi;
 
-
-            string pdfUrl = $"https://www2.agenciatributaria.gob.es/wlpl/inwinvoc/es.aeat.dit.adu.eeca.catalogo.VisualizaSc?COMPLETA=SI&ORIGEN=D&CSV={respuestaTgvi}";
+            string pdfUrlServer = test ? "www6.aeat.es" : "www2.agenciatributaria.gob.es";
+            string pdfUrl = $"https://{pdfUrlServer}/wlpl/inwinvoc/es.aeat.dit.adu.eeca.catalogo.VisualizaSc?COMPLETA=SI&ORIGEN=D&CSV={respuestaTgvi.CSV}";
 
             respuestaTgvi.DescargaPdfEnlace(pdfUrl);
-
 
             return respuestaTgvi;
 

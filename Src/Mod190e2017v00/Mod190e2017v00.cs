@@ -28,7 +28,7 @@
     de manera visible los correspondientes avisos legales exigidos en la
     sección 5 de la licencia GNU Affero General Public.
     
-    Puede evitar el cumplimiento de lo establecido de lo establecido 
+    Puede evitar el cumplimiento de lo establecido 
     anteriormente comprando una licencia comercial. 
     La compra de una licencia comercial es obligatoria
     desde el momento en que usted desarrolle software comercial incluyendo
@@ -84,7 +84,7 @@ namespace AeatModelos.Mod190e2017v00
                 // PERSONA CON QUIÉN RELACIONARSE. Campo 2: Primer apellido, espacio, segundo apellido, espacio, nombre, en este orden.
                 {++c,    new RegistroCampo(0,  68,  40,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ContactoApellidosNombre"      )}, // 08
                 // NÚMERO IDENTIFICATIVO DE LA DECLARACIÓN.
-                {++c,    new RegistroCampo(0, 108,  13,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,    null,     0           )}, // 09
+                {++c,    new RegistroCampo(0, 108,  13,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "NumeroIdentificativoDeclaracion", 1900000000001, 0 )}, // 09
                 // DECLARACIÓN COMPLEMENTARIA O SUSTITUTIVA. "C ": DECLARACIÓN COMPLEMENTARIA. " S": DECLARACIÓN SUSTITUTIVA.
                 {++c,    new RegistroCampo(0, 121,   2,  "A",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                           )}, // 10
                 // NÚMERO IDENTIFICATIVO DE LA DECLARACIÓN ANTERIOR.
