@@ -60,7 +60,7 @@ namespace AeatModelos.Mod190e2017v00
         public Mod190e2017v00p01(string ejercicio, string periodo) : base(ejercicio, periodo)
         {
 
-            string p = "001";   // clave página
+            string p = "P01";   // clave página
             int c = 0;          // contador
 
             RegistroCampos = new Dictionary<decimal, IEmpaquetable>()

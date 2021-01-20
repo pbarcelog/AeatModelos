@@ -1,6 +1,6 @@
 ﻿/*
     Este archivo forma parte del proyecto AeatModelos(R).
-    Copyright (c) 2020 Irene Solutions SL
+    Copyright (c) 2021 Irene Solutions SL
     Autores: Manuel Diago García, Juan Bautista Garcia Traver.
 
     Este programa es software libre; lo puede distribuir y/o modificar
@@ -45,12 +45,12 @@ using AeatModelos.Comunicaciones;
 using System;
 using System.Collections.Generic;
 
-namespace AeatModelos.Mod190e2017v00
+namespace AeatModelos.Mod193e2019v00
 {
     /// <summary>
-    /// Tipo 1 modelo 190. Diseño de registro: DR190_2017.pdf.
+    /// Tipo de registro 1: Registro de Declarante - Modelo 193. Diseño de registro: DR193_2017.pdf.
     /// </summary>
-    public class Mod190e2017v00 : RegistroModPagina
+    public class Mod193e2019v00 : RegistroModPagina
     {
 
         #region Construtores de Instancia
@@ -60,11 +60,12 @@ namespace AeatModelos.Mod190e2017v00
         /// </summary>
         /// <param name="ejercicio">AAAA: 2018</param>
         /// <param name="periodo">Periodo: 1T, 2T...01, 02...12</param>
-        public Mod190e2017v00(string ejercicio, string periodo) : base(ejercicio, periodo)
+        public Mod193e2019v00(string ejercicio, string periodo) : base(ejercicio, periodo)
         {
             PaginasMapa = new Dictionary<int, string>()
             {
-                {1, "AeatModelos.Mod190e2017v00.Mod190e2017v00p01"}
+                {1, "AeatModelos.Mod193e2019v00.Mod193e2019v00p01"},
+                {2, "AeatModelos.Mod193e2019v00.Mod193e2019v00p02"}
             };
 
             string p = "000";   // clave página
@@ -73,7 +74,7 @@ namespace AeatModelos.Mod190e2017v00
             RegistroCampos = new Dictionary<decimal, IEmpaquetable>()
             {
                 {++c,    new RegistroCampo(0,   1,   1,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  1,           0          )}, // 01
-                {++c,    new RegistroCampo(0,   2,   3,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  190,         0          )}, // 02
+                {++c,    new RegistroCampo(0,   2,   3,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  193,         0          )}, // 02
                 {++c,    new RegistroCampo(0,   5,   4,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  Ejercicio,   0          )}, // 03
                 {++c,    new RegistroCampo(0,   9,   9,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "NIF"                          )}, // 04
                 // Primer apellido, espacio, segundo apellido, espacio, nombre, necesariamente en este orden.
@@ -85,34 +86,38 @@ namespace AeatModelos.Mod190e2017v00
                 // PERSONA CON QUIÉN RELACIONARSE. Campo 2: Primer apellido, espacio, segundo apellido, espacio, nombre, en este orden.
                 {++c,    new RegistroCampo(0,  68,  40,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ContactoApellidosNombre"      )}, // 08
                 // NÚMERO IDENTIFICATIVO DE LA DECLARACIÓN.
-                {++c,    new RegistroCampo(0, 108,  13,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "NumeroIdentificativoDeclaracion", 1900000000001, 0 )}, // 09
+                {++c,    new RegistroCampo(0, 108,  13,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "NumeroIdentificativoDeclaracion", 1930000000001, 0 )}, // 09
                 // DECLARACIÓN COMPLEMENTARIA O SUSTITUTIVA. "C": DECLARACIÓN COMPLEMENTARIA.
                 {++c,    new RegistroCampo(0, 121,   1,  "A",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "Complementaria"               )}, // 10
                 // DECLARACIÓN COMPLEMENTARIA O SUSTITUTIVA. "S": DECLARACIÓN SUSTITUTIVA.
-                {++c,    new RegistroCampo(0, 122,   1,  "A",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "Sustitutiva"                  )}, // 10
+                {++c,    new RegistroCampo(0, 122,   1,  "A",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "Sustitutiva"                  )}, // 11
                 // NÚMERO IDENTIFICATIVO DE LA DECLARACIÓN ANTERIOR.
-                {++c,    new RegistroCampo(0, 123,  13,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "JustificanteAnterior", null, 0)}, // 11
-                // NÚMERO TOTAL DE PERCEPCIONES.
-                {++c,    new RegistroCampo(0, 136,   9,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "01",    null,     0           )}, // 12
-                // IMPORTE TOTAL DE LAS PERCEPCIONES. SIGNO NEGATIVO: "N". EN OTRO CASO EL CAMPO SERÁ UN ESPACIO.
-                {++c,    new RegistroCampo(0, 145,  1,   "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "02N",   null                  )}, // 13
-                // IMPORTE TOTAL DE LAS PERCEPCIONES.
-                {++c,    new RegistroCampo(0, 146,  15,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "02",    null,     2           )}, // 14
-                // IMPORTE TOTAL DE LAS RETENCIONES E INGRESOS A CUENTA.
-                {++c,    new RegistroCampo(0, 161,  15,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "03",    null,     2           )}, // 15
-                // CORREO ELECTRÓNICO DE LA PERSONA CON QUIEN RELACIONARSE.
-                {++c,    new RegistroCampo(0, 176,  50,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "CorreoContacto"               )}, // 16
-                // BLANCOS.
-                {++c,    new RegistroCampo(0, 226, 262,  "A",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                           )}, // 17
+                {++c,    new RegistroCampo(0, 123,  13,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "JustificanteAnterior", null, 0)}, // 12
+                // NÚMERO TOTAL DE PERCEPTORES.
+                {++c,    new RegistroCampo(0, 136,   9,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "01",    null,     0           )}, // 13
+                // BASE RETENCIONES E INGRESOS A CUENTA.
+                {++c,    new RegistroCampo(0, 145,  15,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "02",    null,     2           )}, // 14
+                // RETENCIONES E INGRESOS A CUENTA.
+                {++c,    new RegistroCampo(0, 160,  15,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "03",    null,     2           )}, // 15
+                // RETENCIONES E INGRESOS A CUENTA INGRESADOS.
+                {++c,    new RegistroCampo(0, 175,  15,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "04",    null,     2           )}, // 16
+                // --- BLANCOS.
+                {++c,    new RegistroCampo(0, 190,  30,  "A",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"]                                    )}, // 17
+                // GASTOS art 26.1.a) Ley 35/2006.
+                {++c,    new RegistroCampo(0, 220,  15,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "05",    null,     2           )}, // 18
+                // NATURALEZA DEL DECLARANTE.
+                {++c,    new RegistroCampo(0, 235,   1,  "A",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                           )}, // 19
+                // --- BLANCOS.
+                {++c,    new RegistroCampo(0, 236,  252, "A",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"]                                    )}, // 20
                 // SELLO ELECTRÓNICO.
-                {++c,    new RegistroCampo(0, 488,   13, "A",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                           )}, // 18
+                {++c,    new RegistroCampo(0, 488,  13,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"]                                    )}, // 21
 
                 // No se incluye ninguna página por defecto. Éstas se van añadiendo conforme al número de perceptores.
                 {++c,    new ConjuntoDeEmpaquetables(){ Empaquetables = new List<IEmpaquetable>(){
-                } } }, // 19
+                } } }, // 22
             };
 
-            Paginas = RegistroCampos[19] as ConjuntoDeEmpaquetables;
+            Paginas = RegistroCampos[22] as ConjuntoDeEmpaquetables;
         }
 
         #endregion
@@ -123,38 +128,7 @@ namespace AeatModelos.Mod190e2017v00
         /// Actualiza el valor de todos los campos calculados.
         /// </summary>
         public override void Calcular()
-        {
-            // *************************** !Importante ********************************
-            // Comprobamos para unos campos numéricos concretos si a éstos les debe
-            // preceder una "N", con tal de señalar que se trata de un número negativo.
-            // (Se trata de un modelo con diseño viejo y no admite los tipos N)
-            // ************************************************************************
-
-            Mod190e2017v00 modPagina1 = this;
-
-            if (Convert.ToDecimal(modPagina1["02"]?.Valor) < 0)
-                modPagina1["02N"].Valor = "N";
-
-            for (int i = 0; i < Paginas.Empaquetables.Count; i++)
-            {
-                Mod190e2017v00p01 modPaginaPerceptor = Paginas.Empaquetables[i] as Mod190e2017v00p01;
-
-                if (Convert.ToDecimal(modPaginaPerceptor["IMPORTE TOTAL DE LAS PERCEPCIONES."]?.Valor) < 0)
-                    modPaginaPerceptor["IMPORTE TOTAL DE LAS PERCEPCIONES. SIGNO NEGATIVO."].Valor = "N";
-
-                if (Convert.ToDecimal(modPaginaPerceptor["PERCEPCIONES DINERARIAS NO DERIVADAS DE INCAPACIDAD LABORAL. PERCEPCIÓN ÍNTEGRA"]?.Valor) < 0)
-                    modPaginaPerceptor["PERCEPCIONES DINERARIAS NO DERIVADAS DE INCAPACIDAD LABORAL. PERCEPCIÓN ÍNTEGRA. SIGNO NEGATIVO"].Valor = "N";
-
-                if (Convert.ToDecimal(modPaginaPerceptor["PERCEPCIONES EN ESPECIE NO DERIVADAS DE INCAPACIDAD LABORAL: VALORACIÓN"]?.Valor) < 0)
-                    modPaginaPerceptor["PERCEPCIONES EN ESPECIE NO DERIVADAS DE INCAPACIDAD LABORAL: VALORACIÓN. SIGNO NEGATIVO"].Valor = "N";
-
-                if (Convert.ToDecimal(modPaginaPerceptor["PERCEPCIONES DINERARIAS DERIVADAS DE INCAPACIDAD LABORAL. PERCEPCIÓN ÍNTEGRA (Dineraria) DERIVADA DE INCAPACIDAD LABORAL"]?.Valor) < 0)
-                    modPaginaPerceptor["PERCEPCIONES DINERARIAS DERIVADAS DE INCAPACIDAD LABORAL. PERCEPCIÓN ÍNTEGRA (Dineraria) DERIVADA DE INCAPACIDAD LABORAL. SIGNO NEGATIVO"].Valor = "N";
-
-                if (Convert.ToDecimal(modPaginaPerceptor["PERCEPCIONES EN ESPECIE DERIVADAS DE INCAPACIDAD LABORAL: VALORACIÓN DE LA PERCEPCIÓN EN ESPECIE DERIVADA DE INCAPACIDAD LABORAL"]?.Valor) < 0)
-                    modPaginaPerceptor["PERCEPCIONES EN ESPECIE DERIVADAS DE INCAPACIDAD LABORAL: VALORACIÓN DE LA PERCEPCIÓN EN ESPECIE DERIVADA DE INCAPACIDAD LABORAL. SIGNO NEGATIVO"].Valor = "N";
-            }
-
+        { 
         }
 
         /// <summary>
@@ -170,7 +144,7 @@ namespace AeatModelos.Mod190e2017v00
         }
 
         /// <summary>
-        /// Presenta la declaración.
+        /// Presenta la declaración mediante el formato para grandes volúmenes (TGVI).
         /// <param name="test">Indica si la presentación se realiza en el entorno en pruebas de la AEAT.</param>
         /// <param name="certRef">Ruta de certificado para la presentación, en caso de que se utilice uno externo.</param>
         /// <param name="certClave">Contraseña del certificado.</param>
@@ -178,7 +152,6 @@ namespace AeatModelos.Mod190e2017v00
         /// <returns>Respuesta a la operación de presentación.</returns>
         public override Respuesta Presentar(bool test = false, string certRef = null, string certClave = null)
         {
-
             if (!_Confirmado)
                 throw new InvalidOperationException(Errores.MostrarMensaje("RegistroMod.003"));
 
@@ -200,7 +173,7 @@ namespace AeatModelos.Mod190e2017v00
 
             peticionInicializarEnvio.PreparaPeticion();
 
-            peticionInicializarEnvio.PeticionHttp.Headers.Add("MODELO", "190");
+            peticionInicializarEnvio.PeticionHttp.Headers.Add("MODELO", "193");
             peticionInicializarEnvio.PeticionHttp.Headers.Add("EJERCICIO", Ejercicio);
             peticionInicializarEnvio.PeticionHttp.Headers.Add("PERIODO", Periodo);
             peticionInicializarEnvio.PeticionHttp.Headers.Add("NDC", $"{this["NIF"].Valor}");
@@ -262,11 +235,8 @@ namespace AeatModelos.Mod190e2017v00
             respuestaTgvi.DescargaPdfEnlace(pdfUrl);
 
             return respuestaTgvi;
-
         }
 
-
         #endregion
-
     }
 }

@@ -114,6 +114,19 @@ namespace AeatModelos.Mod390e2019v100
 
         #region Métodos Públicos de Instancia
 
+        private void AcumulaCasillas(string[] casillasBase,  string casillaResultado, dynamic modPagina)
+        {
+            decimal suma = 0;
+
+            foreach (var clave in casillasBase)
+            {
+                suma += Convert.ToDecimal(modPagina[clave]?.Valor);
+            }
+
+            if (Convert.ToDecimal(modPagina[casillaResultado]?.Valor) == 0)
+                modPagina[casillaResultado].Valor = suma;
+        }
+
         /// <summary>
         /// Actualiza el valor de todos los campos calculados.
         /// </summary>
@@ -136,55 +149,34 @@ namespace AeatModelos.Mod390e2019v100
 
             // Suma bases devengado
 
-            decimal sumaBasesDevengado = 0;
             string[] basesDevengadoASumar = new string[]
             {
                 "01", "03", "05", "500", "502", "504", "643", "645", "647", "07", "09", "11",
                 "13", "21", "23", "25", "545", "547", "551", "27", "29", "649", "31"
             };
 
-            foreach (var clave in basesDevengadoASumar)
-            {
-                sumaBasesDevengado += Convert.ToDecimal(modPagina2[clave]?.Valor);
-            }
-
-            if (Convert.ToDecimal(modPagina2["33"]?.Valor) == 0)
-                modPagina2["33"].Valor = sumaBasesDevengado;
+            AcumulaCasillas(basesDevengadoASumar, "33", modPagina2);
 
 
             // Suma cuotas devengado
 
-            decimal sumaCuotasDevengado = 0;
             string[] cuotasDevengadoASumar = new string[]
             {
                 "02", "04", "06", "501", "503", "505", "644", "646", "648", "08", "10", "12",
                 "14", "22", "24", "26", "546", "548", "552", "28", "30", "650", "32"
             };
 
-            foreach (var clave in cuotasDevengadoASumar)
-            {
-                sumaCuotasDevengado += Convert.ToDecimal(modPagina2[clave]?.Valor);
-            }
-
-            if (Convert.ToDecimal(modPagina2["34"]?.Valor) == 0)
-                modPagina2["34"].Valor = sumaCuotasDevengado;
+            AcumulaCasillas(cuotasDevengadoASumar, "34", modPagina2);
 
 
             // Total cuotas IVA y recargo de equivalencia ( [34] + [36] + [600] + [602] + [42] + [44] + [46] )
 
-            decimal sumaTotalesDevengado = 0;
             string[] totalesDevengadoASumar = new string[]
             {
                 "34", "36", "600", "602", "42", "44", "46"
             };
 
-            foreach (var clave in totalesDevengadoASumar)
-            {
-                sumaTotalesDevengado += Convert.ToDecimal(modPagina2[clave]?.Valor);
-            }
-
-            if (Convert.ToDecimal(modPagina2["47"]?.Valor) == 0)
-                modPagina2["47"].Valor = sumaTotalesDevengado;
+            AcumulaCasillas(totalesDevengadoASumar, "47", modPagina2);
 
 
             Mod390e2019v100p03 modPagina3 = null;
@@ -215,62 +207,155 @@ namespace AeatModelos.Mod390e2019v100
 
             // Total bases imponibles y cuotas deducibles en operaciones interiores de bienes y servicios corrientes
 
-            decimal sumaOperacionesBienesCorrientesBases = 0;
             string[] basesOperacionesBienesCorrientesASumar = new string[]
             {
                 "190", "603", "605"
             };
 
-            foreach (var clave in basesOperacionesBienesCorrientesASumar)
-            {
-                sumaOperacionesBienesCorrientesBases += Convert.ToDecimal(modPagina3[clave]?.Valor);
-            }
+            AcumulaCasillas(basesOperacionesBienesCorrientesASumar, "48", modPagina3);
 
-            modPagina3["48"].Valor = sumaOperacionesBienesCorrientesBases;
-
-            decimal sumaOperacionesBienesCorrientesCuotas = 0;
             string[] cuotasOperacionesBienesCorrientesASumar = new string[]
             {
                 "191", "604", "606"
             };
 
-            foreach (var clave in cuotasOperacionesBienesCorrientesASumar)
-            {
-                sumaOperacionesBienesCorrientesCuotas += Convert.ToDecimal(modPagina3[clave]?.Valor);
-            }
+            AcumulaCasillas(cuotasOperacionesBienesCorrientesASumar, "49", modPagina3);
 
-            if (Convert.ToDecimal(modPagina3["49"]?.Valor) == 0)
-                modPagina3["49"].Valor = sumaOperacionesBienesCorrientesCuotas;
+
+            // Total bases imponibles y cuotas deducibles en operaciones intragrupo de bienes y servicios corrientes
+
+            string[] basesOperacionesIntragrupoBienesCorrientesASumar = new string[]
+            {
+                "506", "607", "609"
+            };
+
+            AcumulaCasillas(basesOperacionesIntragrupoBienesCorrientesASumar, "512", modPagina3);
+
+            string[] cuotasOperacionesIntragrupoBienesCorrientesASumar = new string[]
+            {
+                "507", "608", "610"
+            };
+
+            AcumulaCasillas(cuotasOperacionesIntragrupoBienesCorrientesASumar, "513", modPagina3);
 
 
             // Total bases imponibles y cuotas deducibles en operaciones interiores de bienes de inversión
 
-            decimal sumaOperacionesBienesInversionBases = 0;
             string[] basesOperacionesBienesInversionASumar = new string[]
             {
                 "196", "611", "613"
             };
 
-            foreach (var clave in basesOperacionesBienesInversionASumar)
-            {
-                sumaOperacionesBienesInversionBases += Convert.ToDecimal(modPagina3[clave]?.Valor);
-            }
+            AcumulaCasillas(basesOperacionesBienesInversionASumar, "50", modPagina3);
 
-            modPagina3["50"].Valor = sumaOperacionesBienesInversionBases;
-
-            decimal sumaOperacionesBienesInversionCuotas = 0;
             string[] cuotasOperacionesBienesInversionASumar = new string[]
             {
                 "197", "612", "614"
             };
 
-            foreach (var clave in cuotasOperacionesBienesInversionASumar)
-            {
-                sumaOperacionesBienesInversionCuotas += Convert.ToDecimal(modPagina3[clave]?.Valor);
-            }
+            AcumulaCasillas(cuotasOperacionesBienesInversionASumar, "51", modPagina3);
 
-            if (Convert.ToDecimal(modPagina3["51"]?.Valor) == 0)
-                modPagina3["51"].Valor = sumaOperacionesBienesInversionCuotas;
+
+            // Total bases imponibles y cuotas deducibles en operaciones intragrupo de bienes de inversión
+
+            string[] basesOperacionesIntragrupoBienesInversionASumar = new string[]
+            {
+                "514", "615", "617"
+            };
+
+            AcumulaCasillas(basesOperacionesIntragrupoBienesInversionASumar, "520", modPagina3);
+
+            string[] cuotasOperacionesIntragrupoBienesInversionASumar = new string[]
+            {
+                "515", "616", "618"
+            };
+
+            AcumulaCasillas(cuotasOperacionesIntragrupoBienesInversionASumar, "521", modPagina3);
+
+
+            // Total bases imponibles y cuotas deducibles en importaciones de bienes corrientes
+
+            string[] basesImportacionesBienesCorrientesASumar = new string[]
+            {
+                "202", "619", "621"
+            };
+
+            AcumulaCasillas(basesImportacionesBienesCorrientesASumar, "52", modPagina3);
+
+            string[] cuotasImportacionesBienesCorrientesASumar = new string[]
+            {
+                "203", "620", "622"
+            };
+
+            AcumulaCasillas(cuotasImportacionesBienesCorrientesASumar, "53", modPagina3);
+
+
+            // Total bases imponibles y cuotas deducibles en importaciones de bienes de inversión
+
+            string[] basesImportacionesBienesInversion = new string[]
+            {
+                "208", "623", "625"
+            };
+
+            AcumulaCasillas(basesImportacionesBienesInversion, "54", modPagina3);
+
+            string[] cuotasImportacionesBienesInversion = new string[]
+            {
+                "209", "624", "626"
+            };
+
+            AcumulaCasillas(cuotasImportacionesBienesInversion, "55", modPagina3);
+
+
+            // Total bases imponibles y cuotas deducibles en adquisiciones intracomunitarias de bienes corrientes
+
+            string[] basesAdquisicionesIntracomunitariasBienesCorrientes = new string[]
+            {
+                "214", "627", "629"
+            };
+
+            AcumulaCasillas(basesAdquisicionesIntracomunitariasBienesCorrientes, "56", modPagina3);
+
+            string[] cuotasAdquisicionesIntracomunitariasBienesCorrientes = new string[]
+            {
+                "215", "628", "630"
+            };
+
+            AcumulaCasillas(cuotasAdquisicionesIntracomunitariasBienesCorrientes, "57", modPagina3);
+
+
+            // Total bases imponibles y cuotas deducibles en adquisiciones intracomunitarias de bienes de inversión
+
+            string[] basesAdquisicionesIntracomunitariasBienesInversion = new string[]
+            {
+                "220", "631", "633"
+            };
+
+            AcumulaCasillas(basesAdquisicionesIntracomunitariasBienesInversion, "58", modPagina3);
+
+            string[] cuotasAdquisicionesIntracomunitariasBienesInversion = new string[]
+            {
+                "221", "632", "634"
+            };
+
+            AcumulaCasillas(cuotasAdquisicionesIntracomunitariasBienesInversion, "59", modPagina3);
+
+
+            // Total bases imponibles y cuotas deducibles en adquisiciones intracomunitarias de servicios
+
+            string[] basesAdquisicionesIntracomunitariasServicios = new string[]
+            {
+                "587", "635", "637"
+            };
+
+            AcumulaCasillas(basesAdquisicionesIntracomunitariasServicios, "597", modPagina3);
+
+            string[] cuotasAdquisicionesIntracomunitariasBienesServicios = new string[]
+            {
+                "588", "636", "638"
+            };
+
+            AcumulaCasillas(cuotasAdquisicionesIntracomunitariasBienesServicios, "598", modPagina3);
 
 
             // Suma de deducciones ( [49] + [513] + [51] + [521] + [53] + [55] + [57] + [59] + [598] + [61] + [661] + [62] + [652] + [63] + [522] )
