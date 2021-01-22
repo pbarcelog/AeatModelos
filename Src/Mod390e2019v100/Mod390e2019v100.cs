@@ -114,7 +114,7 @@ namespace AeatModelos.Mod390e2019v100
 
         #region Métodos Públicos de Instancia
 
-        private void AcumulaCasillas(string[] casillasBase,  string casillaResultado, dynamic modPagina)
+        private void AcumulaCasillas(string[] casillasBase,  string casillaResultado, RegistroModPagina modPagina)
         {
             decimal suma = 0;
 
@@ -385,7 +385,7 @@ namespace AeatModelos.Mod390e2019v100
 
             //Resultado régimen general ( [47] - [64] )
 
-            if (Convert.ToDecimal(modPagina2["47"].Valor) != 0)
+            if (Convert.ToDecimal(modPagina2["65"].Valor) != 0)
                 modPagina4["65"].Valor = Convert.ToDecimal(modPagina2["47"]?.Valor) - Convert.ToDecimal(modPagina4["64"]?.Valor);
 
 
