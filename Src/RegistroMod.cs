@@ -446,6 +446,8 @@ namespace AeatModelos
         /// es igual a 0 o crear es false.</returns>
         public RegistroMod RecuperaPagina(int indicePagina, int indiceGrupo = 0, bool crear = false)
         {
+            if (indicePagina == -1)
+                return this;
 
             if (!PaginasMapa.ContainsKey(indicePagina))
                 throw new ArgumentException(
@@ -465,7 +467,6 @@ namespace AeatModelos
                 return InsertaPagina(indicePagina);
 
             return null;
-
         }
 
         /// <summary>
