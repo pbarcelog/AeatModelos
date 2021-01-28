@@ -1,6 +1,6 @@
 ﻿/*
     Este archivo forma parte del proyecto AeatModelos(R).
-    Copyright (c) 2020 Irene Solutions SL
+    Copyright (c) 2021 Irene Solutions SL
     Autores: Manuel Diago García, Juan Bautista García Traver.
 
     Este programa es software libre; lo puede distribuir y/o modificar
@@ -28,7 +28,7 @@
     de manera visible los correspondientes avisos legales exigidos en la
     sección 5 de la licencia GNU Affero General Public.
     
-    Puede evitar el cumplimiento de lo establecido de lo establecido 
+    Puede evitar el cumplimiento de lo establecido 
     anteriormente comprando una licencia comercial. 
     La compra de una licencia comercial es obligatoria
     desde el momento en que usted desarrolle software comercial incluyendo
@@ -44,12 +44,12 @@ using AeatModelos.Comunicaciones;
 using System;
 using System.Collections.Generic;
 
-namespace AeatModelos.Mod180e14v00
+namespace AeatModelos.Mod347e20v00
 {
     /// <summary>
-    /// TIPO DE REGISTRO 1: REGISTRO DE DECLARANTE. Modelo 180. Diseño de registro: 180.pdf.
+    /// TIPO DE REGISTRO 1: REGISTRO DE DECLARANTE. 
     /// </summary>
-    public class Mod180e14v00 : RegistroModPagina
+    public class Mod347e20v00 : RegistroModPagina
     {
         #region Construtores de Instancia
 
@@ -57,12 +57,13 @@ namespace AeatModelos.Mod180e14v00
         /// Constructor.
         /// </summary>
         /// <param name="ejercicio">AAAA: 2018</param>
-        /// <param name="periodo">Periodo: 1T, 2T...01, 02...12</param>
-        public Mod180e14v00(string ejercicio, string periodo) : base(ejercicio, periodo)
+        /// <param name="periodo">Periodo: 0A</param>
+        public Mod347e20v00(string ejercicio, string periodo) : base(ejercicio, periodo)
         {
             PaginasMapa = new Dictionary<int, string>()
             {
-                {1, "AeatModelos.Mod180e14v00.Mod180e14v00p01"}
+                {1, "AeatModelos.Mod347e20v00.Mod347e20v00p01"},
+                {2, "AeatModelos.Mod347e20v00.Mod347e20v00p02"}
             };
 
             string p = "000";   // clave página
@@ -71,7 +72,7 @@ namespace AeatModelos.Mod180e14v00
             RegistroCampos = new Dictionary<decimal, IEmpaquetable>()
             {
                 {++c,    new RegistroCampo(0,   1,   1,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  1,           0          )}, // 01
-                {++c,    new RegistroCampo(0,   2,   3,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  180,         0          )}, // 02
+                {++c,    new RegistroCampo(0,   2,   3,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  347,         0          )}, // 02
                 {++c,    new RegistroCampo(0,   5,   4,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  Ejercicio,   0          )}, // 03
                 {++c,    new RegistroCampo(0,   9,   9,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "NIF"                          )}, // 04
                 // Primer apellido, espacio, segundo apellido, espacio, nombre, necesariamente en este orden.
@@ -83,22 +84,23 @@ namespace AeatModelos.Mod180e14v00
                 // PERSONA CON QUIÉN RELACIONARSE. Campo 2: Primer apellido, espacio, segundo apellido, espacio, nombre, en este orden.
                 {++c,    new RegistroCampo(0,  68,  40,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ContactoApellidosNombre"      )}, // 08
                 // NÚMERO IDENTIFICATIVO DE LA DECLARACIÓN.
-                {++c,    new RegistroCampo(0, 108,  13,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "NumeroIdentificativoDeclaracion", 1800000000001,     0  )}, // 09
+                {++c,    new RegistroCampo(0, 108,  13,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "NumeroIdentificativoDeclaracion", 3470000000001,     0  )}, // 09
                 // DECLARACIÓN COMPLEMENTARIA O SUSTITUTIVA. "C": DECLARACIÓN COMPLEMENTARIA o blanco.
                 {++c,    new RegistroCampo(0, 121,   1,  "A",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "Complementaria"               )}, // 10
                 // DECLARACIÓN COMPLEMENTARIA O SUSTITUTIVA. "S": DECLARACIÓN SUSTITUTIVA o blanco.
                 {++c,    new RegistroCampo(0, 122,   1,  "A",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "Sustitutiva"                  )}, // 11
                 // NÚMERO IDENTIFICATIVO DE LA DECLARACIÓN ANTERIOR.
-                {++c,    new RegistroCampo(0, 123,  13,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "JustificanteAnterior", null, 0)}, // 12
+                {++c,    new RegistroCampo(0, 123,  13,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "JustificanteAnterior"         )}, // 12
                 // NÚMERO TOTAL DE PERCEPTORES.
                 {++c,    new RegistroCampo(0, 136,   9,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "01",    null,     0           )}, // 13
-                // BASE DE LAS RETENCIONES E INGRESOS A CUENTA.
-                {++c,    new RegistroCampo(0, 145,  1,   "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "02N",   null                  )}, // 14
+                // IMPORTE TOTAL ANUAL DE LAS OPERACIONES.
+                {++c,    new RegistroCampo(0, 145,   1,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "02N",   null                  )}, // 14
                 {++c,    new RegistroCampo(0, 146,  15,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "02",    null,     2           )}, // 15
-                // IMPORTE TOTAL DE LAS RETENCIONES E INGRESOS A CUENTA.
-                {++c,    new RegistroCampo(0, 161,  15,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "03",    null,     2           )}, // 16
-                // BLANCOS.
-                {++c,    new RegistroCampo(0, 176,  62,  "A",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                           )}, // 17
+                // NÚMERO TOTAL DE INMUEBLES.
+                {++c,    new RegistroCampo(0, 161,   9,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "03",    null,     2           )}, // 16
+                // IMPORTE TOTAL DE LAS OPERACIONES DE ARRENDAMIENTO DE LOCALES DE NEGOCIO.
+                {++c,    new RegistroCampo(0, 170,   1,  "An",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "04N",  null                  )}, // 17
+                {++c,    new RegistroCampo(0, 171,  15,  "Num",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "04",   null,     2           )}, // 17
                 // SELLO ELECTRÓNICO.
                 {++c,    new RegistroCampo(0, 238,  263, "A",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                           )}, // 18
 
@@ -125,14 +127,14 @@ namespace AeatModelos.Mod180e14v00
             // (Se trata de un modelo con diseño viejo y no admite los tipos N)
             // ************************************************************************
 
-            Mod180e14v00 modPagina1 = this;
+            Mod347e20v00 modPagina1 = this;
 
             if (Convert.ToDecimal(modPagina1["02"]?.Valor) < 0)
                 modPagina1["02N"].Valor = "N";
 
             for (int i = 0; i < Paginas.Empaquetables.Count; i++)
             {
-                Mod180e14v00p01 modPaginaPerceptor = Paginas.Empaquetables[i] as Mod180e14v00p01;
+                Mod347e20v00 modPaginaPerceptor = Paginas.Empaquetables[i] as Mod347e20v00;
 
                 if (Convert.ToDecimal(modPaginaPerceptor["BaseRetencionesIngresosCta"]?.Valor) < 0)
                     modPaginaPerceptor["BaseRetencionesIngresosCtaN"].Valor = "N";
