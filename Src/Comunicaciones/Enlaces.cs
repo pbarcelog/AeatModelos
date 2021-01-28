@@ -96,6 +96,7 @@ namespace AeatModelos.Comunicaciones
             { "Mod180e14v00",           PftwPicwPresBasicaTgvi },
             { "Mod190e2017v00",         PftwPicwPresBasicaTgvi },
             { "Mod193e2019v00",         PftwPicwPresBasicaTgvi },
+            { "Mod349e20v00",           PftwPicwPresBasicaTgvi },
         };
 
         /// <summary>
@@ -113,6 +114,7 @@ namespace AeatModelos.Comunicaciones
             { "Mod180e14v00",           PftwPicwPresBasicaPruebasTgvi },
             { "Mod190e2017v00",         PftwPicwPresBasicaPruebasTgvi },
             { "Mod193e2019v00",         PftwPicwPresBasicaPruebasTgvi },
+            { "Mod349e20v00",           PftwPicwPresBasicaPruebasTgvi },
         };
 
         #endregion
