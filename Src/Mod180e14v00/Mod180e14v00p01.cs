@@ -46,7 +46,7 @@ using System.Collections.Generic;
 namespace AeatModelos.Mod180e14v00
 {
     /// <summary>
-    /// TIPO DE REGISTRO 2: REGISTRO DE PERCEPTOR. Modelo 180. Diseño de registro: 180.pdf.
+    /// TIPO DE REGISTRO 2: REGISTRO DE PERCEPTOR. Modelo 180. Diseño de registro: 180_2020.pdf.
     /// </summary>
     public class Mod180e14v00p01 : RegistroModPagina
     {

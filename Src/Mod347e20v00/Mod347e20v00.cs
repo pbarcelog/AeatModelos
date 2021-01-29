@@ -47,7 +47,7 @@ using System.Collections.Generic;
 namespace AeatModelos.Mod347e20v00
 {
     /// <summary>
-    /// TIPO DE REGISTRO 1: REGISTRO DE DECLARANTE. 
+    /// TIPO DE REGISTRO 1: REGISTRO DE DECLARANTE. Modelo 347.  Diseño de registro: 347_2020.pdf.
     /// </summary>
     public class Mod347e20v00 : RegistroModPagina
     {
@@ -58,7 +58,7 @@ namespace AeatModelos.Mod347e20v00
         /// </summary>
         /// <param name="ejercicio">AAAA: 2018</param>
         /// <param name="periodo">Periodo: 0A</param>
-        public Mod347e20v00(string ejercicio, string periodo) : base(ejercicio, periodo)
+        public Mod347e20v00(string ejercicio, string periodo = "0A") : base(ejercicio, periodo)
         {
             PaginasMapa = new Dictionary<int, string>()
             {
@@ -99,17 +99,23 @@ namespace AeatModelos.Mod347e20v00
                 // NÚMERO TOTAL DE INMUEBLES.
                 {++c,    new RegistroCampo(0, 161,   9,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "03",    null,     2           )}, // 16
                 // IMPORTE TOTAL DE LAS OPERACIONES DE ARRENDAMIENTO DE LOCALES DE NEGOCIO.
-                {++c,    new RegistroCampo(0, 170,   1,  "An",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "04N",  null                  )}, // 17
-                {++c,    new RegistroCampo(0, 171,  15,  "Num",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "04",   null,     2           )}, // 17
-                // SELLO ELECTRÓNICO.
-                {++c,    new RegistroCampo(0, 238,  263, "A",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                           )}, // 18
+                {++c,    new RegistroCampo(0, 170,   1,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "04N",  null                   )}, // 17
+                {++c,    new RegistroCampo(0, 171,  15,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "04",   null,      2           )}, // 18
+                // ------ BLANCOS.
+                {++c,    new RegistroCampo(0, 186, 205,  "A",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                           )}, // 19
+                // NIF DEL REPRESENTANTE LEGAL. (Si el declarante es menor de 14 años).
+                {++c,    new RegistroCampo(0, 391,   9,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "NIFRepresentanteLegalMenor"   )}, // 20
+                // ------ BLANCOS.
+                {++c,    new RegistroCampo(0, 400,  88,  "A",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                           )}, // 21
+                // SELLO ELECTRONICO.
+                {++c,    new RegistroCampo(0, 488,  13,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                           )}, // 22
 
                 // No se incluye ninguna página por defecto. Éstas se van añadiendo conforme al número de perceptores.
                 {++c,    new ConjuntoDeEmpaquetables(){ Empaquetables = new List<IEmpaquetable>(){
-                } } }, // 19
+                } } }, // 23
             };
 
-            Paginas = RegistroCampos[19] as ConjuntoDeEmpaquetables;
+            Paginas = RegistroCampos[23] as ConjuntoDeEmpaquetables;
         }
 
         #endregion
@@ -132,15 +138,18 @@ namespace AeatModelos.Mod347e20v00
             if (Convert.ToDecimal(modPagina1["02"]?.Valor) < 0)
                 modPagina1["02N"].Valor = "N";
 
+            if (Convert.ToDecimal(modPagina1["04"]?.Valor) < 0)
+                modPagina1["04N"].Valor = "N";
+
             for (int i = 0; i < Paginas.Empaquetables.Count; i++)
             {
-                Mod347e20v00 modPaginaPerceptor = Paginas.Empaquetables[i] as Mod347e20v00;
+                Mod347e20v00p01 modPaginaPerceptor = Paginas.Empaquetables[i] as Mod347e20v00p01;
 
-                if (Convert.ToDecimal(modPaginaPerceptor["BaseRetencionesIngresosCta"]?.Valor) < 0)
-                    modPaginaPerceptor["BaseRetencionesIngresosCtaN"].Valor = "N";
+                if (Convert.ToDecimal(modPaginaPerceptor["ImporteAnual"]?.Valor) < 0)
+                    modPaginaPerceptor["ImporteAnualN"].Valor = "N";
 
-                modPaginaPerceptor["NumeroCasa"].Valor = modPaginaPerceptor["NumeroCasa"].Valor.ToString().PadLeft(5, '0'); // Debe completar ceros por izq. 
-                                                                                                                            // para ser válido.
+                if (Convert.ToDecimal(modPaginaPerceptor["ImporteAnualTransmisionInmuebles"]?.Valor) < 0)
+                    modPaginaPerceptor["ImporteAnualTransmisionInmueblesN"].Valor = "N";
             }
         }
 
@@ -187,7 +196,7 @@ namespace AeatModelos.Mod347e20v00
 
             peticionInicializarEnvio.PreparaPeticion();
 
-            peticionInicializarEnvio.PeticionHttp.Headers.Add("MODELO", "180");
+            peticionInicializarEnvio.PeticionHttp.Headers.Add("MODELO", "347");
             peticionInicializarEnvio.PeticionHttp.Headers.Add("EJERCICIO", Ejercicio);
             peticionInicializarEnvio.PeticionHttp.Headers.Add("PERIODO", Periodo);
             peticionInicializarEnvio.PeticionHttp.Headers.Add("NDC", $"{this["NIF"].Valor}");
