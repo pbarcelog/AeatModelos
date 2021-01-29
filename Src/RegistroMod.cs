@@ -450,8 +450,7 @@ namespace AeatModelos
                 return this;
 
             if (!PaginasMapa.ContainsKey(indicePagina))
-                throw new ArgumentException(
-                    Errores.MostrarMensaje("RegistroMod.000", $"{indicePagina}"));
+                throw new ArgumentException(Errores.MostrarMensaje("RegistroMod.000", $"{indicePagina}"));
 
             int count = 0;
 
@@ -463,7 +462,7 @@ namespace AeatModelos
                 if (pagina.GetType().IsAssignableFrom(tipoObjetivo) && indiceGrupo == count++)
                     return pagina as RegistroMod;
 
-            if (count == 0 && crear)
+            if (crear) // Si la página no existe y se permite crear.
                 return InsertaPagina(indicePagina);
 
             return null;
