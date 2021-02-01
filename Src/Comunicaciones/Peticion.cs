@@ -117,15 +117,15 @@ namespace AeatModelos.Comunicaciones
         protected Respuesta _Respuesta;
 
         /// <summary>
-        /// Modelo sobre el cual se ha construido la petición.
-        /// </summary>
-        RegistroMod _Modelo;
-
-        /// <summary>
         /// Indica si la petición es para el entorno de
         /// pruebas (true) o de producción (false).
         /// </summary>
         bool _Test;
+
+        /// <summary>
+        /// Modelo sobre el cual se ha construido la petición.
+        /// </summary>
+        internal RegistroMod Modelo;
 
         #endregion
 
@@ -171,9 +171,7 @@ namespace AeatModelos.Comunicaciones
         /// <param name="certClave">Contraseña del certificado.</param>
         public Peticion(RegistroMod modelo, bool test = false, string certRef = null, string certClave = null)
         {
-
-
-            _Modelo = modelo;
+            Modelo = modelo;
             _Test = test;
 
             InicializaCertificado(certRef, certClave);
@@ -183,8 +181,7 @@ namespace AeatModelos.Comunicaciones
             InicializaFirmaBasica();
 
             _TextoPeticion = modelo.DatosPeticionPresentacion();
-            _BytesPeticion = RegistroMod.Encoding.GetBytes(_TextoPeticion);
-
+            _BytesPeticion = modelo.Encoding.GetBytes(_TextoPeticion);
         }
 
         #endregion
@@ -215,10 +212,10 @@ namespace AeatModelos.Comunicaciones
         /// <returns>Url del servicio de la aeat correspondiente al modelo de la petición.</returns>
         protected virtual string GeneraEnlace(bool test) 
         {
-            var enlace = test ? Enlaces.BuscaEnlaceModelo(_Modelo, true) : Enlaces.BuscaEnlaceModelo(_Modelo);
+            var enlace = test ? Enlaces.BuscaEnlaceModelo(Modelo, true) : Enlaces.BuscaEnlaceModelo(Modelo);
 
             if (enlace == null)
-                throw new Exception(Errores.MostrarMensaje("Peticion.001", $"{_Modelo.GetType().Name}"));
+                throw new Exception(Errores.MostrarMensaje("Peticion.001", $"{Modelo.GetType().Name}"));
 
             return enlace;
 
@@ -230,9 +227,9 @@ namespace AeatModelos.Comunicaciones
         /// </summary>
         protected virtual void InicializaFirmaBasica() 
         {
-            _Modelo.VariablesEnvio["FIRNIF"] = _CertificadoTitular.NIF;
-            _Modelo.VariablesEnvio["FIRNOMBRE"] = _CertificadoTitular.Nombre;
-            _Modelo.VariablesEnvio["F01"] = _TextoFichero;
+            Modelo.VariablesEnvio["FIRNIF"] = _CertificadoTitular.NIF;
+            Modelo.VariablesEnvio["FIRNOMBRE"] = _CertificadoTitular.Nombre;
+            Modelo.VariablesEnvio["F01"] = _TextoFichero;
         }
 
         /// <summary>
@@ -250,7 +247,6 @@ namespace AeatModelos.Comunicaciones
         /// </summary>
         internal void PreparaPeticion() 
         {
-
             if (PeticionHttp != null)
                 return;
 
@@ -260,7 +256,6 @@ namespace AeatModelos.Comunicaciones
             _HttpWebRequest.ContentType = _ContentType;
             _HttpWebRequest.Method = _Method;
             _HttpWebRequest.ClientCertificates.Add(_Certificado);
-
         }
 
         #endregion      

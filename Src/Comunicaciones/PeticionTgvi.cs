@@ -41,6 +41,8 @@
     Para más información, contacte con la dirección: info@irenesolutions.com    
  */
 
+using System.Text;
+
 namespace AeatModelos.Comunicaciones
 {
 
@@ -71,10 +73,14 @@ namespace AeatModelos.Comunicaciones
         /// <para>'EnviarDatos'</para> 
         /// <para>'PresentarEnvio'</para>
         /// </param>
-        public PeticionTgvi(RegistroMod modelo, bool test = false, string certRef = null, string certClave = null, string action = "InicializarEnvio") : base(modelo, test, certRef, certClave)
+        /// <param name="contentType">Tipo del contenido de la petición http.</param>
+        public PeticionTgvi(RegistroMod modelo, bool test = false, string certRef = null, string certClave = null, string action = "InicializarEnvio", string contentType = "text/plain; charset=UTF-8") : 
+            base(modelo, test, certRef, certClave)
         {
+            modelo.Encoding = Encoding.UTF8;
+
             _Accion = action;
-            _ContentType = "text/plain";
+            _ContentType = contentType;
         }
 
         /// <summary>

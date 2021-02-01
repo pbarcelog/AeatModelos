@@ -148,11 +148,10 @@ namespace AeatModelos.Comunicaciones
         /// <returns>Enlace encontrado o nulo si no hay éxito.</returns>
         public static string BuscaEnlaceModelo(Type tipoModelo, bool test = false)
         {
-
             string enlace = null;
 
             var name = tipoModelo.Name;
-            var modelos = (test) ? ModelosPruebas : (test ? ModelosPruebas : Modelos);
+            var modelos = (Parametros.Actuales.Pruebas) ? ModelosPruebas : (test ? ModelosPruebas : Modelos);
 
             if (modelos.ContainsKey(name))
                 return modelos[name];

@@ -48,7 +48,6 @@ namespace AeatModelos
     /// </summary>
     public class RegistroModPagina : RegistroMod, IPagina
     {
-
         #region Construtores de Instancia
 
         /// <summary>
@@ -111,7 +110,5 @@ namespace AeatModelos
         }
 
         #endregion
-
-
     }
 }

@@ -41,7 +41,6 @@
     Para más información, contacte con la dirección: info@irenesolutions.com    
  */
 
-using AeatModelos.Comunicaciones;
 using System;
 using System.Collections.Generic;
 
@@ -50,7 +49,7 @@ namespace AeatModelos.Mod190e2017v00
     /// <summary>
     /// Tipo 1 modelo 190. Diseño de registro: DR190_2017.pdf.
     /// </summary>
-    public class Mod190e2017v00 : RegistroModPagina
+    public class Mod190e2017v00 : RegistroModPaginaTgvi
     {
 
         #region Construtores de Instancia
@@ -73,7 +72,7 @@ namespace AeatModelos.Mod190e2017v00
             RegistroCampos = new Dictionary<decimal, IEmpaquetable>()
             {
                 {++c,    new RegistroCampo(0,   1,   1,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  1,           0          )}, // 01
-                {++c,    new RegistroCampo(0,   2,   3,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  190,         0          )}, // 02
+                {++c,    new RegistroCampo(0,   2,   3,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ModeloDeclaracion", 190, 0    )}, // 02
                 {++c,    new RegistroCampo(0,   5,   4,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  Ejercicio,   0          )}, // 03
                 {++c,    new RegistroCampo(0,   9,   9,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "NIF"                          )}, // 04
                 // Primer apellido, espacio, segundo apellido, espacio, nombre, necesariamente en este orden.
@@ -168,103 +167,6 @@ namespace AeatModelos.Mod190e2017v00
 
             return $"{NIF}, {apellidosNombreRazonSocial}".Trim();
         }
-
-        /// <summary>
-        /// Presenta la declaración.
-        /// <param name="test">Indica si la presentación se realiza en el entorno en pruebas de la AEAT.</param>
-        /// <param name="certRef">Ruta de certificado para la presentación, en caso de que se utilice uno externo.</param>
-        /// <param name="certClave">Contraseña del certificado.</param>
-        /// </summary>
-        /// <returns>Respuesta a la operación de presentación.</returns>
-        public override Respuesta Presentar(bool test = false, string certRef = null, string certClave = null)
-        {
-
-            if (!_Confirmado)
-                throw new InvalidOperationException(Errores.MostrarMensaje("RegistroMod.003"));
-
-            int indiceUltimaPagina = RegistroCampos.Count;
-
-            string registroTipo1 = null;
-            string registroTipo2 = RegistroCampos[indiceUltimaPagina].AFichero();
-
-            for (decimal p = 1; p < indiceUltimaPagina; p++)
-                registroTipo1 += RegistroCampos[p].AFichero();
-
-
-            VariablesEnvio.Clear();
-            VariablesEnvio.Add("", registroTipo1);
-            OrdenVariablesEnvio = new string[1] { "" };
-
-            // 1. Inicialización
-            var peticionInicializarEnvio = new PeticionTgvi(this, test, certRef, certClave);
-
-            peticionInicializarEnvio.PreparaPeticion();
-
-            peticionInicializarEnvio.PeticionHttp.Headers.Add("MODELO", "190");
-            peticionInicializarEnvio.PeticionHttp.Headers.Add("EJERCICIO", Ejercicio);
-            peticionInicializarEnvio.PeticionHttp.Headers.Add("PERIODO", Periodo);
-            peticionInicializarEnvio.PeticionHttp.Headers.Add("NDC", $"{this["NIF"].Valor}");
-            peticionInicializarEnvio.PeticionHttp.Headers.Add("IDIOMA", "ES");
-            peticionInicializarEnvio.PeticionHttp.Headers.Add("NUMBLOQUES", "1");
-            peticionInicializarEnvio.PeticionHttp.Headers.Add("CODIFICACION", "ISO8859-1");
-
-            var respuestaTgvi = peticionInicializarEnvio.Presentar() as RespuestaTgvi;
-
-            if (respuestaTgvi.Erronea)
-                return respuestaTgvi;
-
-            string cookie = respuestaTgvi.Cookie;
-
-            // 2. Envío datos
-
-            if ((RegistroCampos[indiceUltimaPagina] as ConjuntoDeEmpaquetables).Empaquetables.Count > 40000)
-                throw new NotImplementedException("No implementada la paginación.");
-
-            VariablesEnvio[""] = registroTipo2;
-
-            var peticionEnvio = new PeticionTgvi(this, test, certRef, certClave, "EnviarDatos");
-
-            peticionEnvio.PreparaPeticion();
-
-            peticionEnvio.PeticionHttp.Headers.Add("IDENVIO", respuestaTgvi.IdEnvio);
-            peticionEnvio.PeticionHttp.Headers.Add("NUMBLOQUE", "1");
-            peticionEnvio.PeticionHttp.Headers.Add("CODIFICACION", "UTF-8");//Set-Cookie
-            peticionEnvio.PeticionHttp.Headers.Add("Set-Cookie", cookie);
-
-            respuestaTgvi = peticionEnvio.Presentar() as RespuestaTgvi;
-
-            if (respuestaTgvi.Erronea)
-                return respuestaTgvi;
-
-            // 3. Presentación
-
-            VariablesEnvio[""] = "";
-
-            var peticionPresentacion = new PeticionTgvi(this, test, certRef, certClave, "PresentarEnvio");
-
-            peticionPresentacion.PreparaPeticion();
-
-            peticionPresentacion.PeticionHttp.Headers.Add("IDENVIO", respuestaTgvi.IdEnvio);
-            peticionPresentacion.PeticionHttp.Headers.Add("FIRNIF", peticionPresentacion.CertificadoTitular.NIF);
-            peticionPresentacion.PeticionHttp.Headers.Add("FIRNOMBRE", peticionPresentacion.CertificadoTitular.Nombre);
-            peticionPresentacion.PeticionHttp.Headers.Add("FIR", "FirmaBasica");
-            peticionEnvio.PeticionHttp.Headers.Add("Set-Cookie", cookie);
-
-
-            respuestaTgvi = peticionPresentacion.Presentar() as RespuestaTgvi;
-
-            if (respuestaTgvi.Erronea)
-                return respuestaTgvi;
-
-            string pdfUrlServer = test ? "www6.aeat.es" : "www2.agenciatributaria.gob.es";
-            string pdfUrl = $"https://{pdfUrlServer}/wlpl/inwinvoc/es.aeat.dit.adu.eeca.catalogo.VisualizaSc?COMPLETA=SI&ORIGEN=D&CSV={respuestaTgvi.CSV}";
-
-            respuestaTgvi.DescargaPdfEnlace(pdfUrl);
-
-            return respuestaTgvi;
-
-        }
-
 
         #endregion
 

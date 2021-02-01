@@ -191,6 +191,14 @@ namespace AeatModelos.Comunicaciones
                     Expediente = _HttpWebResponse.Headers["EXPEDIENTE"].Trim();
                     break;
 
+                case "RecuperarErrores":
+                    IdEnvio = _HttpWebResponse.Headers["IDENVIO"].Trim();
+                    EstadoEnvio = _HttpWebResponse.Headers["ESTADO"].Trim();
+
+                    Erronea = true;
+                    Errores.Add(new RespuestaError(_ContenidoTexto)); // Añadimos el fichero devuelto con los registros erróneos.
+
+                    break;
 
                 default:
                     throw new ArgumentException($"'{(_Peticion as PeticionTgvi).Accion}' no es una acción válida.");

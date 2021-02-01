@@ -108,7 +108,7 @@ namespace AeatModelos.Comunicaciones
         /// <summary>
         /// Texto de la respuesta.
         /// </summary>
-        string _ContenidoTexto;
+        protected string _ContenidoTexto;
 
         #endregion     
 
@@ -120,7 +120,6 @@ namespace AeatModelos.Comunicaciones
         /// <param name="peticion">Petición a la que pertenece la respuesta.</param>
         public Respuesta(Peticion peticion)
         {
-
             _Peticion = peticion;
 
             Errores = new List<RespuestaError>();
@@ -130,7 +129,7 @@ namespace AeatModelos.Comunicaciones
             Estado = _HttpWebResponse.StatusDescription;
 
             LeeContenido();
-            _ContenidoTexto = RegistroMod.Encoding.GetString(_ContenidoBinario);
+            _ContenidoTexto = _Peticion.Modelo.Encoding.GetString(_ContenidoBinario);
 
             Erronea = CompruebaErronea();
 
@@ -140,8 +139,6 @@ namespace AeatModelos.Comunicaciones
                 TratarErrores();
             else
                 TratarExito();
-
-
         }
 
         #endregion
@@ -226,7 +223,7 @@ namespace AeatModelos.Comunicaciones
 
                     if (!esPdf)
                         throw new Exception(AeatModelos.Errores.MostrarMensaje("Respuesta.000",
-                            RegistroMod.Encoding.GetString(binarioRespuesta)));
+                            _Peticion.Modelo.Encoding.GetString(binarioRespuesta)));
                 }                    
             }
 

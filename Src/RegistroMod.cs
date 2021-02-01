@@ -232,7 +232,7 @@ namespace AeatModelos
         /// <summary>
         /// Codificación utilizada por la AEAT.
         /// </summary>
-        public static Encoding Encoding = Encoding.GetEncoding("ISO-8859-1");
+        public Encoding Encoding = Encoding.GetEncoding("ISO-8859-1");
 
 
         #endregion
