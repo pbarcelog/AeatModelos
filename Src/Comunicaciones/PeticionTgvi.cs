@@ -73,11 +73,12 @@ namespace AeatModelos.Comunicaciones
         /// <para>'EnviarDatos'</para> 
         /// <para>'PresentarEnvio'</para>
         /// </param>
+        /// <param name="encoding">Tipo de encoding para el envío del registro.</param>
         /// <param name="contentType">Tipo del contenido de la petición http.</param>
-        public PeticionTgvi(RegistroMod modelo, bool test = false, string certRef = null, string certClave = null, string action = "InicializarEnvio", string contentType = "text/plain; charset=UTF-8") : 
+        public PeticionTgvi(RegistroMod modelo, bool test = false, string certRef = null, string certClave = null, string action = "InicializarEnvio", Encoding encoding = null, string contentType = "text/plain; charset=UTF-8") : 
             base(modelo, test, certRef, certClave)
         {
-            modelo.Encoding = Encoding.UTF8;
+            modelo.Encoding = encoding == null ? Encoding.UTF8 : encoding;
 
             _Accion = action;
             _ContentType = contentType;

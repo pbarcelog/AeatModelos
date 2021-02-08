@@ -44,6 +44,7 @@
 using AeatModelos.Comunicaciones;
 using AeatModelos.Configuracion;
 using System;
+using System.Text;
 
 namespace AeatModelos
 {
@@ -93,8 +94,9 @@ namespace AeatModelos
             VariablesEnvio.Add("", registroTipo1);
             OrdenVariablesEnvio = new string[1] { "" };
 
+
             // 1. Inicialización
-            var peticionInicializarEnvio = new PeticionTgvi(this, test, certRef, certClave, "InicializarEnvio");
+            var peticionInicializarEnvio = new PeticionTgvi(this, test, certRef, certClave, "InicializarEnvio", Encoding.GetEncoding("ISO-8859-1"), "text/plain");
 
             peticionInicializarEnvio.PreparaPeticion();
 
@@ -109,7 +111,7 @@ namespace AeatModelos
             peticionInicializarEnvio.PeticionHttp.Headers.Add("NDC", $"{this["NIF"].Valor}");
             peticionInicializarEnvio.PeticionHttp.Headers.Add("IDIOMA", "ES");
             peticionInicializarEnvio.PeticionHttp.Headers.Add("NUMBLOQUES", "1");
-            peticionInicializarEnvio.PeticionHttp.Headers.Add("CODIFICACION", "UTF-8");
+            peticionInicializarEnvio.PeticionHttp.Headers.Add("CODIFICACION", "ISO-8859-1");
 
             var respuestaTgvi = peticionInicializarEnvio.Presentar() as RespuestaTgvi;
 
