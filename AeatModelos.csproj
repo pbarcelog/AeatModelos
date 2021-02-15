@@ -113,6 +113,13 @@
     <Compile Include="Src\Mod303e19v10_10\Mod303e19v10_10p03.cs" />
     <Compile Include="Src\Mod303e19v10_10\Mod303e19v10_10p04.cs" />
     <Compile Include="NamespaceDoc.cs" />
+    <Compile Include="Src\Mod303e21v103\Mod303e21v103.cs" />
+    <Compile Include="Src\Mod303e21v103\Mod303e21v103p01.cs" />
+    <Compile Include="Src\Mod303e21v103\Mod303e21v103p02.cs" />
+    <Compile Include="Src\Mod303e21v103\Mod303e21v103p03.cs" />
+    <Compile Include="Src\Mod303e21v103\Mod303e21v103p04.cs" />
+    <Compile Include="Src\Mod303e21v103\Mod303e21v103p05.cs" />
+    <Compile Include="Src\Mod303e21v103\Txt.cs" />
     <Compile Include="Src\Mod347e20v00\Mod347e20v00.cs" />
     <Compile Include="Src\Mod347e20v00\Mod347e20v00p01.cs" />
     <Compile Include="Src\Mod347e20v00\Mod347e20v00p02.cs" />

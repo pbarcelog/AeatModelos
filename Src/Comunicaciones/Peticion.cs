@@ -45,6 +45,7 @@ using System;
 using System.IO;
 using System.Net;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
 
 namespace AeatModelos.Comunicaciones
 {
@@ -169,10 +170,13 @@ namespace AeatModelos.Comunicaciones
         /// <param name="test">Indica si la presentación se realiza en el entorno en pruebas de la AEAT.</param>
         /// <param name="certRef">Ruta de certificado para la presentación, en caso de que se utilice uno externo.</param>
         /// <param name="certClave">Contraseña del certificado.</param>
-        public Peticion(RegistroMod modelo, bool test = false, string certRef = null, string certClave = null)
+        /// <param name="encoding">Tipo de encoding para el envío del registro.</param>
+        public Peticion(RegistroMod modelo, bool test = false, string certRef = null, string certClave = null, Encoding encoding = null)
         {
             Modelo = modelo;
             _Test = test;
+
+            modelo.Encoding = encoding == null ? modelo.Encoding : encoding;
 
             InicializaCertificado(certRef, certClave);
 

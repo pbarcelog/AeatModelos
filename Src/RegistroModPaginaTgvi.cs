@@ -96,7 +96,7 @@ namespace AeatModelos
 
 
             // 1. Inicialización
-            var peticionInicializarEnvio = new PeticionTgvi(this, test, certRef, certClave, "InicializarEnvio", Encoding.GetEncoding("ISO-8859-1"), "text/plain");
+            var peticionInicializarEnvio = new PeticionTgvi(this, test, certRef, certClave, "InicializarEnvio");
 
             peticionInicializarEnvio.PreparaPeticion();
 
@@ -127,7 +127,7 @@ namespace AeatModelos
 
             VariablesEnvio[""] = registroTipo2;
 
-            var peticionEnvio = new PeticionTgvi(this, test, certRef, certClave, "EnviarDatos");
+            var peticionEnvio = new PeticionTgvi(this, test, certRef, certClave, "EnviarDatos", Encoding.UTF8, "text/plain; charset=UTF-8");
 
             peticionEnvio.PreparaPeticion();
 
@@ -145,7 +145,7 @@ namespace AeatModelos
 
                 // Obtenemos el fichero con los registros erróneos.
 
-                var peticionErrores = new PeticionTgvi(this, test, certRef, certClave, "RecuperarErrores");
+                var peticionErrores = new PeticionTgvi(this, test, certRef, certClave, "RecuperarErrores", Encoding.UTF8, "text/plain; charset=UTF-8");
 
                 peticionErrores.PreparaPeticion();
 
@@ -164,7 +164,7 @@ namespace AeatModelos
 
             VariablesEnvio[""] = "";
 
-            var peticionPresentacion = new PeticionTgvi(this, test, certRef, certClave, "PresentarEnvio");
+            var peticionPresentacion = new PeticionTgvi(this, test, certRef, certClave, "PresentarEnvio", Encoding.UTF8, "text/plain; charset=UTF-8");
 
             peticionPresentacion.PreparaPeticion();
 

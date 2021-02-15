@@ -1,0 +1,220 @@
+﻿/*
+    Este archivo forma parte del proyecto AeatModelos(R).
+    Copyright (c) 2021 Irene Solutions SL
+    Autores: Manuel Diago García, Juan Bautista Garcia Traver.
+
+    Este programa es software libre; lo puede distribuir y/o modificar
+    según los terminos de la licencia GNU Affero General Public License
+    versión 3 según su redacción de la Free Software Foundation con la
+    siguiente condición añadida en la sección 15 según se establece en
+    la sección 7(a):
+
+    PARA CUALQUIER PARTE DEL CÓGIO PROPIEDAD DE IRENE SOLUTIONS. IRENE 
+    SOLUTIONS NO SE HACE RESPONSABLE DE LA VULNERACIÓN DE DERECHOS 
+    DE TERCEROS.
+
+    Este programa se distribuye con la esperanza de que sea útil, pero
+    SIN GARANTÍA DE NINGÚN TIPO; ni siquiera la derivada de un acuerdo
+    comercial o utilización para un propósito particular.
+   
+    Para más información puede consultar la licencia GNU Affero General
+    Public http://www.gnu.org/licenses o escribir a la Free Software 
+    Foundation, Inc. , 51 Franklin Street, Fifth Floor,
+    Boston, MA, 02110-1301 USA, o descargarla en la siguiente URL:
+        http://www.irenesolutions.com/terms-of-use.pdf 
+
+    Las interfaces de usuario con versiones del código fuente del presente 
+    proyecto, modificado o no, o código de objeto del mismo, deben incluir
+    de manera visible los correspondientes avisos legales exigidos en la
+    sección 5 de la licencia GNU Affero General Public.
+    
+    Puede evitar el cumplimiento de lo establecido 
+    anteriormente comprando una licencia comercial. 
+    La compra de una licencia comercial es obligatoria
+    desde el momento en que usted desarrolle software comercial incluyendo
+    funcionalidades de AeatModelos sin la publicación del código fuente
+    de sus propias aplicaciones.
+    Estas actividades incluyen: La oferta de servicios de pago mediante
+    aplicaciones web de cualquier tipo que incluyan la funcionalidad
+    de AeatModelos.
+    
+    Para más información, contacte con la dirección: info@irenesolutions.com    
+ */
+
+
+using System.Collections.Generic;
+
+namespace AeatModelos.Mod303e21v103
+{
+    /// <summary>
+    /// Descripciones de campos.
+    /// </summary>
+    public class Txt
+    {
+        #region Propiedades Públicas Estáticas
+
+        /// <summary>
+        /// Diccionario con las descripciones de campo
+        /// según clave (página.numcampo).
+        /// </summary>
+        public static Dictionary<string, string> Den = new Dictionary<string, string>() 
+        {
+            {"P01.001", "Inicio del identificador de modelo y página."},
+            {"P01.002", "Modelo."},
+            {"P01.003", "Página."},
+            {"P01.004", "Fin de identificador de modelo. "},
+            {"P01.005", "Indicador de página complementaria. "},
+            {"P01.006", "Tipo Declaración"},
+            {"P01.007", "Identificación (1) - NIF"},
+            {"P01.008", "Identificación (1) - Apellidos y nombre o Razón social"},
+            {"P01.009", "Devengo (2) - Ejercicio"},
+            {"P01.010", "Devengo (2) - Período"},
+            {"P01.011", "Identificación (1) - Tributación exclusivamente foral. Sujeto pasivo que tributa exclusivamente a una Administración tributaria Foral con IVA a la importación liquidado por la Aduana pendiente de ingreso"},
+            {"P01.012", "Identificación (1) - Sujeto pasivo inscrito en el Registro de devolución mensual (art. 30 RIVA)"},
+            {"P01.013", "Identificación (1) - Sujeto pasivo que tributa exclusivamente en régimen simplificado"},
+            {"P01.014", "Identificación (1) - Autoliquidación conjunta"},
+            {"P01.015", "Identificación (1) - Sujeto pasivo acogido al régimen especial del criterio de Caja (art. 163 undecies LIVA)"},
+            {"P01.016", "Identificación (1) - Sujeto pasivo destinatario de operaciones acogidas al régimen especial del criterio de caja"},
+            {"P01.017", "Identificación (1) - Opción por la aplicación de la prorrata especial (art. 103.Dos.1º LIVA)"},
+            {"P01.018", "Identificación (1) - Revocación de la opción por la aplicación de la prorrata especial"},
+            {"P01.019", "Identificación (1) - Sujeto pasivo declarado en concurso de acreedores en el presente período de liquidación"},
+            {"P01.020", "Identificación (1) - Fecha en que se dictó el auto de declaración de concurso"},
+            {"P01.021", "Identificación (1) - Auto de declaración de concurso dictado en el período"},
+            {"P01.022", "Identificación (1) - Sujeto pasivo acogido voluntariamente al SII"},
+            {"P01.023", "Identificación (1) - Sujeto pasivo exonerado de la Declaración-resumen anual del IVA, modelo 390"},
+            {"P01.024", "Identificación (1) - Sujeto pasivo con volumen anual de operaciones distinto de cero (art. 121 LIVA)"},
+            {"P01.025", "Liquidación (3) - Regimen General - IVA Devengado - Régimen general - Base imponible [01]"},
+            {"P01.026", "Liquidación (3) - Regimen General - IVA Devengado - Régimen general - Tipo % [02]"},
+            {"P01.027", "Liquidación (3) - Regimen General - IVA Devengado - Régimen general - Cuota [03]"},
+            {"P01.028", "Liquidación (3) - Regimen General - IVA Devengado - Régimen general - Base imponible [04]"},
+            {"P01.029", "Liquidación (3) - Regimen General - IVA Devengado - Régimen general - Tipo % [05]"},
+            {"P01.030", "Liquidación (3) - Regimen General - IVA Devengado - Régimen general - Cuota [06]"},
+            {"P01.031", "Liquidación (3) - Regimen General - IVA Devengado - Régimen general - Base imponible [07]"},
+            {"P01.032", "Liquidación (3) - Regimen General - IVA Devengado - Régimen general - Tipo % [08]"},
+            {"P01.033", "Liquidación (3) - Regimen General - IVA Devengado - Régimen general - Cuota [09]"},
+            {"P01.034", "Liquidación (3) - Regimen General - IVA Devengado - Adquisiciones intracomunitarias de bienes y servicios - Base imponible  [10]"},
+            {"P01.035", "Liquidación (3) - Regimen General - IVA Devengado - Adquisiciones intracomunitarias de bienes y servicios - Cuota [11]"},
+            {"P01.036", "Liquidación (3) - Regimen General - IVA Devengado - Otras operaciones con inversión del sujeto pasivo (excepto. adq. intracom) - Base imponible  [12]"},
+            {"P01.037", "Liquidación (3) - Regimen General - IVA Devengado - Otras operaciones con inversión del sujeto pasivo (excepto. adq. intracom) - Cuota [13]"},
+            {"P01.038", "Liquidación (3) - Regimen General - IVA Devengado - Modificación bases y cuotas- Base imponible  [14]"},
+            {"P01.039", "Liquidación (3) - Regimen General - IVA Devengado - Modificación bases y cuotas - Cuota [15]"},
+            {"P01.040", "Liquidación (3) - Regimen General - IVA Devengado - Recargo equivalencia- Base imponible [16]"},
+            {"P01.041", "Liquidación (3) - Regimen General - IVA Devengado - Recargo equivalencia - Tipo % [17]"},
+            {"P01.042", "Liquidación (3) - Regimen General - IVA Devengado - Recargo equivalencia - Cuota [18]"},
+            {"P01.043", "Liquidación (3) - Regimen General - IVA Devengado - Recargo equivalencia - Base imponible [19]"},
+            {"P01.044", "Liquidación (3) - Regimen General - IVA Devengado - Recargo equivalencia - Tipo % [20]"},
+            {"P01.045", "Liquidación (3) - Regimen General - IVA Devengado - Recargo equivalencia - Cuota [21]"},
+            {"P01.046", "Liquidación (3) - Regimen General - IVA Devengado - Recargo equivalencia - Base imponible [22]"},
+            {"P01.047", "Liquidación (3) - Regimen General - IVA Devengado - Recargo equivalencia - Tipo % [23]"},
+            {"P01.048", "Liquidación (3) - Regimen General - IVA Devengado - Recargo equivalencia - Cuota [24]"},
+            {"P01.049", "Liquidación (3) - Regimen General - IVA Devengado - Modificaciones bases y cuotas del recargo de equivalencia - Base imponible [25]"},
+            {"P01.050", "Liquidación (3) - Regimen General - IVA Devengado - Modificaciones bases y cuotas del recargo de equivalencia - Cuota [26]"},
+            {"P01.051", "Liquidación (3) - Regimen General - IVA Devengado - Total cuota devengada ( [03] + [06] + [09] + [11] + [13] + [15] + [18] + [21] + [24] + [26]) [27]"},
+            {"P01.052", "Liquidación (3) - Regimen General - IVA Deducible - Por cuotas soportadas en operaciones interiores corrientes - Base [28]"},
+            {"P01.053", "Liquidación (3) - Regimen General - IVA Deducible - Por cuotas soportadas en operaciones interiores corrientes - Cuota [29]"},
+            {"P01.054", "Liquidación (3) - Regimen General - IVA Deducible - Por cuotas soportadas en operaciones interiores con bienes de inversión - Base [30] "},
+            {"P01.055", "Liquidación (3) - Regimen General - IVA Deducible - Por cuotas soportadas en operaciones interiores con bienes de inversión - Cuota [31] "},
+            {"P01.056", "Liquidación (3) - Regimen General - IVA Deducible - Por cuotas soportadas en las importaciones de bienes corrientes - Base [32]"},
+            {"P01.057", "Liquidación (3) - Regimen General - IVA Deducible - Por cuotas soportadas en las importaciones de bienes corrientes - Cuota [33]"},
+            {"P01.058", "Liquidación (3) - Regimen General - IVA Deducible - Por cuotas soportadas en las importaciones de bienes de inversión - Base [34]"},
+            {"P01.059", "Liquidación (3) - Regimen General - IVA Deducible - Por cuotas soportadas en las importaciones de bienes de inversión - Cuota [35]"},
+            {"P01.060", "Liquidación (3) - Regimen General - IVA Deducible - En adquisiciones intracomunitarias de bienes y servicios corrientes - Base [36]"},
+            {"P01.061", "Liquidación (3) - Regimen General - IVA Deducible - En adquisiciones intracomunitarias de bienes y servicios corrientes - Cuota [37]"},
+            {"P01.062", "Liquidación (3) - Regimen General - IVA Deducible - En adquisiciones intracomunitarias de bienes de inversión - Base [38]"},
+            {"P01.063", "Liquidación (3) - Regimen General - IVA Deducible - En adquisiciones intracomunitarias de bienes de inversión - Cuota [39]"},
+            {"P01.064", "Liquidación (3) - Regimen General - IVA Deducible - Rectificación de deducciones - Base [40]"},
+            {"P01.065", "Liquidación (3) - Regimen General - IVA Deducible - Rectificación de deducciones - Cuota [41]"},
+            {"P01.066", "Liquidación (3) - Regimen General - IVA Deducible - Compensaciones Régimen Especial A.G. y P. - Cuota [42]"},
+            {"P01.067", "Liquidación (3) - Regimen General - IVA Deducible - Regularización inversiones - Cuota [43]"},
+            {"P01.068", "Liquidación (3) - Regimen General - IVA Deducible - Regularización por aplicación del porcentaje definitivo de prorrata - Cuota [44]"},
+            {"P01.069", "Liquidación (3) - Regimen General - IVA Deducible - Total a deducir ( [29] + [31] + [33] + [35] + [37] + [39] + [41] + [42] + [43] + [44] ) - Cuota [45]"},
+            {"P01.070", "Liquidación (3) - Regimen General - IVA Deducible - Resultado régimen general ( [27] - [45] ) - Cuota [46]"},
+            {"P01.071", "Reservado para la AEAT"},
+            {"P01.072", "Reservado para la AEAT - Sello electrónico reservado para la AEAT "},
+            {"P01.073", "Indicador de fin de registro"},
+
+            {"P03.001", "Inicio del identificador de modelo y página."},
+            {"P03.002", "Modelo."},
+            {"P03.003", "Página."},
+            {"P03.004", "Fin de identificador de modelo. "},
+            {"P03.005", "Información adicional - Entregas intracomunitarias de bienes y servicios [59]"},
+            {"P03.006", "Información adicional - Exportaciones y operaciones asimiladas [60]"},
+            {"P03.007", "Información adicional - Operaciones no sujetas o con inversión del sujeto pasivo que originan el derecho a deducción [61]"},
+            {"P03.008", "Reservado para la AEAT"},
+            {"P03.009", "Reservado para la AEAT"},
+            {"P03.010", "Reservado para la AEAT"},
+            {"P03.011", "Reservado para la AEAT"},
+            {"P03.012", "Reservado para la AEAT"},
+            {"P03.013", "Información adicional - Exclusivamente para operaciones de entrega de bienes y prestaciones de servicios a las que resulte de aplicación el régimen especial del criterio de Caja. Importes devengados en período de liquidación según art. 75 LIVA. - Base Imponible [62]"},
+            {"P03.014", "Información adicional - Exclusivamente para operaciones de entrega de bienes y prestaciones de servicios a las que resulte de aplicación el régimen especial del criterio de Caja. Importes devengados en período de liquidación según art. 75 LIVA. - Cuota [63]"},
+            {"P03.015", "Información adicional - Exclusivamente para operaciones de entrega de bienes y prestaciones de servicios a las que resulte de aplicación el régimen especial del criterio de Caja. Cuotas de IVA soportados en operaciones que tributen por el régimen especial del criterio de caja conforme a la regla general de devengo contenida en el artículo 75 LIVA. - Base Imponible [74]"},
+            {"P03.016", "Información adicional - Exclusivamente para operaciones de entrega de bienes y prestaciones de servicios a las que resulte de aplicación el régimen especial del criterio de Caja. Cuotas totales de IVA soportados en operaciones que tributen por el régimen especial del criterio de caja conforme a la regla general de devengo contenida en el artículo 75 de LIVA. - Cuota [75]"},
+            {"P03.017", "Resultado - Regularización cuotas art. 80.cinco.5ª LIVA  [76]"},
+            {"P03.018", "Resultado - Suma de resultados ( [46] + [58] + [76] ) [64]"},
+            {"P03.019", "Resultado - % Atribuible a la Administración del Estado [65]"},
+            {"P03.020", "Resultado - Atribuible a la Administración del Estado [66]"},
+            {"P03.021", "Resultado - IVA a la importación liquidado por la Aduana pendiente de ingreso  [77]"},
+            {"P03.022", "Resultado - Cuotas a compensar pendientes de periodos anteriores [110]"},
+            {"P03.023", "Cuotas a compensar de periodos anteriores aplicadas en este periodo [78]"},
+            {"P03.024", "Cuotas a compensar de periodos previos pendientes para periodos posteriores ([110] - [78]) [87]"},
+            {"P03.025", "Resultado - Exclusivamente para sujetos pasivos que tributan conjuntamente a la Administración del Estado y a las Diputaciones Forales Resultado de la regularización anual [68]"},
+            {"P03.026", "Resultado - Resultado ( [66] + [77] - [78] + [68] ) [69]"},
+            {"P03.027", "Resultado - A deducir [70]"},
+            {"P03.028", "Resultado - Resultado de la liquidación ( [69] - [70] ) [71]"},
+            {"P03.029", "Declaración complementaria"},
+            {"P03.030", "Número justificante declaración anterior"},
+            {"P03.031", "Declaración Sin actividad"},
+            {"P03.032", "Devolución. SWIFT-BIC"},
+            {"P03.033", "Domiciliación/Devolución - IBAN "},
+            {"P03.034", "Reservado para la AEAT"},
+            {"P03.035", "Reservado para la AEAT"},
+            {"P03.036", "Indicador de fin de registro"},
+
+            {"P04.001", "Inicio del identificador de modelo y página."},
+            {"P04.002", "Modelo."},
+            {"P04.003", "Página."},
+            {"P04.004", "Fin de identificador de modelo. "},
+            {"P04.005", "Indicador de página complementaria. Blanco (No complementaria) o 'C' (Complementaria)"},
+            {"P04.006", "Información adicional - Exclusivamente a cumplimentar en el último periodo exonerados de la Declaración-resumen anual del IVA: B - Clave - Principal"},
+            {"P04.007", "Información adicional - Exclusivamente a cumplimentar en el último periodo exonerados de la Declaración-resumen anual del IVA: C - Epígrafe IAE - Principal"},
+            {"P04.008", "Información adicional - Exclusivamente a cumplimentar en el último periodo exonerados de la Declaración-resumen anual del IVA: B - Clave - Otras - 1ª"},
+            {"P04.009", "Información adicional - Exclusivamente a cumplimentar en el último periodo exonerados de la Declaración-resumen anual del IVA: C - Epígrafe IAE - Otras - 1ª"},
+            {"P04.010", "Información adicional - Exclusivamente a cumplimentar en el último periodo exonerados de la Declaración-resumen anual del IVA: B - Clave - Otras - 2ª"},
+            {"P04.011", "Información adicional - Exclusivamente a cumplimentar en el último periodo exonerados de la Declaración-resumen anual del IVA: C - Epígrafe IAE - Otras - 2ª"},
+            {"P04.012", "Información adicional - Exclusivamente a cumplimentar en el último periodo exonerados de la Declaración-resumen anual del IVA: B - Clave - Otras - 3ª"},
+            {"P04.013", "Información adicional - Exclusivamente a cumplimentar en el último periodo exonerados de la Declaración-resumen anual del IVA: C - Epígrafe IAE - Otras - 3ª"},
+            {"P04.014", "Información adicional - Exclusivamente a cumplimentar en el último periodo exonerados de la Declaración-resumen anual del IVA: B - Clave - Otras - 4ª"},
+            {"P04.015", "Información adicional - Exclusivamente a cumplimentar en el último periodo exonerados de la Declaración-resumen anual del IVA: C - Epígrafe IAE - Otras - 4ª"},
+            {"P04.016", "Información adicional - Exclusivamente a cumplimentar en el último periodo exonerados de la Declaración-resumen anual del IVA: B - Clave - Otras - 5ª"},
+            {"P04.017", "Información adicional - Exclusivamente a cumplimentar en el último periodo exonerados de la Declaración-resumen anual del IVA: C - Epígrafe IAE - Otras - 5ª"},
+            {"P04.018", "Información adicional - Exclusivamente a cumplimentar en el último periodo exonerados de la Declaración-resumen anual del IVA: D - Marque si ha efectuado operaciones por las que tenga obligación de presentar la declaración anual de operaciones con terceras personas."},
+            {"P04.019", "Información de la tributación por razón de territorio: Álava [89]"},
+            {"P04.020", "Información de la tributación por razón de territorio: Guipuzcoa [90]"},
+            {"P04.021", "Información de la tributación por razón de territorio: Vizcaya [91]"},
+            {"P04.022", "Información de la tributación por razón de territorio: Navarra [92]"},
+            {"P04.023", "Información de la tributación por razón de territorio: Territorio común [107]"},
+            {"P04.024", "Información adicional - Exclusivamente a cumplimentar en el último periodo exonerados de la Declaración-resumen anual del IVA - Operaciones realizadas en el ejercicio - Operaciones en régimen general [80]"},
+            {"P04.025", "Información adicional - Exclusivamente a cumplimentar en el último periodo exonerados de la Declaración-resumen anual del IVA - Operaciones realizadas en el ejercicio - Operaciones en régimen especial del criterio de caja conforme art. 75 LIVA [81]"},
+            {"P04.026", "Información adicional - Exclusivamente a cumplimentar en el último periodo exonerados de la Declaración-resumen anual del IVA - Operaciones realizadas en el ejercicio - Entregas intracomunitarias de bienes y servicios [93]"},
+            {"P04.027", "Información adicional - Exclusivamente a cumplimentar en el último periodo exonerados de la Declaración-resumen anual del IVA - Operaciones realizadas en el ejercicio - Exportaciones y otras operaciones exentas con derecho a deducción [94]"},
+            {"P04.028", "Información adicional - Exclusivamente a cumplimentar en el último periodo exonerados de la Declaración-resumen anual del IVA - Operaciones realizadas en el ejercicio - Operaciones exentas sin derecho a deducción [83]"},
+            {"P04.029", "Información adicional - Exclusivamente a cumplimentar en el último periodo exonerados de la Declaración-resumen anual del IVA - Operaciones realizadas en el ejercicio - Operaciones no sujetas por reglas de localización o con inversión del sujeto pasivo [84]"},
+            {"P04.030", "Información adicional - Exclusivamente a cumplimentar en el último periodo exonerados de la Declaración-resumen anual del IVA - Operaciones realizadas en el ejercicio - Entregas de bienes objeto de instalación o montaje en otros Estados miembros [85]"},
+            {"P04.031", "Reservado para la AEAT"},
+            {"P04.032", "Reservado para la AEAT"},
+            {"P04.033", "Reservado para la AEAT"},
+            {"P04.034", "Información adicional - Exclusivamente a cumplimentar en el último periodo exonerados de la Declaración-resumen anual del IVA - Operaciones realizadas en el ejercicio - Operaciones en régimen simplificado [86]"},
+            {"P04.035", "Información adicional - Exclusivamente a cumplimentar en el último periodo exonerados de la Declaración-resumen anual del IVA - Operaciones realizadas en el ejercicio - Operaciones en régimen especial de la agricultura, ganadería y pesca [95]"},
+            {"P04.036", "Información adicional - Exclusivamente a cumplimentar en el último periodo exonerados de la Declaración-resumen anual del IVA - Operaciones realizadas en el ejercicio - Operaciones realizadas por sujetos pasivos acogidos al régimen especial del recargo de equivalencia [96]"},
+            {"P04.037", "Información adicional - Exclusivamente a cumplimentar en el último periodo exonerados de la Declaración-resumen anual del IVA - Operaciones realizadas en el ejercicio - Operaciones en Régimen especial de bienes usados, objetos de arte, antigüedades y objetos de colección [97]"},
+            {"P04.038", "Información adicional - Exclusivamente a cumplimentar en el último periodo exonerados de la Declaración-resumen anual del IVA - Operaciones realizadas en el ejercicio - Operaciones en régimen especial de Agencias de Viajes [98]"},
+            {"P04.039", "Información adicional - Exclusivamente a cumplimentar en el último periodo exonerados de la Declaración-resumen anual del IVA - Operaciones realizadas en el ejercicio - Entregas de bienes inmuebles no habituales, operaciones financieras y relativas al oro de inversión no habituales [79]"},
+            {"P04.040", "Información adicional - Exclusivamente a cumplimentar en el último periodo exonerados de la Declaración-resumen anual del IVA - Operaciones realizadas en el ejercicio - Entregas de bienes de inversión [99]"},
+            {"P04.041", "Información adicional - Exclusivamente a cumplimentar en el último periodo exonerados de la Declaración-resumen anual del IVA - Operaciones realizadas en el ejercicio - Total volumen de operaciones ([80]+[81]+[93]+[94]+[83]+[84]+[85]+[86]+[95]+[96]+[97]+[98]-[79]-[99]) [88]"},
+            {"P04.042", "Reservado para la AEAT"},
+            {"P04.043", "Indicador de fin de registro"},
+        };
+
+        #endregion
+    }
+}
