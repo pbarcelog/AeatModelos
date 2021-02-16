@@ -63,8 +63,7 @@ namespace AeatModelos.Comunicaciones
         public static string PftwPicwPresBasica = "https://www1.agenciatributaria.gob.es/wlpl/PFTW-PICW/PresBasica";
 
         /// <summary>
-        /// Enlace al servicios de presentación de declaraciones del modelo 130,
-        /// 303...
+        /// Enlace al servicios de presentación de declaraciones mediante TGVI.
         /// </summary>
         public static string PftwPicwPresBasicaTgvi = "https://www1.agenciatributaria.gob.es/wlpl/OVPT-NTGV/";
 
@@ -76,8 +75,7 @@ namespace AeatModelos.Comunicaciones
         public static string PftwPicwPresBasicaPruebas = "https://www7.aeat.es/wlpl/PFTW-PICW/PresBasica";
 
         /// <summary>
-        /// Enlace al servicios de presentación de declaraciones del modelo 130,
-        /// 303...
+        /// Enlace al servicios de presentación de declaraciones mediante TGVI.
         /// </summary>
         public static string PftwPicwPresBasicaPruebasTgvi = "https://www7.aeat.es/wlpl/OVPT-NTGV/";
 
@@ -88,6 +86,7 @@ namespace AeatModelos.Comunicaciones
         /// </summary>
         public static Dictionary<string, string> Modelos = new Dictionary<string, string>() {
             { "Mod303e19v10_10",        PftwPicwPresBasica },
+            { "Mod303e21v103",          PftwPicwPresBasica },
             { "Mod130e15v11",           PftwPicwPresBasica },
             { "Mod390e2019v100",        PftwPicwPresBasica },
             { "Mod123e15v13",           PftwPicwPresBasica },
@@ -107,6 +106,7 @@ namespace AeatModelos.Comunicaciones
         /// </summary>
         public static Dictionary<string, string> ModelosPruebas = new Dictionary<string, string>() {
             { "Mod303e19v10_10",        PftwPicwPresBasicaPruebas },
+            { "Mod303e21v103",          PftwPicwPresBasicaPruebas },
             { "Mod130e15v11",           PftwPicwPresBasicaPruebas },
             { "Mod390e2019v100",        PftwPicwPresBasicaPruebas },
             { "Mod123e15v13",           PftwPicwPresBasicaPruebas },

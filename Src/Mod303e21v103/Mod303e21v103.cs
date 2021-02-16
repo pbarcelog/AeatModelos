@@ -41,6 +41,7 @@
     Para más información, contacte con la dirección: info@irenesolutions.com    
  */
 
+using System;
 using System.Collections.Generic;
 
 namespace AeatModelos.Mod303e21v103
@@ -65,12 +66,12 @@ namespace AeatModelos.Mod303e21v103
                 {2, "AeatModelos.Mod303e21v103.Mod303e21v103p02"},
                 {3, "AeatModelos.Mod303e21v103.Mod303e21v103p03"},
                 {4, "AeatModelos.Mod303e21v103.Mod303e21v103p04"},
-                {4, "AeatModelos.Mod303e21v103.Mod303e21v103p05"}
+                {5, "AeatModelos.Mod303e21v103.Mod303e21v103p05"}
             };
 
             RegistroCampos[14] = new ConjuntoDeEmpaquetables()
             {
-                Empaquetables = new List<IEmpaquetable>() { new Mod303e21v103(Ejercicio, Periodo) }
+                Empaquetables = new List<IEmpaquetable>() { new Mod303e21v103p01(Ejercicio, Periodo) }
             };
 
             Paginas = RegistroCampos[14] as ConjuntoDeEmpaquetables;
@@ -80,12 +81,146 @@ namespace AeatModelos.Mod303e21v103
 
         #region Métodos Públicos de Instancia
 
+        private void AcumulaCasillas(string[] casillasBase, string casillaResultado, RegistroModPagina modPagina)
+        {
+            decimal suma = 0;
+
+            foreach (var clave in casillasBase)
+            {
+                suma += Convert.ToDecimal(modPagina[clave]?.Valor);
+            }
+
+            if (Convert.ToDecimal(modPagina[casillaResultado]?.Valor) == 0)
+                modPagina[casillaResultado].Valor = suma;
+        }
+
+        /// <summary>
+        /// Devuelve una cadena con la representación del titular del
+        /// certificado que va a realizar la presentación.
+        /// </summary>
+        public override string Declarante()
+        {
+            string NIF = $"{Paginas.Empaquetables[0]["NIF"].Valor}";
+            string apellidosNombreRazonSocial = $"{Paginas.Empaquetables[0]["ApellidosNombreRazonSocial"].Valor}";
+
+            return $"{NIF}, {apellidosNombreRazonSocial}".Trim();
+        }
+
         /// <summary>
         /// Actualiza el valor de todos los campos calculados.
         /// </summary>
         public override void Calcular()
         {
-            base.Calcular();
+            Mod303e21v103p01 modPagina1 = Paginas.Empaquetables[0] as Mod303e21v103p01;
+            Mod303e21v103p02 modPagina2 = null;
+
+            if (Paginas.Empaquetables.Count > 1)
+                modPagina2 = Paginas.Empaquetables[1] as Mod303e21v103p02;
+
+            if (modPagina2 == null)
+            {
+                modPagina2 = new Mod303e21v103p02(Ejercicio, Periodo);
+                Paginas.Empaquetables.Add(modPagina2);
+            }
+
+            Mod303e21v103p03 modPagina3 = null;
+
+            for (int p = Paginas.Empaquetables.Count - 1; p > -1; p--)
+                if (modPagina3 == null)
+                    modPagina3 = Paginas.Empaquetables[p] as Mod303e21v103p03;
+
+            if (modPagina3 == null)
+            {
+                modPagina3 = new Mod303e21v103p03(Ejercicio, Periodo);
+                Paginas.Empaquetables.Add(modPagina3);
+            }
+
+
+            string[] clavesASumar = null;
+
+            // Me aseguro de informar los tipos necesarios.
+
+            int[] clavesCuota = new int[] { 3, 6, 9, 18, 21 };
+            decimal[] tipos = new decimal[] { 4m, 10m, 21m, 5.2m, 1.4m };
+
+            for (int k = 0; k < clavesCuota.Length; k++)
+            {
+                string claveCuota = $"{clavesCuota[k]}".PadLeft(2, '0');
+                string claveTipo = $"{clavesCuota[k] - 1}".PadLeft(2, '0');
+
+                if (Convert.ToDecimal(modPagina1[claveCuota]?.Valor) != 0 &&
+                    Convert.ToDecimal(modPagina1[claveTipo]?.Valor) == 0)
+                    modPagina1[claveTipo].Valor = tipos[k];
+            }
+
+
+            // Total cuota devengada ( [03] + [06] + [09] + [11] + [13] + [15] + [18] + [21] + [24] + [26] )
+
+            clavesASumar = new string[] { "03", "06", "09", "11", "13", "15", "18", "21", "24", "26" };
+
+            AcumulaCasillas(clavesASumar, "27", modPagina1);
+
+
+            // Total a deducir ( [29] + [31] + [33] + [35] + [37] + [39] + [41] + [42] + [43] + [44] )
+
+            clavesASumar = new string[] { "29", "31", "33", "35", "37", "39", "41", "42", "43", "44" };
+
+            AcumulaCasillas(clavesASumar, "45", modPagina1);
+
+
+            // Resultado régimen general ( [27] - [45] )
+            if (Convert.ToDecimal(modPagina1["46"]?.Valor) == 0)
+                modPagina1["46"].Valor = Convert.ToDecimal(modPagina1["27"].Valor) - Convert.ToDecimal(modPagina1["45"].Valor);
+
+
+            // Suma de resultados ( [46] + [58] + [76] )
+            if (Convert.ToDecimal(modPagina3["64"]?.Valor) == 0)
+                modPagina3["64"].Valor = Convert.ToDecimal(modPagina1["46"].Valor) + ((modPagina2 == null) ? 0 : Convert.ToDecimal(modPagina2["58"].Valor)) +
+                Convert.ToDecimal(modPagina3["76"].Valor);
+
+            // Atribuible a la Administracion del Estado
+            if (Convert.ToDecimal(modPagina3["65"]?.Valor) == 0)
+                modPagina3["65"].Valor = 100;
+
+            // Atribuible a la Administración del Estado
+            if (Convert.ToDecimal(modPagina3["66"]?.Valor) == 0)
+                modPagina3["66"].Valor = Math.Round(Convert.ToDecimal(modPagina3["65"].Valor) / 100 *
+                Convert.ToDecimal(modPagina3["64"].Valor), 2);
+
+            // Comprobamos si existen cuotas a compensar de periodos anteriores.
+            decimal cuotasACompensar = Convert.ToDecimal(modPagina3["110"].Valor);
+
+            if (cuotasACompensar > 0) // Existen cuotas a compensar de periodos anteriores, por lo que calculamos que importe se aplicará en este periodo.
+            {
+                decimal resultadoPeriodo = Convert.ToDecimal(modPagina3["66"].Valor) + Convert.ToDecimal(modPagina3["77"].Valor) + Convert.ToDecimal(modPagina3["68"].Valor);
+
+                if (Convert.ToDecimal(modPagina3["78"]?.Valor) == 0)
+                {
+                    if (resultadoPeriodo >= cuotasACompensar)
+                        modPagina3["78"].Valor = cuotasACompensar;
+                    else
+                        modPagina3["78"].Valor = resultadoPeriodo;
+                }                    
+            }
+
+            // Cuotas a compensar de periodos previos pendientes para periodos posteriores ([110] - [78]) [87]
+            if (Convert.ToDecimal(modPagina3["87"]?.Valor) == 0)
+                modPagina3["87"].Valor = Convert.ToDecimal(modPagina3["110"].Valor) - Convert.ToDecimal(modPagina3["78"].Valor);
+
+            // Resultado ( [66] + [77] - [78] + [68] )
+            decimal resultado = Convert.ToDecimal(modPagina3["66"].Valor) +
+            Convert.ToDecimal(modPagina3["77"].Valor) -
+            Convert.ToDecimal(modPagina3["78"].Valor) +
+            Convert.ToDecimal(modPagina3["68"].Valor);
+
+            if (Convert.ToDecimal(modPagina3["69"]?.Valor) == 0)
+                modPagina3["69"].Valor = resultado;
+
+            // Resultado de la liquidación ( [69] - [70] ) [71]
+            if (Convert.ToDecimal(modPagina3["71"]?.Valor) == 0)
+                modPagina3["71"].Valor = Convert.ToDecimal(modPagina3["69"].Valor) - Convert.ToDecimal(modPagina3["70"].Valor);
+
+            Paginas.Empaquetables.Sort(); // Ordenamos las páginas para evitar problemas indeseados.
         }
 
         #endregion

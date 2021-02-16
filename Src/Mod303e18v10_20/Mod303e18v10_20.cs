@@ -122,7 +122,8 @@ namespace AeatModelos.Mod303e18v10_20
             Mod303e18v10_20p03 modPagina3 = null;
 
             for (int p = Paginas.Empaquetables.Count - 1; p > -1; p--)
-                modPagina3 = Paginas.Empaquetables[Paginas.Empaquetables.Count - 1] as Mod303e18v10_20p03;
+                if (modPagina3 == null)
+                    modPagina3 = Paginas.Empaquetables[p] as Mod303e18v10_20p03;
 
             if (modPagina3 == null)
             {

@@ -46,7 +46,7 @@ namespace AeatModelos.Mod303e21v103
     /// <summary>
     /// Página 2 modelo 303.  Diseño de registro: DR303e21v103.xlsx.
     /// </summary>
-    public class Mod303e21v103p02 : RegistroModPagina
+    public class Mod303e21v103p02 : Mod303e19v10_10.Mod303e19v10_10p02
     {
         #region Construtores de Instancia
 

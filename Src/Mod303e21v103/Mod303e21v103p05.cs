@@ -67,78 +67,133 @@ namespace AeatModelos.Mod303e21v103
             {
                 {++c,    new RegistroCampo(1,    1,    2,  "An",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,                      "<T"        )}, //001
                 {++c,    new RegistroCampo(1,    3,    3,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,                      303,    0   )}, //002
-                {++c,    new RegistroCampo(1,    6,    5,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,                      4000,   0   )}, //003
-                {++c,    new RegistroCampo(1,   11,    1,  "An",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,                      ">"         )}, //004
+                {++c,    new RegistroCampo(1,    6,    5,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,                      5000,   0   )}, //003
+                {++c,    new RegistroCampo(1,   11,    1,  " An ",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,                      ">"         )}, //004
                 {++c,    new RegistroCampo(1,   12,    1,  "A",       Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                                   )}, //005
-                {++c,    new RegistroCampo(1,   13,    1,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                                   )}, //006
-                {++c,    new RegistroCampo(1,   14,    4,  "An",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                                   )}, //007
-                {++c,    new RegistroCampo(1,   18,    1,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                                   )}, //008
-                {++c,    new RegistroCampo(1,   19,    4,  "An",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                                   )}, //009
-                {++c,    new RegistroCampo(1,   23,    1,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                                   )}, //010
-                {++c,    new RegistroCampo(1,   24,    4,  "An",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                                   )}, //011
-                {++c,    new RegistroCampo(1,   28,    1,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                                   )}, //012
-                {++c,    new RegistroCampo(1,   29,    4,  "An",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                                   )}, //013
-                {++c,    new RegistroCampo(1,   33,    1,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                                   )}, //014
-                {++c,    new RegistroCampo(1,   34,    4,  "An",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                                   )}, //015
-                {++c,    new RegistroCampo(1,   38,    1,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                                   )}, //016
-                {++c,    new RegistroCampo(1,   39,    4,  "An",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                                   )}, //017
-                // Información adicional - Exclusivamente a cumplimentar en el último periodo exonerados de la Declaración-resumen anual del IVA:
-                // D - Marque si ha efectuado operaciones por las que tenga obligación de presentar la declaración anual de operaciones con terceras personas.
-                // X o blanco.
-                {++c,    new RegistroCampo(1,   43,    1,  "An",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "OperacionesTercerasPersonas"          )}, //018
-                // Información de la tributación por razón de territorio: Álava [89].
-                {++c,    new RegistroCampo(1,   44,    5,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "89",                      0,   2      )}, //019
-                // Información de la tributación por razón de territorio: Guipuzcoa [90].
-                {++c,    new RegistroCampo(1,   49,    5,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "90",                      0,   2      )}, //020
-                // Información de la tributación por razón de territorio: Vizcaya [91].
-                {++c,    new RegistroCampo(1,   54,    5,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "91",                      0,   2      )}, //021
-                // Información de la tributación por razón de territorio: Navarra [92].
-                {++c,    new RegistroCampo(1,   59,    5,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "92",                      0,   2      )}, //022
-                // Información de la tributación por razón de territorio: Territorio común [107].
-                {++c,    new RegistroCampo(1,   64,    5,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "107",                     0,   2      )}, //023
 
-                // *** INICIO: Información adicional - Exclusivamente a cumplimentar en el último periodo exonerados de la Declaración-resumen anual del IVA *** 
-                // *** Operaciones realizadas en el ejercicio - ***
-                // Operaciones en régimen general [80].
-                {++c,    new RegistroCampo(1,   69,   17,  "N",       Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "80",                      0,   2, true)}, //024
-                // Operaciones en régimen especial del criterio de caja conforme art. 75 LIVA [81].
-                {++c,    new RegistroCampo(1,   86,   17,  "N",       Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "81",                      0,   2, true)}, //025
-                // Entregas intracomunitarias de bienes y servicios [93].
-                {++c,    new RegistroCampo(1,  103,   17,  "N",       Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "93",                      0,   2, true)}, //026
-                // Exportaciones y otras operaciones exentas con derecho a deducción [94].
-                {++c,    new RegistroCampo(1,  120,   17,  "N",       Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "94",                      0,   2, true)}, //027
-                // Operaciones exentas sin derecho a deducción [83].
-                {++c,    new RegistroCampo(1,  137,   17,  "N",       Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "83",                      0,   2, true)}, //028
-                // Operaciones no sujetas por reglas de localización o con inversión del sujeto pasivo [84].
-                {++c,    new RegistroCampo(1,  154,   17,  "N",       Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "84",                      0,   2, true)}, //029
-                // Entregas de bienes objeto de instalación o montaje en otros Estados miembros [85].
-                {++c,    new RegistroCampo(1,  171,   17,  "N",       Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "85",                      0,   2, true)}, //030
-                // Reservado AEAT.
-                {++c,    new RegistroCampo(1,  188,   17,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                                   )}, //031
-                {++c,    new RegistroCampo(1,  205,   17,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                                   )}, //032
-                {++c,    new RegistroCampo(1,  222,   17,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                                   )}, //033
-                // Operaciones en régimen simplificado [86].
-                {++c,    new RegistroCampo(1,  239,   17,  "N",       Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "86",                      0,   2, true)}, //034
-                // Operaciones en régimen especial de la agricultura, ganadería y pesca [95].
-                {++c,    new RegistroCampo(1,  256,   17,  "N",       Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "95",                      0,   2, true)}, //035
-                // Operaciones realizadas por sujetos pasivos acogidos al régimen especial del recargo de equivalencia [96].
-                {++c,    new RegistroCampo(1,  273,   17,  "N",       Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "96",                      0,   2, true)}, //036
-                // Operaciones en Régimen especial de bienes usados, objetos de arte, antigüedades y objetos de colección [97].
-                {++c,    new RegistroCampo(1,  290,   17,  "N",       Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "97",                      0,   2, true)}, //037
-                // Operaciones en régimen especial de Agencias de Viajes [98].
-                {++c,    new RegistroCampo(1,  307,   17,  "N",       Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "98",                      0,   2, true)}, //038
-                // Entregas de bienes inmuebles no habituales, operaciones financieras y relativas al oro de inversión no habituales [79].
-                {++c,    new RegistroCampo(1,  324,   17,  "N",       Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "79",                      0,   2, true)}, //039
-                // Entregas de bienes de inversión [99].
-                {++c,    new RegistroCampo(1,  341,   17,  "N",       Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "99",                      0,   2, true)}, //040
-                // Total volumen de operaciones ([80]+[81]+[93]+[94]+[83]+[84]+[85]+[86]+[95]+[96]+[97]+[98]-[79]-[99]) [88].
-                {++c,    new RegistroCampo(1,  358,   17,  "N",       Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "88",                      0,   2, true)}, //041
-                // *** FINAL: Información adicional - Exclusivamente a cumplimentar en el último periodo exonerados de la Declaración-resumen anual del IVA *** 
-                // *** Operaciones realizadas en el ejercicio - ***
+                // *** Prorratas - 1 - 
+                // Código CNAE [500].
+                {++c,    new RegistroCampo(1,   13,    3,  "An",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "500"                                  )}, //006
+                // Importe de operaciones [501].
+                {++c,    new RegistroCampo(1,   16,   17,  "N",       Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "501",                     0,   2, true)}, //007
+                // Importe de operaciones con derecho a deducción [502].
+                {++c,    new RegistroCampo(1,   33,   17,  "N",       Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "502",                     0,   2, true)}, //008
+                // Tipo de prorrata [503].
+                {++c,    new RegistroCampo(1,   50,    1,  "An",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "503"                                  )}, //009
+                // % de prorrata [504].
+                {++c,    new RegistroCampo(1,   51,    5,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "504",                     0,   2      )}, //010
+                                
+                // *** Prorratas - 2 - 
+                // Código CNAE [505].
+                {++c,    new RegistroCampo(1,   56,    3,  "An",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "505"                                  )}, //011
+                // Importe de operaciones [506].
+                {++c,    new RegistroCampo(1,   59,   17,  "N",       Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "506",                     0,   2, true)}, //012
+                // Importe de operaciones con derecho a deducción [507].
+                {++c,    new RegistroCampo(1,   76,   17,  "N",       Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "507",                     0,   2, true)}, //013
+                // Tipo de prorrata [508].
+                {++c,    new RegistroCampo(1,   93,    1,  "An",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "508"                                  )}, //014
+                // % de prorrata [509].
+                {++c,    new RegistroCampo(1,   94,    5,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "509",                     0,   2      )}, //015
+                
+                // *** Prorratas - 3 - 
+                // Código CNAE [510].
+                {++c,    new RegistroCampo(1,   99,    3,  "An",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "510"                                  )}, //016
+                // Importe de operaciones [511].
+                {++c,    new RegistroCampo(1,  102,   17,  "N",       Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "511",                     0,   2, true)}, //017
+                // Importe de operaciones con derecho a deducción [512].
+                {++c,    new RegistroCampo(1,  119,   17,  "N",       Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "512",                     0,   2, true)}, //018
+                // Tipo de prorrata [513].
+                {++c,    new RegistroCampo(1,  136,    1,  "An",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "513"                                  )}, //019
+                // % de prorrata [514].
+                {++c,    new RegistroCampo(1,  137,    5,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "514",                     0,   2      )}, //020
+                
+                // *** Prorratas - 4 - 
+                // Código CNAE [515].
+                {++c,    new RegistroCampo(1,  142,    3,  "An",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "515"                                  )}, //021
+                // Importe de operaciones [516].
+                {++c,    new RegistroCampo(1,  145,   17,  "N",       Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "516",                     0,   2, true)}, //022
+                // Importe de operaciones con derecho a deducción [517].
+                {++c,    new RegistroCampo(1,  162,   17,  "N",       Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "517",                     0,   2, true)}, //023
+                // Tipo de prorrata [518].
+                {++c,    new RegistroCampo(1,  179,    1,  "An",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "518"                                  )}, //024
+                // % de prorrata [519].
+                {++c,    new RegistroCampo(1,  180,    5,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "519",                     0,   2      )}, //025
+                
+                // *** Prorratas - 5 - 
+                // Código CNAE [520].
+                {++c,    new RegistroCampo(1,  185,    3,  "An",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "520"                                  )}, //026
+                // Importe de operaciones [521].
+                {++c,    new RegistroCampo(1,  188,   17,  "N",       Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "521",                     0,   2, true)}, //027
+                // Importe de operaciones con derecho a deducción [522].
+                {++c,    new RegistroCampo(1,  205,   17,  "N",       Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "522",                     0,   2, true)}, //028
+                // Tipo de prorrata [523].
+                {++c,    new RegistroCampo(1,  222,    1,  "An",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "523"                                  )}, //029
+                // % de prorrata [524].
+                {++c,    new RegistroCampo(1,  223,    5,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "524",                     0,   2      )}, //030
+
+                // *** 13. Reg. Deducc. Diferenc.- 1 -
+                // IVA ded. Operac. Interiores - Bienes y servicios.
+                {++c,    new RegistroCampo(1,  228,   17,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "700",                     0,   2      )}, //031
+                {++c,    new RegistroCampo(1,  245,   17,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "701",                     0,   2      )}, //032
+                // IVA ded. Operac. Interiores - Bienes inversión.
+                {++c,    new RegistroCampo(1,  262,   17,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "702",                     0,   2      )}, //033
+                {++c,    new RegistroCampo(1,  279,   17,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "703",                     0,   2      )}, //034
+                // IVA ded. Importaciones - Bienes corrientes.
+                {++c,    new RegistroCampo(1,  296,   17,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "704",                     0,   2      )}, //035
+                {++c,    new RegistroCampo(1,  313,   17,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "705",                     0,   2      )}, //036
+                // IVA ded. Importaciones - Bienes inversión.
+                {++c,    new RegistroCampo(1,  330,   17,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "706",                     0,   2      )}, //037
+                {++c,    new RegistroCampo(1,  347,   17,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "707",                     0,   2      )}, //038
+                // IVA ded. Adquisic. intracomun. - Bienes corrientes.
+                {++c,    new RegistroCampo(1,  364,   17,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "708",                     0,   2      )}, //039
+                {++c,    new RegistroCampo(1,  381,   17,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "709",                     0,   2      )}, //040
+                // IVA ded. Adquisic. intracomun. - Bienes inversión.
+                {++c,    new RegistroCampo(1,  398,   17,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "710",                     0,   2      )}, //041
+                {++c,    new RegistroCampo(1,  415,   17,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "711",                     0,   2      )}, //042
+                // Compensac. rég. especial agric./ganad./pesca.
+                {++c,    new RegistroCampo(1,  432,   17,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "712",                     0,   2      )}, //043
+                {++c,    new RegistroCampo(1,  449,   17,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "713",                     0,   2      )}, //044
+                // Rectificación de deducciones.
+                {++c,    new RegistroCampo(1,  466,   17,  "N",       Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "714",                     0,   2, true)}, //045
+                {++c,    new RegistroCampo(1,  483,   17,  "N",       Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "715",                     0,   2, true)}, //046
+                // Regularización de inversiones.
+                {++c,    new RegistroCampo(1,  500,   17,  "N",       Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "716",                     0,   2, true)}, //047
+                // Suma de deducciones.
+                {++c,    new RegistroCampo(1,  517,   17,  "N",       Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "717",                     0,   2, true)}, //048
+                
+                // *** 13. Reg. Deducc. Diferenc.- 2 -
+                // IVA ded. Operac. Interiores - Bienes y servicios.
+                {++c,    new RegistroCampo(1,  534,   17,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "718",                     0,   2      )}, //049
+                {++c,    new RegistroCampo(1,  551,   17,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "719",                     0,   2      )}, //050
+                // IVA ded. Operac. Interiores - Bienes inversión.
+                {++c,    new RegistroCampo(1,  568,   17,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "720",                     0,   2      )}, //051
+                {++c,    new RegistroCampo(1,  585,   17,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "721",                     0,   2      )}, //052
+                // IVA ded. Importaciones - Bienes corrientes.
+                {++c,    new RegistroCampo(1,  602,   17,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "722",                     0,   2      )}, //053
+                {++c,    new RegistroCampo(1,  619,   17,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "723",                     0,   2      )}, //054
+                // IVA ded. Importaciones - Bienes inversión.
+                {++c,    new RegistroCampo(1,  636,   17,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "724",                     0,   2      )}, //055
+                {++c,    new RegistroCampo(1,  653,   17,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "725",                     0,   2      )}, //056
+                // IVA ded. Adquisic. intracomun. - Bienes corrientes.
+                {++c,    new RegistroCampo(1,  670,   17,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "726",                     0,   2      )}, //057
+                {++c,    new RegistroCampo(1,  687,   17,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "727",                     0,   2      )}, //058
+                // IVA ded. Adquisic. intracomun. - Bienes inversión.
+                {++c,    new RegistroCampo(1,  704,   17,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "728",                     0,   2      )}, //059
+                {++c,    new RegistroCampo(1,  721,   17,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "729",                     0,   2      )}, //060
+                // Compensac. rég. especial agric./ganad./pesca.
+                {++c,    new RegistroCampo(1,  738,   17,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "730",                     0,   2      )}, //061
+                {++c,    new RegistroCampo(1,  755,   17,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "731",                     0,   2      )}, //062
+                // Rectificación de deducciones.
+                {++c,    new RegistroCampo(1,  772,   17,  "N",       Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "732",                     0,   2, true)}, //063
+                {++c,    new RegistroCampo(1,  789,   17,  "N",       Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "733",                     0,   2, true)}, //064
+                // Regularización de inversiones.
+                {++c,    new RegistroCampo(1,  806,   17,  "N",       Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "734",                     0,   2, true)}, //065
+                // Suma de deducciones.
+                {++c,    new RegistroCampo(1,  823,   17,  "N",       Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "735",                     0,   2, true)}, //066
 
                 // Reservado AEAT.
-                {++c,    new RegistroCampo(1,  375,  600,  "An",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                                   )}, //042
-                {++c,    new RegistroCampo(1,  975,   12,  "An",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,      "</T30304000>"              )}, //043
+                {++c,    new RegistroCampo(1,  840,  672,  "An",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                                   )}, //067
+                {++c,    new RegistroCampo(1, 1512,   12,  "An",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,      "</T30305000>"              )}, //068
             };
         }
 
