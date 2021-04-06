@@ -201,7 +201,9 @@ namespace AeatModelos.Mod303e21v103
 
                 if (Convert.ToDecimal(modPagina3["78"]?.Valor) == 0)
                 {
-                    if (resultadoPeriodo >= cuotasACompensar)
+                    if(resultadoPeriodo <= 0)
+                        modPagina3["78"].Valor = 0;
+                    else if (resultadoPeriodo >= cuotasACompensar)
                         modPagina3["78"].Valor = cuotasACompensar;
                     else
                         modPagina3["78"].Valor = resultadoPeriodo;
