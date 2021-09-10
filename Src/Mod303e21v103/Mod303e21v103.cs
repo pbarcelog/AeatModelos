@@ -51,6 +51,7 @@ namespace AeatModelos.Mod303e21v103
     /// </summary>
     public class Mod303e21v103 : Mod303e19v10_10.Mod303e19v10_10
     {
+
         #region Construtores de Instancia
 
         /// <summary>
@@ -79,20 +80,29 @@ namespace AeatModelos.Mod303e21v103
 
         #endregion
 
-        #region Métodos Públicos de Instancia
+        #region Métodos Privados de Instancia
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="casillasBase"></param>
+        /// <param name="casillaResultado"></param>
+        /// <param name="modPagina"></param>
         private void AcumulaCasillas(string[] casillasBase, string casillaResultado, RegistroModPagina modPagina)
         {
             decimal suma = 0;
 
             foreach (var clave in casillasBase)
-            {
                 suma += Convert.ToDecimal(modPagina[clave]?.Valor);
-            }
 
             if (Convert.ToDecimal(modPagina[casillaResultado]?.Valor) == 0)
                 modPagina[casillaResultado].Valor = suma;
         }
+
+        #endregion
+
+        #region Métodos Públicos de Instancia
+
 
         /// <summary>
         /// Devuelve una cadena con la representación del titular del
@@ -231,5 +241,6 @@ namespace AeatModelos.Mod303e21v103
         }
 
         #endregion
+
     }
 }

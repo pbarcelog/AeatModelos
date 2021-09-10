@@ -73,14 +73,14 @@ namespace AeatModelos.Comunicaciones
         /// Certificado de cliente para la conexión con los servicios
         /// de la aeat.
         /// </summary>
-        X509Certificate2 _Certificado;
+        protected X509Certificate2 _Certificado;
 
         /// <summary>
         /// Titular del certificado de cliente para la conexión 
         /// con los servicios
         /// de la aeat.
         /// </summary>        
-        CertificadoTitular _CertificadoTitular;
+        protected CertificadoTitular _CertificadoTitular;
 
         /// <summary>
         /// Enlace al servicio de presentación de la aeat 
@@ -97,7 +97,7 @@ namespace AeatModelos.Comunicaciones
         /// Fichero construido según el diseño de registro correspondiente
         /// de la aeat para el modelo.
         /// </summary>
-        string _TextoFichero;
+        protected string _TextoFichero;
 
         /// <summary>
         /// Texto de la petición a enviar al servicio de presentación de la
@@ -173,6 +173,7 @@ namespace AeatModelos.Comunicaciones
         /// <param name="encoding">Tipo de encoding para el envío del registro.</param>
         public Peticion(RegistroMod modelo, bool test = false, string certRef = null, string certClave = null, Encoding encoding = null)
         {
+
             Modelo = modelo;
             _Test = test;
 
@@ -216,7 +217,7 @@ namespace AeatModelos.Comunicaciones
         /// <returns>Url del servicio de la aeat correspondiente al modelo de la petición.</returns>
         protected virtual string GeneraEnlace(bool test) 
         {
-            var enlace = test ? Enlaces.BuscaEnlaceModelo(Modelo, true) : Enlaces.BuscaEnlaceModelo(Modelo);
+            var enlace = test ? Modelo.Enlaces.UrlPruebas : Modelo.Enlaces.UrlProduccion;
 
             if (enlace == null)
                 throw new Exception(Errores.MostrarMensaje("Peticion.001", $"{Modelo.GetType().Name}"));
@@ -284,7 +285,6 @@ namespace AeatModelos.Comunicaciones
         }
 
         #endregion
-
 
     }
 }

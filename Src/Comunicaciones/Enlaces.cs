@@ -52,7 +52,7 @@ namespace AeatModelos.Comunicaciones
     /// Enlaces con los servicios de la agencia tributaria.
     /// </summary>
     public class Enlaces
-    {    
+    {
 
         #region Propiedades Públicas Estáticas
 
@@ -63,10 +63,15 @@ namespace AeatModelos.Comunicaciones
         public static string PftwPicwPresBasica = "https://www1.agenciatributaria.gob.es/wlpl/PFTW-PICW/PresBasica";
 
         /// <summary>
+        /// Enlace al servicios de presentación de declaraciones versión 2022 del modelo 130,
+        /// 303...
+        /// </summary>
+        public static string PftwPicwPresBasicaDos = "https://www1.agenciatributaria.gob.es/wlpl/PFTW-PICW/PresBasicaDos";
+
+        /// <summary>
         /// Enlace al servicios de presentación de declaraciones mediante TGVI.
         /// </summary>
         public static string PftwPicwPresBasicaTgvi = "https://www1.agenciatributaria.gob.es/wlpl/OVPT-NTGV/";
-
 
         /// <summary>
         /// Enlace al servicios de presentación de declaraciones del modelo 130,
@@ -75,89 +80,15 @@ namespace AeatModelos.Comunicaciones
         public static string PftwPicwPresBasicaPruebas = "https://www7.aeat.es/wlpl/PFTW-PICW/PresBasica";
 
         /// <summary>
+        /// Enlace al servicios de presentación de declaraciones del modelo 130,
+        /// 303...
+        /// </summary>
+        public static string PftwPicwPresBasicaDosPruebas = "https://prewww1.aeat.es/wlpl/PFTW-PICW/PresBasicaDos";
+
+        /// <summary>
         /// Enlace al servicios de presentación de declaraciones mediante TGVI.
         /// </summary>
         public static string PftwPicwPresBasicaPruebasTgvi = "https://www7.aeat.es/wlpl/OVPT-NTGV/";
-
-
-        /// <summary>
-        /// Diccionario de enlaces por modelos referenciados por
-        /// la clave del modelo correspondiente.
-        /// </summary>
-        public static Dictionary<string, string> Modelos = new Dictionary<string, string>() {
-            { "Mod303e19v10_10",        PftwPicwPresBasica },
-            { "Mod303e21v103",          PftwPicwPresBasica },
-            { "Mod130e15v11",           PftwPicwPresBasica },
-            { "Mod390e2019v100",        PftwPicwPresBasica },
-            { "Mod123e15v13",           PftwPicwPresBasica },
-            { "Mod115e15v13",           PftwPicwPresBasica },
-            { "Mod111e16v18",           PftwPicwPresBasica },
-            { "Mod180e14v00",           PftwPicwPresBasicaTgvi },
-            { "Mod190e2017v00",         PftwPicwPresBasicaTgvi },
-            { "Mod193e2019v00",         PftwPicwPresBasicaTgvi },
-            { "Mod349e20v00",           PftwPicwPresBasicaTgvi },
-            { "Mod347e20v00",           PftwPicwPresBasicaTgvi },
-        };
-
-        /// <summary>
-        /// Diccionario de enlaces por modelos referenciados por
-        /// la clave del modelo correspondiente para el entorno de
-        /// pruebas.
-        /// </summary>
-        public static Dictionary<string, string> ModelosPruebas = new Dictionary<string, string>() {
-            { "Mod303e19v10_10",        PftwPicwPresBasicaPruebas },
-            { "Mod303e21v103",          PftwPicwPresBasicaPruebas },
-            { "Mod130e15v11",           PftwPicwPresBasicaPruebas },
-            { "Mod390e2019v100",        PftwPicwPresBasicaPruebas },
-            { "Mod123e15v13",           PftwPicwPresBasicaPruebas },
-            { "Mod115e15v13",           PftwPicwPresBasicaPruebas },
-            { "Mod111e16v18",           PftwPicwPresBasicaPruebas },
-            { "Mod180e14v00",           PftwPicwPresBasicaPruebasTgvi },
-            { "Mod190e2017v00",         PftwPicwPresBasicaPruebasTgvi },
-            { "Mod193e2019v00",         PftwPicwPresBasicaPruebasTgvi },
-            { "Mod349e20v00",           PftwPicwPresBasicaPruebasTgvi },
-            { "Mod347e20v00",           PftwPicwPresBasicaPruebasTgvi },
-        };
-
-        #endregion
-
-        #region Métodos Públicos Estáticos
-
-        /// <summary>
-        /// Devuelve el enlace al servicio online de la aeat para
-        /// el modelo facilitado como parámetro
-        /// </summary>
-        /// <param name="modelo">Instancia del modelo a consultar.</param>
-        /// <param name="test">Testigo para indicar si el enlace devuelto debe ser para el modo "Test".</param>
-        /// <returns>Enlace encontrado o nulo si no hay éxito.</returns>
-        public static string BuscaEnlaceModelo(RegistroMod modelo, bool test = false)
-        {
-
-            if (modelo == null)
-                throw new ArgumentNullException(Errores.MostrarMensaje("Enlaces.000"));
-
-            return BuscaEnlaceModelo(modelo.GetType(), test);
-        }
-
-        /// <summary>
-        /// Devuelve el enlace al servicio online de la aeat para
-        /// el modelo facilitado como parámetro
-        /// </summary>
-        /// <param name="tipoModelo">Tipo del modelo a consultar.</param>
-        /// <param name="test">Testigo para indicar si el enlace devuelto debe ser para el modo "Test".</param>
-        /// <returns>Enlace encontrado o nulo si no hay éxito.</returns>
-        public static string BuscaEnlaceModelo(Type tipoModelo, bool test = false)
-        {
-            string enlace = null;
-
-            var name = tipoModelo.Name;
-            var modelos = (Parametros.Actuales.Pruebas) ? ModelosPruebas : (test ? ModelosPruebas : Modelos);
-
-            if (modelos.ContainsKey(name))
-                return modelos[name];
-
-            return enlace;
-        }
 
         #endregion
 

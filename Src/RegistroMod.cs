@@ -72,6 +72,7 @@ namespace AeatModelos
             {"<T130", "AeatModelos.Mod130e15v11.Mod130e15v11" },
             {"<T131", "AeatModelos.Mod131e2019v1_00.Mod131e2019v1_00" },
             {"<T303", "AeatModelos.Mod303e19v10_10.Mod303e19v10_10" },
+            {"<T369", "AeatModelos.Mod303e19v10_10.Mod303e19v10_10" },
         };
 
         #endregion
@@ -99,8 +100,11 @@ namespace AeatModelos
         /// <param name="periodo">Periodo: 1T, 2T...01, 02...12</param>
         public RegistroMod(string ejercicio, string periodo)
         {
+            
             Ejercicio = ejercicio;
             Periodo = periodo;
+
+            IniciaEnlaces();
 
             VariablesEnvio = new Dictionary<string, string>() {
                 {"FIRNIF",          null },
@@ -225,6 +229,17 @@ namespace AeatModelos
 
         }
 
+        /// <summary>
+        /// Inicia los enlaces de los servicios correspondientes al modelo.
+        /// </summary>
+        internal virtual void IniciaEnlaces() 
+        {
+
+            Enlaces = new GestorDeEnlaces(Comunicaciones.Enlaces.PftwPicwPresBasica,
+                Comunicaciones.Enlaces.PftwPicwPresBasicaPruebas);
+
+        }
+
         #endregion
 
         #region Propiedades Públicas Estáticas
@@ -238,6 +253,11 @@ namespace AeatModelos
         #endregion
 
         #region Propiedades Públicas de Instancia
+
+        /// <summary>
+        /// Código de modelo AEAT.
+        /// </summary>
+        public string Modelo { get; internal set; }
 
         /// <summary>
         /// Valor del campo.
@@ -307,6 +327,19 @@ namespace AeatModelos
         /// es null.
         /// </summary>
         public ConjuntoDeEmpaquetables Paginas { get; protected set; }
+
+        /// <summary>
+        /// Si la instancia actual contiene registros de
+        /// detalle estos se muestran como ConjuntoDeEmpaquetables
+        /// en esta propiedad. Si no el valor de la propiedad
+        /// es null.
+        /// </summary>
+        public ConjuntoDeEmpaquetables Registros { get; protected set; }
+
+        /// <summary>
+        /// Enlaces de los servicios de presentación.
+        /// </summary>
+        public GestorDeEnlaces Enlaces { get; protected set; }
 
         #endregion
 

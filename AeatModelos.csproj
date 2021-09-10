@@ -45,7 +45,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Src\Comunicaciones\GestorDeEnlaces.cs" />
+    <Compile Include="Src\Comunicaciones\PeticionPresBasicaDos.cs" />
     <Compile Include="Src\Comunicaciones\PeticionTgvi.cs" />
+    <Compile Include="Src\Comunicaciones\RespuestaPresBasicaDos.cs" />
     <Compile Include="Src\Comunicaciones\RespuestaTgvi.cs" />
     <Compile Include="Src\ICasilla.cs" />
     <Compile Include="Src\Comunicaciones\Certificado.cs" />
@@ -128,6 +131,33 @@
     <Compile Include="Src\Mod349e20v00\Mod349e20v00p01.cs" />
     <Compile Include="Src\Mod349e20v00\Mod349e20v00p02.cs" />
     <Compile Include="Src\Mod349e20v00\Txt.cs" />
+    <Compile Include="Src\Mod369e21v10i\Mod369e21v10i.cs" />
+    <Compile Include="Src\Mod369e21v10i\Txt.cs" />
+    <Compile Include="Src\Mod369e21v10u\Txt.cs" />
+    <Compile Include="Src\Mod369e21v10x\Mod369e21v10x.cs" />
+    <Compile Include="Src\Mod369e21v10u\Mod369e21v10u.cs" />
+    <Compile Include="Src\Mod369e21v10i\Mod369e21v10i01.cs" />
+    <Compile Include="Src\Mod369e21v10i\Mod369e21v10i01_Item.cs" />
+    <Compile Include="Src\Mod369e21v10u\Mod369e21v10u04.cs" />
+    <Compile Include="Src\Mod369e21v10u\Mod369e21v10u03.cs" />
+    <Compile Include="Src\Mod369e21v10u\Mod369e21v10u02.cs" />
+    <Compile Include="Src\Mod369e21v10u\Mod369e21v10u01.cs" />
+    <Compile Include="Src\Mod369e21v10u\Mod369e21v10u04_Item.cs" />
+    <Compile Include="Src\Mod369e21v10u\Mod369e21v10u03_Item.cs" />
+    <Compile Include="Src\Mod369e21v10u\Mod369e21v10u02_Item.cs" />
+    <Compile Include="Src\Mod369e21v10u\Mod369e21v10u01_Item.cs" />
+    <Compile Include="Src\Mod369e21v10i\Mod369e21v10i02.cs" />
+    <Compile Include="Src\Mod369e21v10u\Mod369e21v10u05.cs" />
+    <Compile Include="Src\Mod369e21v10i\Mod369e21v10i02_Item.cs" />
+    <Compile Include="Src\Mod369e21v10u\Mod369e21v10u05_Item.cs" />
+    <Compile Include="Src\Mod369e21v10i\Mod369e21v10i03.cs" />
+    <Compile Include="Src\Mod369e21v10u\Mod369e21v10u06.cs" />
+    <Compile Include="Src\Mod369e21v10x\Mod369e21v10x03.cs" />
+    <Compile Include="Src\Mod369e21v10x\Mod369e21v10x02_Item.cs" />
+    <Compile Include="Src\Mod369e21v10x\Mod369e21v10x02.cs" />
+    <Compile Include="Src\Mod369e21v10x\Mod369e21v10x01_Item.cs" />
+    <Compile Include="Src\Mod369e21v10x\Mod369e21v10x01.cs" />
+    <Compile Include="Src\Mod369e21v10x\Txt.cs" />
     <Compile Include="Src\Mod390e2019v100\Mod390e2019v100.cs" />
     <Compile Include="Src\Mod390e2019v100\Mod390e2019v100p01.cs" />
     <Compile Include="Src\Mod390e2019v100\Mod390e2019v100p02.cs" />
@@ -149,6 +179,7 @@
     <Compile Include="Src\Mod303e18v10_10\Mod303e18v10_10.cs" />
     <Compile Include="Src\Mod303e18v10_10\Txt.cs" />
     <Compile Include="Src\RegistroModPagina.cs" />
+    <Compile Include="Src\RegistroModPaginaPresBasicaDos.cs" />
     <Compile Include="Src\RegistroModPaginaTgvi.cs" />
   </ItemGroup>
   <ItemGroup />

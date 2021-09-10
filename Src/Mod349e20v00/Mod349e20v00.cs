@@ -51,6 +51,7 @@ namespace AeatModelos.Mod349e20v00
     /// </summary>
     public class Mod349e20v00 : RegistroModPaginaTgvi
     {
+
         #region Construtores de Instancia
 
         /// <summary>
@@ -60,6 +61,9 @@ namespace AeatModelos.Mod349e20v00
         /// <param name="periodo">Periodo: 1T, 2T...01, 02...12, 0A</param>
         public Mod349e20v00(string ejercicio, string periodo) : base(ejercicio, periodo)
         {
+
+            Modelo = "349";
+
             PaginasMapa = new Dictionary<int, string>()
             {
                 {1, "AeatModelos.Mod349e20v00.Mod349e20v00p01"},
@@ -71,51 +75,52 @@ namespace AeatModelos.Mod349e20v00
 
             RegistroCampos = new Dictionary<decimal, IEmpaquetable>()
             {
-                {++c,    new RegistroCampo(0,   1,   1,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  1,           0          )}, // 01
-                {++c,    new RegistroCampo(0,   2,   3,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ModeloDeclaracion", 349, 0    )}, // 02
-                {++c,    new RegistroCampo(0,   5,   4,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  Ejercicio,   0          )}, // 03
-                {++c,    new RegistroCampo(0,   9,   9,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "NIF"                          )}, // 04
+                {++c,    new RegistroCampo(0,   1,   1,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  1,           0                                    )}, // 01
+                {++c,    new RegistroCampo(0,   2,   3,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ModeloDeclaracion", Convert.ToInt32(Modelo), 0          )}, // 02
+                {++c,    new RegistroCampo(0,   5,   4,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  Ejercicio,   0                                    )}, // 03
+                {++c,    new RegistroCampo(0,   9,   9,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "NIF"                                                    )}, // 04
                 // Primer apellido, espacio, segundo apellido, espacio, nombre, necesariamente en este orden.
-                {++c,    new RegistroCampo(0,  18,  40,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ApellidosNombreRazonSocial"   )}, // 05
+                {++c,    new RegistroCampo(0,  18,  40,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ApellidosNombreRazonSocial"                             )}, // 05
                 // --------- BLANCOS.
-                {++c,    new RegistroCampo(0,  58,   1,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"]                                    )}, // 06
+                {++c,    new RegistroCampo(0,  58,   1,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"]                                                              )}, // 06
                 // PERSONA CON QUIÉN RELACIONARSE. Campo 1: Teléfono
-                {++c,    new RegistroCampo(0,  59,   9,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ContactoTelefono"             )}, // 07
+                {++c,    new RegistroCampo(0,  59,   9,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ContactoTelefono"                                       )}, // 07
                 // PERSONA CON QUIÉN RELACIONARSE. Campo 2: Primer apellido, espacio, segundo apellido, espacio, nombre, en este orden.
-                {++c,    new RegistroCampo(0,  68,  40,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ContactoApellidosNombre"      )}, // 08
+                {++c,    new RegistroCampo(0,  68,  40,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ContactoApellidosNombre"                                )}, // 08
                 // NÚMERO IDENTIFICATIVO DE LA DECLARACIÓN.
                 {++c,    new RegistroCampo(0, 108,  13,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "NumeroIdentificativoDeclaracion", 3490000000001,     0  )}, // 09
                 // DECLARACIÓN COMPLEMENTARIA O SUSTITUTIVA. "C": DECLARACIÓN COMPLEMENTARIA o blanco.
-                {++c,    new RegistroCampo(0, 121,   1,  "A",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "Complementaria"               )}, // 10
+                {++c,    new RegistroCampo(0, 121,   1,  "A",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "Complementaria"                                         )}, // 10
                 // DECLARACIÓN COMPLEMENTARIA O SUSTITUTIVA. "S": DECLARACIÓN SUSTITUTIVA o blanco.
-                {++c,    new RegistroCampo(0, 122,   1,  "A",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "Sustitutiva"                  )}, // 11
+                {++c,    new RegistroCampo(0, 122,   1,  "A",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "Sustitutiva"                                            )}, // 11
                 // NÚMERO IDENTIFICATIVO DE LA DECLARACIÓN ANTERIOR.
-                {++c,    new RegistroCampo(0, 123,  13,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "JustificanteAnterior", null, 0)}, // 12
+                {++c,    new RegistroCampo(0, 123,  13,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "JustificanteAnterior", null, 0                          )}, // 12
                 // PERÍODO.
-                {++c,    new RegistroCampo(0, 136,   2,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  Periodo                 )}, // 13
+                {++c,    new RegistroCampo(0, 136,   2,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  Periodo                                           )}, // 13
                 // NÚMERO TOTAL DE OPERADORES INTRACOMUNITARIOS.
-                {++c,    new RegistroCampo(0, 138,   9,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "01",    null,     0           )}, // 14
+                {++c,    new RegistroCampo(0, 138,   9,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "01",    null,     0                                     )}, // 14
                 // IMPORTE DE LAS OPERACIONES INTRACOMUNITARIAS.
-                {++c,    new RegistroCampo(0, 147,  15,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "02",    null,     2           )}, // 15
+                {++c,    new RegistroCampo(0, 147,  15,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "02",    null,     2                                     )}, // 15
                 // NÚMERO TOTAL DE OPERADORES INTRACOMUNITARIOS CON RECTIFICACIONES.
-                {++c,    new RegistroCampo(0, 162,   9,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "03",    null,     0           )}, // 16
+                {++c,    new RegistroCampo(0, 162,   9,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "03",    null,     0                                     )}, // 16
                 // IMPORTE DE LAS RECTIFICACIONES.
-                {++c,    new RegistroCampo(0, 171,  15,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "04",    null,     2           )}, // 17
+                {++c,    new RegistroCampo(0, 171,  15,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "04",    null,     2                                     )}, // 17
                 // INDICADOR CAMBIO PERIODICIDAD EN LA OBLIGACIÓN DE DECLARAR.
-                {++c,    new RegistroCampo(0, 186,   1,  "A",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                           )}, // 18
+                {++c,    new RegistroCampo(0, 186,   1,  "A",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                                                     )}, // 18
                 // --------- BLANCOS.
-                {++c,    new RegistroCampo(0, 187, 204,  "A",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                           )}, // 19
+                {++c,    new RegistroCampo(0, 187, 204,  "A",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                                                     )}, // 19
                 // NIF DEL REPRESENTANTE LEGAL. (Si el declarante es menor de 14 años).
-                {++c,    new RegistroCampo(0, 391,   9,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "NIFRepresentanteLegalMenor"   )}, // 20
+                {++c,    new RegistroCampo(0, 391,   9,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "NIFRepresentanteLegalMenor"                             )}, // 20
                 // --------- BLANCOS.
-                {++c,    new RegistroCampo(0, 400, 101,  "A",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                           )}, // 21
+                {++c,    new RegistroCampo(0, 400, 101,  "A",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                                                     )}, // 21
 
                 // No se incluye ninguna página por defecto. Éstas se van añadiendo conforme al número de operadores intracomunitarios.
                 {++c,    new ConjuntoDeEmpaquetables(){ Empaquetables = new List<IEmpaquetable>(){
-                } } }, // 22
+                } }                                                                                                                                                     },  // 22
             };
 
             Paginas = RegistroCampos[22] as ConjuntoDeEmpaquetables;
+
         }
 
         #endregion
@@ -143,5 +148,6 @@ namespace AeatModelos.Mod349e20v00
         }
 
         #endregion
+
     }
 }

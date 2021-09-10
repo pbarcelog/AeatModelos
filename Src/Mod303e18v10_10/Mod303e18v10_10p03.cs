@@ -41,6 +41,7 @@
     Para más información, contacte con la dirección: info@irenesolutions.com    
  */
 
+using System;
 using System.Collections.Generic;
 
 namespace AeatModelos.Mod303e18v10_10
@@ -62,13 +63,15 @@ namespace AeatModelos.Mod303e18v10_10
         public Mod303e18v10_10p03(string ejercicio, string periodo) : base(ejercicio, periodo)
         {
 
+            Modelo = "303";
+
             string p = "P03";   // clave página
             int c = 0;          // contador
 
             RegistroCampos = new Dictionary<decimal, IEmpaquetable>()
             {
                  {++c,     new RegistroCampo(3,    1,   2,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],  null,  "<T"                )},
-                 {++c,     new RegistroCampo(3,    3,   3,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],  null,  303,        0       )},
+                 {++c,     new RegistroCampo(3,    3,   3,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],  null,  Convert.ToInt32(Modelo),        0       )},
                  {++c,     new RegistroCampo(3,    6,   5,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],  null,  3000,       0       )},
                  {++c,     new RegistroCampo(3,   11,   1,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],  null,  ">"                 )},
                  {++c,     new RegistroCampo(3,   12,  17,  "N",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],  "59"                        )},

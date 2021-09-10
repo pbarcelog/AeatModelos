@@ -62,6 +62,8 @@ namespace AeatModelos.Mod131e2019v1_00
         public Mod131e2019v1_00p01(string ejercicio, string periodo) : base(ejercicio, periodo)
         {
 
+            Modelo = "131";
+
             string p = "P01";   // clave página
             int c = 0;          // contador
 

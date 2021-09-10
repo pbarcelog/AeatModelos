@@ -41,6 +41,7 @@
     Para más información, contacte con la dirección: info@irenesolutions.com    
  */
 
+using System;
 using System.Collections.Generic;
 
 namespace AeatModelos.Mod347e20v00
@@ -50,6 +51,7 @@ namespace AeatModelos.Mod347e20v00
     /// </summary>
     public class Mod347e20v00p02 : RegistroModPagina
     {
+
         #region Construtores de Instancia
 
         /// <summary>
@@ -59,48 +61,51 @@ namespace AeatModelos.Mod347e20v00
         /// <param name="periodo">Periodo: 0A</param>
         public Mod347e20v00p02(string ejercicio, string periodo) : base(ejercicio, periodo)
         {
+
+            Modelo = "347";
+
             string p = "P02";   // clave página
             int c = 0;          // contador
 
             RegistroCampos = new Dictionary<decimal, IEmpaquetable>()
             {
-                {++c,    new RegistroCampo(1,   1,   1,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,                             2, 0  )}, // 01
-                {++c,    new RegistroCampo(1,   2,   3,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,                           347, 0  )}, // 02
-                {++c,    new RegistroCampo(1,   5,   4,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,                     Ejercicio, 0  )}, // 03
-                {++c,    new RegistroCampo(1,   9,   9,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "NIFDeclarante"                         )}, // 04
-                {++c,    new RegistroCampo(1,  18,   9,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "NIFArrendatario"                       )}, //005
-                {++c,    new RegistroCampo(1,  27,   9,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "NIFRepresentanteLegal"                 )}, //006
+                {++c,    new RegistroCampo(1,   1,   1,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,                             2, 0       )}, // 01
+                {++c,    new RegistroCampo(1,   2,   3,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null, Convert.ToInt32(Modelo), 0             )}, // 02
+                {++c,    new RegistroCampo(1,   5,   4,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,                     Ejercicio, 0       )}, // 03
+                {++c,    new RegistroCampo(1,   9,   9,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "NIFDeclarante"                              )}, // 04
+                {++c,    new RegistroCampo(1,  18,   9,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "NIFArrendatario"                            )}, // 05
+                {++c,    new RegistroCampo(1,  27,   9,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "NIFRepresentanteLegal"                      )}, // 06
                 // APELLIDOS Y NOMBRE O DENOMINACIÓN DEL PERCEPTOR. Primer apellido, espacio, segundo apellido, espacio, nombre, en este orden.
-                {++c,    new RegistroCampo(1,  36,  40,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ApellidosNombreDenominacion"           )}, //007
+                {++c,    new RegistroCampo(1,  36,  40,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ApellidosNombreDenominacion"                )}, // 07
                 // TIPO DE HOJA. Constante ‘I’.
-                {++c,    new RegistroCampo(1,  76,   1,  "A",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,        "I"                        )}, //008
+                {++c,    new RegistroCampo(1,  76,   1,  "A",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,        "I"                             )}, // 08
                 //  ------ BLANCOS.
-                {++c,    new RegistroCampo(1,  77,  22,  "A",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"]                                             )}, //009
+                {++c,    new RegistroCampo(1,  77,  22,  "A",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"]                                                  )}, // 09
                 // IMPORTE DE LA OPERACION.
-                {++c,    new RegistroCampo(1,  99,   1,  "A",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ImporteOperacionN"                     )}, //010
-                {++c,    new RegistroCampo(1, 100,  15,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ImporteOperacion",            null, 2  )}, //011
+                {++c,    new RegistroCampo(1,  99,   1,  "A",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ImporteOperacionN"                          )}, // 10
+                {++c,    new RegistroCampo(1, 100,  15,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ImporteOperacion",            null, 2       )}, // 11
                 // Situación inmueble.
-                {++c,    new RegistroCampo(1, 115,   1,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "SituaciónInmueble",           null, 0  )}, //012
+                {++c,    new RegistroCampo(1, 115,   1,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "SituaciónInmueble",           null, 0       )}, // 12
                 // Datos del inmueble.
-                {++c,    new RegistroCampo(1, 116,  25,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ReferenciaCatastral"                   )}, //013
-                {++c,    new RegistroCampo(1, 141,   5,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "TipoVia"                               )}, //014
-                {++c,    new RegistroCampo(1, 146,  50,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "NombreVia"                             )}, //015
-                {++c,    new RegistroCampo(1, 196,   3,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "TipoNumeracion"                        )}, //016
-                {++c,    new RegistroCampo(1, 199,   5,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "NumeroCasa"                            )}, //017
-                {++c,    new RegistroCampo(1, 204,   3,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "CalificadorNumero"                     )}, //018
-                {++c,    new RegistroCampo(1, 207,   3,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "Bloque"                                )}, //019
-                {++c,    new RegistroCampo(1, 210,   3,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "Portal"                                )}, //020
-                {++c,    new RegistroCampo(1, 213,   3,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "Escalera"                              )}, //021
-                {++c,    new RegistroCampo(1, 216,   3,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "Planta"                                )}, //022
-                {++c,    new RegistroCampo(1, 219,   3,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "Puerta"                                )}, //023
-                {++c,    new RegistroCampo(1, 222,  40,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "InfoAdicionalDomicilio"                )}, //024
-                {++c,    new RegistroCampo(1, 262,  30,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "Localidad"                             )}, //025
-                {++c,    new RegistroCampo(1, 292,  30,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "Municipio"                             )}, //026
-                {++c,    new RegistroCampo(1, 322,   5,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "CodigoMunicipio"                       )}, //027
-                {++c,    new RegistroCampo(1, 327,   2,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "CodigoProvincia"                       )}, //028
-                {++c,    new RegistroCampo(1, 329,   5,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "CodigoPostal"                          )}, //029
+                {++c,    new RegistroCampo(1, 116,  25,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ReferenciaCatastral"                        )}, // 13
+                {++c,    new RegistroCampo(1, 141,   5,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "TipoVia"                                    )}, // 14
+                {++c,    new RegistroCampo(1, 146,  50,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "NombreVia"                                  )}, // 15
+                {++c,    new RegistroCampo(1, 196,   3,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "TipoNumeracion"                             )}, // 16
+                {++c,    new RegistroCampo(1, 199,   5,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "NumeroCasa"                                 )}, // 17
+                {++c,    new RegistroCampo(1, 204,   3,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "CalificadorNumero"                          )}, // 18
+                {++c,    new RegistroCampo(1, 207,   3,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "Bloque"                                     )}, // 19
+                {++c,    new RegistroCampo(1, 210,   3,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "Portal"                                     )}, // 20
+                {++c,    new RegistroCampo(1, 213,   3,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "Escalera"                                   )}, // 21
+                {++c,    new RegistroCampo(1, 216,   3,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "Planta"                                     )}, // 22
+                {++c,    new RegistroCampo(1, 219,   3,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "Puerta"                                     )}, // 23
+                {++c,    new RegistroCampo(1, 222,  40,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "InfoAdicionalDomicilio"                     )}, // 24
+                {++c,    new RegistroCampo(1, 262,  30,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "Localidad"                                  )}, // 25
+                {++c,    new RegistroCampo(1, 292,  30,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "Municipio"                                  )}, // 26
+                {++c,    new RegistroCampo(1, 322,   5,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "CodigoMunicipio"                            )}, // 27
+                {++c,    new RegistroCampo(1, 327,   2,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "CodigoProvincia"                            )}, // 28
+                {++c,    new RegistroCampo(1, 329,   5,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "CodigoPostal"                               )}, // 29
                 // ---
-                {++c,    new RegistroCampo(1, 334, 167,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                                    )}, //030
+                {++c,    new RegistroCampo(1, 334, 167,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                                         )}  // 30
             };
         }
 
@@ -116,5 +121,6 @@ namespace AeatModelos.Mod347e20v00
         }
 
         #endregion
+
     }
 }

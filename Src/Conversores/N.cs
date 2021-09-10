@@ -41,8 +41,6 @@
     Para más información, contacte con la dirección: info@irenesolutions.com    
  */
 
-using System;
-
 namespace AeatModelos.Conversores
 {
 

@@ -171,7 +171,7 @@ namespace AeatModelos.Comunicaciones
 
         /// <summary>
         /// Realiza las labores necesarias en caso de que la respuesta
-        /// se errónea.
+        /// sea errónea.
         /// </summary>
         protected virtual void TratarErrores()
         {
@@ -181,13 +181,31 @@ namespace AeatModelos.Comunicaciones
         }
 
         /// <summary>
+        /// Obtiene el código CSV de una respuesta correcta.
+        /// </summary>
+        protected virtual void RecuperaCSV() 
+        {
+            CSV = _RgCsv.Match(_ContenidoTexto).Value;
+        }
+
+        /// <summary>
+        /// Obtiene el enlace al pdf de la declaración obtenida
+        /// en una respuesta correcta.
+        /// </summary>
+        protected virtual void RecuperaEnlacePdf() 
+        {
+            EnlacePdf = _RgPdfEnlace.Match(_ContenidoTexto).Value;
+        }
+
+        /// <summary>
         /// Realiza las labores necesarias en caso de que la respuesta
         /// se satisfactoria.
         /// </summary>
         protected virtual void TratarExito()
         {
-            CSV = _RgCsv.Match(_ContenidoTexto).Value;
-            EnlacePdf = _RgPdfEnlace.Match(_ContenidoTexto).Value;
+
+            RecuperaCSV();
+            RecuperaEnlacePdf();
 
             if (string.IsNullOrEmpty(EnlacePdf))
                 throw new InvalidDataException($"Enlace a PDF de declaración no encontrado para el CSV: {CSV}.\nCompruebe " + 
@@ -235,7 +253,7 @@ namespace AeatModelos.Comunicaciones
         /// </summary>
         /// <param name="binario">Bytes con un posible documento PDF.</param>
         /// <returns>True en caso de ser un fichero PDF.</returns>
-        private bool EsFormatoPDF(byte[] binario)
+        protected bool EsFormatoPDF(byte[] binario)
         {
             bool esPdf = 
                 (binario[0] == _PdfNumerosMagicos[0]) &&
@@ -304,7 +322,22 @@ namespace AeatModelos.Comunicaciones
         /// </summary>
         public byte[] DatosPdf { get; protected set; }
 
+        /// <summary>
+        /// Representación textual de la instancia.
+        /// </summary>
+        /// <returns>Representación textual de la instancia.</returns>
+        public override string ToString()
+        {
+
+            if (Errores != null && Errores.Count > 0)
+                return $"ER: [{Errores[0].Codigo}] [{Errores[0].Descripcion}";
+
+            return $"OK: [CSV] {CSV}";
+
+                
+        }
+
         #endregion
- 
+
     }
 }

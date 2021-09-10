@@ -51,7 +51,7 @@ namespace AeatModelos.Mod111e16v18
     /// <summary>
     /// Página 0 modelo 111. Diseño de registro: dr111e16v18.xlsx.
     /// </summary>
-    public class Mod111e16v18 : RegistroModPagina
+    public class Mod111e16v18 : RegistroModPaginaPresBasicaDos
     {
 
         #region Construtores de Instancia
@@ -64,6 +64,8 @@ namespace AeatModelos.Mod111e16v18
         public Mod111e16v18(string ejercicio, string periodo) : base(ejercicio, periodo)
         {
 
+            Modelo = "111";
+
             PaginasMapa = new Dictionary<int, string>()
             {
                 {1, "AeatModelos.Mod111e16v18.Mod111e16v18p01"}
@@ -75,10 +77,10 @@ namespace AeatModelos.Mod111e16v18
             RegistroCampos = new Dictionary<decimal, IEmpaquetable>()
             {
                 {++c,    new RegistroCampo(0,   1,   2,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  "<T"                    )},
-                {++c,    new RegistroCampo(0,   3,   3,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  "111"                   )},
+                {++c,    new RegistroCampo(0,   3,   3,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  Modelo                  )},
                 {++c,    new RegistroCampo(0,   6,   1,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  "0"                     )},
-                {++c,    new RegistroCampo(0,   7,   4,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,   Ejercicio               )},
-                {++c,    new RegistroCampo(0,  11,   2,  "An ",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,   Periodo                 )},
+                {++c,    new RegistroCampo(0,   7,   4,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,   Ejercicio              )},
+                {++c,    new RegistroCampo(0,  11,   2,  "An ",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,   Periodo                )},
                 {++c,    new RegistroCampo(0,  13,   5,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  "0000>"                 )},
                 {++c,    new RegistroCampo(0,  18,   5,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  "<AUX>"                 )},
                 {++c,    new RegistroCampo(0,  23,  70,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  new string(' ', 70)     )},
@@ -93,7 +95,7 @@ namespace AeatModelos.Mod111e16v18
                             new Mod111e16v18p01(Ejercicio, Periodo)
                 } } },
 
-                {++c,    new RegistroCampo(0,   0,  18,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  $"</T1110{Ejercicio}{Periodo}0000>")},
+                {++c,    new RegistroCampo(0,   0,  18,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  $"</T{Modelo}0{Ejercicio}{Periodo}0000>")},
                 {++c,    new RegistroCampo(0,   0,   1,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,   '\n'                    )},
             };
 

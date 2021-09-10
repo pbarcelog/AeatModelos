@@ -41,6 +41,7 @@
     Para más información, contacte con la dirección: info@irenesolutions.com    
  */
 
+using System;
 using System.Collections.Generic;
 
 namespace AeatModelos.Mod180e14v00
@@ -50,6 +51,7 @@ namespace AeatModelos.Mod180e14v00
     /// </summary>
     public class Mod180e14v00p01 : RegistroModPagina
     {
+
         #region Construtores de Instancia
 
         /// <summary>
@@ -59,13 +61,16 @@ namespace AeatModelos.Mod180e14v00
         /// <param name="periodo">Periodo: 1T, 2T...01, 02...12</param>
         public Mod180e14v00p01(string ejercicio, string periodo) : base(ejercicio, periodo)
         {
+
+            Modelo = "180";
+
             string p = "P01";   // clave página
             int c = 0;          // contador
 
             RegistroCampos = new Dictionary<decimal, IEmpaquetable>()
             {
                 {++c,    new RegistroCampo(1,   1,   1,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,                             2, 0  )}, // 01
-                {++c,    new RegistroCampo(1,   2,   3,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,                           180, 0  )}, // 02
+                {++c,    new RegistroCampo(1,   2,   3,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,       Convert.ToInt32(Modelo), 0  )}, // 02
                 {++c,    new RegistroCampo(1,   5,   4,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,                     Ejercicio, 0  )}, // 03
                 {++c,    new RegistroCampo(1,   9,   9,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "NIFDeclarante"                         )}, // 04
                 {++c,    new RegistroCampo(1,  18,   9,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "NIFPerceptor"                          )}, //005
@@ -106,6 +111,7 @@ namespace AeatModelos.Mod180e14v00
                 // ---
                 {++c,    new RegistroCampo(1, 328, 173,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                                    )}, //033
             };
+
         }
 
         #endregion
@@ -120,5 +126,6 @@ namespace AeatModelos.Mod180e14v00
         }
 
         #endregion
+
     }
 }

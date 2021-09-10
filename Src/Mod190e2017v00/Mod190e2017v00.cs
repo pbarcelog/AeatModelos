@@ -61,6 +61,9 @@ namespace AeatModelos.Mod190e2017v00
         /// <param name="periodo">Periodo: 1T, 2T...01, 02...12</param>
         public Mod190e2017v00(string ejercicio, string periodo) : base(ejercicio, periodo)
         {
+
+            Modelo = "190";
+
             PaginasMapa = new Dictionary<int, string>()
             {
                 {1, "AeatModelos.Mod190e2017v00.Mod190e2017v00p01"}
@@ -72,7 +75,7 @@ namespace AeatModelos.Mod190e2017v00
             RegistroCampos = new Dictionary<decimal, IEmpaquetable>()
             {
                 {++c,    new RegistroCampo(0,   1,   1,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  1,           0          )}, // 01
-                {++c,    new RegistroCampo(0,   2,   3,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ModeloDeclaracion", 190, 0    )}, // 02
+                {++c,    new RegistroCampo(0,   2,   3,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ModeloDeclaracion", Convert.ToInt32(Modelo), 0    )}, // 02
                 {++c,    new RegistroCampo(0,   5,   4,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  Ejercicio,   0          )}, // 03
                 {++c,    new RegistroCampo(0,   9,   9,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "NIF"                          )}, // 04
                 // Primer apellido, espacio, segundo apellido, espacio, nombre, necesariamente en este orden.
@@ -112,6 +115,7 @@ namespace AeatModelos.Mod190e2017v00
             };
 
             Paginas = RegistroCampos[19] as ConjuntoDeEmpaquetables;
+
         }
 
         #endregion
@@ -123,6 +127,7 @@ namespace AeatModelos.Mod190e2017v00
         /// </summary>
         public override void Calcular()
         {
+
             // *************************** !Importante ********************************
             // Comprobamos para unos campos numéricos concretos si a éstos les debe
             // preceder una "N", con tal de señalar que se trata de un número negativo.
@@ -162,10 +167,12 @@ namespace AeatModelos.Mod190e2017v00
         /// </summary>
         public override string Declarante()
         {
+
             string NIF = $"{this["NIF"].Valor}";
             string apellidosNombreRazonSocial = $"{this["ApellidosNombreRazonSocial"].Valor}";
 
             return $"{NIF}, {apellidosNombreRazonSocial}".Trim();
+
         }
 
         #endregion

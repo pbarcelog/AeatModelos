@@ -41,7 +41,6 @@
     Para más información, contacte con la dirección: info@irenesolutions.com    
  */
 
-using System;
 using System.Collections.Generic;
 
 namespace AeatModelos.Mod193e2019v00
@@ -61,6 +60,9 @@ namespace AeatModelos.Mod193e2019v00
         /// <param name="periodo">Periodo: 1T, 2T...01, 02...12</param>
         public Mod193e2019v00(string ejercicio, string periodo) : base(ejercicio, periodo)
         {
+
+            Modelo = "193";
+
             PaginasMapa = new Dictionary<int, string>()
             {
                 {1, "AeatModelos.Mod193e2019v00.Mod193e2019v00p01"},
@@ -117,6 +119,7 @@ namespace AeatModelos.Mod193e2019v00
             };
 
             Paginas = RegistroCampos[22] as ConjuntoDeEmpaquetables;
+
         }
 
         #endregion
@@ -143,5 +146,6 @@ namespace AeatModelos.Mod193e2019v00
         }
 
         #endregion
+
     }
 }

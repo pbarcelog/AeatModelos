@@ -54,6 +54,7 @@ namespace AeatModelos
     /// </summary>
     public class RegistroModPaginaTgvi : RegistroModPagina
     {
+
         #region Construtores de Instancia
 
         /// <summary>
@@ -63,6 +64,21 @@ namespace AeatModelos
         /// <param name="periodo">Periodo: 1T, 2T...01, 02...12</param>
         public RegistroModPaginaTgvi(string ejercicio, string periodo) : base(ejercicio, periodo)
         {
+        }
+
+        #endregion
+
+        #region Métodos Privados de Instancia
+
+        /// <summary>
+        /// Inicia los enlaces de los servicios correspondientes al modelo.
+        /// </summary>
+        internal override void IniciaEnlaces()
+        {
+
+            Enlaces = new GestorDeEnlaces(Comunicaciones.Enlaces.PftwPicwPresBasicaTgvi,
+                Comunicaciones.Enlaces.PftwPicwPresBasicaPruebasTgvi);
+
         }
 
         #endregion
@@ -189,5 +205,8 @@ namespace AeatModelos
         }
 
         #endregion
+
+
+
     }
 }

@@ -42,10 +42,6 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AeatModelos.Comunicaciones
 {
@@ -58,13 +54,111 @@ namespace AeatModelos.Comunicaciones
     public class RespuestaTgvi : Respuesta
     {
 
+        #region Construtores de Instancia
+
         /// <summary>
         /// Constructor.
         /// </summary>
         /// <param name="peticion">Petición a la que pertenece la respuesta.</param>
         public RespuestaTgvi(PeticionTgvi peticion) : base(peticion)
-        {         
+        {
         }
+
+        #endregion
+
+        #region Métodos Privados de Instancia
+
+        /// <summary>
+        /// Devuelve true si la respuesta de la aeat indica que la
+        /// presentación ha sido errónea.
+        /// </summary>
+        /// <returns>True si errónea y false si correcta.</returns>
+        protected override bool CompruebaErronea()
+        {
+            return _HttpWebResponse.Headers["CODIGO"].Trim() != "0";
+        }
+
+        /// <summary>
+        /// Realiza las labores necesarias en caso de que la respuesta
+        /// se errónea.
+        /// </summary>
+        protected override void TratarErrores()
+        {
+            Errores.Add(new RespuestaError(_HttpWebResponse.Headers["MENSAJE"].Trim()));
+        }
+
+        /// <summary>
+        /// Realiza las labores necesarias en caso de que la respuesta
+        /// se satisfactoria.
+        /// </summary>
+        protected override void TratarExito()
+        {
+
+            switch ((_Peticion as PeticionTgvi).Accion)
+            {
+
+                case "InicializarEnvio":
+                    IdEnvio = _HttpWebResponse.Headers["IDENVIO"].Trim();
+                    SigBloque = _HttpWebResponse.Headers["SIGBLOQUE"].Trim();
+                    Cookie = _HttpWebResponse.Headers["Set-Cookie"].Trim();
+                    break;
+
+                case "EnviarDatos":
+                    IdEnvio = _HttpWebResponse.Headers["IDENVIO"].Trim();
+                    EstadoEnvio = _HttpWebResponse.Headers["ESTADO"].Trim();
+
+                    if (EstadoEnvio != "FINALIZADO")
+                        SigBloque = _HttpWebResponse.Headers["SIGBLOQUE"].Trim();
+
+                    RegistrosEnviadosCorrectos = Convert.ToInt32(_HttpWebResponse.Headers["TOTALT2OK"].Trim());
+                    RegistrosEnviadosErroneos = Convert.ToInt32(_HttpWebResponse.Headers["TOTALT2KO"].Trim());
+                    RegistrosEnvioCorrectos = Convert.ToInt32(_HttpWebResponse.Headers["BLOQUET2OK"].Trim());
+                    RegistrosEnvioErroneos = Convert.ToInt32(_HttpWebResponse.Headers["BLOQUET2KO"].Trim());
+
+                    if (RegistrosEnviadosErroneos > 0)
+                    {
+                        Erronea = true;
+                        Errores.Add(new RespuestaError($"Existen {RegistrosEnviadosErroneos} registros erróneos en el envío."));
+                    }
+
+                    break;
+
+                case "PresentarEnvio":
+                    IdEnvio = _HttpWebResponse.Headers["IDENVIO"].Trim();
+                    CSV = _HttpWebResponse.Headers["CSV"].Trim();
+                    Expediente = _HttpWebResponse.Headers["EXPEDIENTE"].Trim();
+                    break;
+
+                case "RecuperarErrores":
+                    IdEnvio = _HttpWebResponse.Headers["IDENVIO"].Trim();
+                    EstadoEnvio = _HttpWebResponse.Headers["ESTADO"].Trim();
+
+                    Erronea = true;
+                    Errores.Add(new RespuestaError(_ContenidoTexto)); // Añadimos el fichero devuelto con los registros erróneos.
+
+                    break;
+
+                default:
+                    throw new ArgumentException($"'{(_Peticion as PeticionTgvi).Accion}' no es una acción válida.");
+            }
+
+        }
+
+        /// <summary>
+        /// Prueba la descarga con certificado.
+        /// </summary>
+        /// <param name="enlace">Url del pdf a descargar.</param>
+        /// <returns>Datos binarios de la respuesta.</returns>
+        internal override byte[] DescargaPdfEnlace(string enlace)
+        {
+            EnlacePdf = enlace;
+            DatosPdf = base.DescargaPdfEnlace(EnlacePdf);
+            return DatosPdf;
+        }
+
+        #endregion
+
+        #region Propiedades Públicas de Instancia
 
         /// <summary>
         /// Identificador único de un envío, necesario para el envío de datos y la 
@@ -128,95 +222,7 @@ namespace AeatModelos.Comunicaciones
         /// </summary>
         public int RegistrosEnvioErroneos { get; private set; }
 
-
-        /// <summary>
-        /// Devuelve true si la respuesta de la aeat indica que la
-        /// presentación ha sido errónea.
-        /// </summary>
-        /// <returns>True si errónea y false si correcta.</returns>
-        protected override bool CompruebaErronea()
-        {
-            return _HttpWebResponse.Headers["CODIGO"].Trim() != "0";
-        }
-
-
-        /// <summary>
-        /// Realiza las labores necesarias en caso de que la respuesta
-        /// se errónea.
-        /// </summary>
-        protected override void TratarErrores()
-        {
-            Errores.Add(new RespuestaError(_HttpWebResponse.Headers["MENSAJE"].Trim()));
-        }
-
-        /// <summary>
-        /// Realiza las labores necesarias en caso de que la respuesta
-        /// se satisfactoria.
-        /// </summary>
-        protected override void TratarExito()
-        {
-
-            switch ((_Peticion as PeticionTgvi).Accion) 
-            {
-
-                case "InicializarEnvio":
-                    IdEnvio = _HttpWebResponse.Headers["IDENVIO"].Trim();
-                    SigBloque = _HttpWebResponse.Headers["SIGBLOQUE"].Trim();
-                    Cookie = _HttpWebResponse.Headers["Set-Cookie"].Trim();
-                    break;
-
-                case "EnviarDatos":
-                    IdEnvio = _HttpWebResponse.Headers["IDENVIO"].Trim();
-                    EstadoEnvio = _HttpWebResponse.Headers["ESTADO"].Trim();
-                    
-                    if(EstadoEnvio != "FINALIZADO")
-                        SigBloque = _HttpWebResponse.Headers["SIGBLOQUE"].Trim();
-
-                    RegistrosEnviadosCorrectos = Convert.ToInt32(_HttpWebResponse.Headers["TOTALT2OK"].Trim());
-                    RegistrosEnviadosErroneos = Convert.ToInt32(_HttpWebResponse.Headers["TOTALT2KO"].Trim());
-                    RegistrosEnvioCorrectos = Convert.ToInt32(_HttpWebResponse.Headers["BLOQUET2OK"].Trim());
-                    RegistrosEnvioErroneos = Convert.ToInt32(_HttpWebResponse.Headers["BLOQUET2KO"].Trim());
-
-                    if (RegistrosEnviadosErroneos > 0)
-                    {
-                        Erronea = true;
-                        Errores.Add(new RespuestaError($"Existen {RegistrosEnviadosErroneos} registros erróneos en el envío."));
-                    }                        
-
-                    break;
-
-                case "PresentarEnvio":
-                    IdEnvio = _HttpWebResponse.Headers["IDENVIO"].Trim();
-                    CSV = _HttpWebResponse.Headers["CSV"].Trim();
-                    Expediente = _HttpWebResponse.Headers["EXPEDIENTE"].Trim();
-                    break;
-
-                case "RecuperarErrores":
-                    IdEnvio = _HttpWebResponse.Headers["IDENVIO"].Trim();
-                    EstadoEnvio = _HttpWebResponse.Headers["ESTADO"].Trim();
-
-                    Erronea = true;
-                    Errores.Add(new RespuestaError(_ContenidoTexto)); // Añadimos el fichero devuelto con los registros erróneos.
-
-                    break;
-
-                default:
-                    throw new ArgumentException($"'{(_Peticion as PeticionTgvi).Accion}' no es una acción válida.");
-            }
-
-        }
-
-        /// <summary>
-        /// Prueba la descarga con certificado.
-        /// </summary>
-        /// <param name="enlace">Url del pdf a descargar.</param>
-        /// <returns>Datos binarios de la respuesta.</returns>
-        internal override byte[] DescargaPdfEnlace(string enlace) 
-        {
-            EnlacePdf = enlace;
-            DatosPdf = base.DescargaPdfEnlace(EnlacePdf);
-            return DatosPdf;
-        }
+        #endregion
 
     }
 }

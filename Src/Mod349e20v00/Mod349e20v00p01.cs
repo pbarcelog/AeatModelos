@@ -42,6 +42,7 @@
  */
 
 
+using System;
 using System.Collections.Generic;
 
 namespace AeatModelos.Mod349e20v00
@@ -51,6 +52,7 @@ namespace AeatModelos.Mod349e20v00
     /// </summary>
     public class Mod349e20v00p01 : RegistroModPagina
     {
+
         #region Construtores de Instancia
 
         /// <summary>
@@ -61,33 +63,36 @@ namespace AeatModelos.Mod349e20v00
         public Mod349e20v00p01(string ejercicio, string periodo) : base(ejercicio, periodo)
         {
 
+            Modelo = "349";
+
             string p = "P01";   // clave página
             int c = 0;          // contador
 
             RegistroCampos = new Dictionary<decimal, IEmpaquetable>()
             {
-                {++c,    new RegistroCampo(1,   1,   1,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  2,      0               )}, // 01
-                {++c,    new RegistroCampo(1,   2,   3,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  349,      0             )}, // 02
-                {++c,    new RegistroCampo(1,   5,   4,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  Ejercicio,      0       )}, // 03
-                {++c,    new RegistroCampo(1,   9,   9,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "NIFDeclarante"                )}, // 04
+                {++c,    new RegistroCampo(1,   1,   1,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  2,      0                         )}, // 01
+                {++c,    new RegistroCampo(1,   2,   3,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null, Convert.ToInt32(Modelo),   0       )}, // 02
+                {++c,    new RegistroCampo(1,   5,   4,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  Ejercicio,      0                 )}, // 03
+                {++c,    new RegistroCampo(1,   9,   9,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "NIFDeclarante"                          )}, // 04
                 // --- BLANCOS.
-                {++c,    new RegistroCampo(1,  18,  58,  "A",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"]                                    )}, //005
-                {++c,    new RegistroCampo(1,  76,  17,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "NIFOperadorIntracomunitario"  )}, //006
+                {++c,    new RegistroCampo(1,  18,  58,  "A",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"]                                              )}, // 05
+                {++c,    new RegistroCampo(1,  76,  17,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "NIFOperadorIntracomunitario"            )}, // 06
                 // APELLIDOS Y NOMBRE O DENOMINACIÓN DEL PERCEPTOR. Primer apellido, espacio, segundo apellido, espacio, nombre, en este orden.
-                {++c,    new RegistroCampo(1,  93,  40,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ApellidosNombreDenominacion"  )}, //007
+                {++c,    new RegistroCampo(1,  93,  40,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ApellidosNombreDenominacion"            )}, // 07
                 // CLAVE DE OPERACIÓN.
-                {++c,    new RegistroCampo(1, 133,   1,  "A",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ClaveOperacion"               )}, //008
+                {++c,    new RegistroCampo(1, 133,   1,  "A",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ClaveOperacion"                         )}, // 08
                 // BASE IMPONIBLE O IMPORTE.
-                {++c,    new RegistroCampo(1, 134,  13,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "BaseImponibleImporte", null, 2)}, //009
+                {++c,    new RegistroCampo(1, 134,  13,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "BaseImponibleImporte", null, 2          )}, // 09
                 // --- BLANCOS.
-                {++c,    new RegistroCampo(1, 147,  32,  "A",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"]                                    )}, //010
+                {++c,    new RegistroCampo(1, 147,  32,  "A",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"]                                              )}, // 10
                 // NIF EMPRESARIO O PROFESIONAL DESTINATARIO FINAL SUSTITUTO. Solo para claves de operación "C".
-                {++c,    new RegistroCampo(1, 179,  17,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "NIFDestinatarioSustituto"     )}, //011
+                {++c,    new RegistroCampo(1, 179,  17,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "NIFDestinatarioSustituto"               )}, // 11
                 // APELLIDOS Y NOMBRE O RAZÓN SOCIAL DEL SUJETO PASIVO SUSTITUTO. Solo para claves de operación "C".
-                {++c,    new RegistroCampo(1, 196,  40,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ApellidosNombreDenominacionSustituto")}, //012
+                {++c,    new RegistroCampo(1, 196,  40,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ApellidosNombreDenominacionSustituto"   )}, // 12
                 // --- BLANCOS.
-                {++c,    new RegistroCampo(1, 236, 265,  "A",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"]                                    )}, //013
+                {++c,    new RegistroCampo(1, 236, 265,  "A",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"]                                              )}  // 13
             };
+
         }
 
         #endregion
@@ -102,5 +107,6 @@ namespace AeatModelos.Mod349e20v00
         }
 
         #endregion
+
     }
 }

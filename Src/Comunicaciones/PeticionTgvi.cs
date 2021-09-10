@@ -54,10 +54,16 @@ namespace AeatModelos.Comunicaciones
     public class PeticionTgvi : Peticion
     {
 
+        #region Variables Privadas de Instancia
+
         /// <summary>
         /// Acción a realizar en el sistema TGVI.
         /// </summary>
         string _Accion;
+
+        #endregion
+
+        #region Construtores de Instancia
 
         /// <summary>
         /// Copnstruye una instancia de la clase
@@ -75,12 +81,18 @@ namespace AeatModelos.Comunicaciones
         /// </param>
         /// <param name="encoding">Tipo de encoding para el envío del registro.</param>
         /// <param name="contentType">Tipo del contenido de la petición http.</param>
-        public PeticionTgvi(RegistroMod modelo, bool test = false, string certRef = null, string certClave = null, string action = "InicializarEnvio", Encoding encoding = null, string contentType = "text/plain") : 
+        public PeticionTgvi(RegistroMod modelo, bool test = false, string certRef = null,
+            string certClave = null, string action = "InicializarEnvio", Encoding encoding = null,
+            string contentType = "text/plain") :
             base(modelo, test, certRef, certClave, encoding)
         {
             _Accion = action;
             _ContentType = contentType;
         }
+
+        #endregion
+
+        #region Métodos Privados de Instancia
 
         /// <summary>
         /// Recupera la url donde se encuentra el servicio de la aeat requerido
@@ -101,17 +113,24 @@ namespace AeatModelos.Comunicaciones
         {
         }
 
+        #endregion
+
+        #region Propiedades Públicas de Instancia
+
         /// <summary>
-        /// cción a realizar en el sistema TGVI.
+        /// Acción a realizar en el sistema TGVI.
         /// </summary>
-        public string Accion 
+        public string Accion
         {
-            get 
+            get
             {
                 return _Accion;
             }
         }
 
+        #endregion
+
+        #region Métodos Públicos de Instancia
 
         /// <summary>
         /// Intenta presentar la declaración mediante el envío de la petición
@@ -129,6 +148,8 @@ namespace AeatModelos.Comunicaciones
 
             return _Respuesta;
         }
+
+        #endregion
 
     }
 }

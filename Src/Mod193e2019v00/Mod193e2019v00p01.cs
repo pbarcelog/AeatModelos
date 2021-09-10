@@ -50,6 +50,7 @@ namespace AeatModelos.Mod193e2019v00
     /// </summary>
     public class Mod193e2019v00p01 : RegistroModPagina
     {
+
         #region Construtores de Instancia
 
         /// <summary>
@@ -59,6 +60,8 @@ namespace AeatModelos.Mod193e2019v00
         /// <param name="periodo">Periodo: 1T, 2T...01, 02...12</param>
         public Mod193e2019v00p01(string ejercicio, string periodo) : base(ejercicio, periodo)
         {
+
+            Modelo = "193";
 
             string p = "P01";   // clave página
             int c = 0;          // contador
@@ -126,6 +129,7 @@ namespace AeatModelos.Mod193e2019v00
                 // --- BLANCOS.
                 {++c,    new RegistroCampo(1, 249, 252,  "A",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"]                                    )}, //033
             };
+
         }
 
         #endregion
@@ -140,5 +144,6 @@ namespace AeatModelos.Mod193e2019v00
         }
 
         #endregion
+
     }
 }
