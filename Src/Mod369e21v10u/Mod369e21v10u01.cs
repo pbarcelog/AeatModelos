@@ -95,9 +95,9 @@ namespace AeatModelos.Mod369e21v10u
                 {++c,     new RegistroCampo(2,   56,   2,    "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"], "DeclarantePais"                                )}, // 11
                 {++c,     new RegistroCampo(2,   58,  15,    "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"], "DeclaranteNIF"                                 )}, // 12
                 {++c,     new RegistroCampo(2,   73, 125,    "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"], "DeclaranteApellidosNombreRazonSocial"          )}, // 13
-                {++c,     new RegistroCampo(2,  198,   4,    "Num ", Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"], "Ejercicio",    ejercicio                       )}, // 14
+                {++c,     new RegistroCampo(2,  198,   4,    "Num ", Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"], "Ejercicio",    ejercicio, 0                    )}, // 14
                 {++c,     new RegistroCampo(2,  202,   1,    "An ",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"], "TipoPeriodo",        "T"                       )}, // 15
-                {++c,     new RegistroCampo(2,  203,   2,    "Num ", Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"], "Periodo"                                       )}, // 16
+                {++c,     new RegistroCampo(2,  203,   2,    "Num ", Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"], "Periodo", null, 0                              )}, // 16
 
                 // AAAAMMDD
                 {++c,     new RegistroCampo(2,  205,   8,    "Num ", Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"], "Desde"                                         )}, // 17
@@ -159,8 +159,15 @@ namespace AeatModelos.Mod369e21v10u
 
             decimal importePagado = 0;
 
-            foreach (var registro in registros.Empaquetables) 
+            for (int r = registros.Empaquetables.Count - 1; r > -1; r--)
+            {
+
+                var registro = registros.Empaquetables[r];
+
                 importePagado += Convert.ToDecimal(registro["Cuota"]?.Valor);
+
+                
+            }
 
             this["ImportePagado"].Valor = importePagado;
 

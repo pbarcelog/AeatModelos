@@ -90,6 +90,15 @@ namespace AeatModelos.Mod369e21v10u
                 {++c,    new RegistroCampo(0,  18,  92,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  new string(' ', 92)                       )}, // 07
                 {++c,    new RegistroCampo(0, 110,   9,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "NIF"                                            )}, // 08
                 {++c,    new RegistroCampo(0, 119, 210,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  new string(' ', 210)                      )}, // 09
+
+                // T36900 Info Adicional: DR369e21.xlsx
+                {++c,    new RegistroCampo(1,   1,   2, "An",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,                  "<T"                      )}, // 10
+                {++c,    new RegistroCampo(1,   3,   3, "Num ",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,                  369,    0                 )}, // 11
+                {++c,    new RegistroCampo(1,   6,   2, "Num ",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,                    0,    0                 )}, // 12
+                {++c,    new RegistroCampo(1,   8,   1, "An ",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,                  ">"                       )}, // 13
+                {++c,    new RegistroCampo(1,   9,  93, "An",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,   new string(' ', 93)                      )}, // 14
+                {++c,    new RegistroCampo(1, 102,   9, "An",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,            $"</T{Modelo}00>"               )}, // 15
+
                 
                 // Posibles páginas presentación:
                 // T36900 - común siempre se envía
@@ -98,22 +107,22 @@ namespace AeatModelos.Mod369e21v10u
                 // Importación: T36910 a T36912
                 {++c,    new ConjuntoDeEmpaquetables(){ Empaquetables = new List<IEmpaquetable>(){
                     new Mod369e21v10u01(Ejercicio, Periodo)
-                } }                                                                                                                                                 },  // 10
+                } }                                                                                                                                             },  // 16
 
-                {++c,    new RegistroCampo(0,   0,  18,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  $"</T{Modelo}0{Ejercicio}{Periodo}0000>"      )}, // 11
-                //{++c,    new RegistroCampo(0,   0,   0,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,   '\n'                                       )}, // 12
+                // T36909 Info Adicional: DR369e21.xlsx
+                {++c,    new RegistroCampo(1,   1,   2, "An",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,                  "<T"                      )}, // 17
+                {++c,    new RegistroCampo(1,   3,   3, "Num ",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,                  369,    0                 )}, // 18
+                {++c,    new RegistroCampo(1,   6,   2, "Num ",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,                    9,    0                 )}, // 19
+                {++c,    new RegistroCampo(1,   8,   1, "An ",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,                  ">"                       )}, // 20
+                {++c,    new RegistroCampo(1,   9,  5785, "An",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,   new string(' ', 5785)                   )}, // 21
+                {++c,    new RegistroCampo(1,   6,   1, "Num ",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null, 0, 0                                       )}, // 22
+                {++c,    new RegistroCampo(1, 5795,   9, "An",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,            $"</T{Modelo}09>"               )}, // 23
+                {++c,    new RegistroCampo(0,   0,  18,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,  $"</T{Modelo}0{Ejercicio}{Periodo}0000>"  )}, // 24
                  
-                // T36900 Info Adicional: DR369e21.xlsx
-                //{++c,    new RegistroCampo(1,   1,   2, "An",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,                  "<T"                        )}, // 13
-                //{++c,    new RegistroCampo(1,   3,   3, "Num ",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,                  369,    0                   )}, // 14
-                //{++c,    new RegistroCampo(1,   6,   2, "Num ",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,                    0,    0                   )}, // 15
-                //{++c,    new RegistroCampo(1,   8,   1, "An ",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,                  ">"                         )}, // 16
-                //{++c,    new RegistroCampo(1,   9,  93, "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,   new string(' ', 93)                         )}, // 17
-                //{++c,    new RegistroCampo(1, 102,   9, "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,            $"</T{Modelo}00>"                  )}  //  18
 
             };
 
-            Paginas = RegistroCampos[10] as ConjuntoDeEmpaquetables;
+            Paginas = RegistroCampos[16] as ConjuntoDeEmpaquetables;
 
         }
 

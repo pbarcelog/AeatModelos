@@ -117,7 +117,7 @@ namespace AeatModelos
                 throw new ArgumentException(
                     Errores.MostrarMensaje("RegistroCampo.002", $"{posicion}"));
 
-            if (longitud < 0 || longitud > 2000)
+            if (longitud < 0 || longitud > 6000)
                 throw new ArgumentException(
                     Errores.MostrarMensaje("RegistroCampo.003", $"{longitud}"));
 
