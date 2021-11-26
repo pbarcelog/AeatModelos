@@ -83,10 +83,12 @@ namespace AeatModelos
         /// (si no se especifica se devuelve la primera coincidencia).</param>
         /// <param name="crear">Si es true y no se encuentra la página
         /// entre los empaquetables, la crea.</param>
+        /// <param name="numeroPaginaHija">Indica si se tiene que resuperar una subpágina
+        /// contenida en la página principal indicada por indice en base 1 de la subpágina</param>
         /// <returns>Página recuperada si existe, recién creada
         /// si no existe y crear=true o null si no existe e índiceGrupo no
         /// es igual a 0 o crear es false.</returns>
-        RegistroMod RecuperaPagina(int indicePagina, int indiceGrupo = 0, bool crear = false);
+        RegistroMod RecuperaPagina(int indicePagina, int indiceGrupo = 0, bool crear = false, int numeroPaginaHija = 0);
 
         /// <summary>
         /// Actualiza el valor de todos los campos calculados.

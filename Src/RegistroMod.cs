@@ -474,31 +474,52 @@ namespace AeatModelos
         /// (si no se especifica se devuelve la primera coincidencia).</param>
         /// <param name="crear">Si es true y no se encuentra la página
         /// entre los empaquetables, la crea.</param>
+        /// <param name="numeroPaginaHija">Indica si se tiene que resuperar una subpágina
+        /// contenida en la página principal indicada por indice en base 1 de la subpágina</param>
         /// <returns>Página recuperada si existe, recién creada
         /// si no existe y crear=true o null si no existe e índiceGrupo no
         /// es igual a 0 o crear es false.</returns>
-        public RegistroMod RecuperaPagina(int indicePagina, int indiceGrupo = 0, bool crear = false)
+        public RegistroMod RecuperaPagina(int indicePagina, int indiceGrupo = 0, 
+            bool crear = false, int numeroPaginaHija = 0)
         {
-            if (indicePagina == -1)
-                return this;
 
-            if (!PaginasMapa.ContainsKey(indicePagina))
+            RegistroMod paginaPrincipal = null;
+
+            if (indicePagina == -1)
+                paginaPrincipal = this;            
+
+            if (paginaPrincipal == null && !PaginasMapa.ContainsKey(indicePagina))
                 throw new ArgumentException(Errores.MostrarMensaje("RegistroMod.000", $"{indicePagina}"));
 
-            int count = 0;
+            if (paginaPrincipal != null)
+            {
 
-            string typeName = PaginasMapa[indicePagina];
+                int count = 0;
 
-            Type tipoObjetivo = Type.GetType(typeName);
+                string typeName = PaginasMapa[indicePagina];
 
-            foreach (var pagina in Paginas.Empaquetables)
-                if (pagina.GetType().IsAssignableFrom(tipoObjetivo) && indiceGrupo == count++)
-                    return pagina as RegistroMod;
+                Type tipoObjetivo = Type.GetType(typeName);
 
-            if (crear) // Si la página no existe y se permite crear.
-                return InsertaPagina(indicePagina);
+                if (paginaPrincipal == null)
+                    foreach (var pagina in Paginas.Empaquetables)
+                        if (pagina.GetType().IsAssignableFrom(tipoObjetivo) && indiceGrupo == count++)
+                            paginaPrincipal = pagina as RegistroMod;
 
-            return null;
+                if (paginaPrincipal == null && crear) // Si la página no existe y se permite crear.
+                    paginaPrincipal = InsertaPagina(indicePagina);
+
+                if (numeroPaginaHija == 0) // Si no busco una página hija, devuelvo la actual
+                    return paginaPrincipal;
+
+            }
+
+            // Si busco una página hija
+
+            if (paginaPrincipal?.Registros?.Empaquetables != null && paginaPrincipal?.Registros?.Empaquetables.Count < numeroPaginaHija -1)
+                throw new ArgumentException(Errores.MostrarMensaje("ConjuntoDeEmpaquetables.001", $"{numeroPaginaHija-1}"));
+
+            return paginaPrincipal?.Registros?.Empaquetables[numeroPaginaHija-1] as RegistroMod;
+
         }
 
         /// <summary>

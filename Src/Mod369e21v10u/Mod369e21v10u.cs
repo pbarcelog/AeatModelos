@@ -67,11 +67,11 @@ namespace AeatModelos.Mod369e21v10u
 
             PaginasMapa = new Dictionary<int, string>()
             {
-                {1, "AeatModelos.Mod369e21v10.Mod369e21v10u01"},
-                {2, "AeatModelos.Mod369e21v10.Mod369e21v10u02"},
-                {3, "AeatModelos.Mod369e21v10.Mod369e21v10u03"},
-                {4, "AeatModelos.Mod369e21v10.Mod369e21v10u04"},
-                {5, "AeatModelos.Mod369e21v10.Mod369e21v10u05"},
+                {1, "AeatModelos.Mod369e21v10u.Mod369e21v10u01"},
+                {2, "AeatModelos.Mod369e21v10u.Mod369e21v10u02"},
+                {3, "AeatModelos.Mod369e21v10u.Mod369e21v10u03"},
+                {4, "AeatModelos.Mod369e21v10u.Mod369e21v10u04"},
+                {5, "AeatModelos.Mod369e21v10u.Mod369e21v10u05"},
             };
 
             string p = "000";   // clave página

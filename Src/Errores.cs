@@ -65,6 +65,7 @@ namespace AeatModelos
             {"RegistroCampo.002",           "La propiedad Posicion sólo puede ser un entero de 0 a 10000. Valor inválido {0}." },
             {"RegistroCampo.003",           "La propiedad Longitud sólo puede ser un entero de 1 a 2000. Valor inválido {0}." },
             {"ConjuntoDeEmpaquetables.000", "El {0} no está implementado en la clase base ConjuntoDeEmpaquetables." },
+            {"ConjuntoDeEmpaquetables.001", "No existe elemento con el índice {0} en el conjunto de empaquetables." },
             {"Certificado.000",             "El modo de gestión de certificados {0} no es compatible con la plataforma {1}." },
             {"Certificado.001",             "No se ha encontrado un certificado con la huella digital {0} en el almacén de certificados del usuario ni en el de la máquina local." },
             {"Certificado.002",             "No se ha podido cargar el archivo de certificado {0}. Revise la ruta al archivo y la contraseña." },
