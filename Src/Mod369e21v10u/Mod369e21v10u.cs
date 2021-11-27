@@ -72,6 +72,7 @@ namespace AeatModelos.Mod369e21v10u
                 {3, "AeatModelos.Mod369e21v10u.Mod369e21v10u03"},
                 {4, "AeatModelos.Mod369e21v10u.Mod369e21v10u04"},
                 {5, "AeatModelos.Mod369e21v10u.Mod369e21v10u05"},
+                {6, "AeatModelos.Mod369e21v10u.Mod369e21v10u06"}
             };
 
             string p = "000";   // clave página
@@ -135,6 +136,20 @@ namespace AeatModelos.Mod369e21v10u
         /// </summary>
         public override void Calcular()
         {          
+        }
+
+        /// <summary>
+        /// Devuelve una cadena con la representación del titular del
+        /// certificado que va a realizar la presentación.
+        /// </summary>
+        public override string Declarante()
+        {
+
+            string NIF = $"{Paginas.Empaquetables[0]["DeclaranteNIF"].Valor}";
+            string apellidosNombreRazonSocial = $"{Paginas.Empaquetables[0]["DeclaranteApellidosNombreRazonSocial"].Valor}";
+
+            return $"{NIF}, {apellidosNombreRazonSocial}".Trim();
+
         }
 
         #endregion

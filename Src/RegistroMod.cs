@@ -491,7 +491,7 @@ namespace AeatModelos
             if (paginaPrincipal == null && !PaginasMapa.ContainsKey(indicePagina))
                 throw new ArgumentException(Errores.MostrarMensaje("RegistroMod.000", $"{indicePagina}"));
 
-            if (paginaPrincipal != null)
+            if (paginaPrincipal == null)
             {
 
                 int count = 0;
@@ -508,10 +508,10 @@ namespace AeatModelos
                 if (paginaPrincipal == null && crear) // Si la página no existe y se permite crear.
                     paginaPrincipal = InsertaPagina(indicePagina);
 
-                if (numeroPaginaHija == 0) // Si no busco una página hija, devuelvo la actual
-                    return paginaPrincipal;
-
             }
+
+            if (numeroPaginaHija == 0) // Si no busco una página hija, devuelvo la actual
+                return paginaPrincipal;
 
             // Si busco una página hija
 
@@ -608,6 +608,7 @@ namespace AeatModelos
             string nombre = $"{Paginas.Empaquetables[0]["Nombre"].Valor}";
 
             return $"{NIF}, {apellidos} {nombre}".Trim();
+
         }
 
         /// <summary>
@@ -629,6 +630,7 @@ namespace AeatModelos
         /// <returns>Respuesta a la operación de presentación.</returns>
         public virtual Respuesta Presentar(bool test = false, string certRef = null, string certClave = null)
         {
+
             if (!_Confirmado)
                 throw new InvalidOperationException(Errores.MostrarMensaje("RegistroMod.003"));
 

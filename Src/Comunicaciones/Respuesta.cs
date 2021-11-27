@@ -67,10 +67,21 @@ namespace AeatModelos.Comunicaciones
         static Regex _RgError = new Regex(@"(?<=<title>)Errores en modelo \d{3}(?=</title>)");
 
         /// <summary>
+        /// Expresión regular para determina otra respuesta de error.
+        /// </summary>
+        static Regex _RgErrorEntradaIncorrecta = new Regex(@"<title>Entrada incorrecta</title>");
+
+        /// <summary>
         /// Expresión regular leer los errores de la declaración
         /// en su caso como un bloque de texto.
         /// </summary>
         static Regex _RgErrores = new Regex("(?<=Err\\[\\d+\\]\\s*=\\s*\")[^\"]+(?=\")");
+
+        /// <summary>
+        /// Expresión regular leer los errores de la declaración
+        /// en su caso como un bloque de texto.
+        /// </summary>
+        static Regex _RgErroresEntradaIncorrecta = new Regex("(?<=<div class=\"AEAT_bloque_errores\">\\s*)[^\\s][\\S\\s]+?(?=\\s*</div>)");
 
         /// <summary>
         /// Expresión regular para obtener el código seguro de
@@ -152,7 +163,8 @@ namespace AeatModelos.Comunicaciones
         /// <returns>True si errónea y false si correcta.</returns>
         protected virtual bool CompruebaErronea() 
         { 
-            return _RgError.IsMatch(_ContenidoTexto);
+            return _RgError.IsMatch(_ContenidoTexto) ||
+                _RgErrorEntradaIncorrecta.IsMatch(_ContenidoTexto);
         }
 
         /// <summary>
@@ -178,6 +190,10 @@ namespace AeatModelos.Comunicaciones
 
             foreach (Match error in _RgErrores.Matches(_ContenidoTexto))
                 Errores.Add(new RespuestaError(error.Value));
+
+            foreach (Match error in _RgErroresEntradaIncorrecta.Matches(_ContenidoTexto))
+                Errores.Add(new RespuestaError(error.Value));
+
         }
 
         /// <summary>

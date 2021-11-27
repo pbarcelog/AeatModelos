@@ -157,7 +157,8 @@ namespace AeatModelos.Mod369e21v10u
             {"U06.003", "Página"},
             {"U06.004", "Fin de identificador de modelo"},
             {"U06.005", "Complementaria"},
-            {"U06.006", "Reservado"}
+            {"U06.006", "Reservado"},
+            {"U06.007", "Constante"}
         };
 
 

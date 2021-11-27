@@ -187,6 +187,7 @@ namespace AeatModelos.Comunicaciones
 
             _TextoPeticion = modelo.DatosPeticionPresentacion();
             _BytesPeticion = modelo.Encoding.GetBytes(_TextoPeticion);
+
         }
 
         #endregion
