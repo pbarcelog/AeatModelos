@@ -99,3 +99,14 @@ else
 
 [Retenciones capital mobiliario Modelo 123 presentación telemática](https://github.com/mdiago/AeatModelos/wiki/012-Ejemplo:-Rendimientos-capital-mobiliario-Confecci%C3%B3n-y-presentaci%C3%B3n-Modelo-123-2015-versi%C3%B3n-1.3)
 
+[IRPF Confección y presentación modelo 180](https://github.com/mdiago/AeatModelos/wiki/013-Ejemplo:-Retenciones-Arrendamientos-Inmuebles-urbanos.-Confecci%C3%B3n-y-presentaci%C3%B3n-Modelo-180)
+
+[IRPF Confección y presentación modelo 193](https://github.com/mdiago/AeatModelos/wiki/014-Ejemplo:-Retenciones-sobre-determinados-rendimientos-del-capital-mobiliario.-Confecci%C3%B3n-y-presentaci%C3%B3n-Modelo-193)
+
+[Confección y presentación modelo 347](https://github.com/mdiago/AeatModelos/wiki/015-Ejemplo:-Declaraci%C3%B3n-anual-operaciones-con-terceras-personas.-Confecci%C3%B3n-y-presentaci%C3%B3n-Modelo-347-(Complementaria-con-TGVI))
+
+[Confección y presentación modelo 349](https://github.com/mdiago/AeatModelos/wiki/016-Ejemplo:-Declaraci%C3%B3n-recapitulativa-de-operaciones-intracomunitarias.-Confecci%C3%B3n-y-presentaci%C3%B3n-Modelo-349)
+
+[OSS Confección y presentación modelo 369](https://github.com/mdiago/AeatModelos/wiki/017-Ejemplo:-Declaraci%C3%B3n-servicios-uni%C3%B3n-OSS.-Confecci%C3%B3n-y-presentaci%C3%B3n-Modelo-369)
+
+
