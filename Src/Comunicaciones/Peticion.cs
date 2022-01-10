@@ -274,9 +274,8 @@ namespace AeatModelos.Comunicaciones
         /// la misma.
         /// </summary>
         /// <returns>Respuesta a una petición de presentación</returns>
-        public virtual Respuesta Presentar(bool test = false)
+        public virtual Respuesta Presentar()
         {
-
             PreparaPeticion();
             EscribePeticion();
 

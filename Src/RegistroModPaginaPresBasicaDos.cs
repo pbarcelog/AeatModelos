@@ -144,7 +144,7 @@ namespace AeatModelos
             if (Convert.ToInt32(Ejercicio) > 2021)
                 return new PeticionPresBasicaDos(this, test, certRef, certClave, System.Text.Encoding.UTF8).Presentar();
             else
-                return base.Presentar();            
+                return base.Presentar(test, certRef, certClave);            
 
         }
 

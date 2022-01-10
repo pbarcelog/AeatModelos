@@ -138,9 +138,8 @@ namespace AeatModelos.Comunicaciones
         /// la misma.
         /// </summary>
         /// <returns>Respuesta a una petición de presentación</returns>
-        public override Respuesta Presentar(bool test = false)
+        public override Respuesta Presentar()
         {
-
             PreparaPeticion();
             EscribePeticion();
 
