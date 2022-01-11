@@ -104,7 +104,8 @@ namespace AeatModelos.Mod303e19v10_10
 
             // Último perido no válido valor 0 (establecemos por defecto el valor 2, no exonerado de 390)
             if ($"{modPagina1["Periodo"].Valor}" == "4T" || $"{modPagina1["Periodo"].Valor}" == "12")
-                modPagina1["Exonerado390"].Valor = 2; // (1=SI, 2=NO)
+                if($"{modPagina1["Exonerado390"].Valor}" == "0")
+                    modPagina1["Exonerado390"].Valor = 2; // (1=SI, 2=NO)
 
         }
 
