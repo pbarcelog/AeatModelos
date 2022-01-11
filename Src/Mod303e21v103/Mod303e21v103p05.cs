@@ -68,8 +68,10 @@ namespace AeatModelos.Mod303e21v103
                 {++c,    new RegistroCampo(1,    1,    2,  "An",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,                      "<T"        )}, //001
                 {++c,    new RegistroCampo(1,    3,    3,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,                      303,    0   )}, //002
                 {++c,    new RegistroCampo(1,    6,    5,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,                      5000,   0   )}, //003
-                {++c,    new RegistroCampo(1,   11,    1,  " An ",    Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,                      ">"         )}, //004
-                {++c,    new RegistroCampo(1,   12,    1,  "A",       Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                                   )}, //005
+                {++c,    new RegistroCampo(1,   11,    1,  "An",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,                      ">"         )}, //004
+
+                // Indicador de página complementaria. Blanco (No complementaria) o "C" (Complementaria)
+                { ++c,    new RegistroCampo(1,   12,    1,  "A",       Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "IndicadorPagComplementaria"           )}, //005
 
                 // *** Prorratas - 1 - 
                 // Código CNAE [500].

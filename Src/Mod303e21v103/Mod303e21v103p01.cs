@@ -94,7 +94,7 @@ namespace AeatModelos.Mod303e21v103
                 {++c,    new RegistroCampo(1, 126,    1,  "An",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "AutoConcurso"                         )}, //021
                 {++c,    new RegistroCampo(1, 127,    1,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "SiiVoluntario",            2,     0   )}, //022
                 {++c,    new RegistroCampo(1, 128,    1,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "Exonerado390",             0,     0   )}, //023
-                {++c,    new RegistroCampo(1, 129,    1,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "VolumenOperacionesArt121"             )}, //024
+                {++c,    new RegistroCampo(1, 129,    1,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "VolumenOperacionesArt121", 0,     0   )}, //024
                 {++c,    new RegistroCampo(1, 130,   17,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "01" ,                     0           )}, //025
                 {++c,    new RegistroCampo(1, 147,    5,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "02" ,                     4           )}, //026
                 {++c,    new RegistroCampo(1, 152,   17,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "03" ,                     0           )}, //027

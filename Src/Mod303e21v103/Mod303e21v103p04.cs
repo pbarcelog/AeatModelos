@@ -71,18 +71,18 @@ namespace AeatModelos.Mod303e21v103
                 {++c,    new RegistroCampo(1,    6,    5,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,                      4000,   0   )}, //003
                 {++c,    new RegistroCampo(1,   11,    1,  "An",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,                      ">"         )}, //004
                 {++c,    new RegistroCampo(1,   12,    1,  "A",       Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                                   )}, //005
-                {++c,    new RegistroCampo(1,   13,    1,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                                   )}, //006
-                {++c,    new RegistroCampo(1,   14,    4,  "An",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                                   )}, //007
-                {++c,    new RegistroCampo(1,   18,    1,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                                   )}, //008
-                {++c,    new RegistroCampo(1,   19,    4,  "An",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                                   )}, //009
-                {++c,    new RegistroCampo(1,   23,    1,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                                   )}, //010
-                {++c,    new RegistroCampo(1,   24,    4,  "An",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                                   )}, //011
-                {++c,    new RegistroCampo(1,   28,    1,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                                   )}, //012
-                {++c,    new RegistroCampo(1,   29,    4,  "An",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                                   )}, //013
-                {++c,    new RegistroCampo(1,   33,    1,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                                   )}, //014
-                {++c,    new RegistroCampo(1,   34,    4,  "An",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                                   )}, //015
-                {++c,    new RegistroCampo(1,   38,    1,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                                   )}, //016
-                {++c,    new RegistroCampo(1,   39,    4,  "An",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                                   )}, //017
+                {++c,    new RegistroCampo(1,   13,    1,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "PrincipalClaveB",          0,     0   )}, //006
+                {++c,    new RegistroCampo(1,   14,    4,  "An",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "PrincipalEpigrafeIAE"                 )}, //007
+                {++c,    new RegistroCampo(1,   18,    1,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "Otras01ClaveB"                        )}, //008
+                {++c,    new RegistroCampo(1,   19,    4,  "An",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "Otras01EpigrafeIAE"                   )}, //009
+                {++c,    new RegistroCampo(1,   23,    1,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "Otras02ClaveB"                        )}, //010
+                {++c,    new RegistroCampo(1,   24,    4,  "An",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "Otras02EpigrafeIAE"                   )}, //011
+                {++c,    new RegistroCampo(1,   28,    1,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "Otras03ClaveB"                        )}, //012
+                {++c,    new RegistroCampo(1,   29,    4,  "An",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "Otras03EpigrafeIAE"                   )}, //013
+                {++c,    new RegistroCampo(1,   33,    1,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "Otras04ClaveB"                        )}, //014
+                {++c,    new RegistroCampo(1,   34,    4,  "An",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "Otras04EpigrafeIAE"                   )}, //015
+                {++c,    new RegistroCampo(1,   38,    1,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "Otras05ClaveB"                        )}, //016
+                {++c,    new RegistroCampo(1,   39,    4,  "An",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "Otras05EpigrafeIAE"                   )}, //017
                 // Información adicional - Exclusivamente a cumplimentar en el último periodo exonerados de la Declaración-resumen anual del IVA:
                 // D - Marque si ha efectuado operaciones por las que tenga obligación de presentar la declaración anual de operaciones con terceras personas.
                 // X o blanco.

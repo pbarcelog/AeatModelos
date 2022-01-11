@@ -130,14 +130,9 @@ namespace AeatModelos.Mod303e21v103
 
             Mod303e21v103p02 modPagina2 = null;
 
-            if (Paginas.Empaquetables.Count > 1)
-                modPagina2 = Paginas.Empaquetables[1] as Mod303e21v103p02;
-
-            if (modPagina2 == null)
-            {
-                modPagina2 = new Mod303e21v103p02(Ejercicio, Periodo);
-                Paginas.Empaquetables.Add(modPagina2);
-            }
+            for (int p = Paginas.Empaquetables.Count - 1; p > -1; p--)
+                if (modPagina2 == null)
+                    modPagina2 = Paginas.Empaquetables[p] as Mod303e21v103p02;
 
             Mod303e21v103p03 modPagina3 = null;
 
