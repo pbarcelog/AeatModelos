@@ -46,6 +46,7 @@ using System.Collections.Generic;
 
 namespace AeatModelos.Mod303e21v103
 {
+
     /// <summary>
     /// Página 0 modelo 303. Diseño de registro: DR303e21v103.xlsx.
     /// </summary>
@@ -76,6 +77,7 @@ namespace AeatModelos.Mod303e21v103
             };
 
             Paginas = RegistroCampos[14] as ConjuntoDeEmpaquetables;
+
         }
 
         #endregion
@@ -88,7 +90,7 @@ namespace AeatModelos.Mod303e21v103
         /// <param name="casillasBase"></param>
         /// <param name="casillaResultado"></param>
         /// <param name="modPagina"></param>
-        private void AcumulaCasillas(string[] casillasBase, string casillaResultado, RegistroModPagina modPagina)
+        private void AcumulaCasillas(string[] casillasBase, string casillaResultado, IPagina modPagina)
         {
             decimal suma = 0;
 
@@ -97,6 +99,28 @@ namespace AeatModelos.Mod303e21v103
 
             if (Convert.ToDecimal(modPagina[casillaResultado]?.Valor) == 0)
                 modPagina[casillaResultado].Valor = suma;
+        }
+
+        /// <summary>
+        /// En caso de que la declaración sea a devolver realiza las operaciones necesarias.
+        /// </summary>
+        protected virtual void PreparaDevolucion() 
+        {
+
+            Mod303e21v103p01 modPagina1 = Paginas.Empaquetables[0] as Mod303e21v103p01;
+
+            Mod303e21v103p03 modPagina3 = null;
+
+            for (int p = Paginas.Empaquetables.Count - 1; p > -1; p--)
+                if (modPagina3 == null)
+                    modPagina3 = Paginas.Empaquetables[p] as Mod303e21v103p03;
+
+            if (modPagina3 == null)
+                throw new ArgumentException($"Se ha seleccionado devolución ('D') como tipo de declaración y no se ha proporcionado IBAN");           
+
+            if ($"{modPagina3["IBAN"].Valor}".Trim() == "")
+                throw new ArgumentException($"Se ha seleccionado devolución ('D') como tipo de declaración y no se ha proporcionado IBAN");
+
         }
 
         #endregion
@@ -121,36 +145,21 @@ namespace AeatModelos.Mod303e21v103
         /// </summary>
         public override void Calcular()
         {
-            Mod303e21v103p01 modPagina1 = Paginas.Empaquetables[0] as Mod303e21v103p01;
+
+            IPagina modPagina1 = RecuperaPagina(1, 0, false) as IPagina;
+            IPagina modPagina2 = RecuperaPagina(2, 0, false) as IPagina;
+            IPagina modPagina3 = RecuperaPagina(3, 0, true) as IPagina; // Si no existe la crea
 
             // Último perido no válido valor 0 (establecemos por defecto el valor 2, no exonerado de 390)
             if ($"{modPagina1["Periodo"].Valor}" == "4T" || $"{modPagina1["Periodo"].Valor}" == "12")
                 if ($"{modPagina1["Exonerado390"].Valor}" == "0")
                     modPagina1["Exonerado390"].Valor = 2; // (1=SI, 2=NO)
 
-            Mod303e21v103p02 modPagina2 = null;
-
-            for (int p = Paginas.Empaquetables.Count - 1; p > -1; p--)
-                if (modPagina2 == null)
-                    modPagina2 = Paginas.Empaquetables[p] as Mod303e21v103p02;
-
-            Mod303e21v103p03 modPagina3 = null;
-
-            for (int p = Paginas.Empaquetables.Count - 1; p > -1; p--)
-                if (modPagina3 == null)
-                    modPagina3 = Paginas.Empaquetables[p] as Mod303e21v103p03;
-
-            if (modPagina3 == null)
-            {
-                modPagina3 = new Mod303e21v103p03(Ejercicio, Periodo);
-                Paginas.Empaquetables.Add(modPagina3);
-            }
-
 
             // Me aseguro de informar los tipos necesarios.
 
-            int[] clavesCuota = new int[] { 3, 6, 9, 18, 21 };
-            decimal[] tipos = new decimal[] { 4m, 10m, 21m, 5.2m, 1.4m };
+            int[] clavesCuota = new int[] { 3, 6, 9, 20, 23 };
+            decimal[] tipos = new decimal[] { 4m, 10m, 21m, 1.4m, 5.2m };
 
             for (int k = 0; k < clavesCuota.Length; k++)
             {
@@ -185,12 +194,13 @@ namespace AeatModelos.Mod303e21v103
 
 
             // Suma de resultados ( [46] + [58] + [76] )
-            if (Convert.ToDecimal(modPagina3["64"]?.Valor) == 0)
-                modPagina3["64"].Valor = Convert.ToDecimal(modPagina1["46"].Valor) + ((modPagina2 == null) ? 0 : Convert.ToDecimal(modPagina2["58"].Valor)) +
-                Convert.ToDecimal(modPagina3["76"].Valor);
+            if (modPagina3["64"] != null && Convert.ToDecimal(modPagina3["64"]?.Valor) == 0)
+                modPagina3["64"].Valor = Convert.ToDecimal(modPagina1["46"].Valor) + ((modPagina2 == null) ? 0 : 
+                    Convert.ToDecimal(modPagina2["58"] == null ? 0 : modPagina2["58"].Valor)) +
+                Convert.ToDecimal(modPagina3["76"] == null ? 0 : modPagina3["76"].Valor);
 
             // Atribuible a la Administracion del Estado
-            if (Convert.ToDecimal(modPagina3["65"]?.Valor) == 0)
+            if (modPagina3["65"] != null && Convert.ToDecimal(modPagina3["65"]?.Valor) == 0)
                 modPagina3["65"].Valor = 100;
 
             // Atribuible a la Administración del Estado
@@ -233,7 +243,12 @@ namespace AeatModelos.Mod303e21v103
             if (Convert.ToDecimal(modPagina3["71"]?.Valor) == 0)
                 modPagina3["71"].Valor = Convert.ToDecimal(modPagina3["69"].Valor) - Convert.ToDecimal(modPagina3["70"].Valor);
 
+            // Verificaciones tipo declaración
+            if ($"{modPagina1["TipoDeclaracion"].Valor}" == "D")
+                PreparaDevolucion();
+
             Paginas.Empaquetables.Sort(); // Ordenamos las páginas para evitar problemas indeseados.
+
         }
 
         #endregion

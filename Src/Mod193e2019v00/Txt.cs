@@ -50,6 +50,7 @@ namespace AeatModelos.Mod193e2019v00
     /// </summary>
     public class Txt
     {
+
         #region Propiedades Públicas Estáticas
 
         /// <summary>
@@ -127,5 +128,6 @@ namespace AeatModelos.Mod193e2019v00
         };
 
         #endregion
+
     }
 }

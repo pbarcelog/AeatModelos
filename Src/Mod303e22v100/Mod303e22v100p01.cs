@@ -1,6 +1,6 @@
 ﻿/*
     Este archivo forma parte del proyecto AeatModelos(R).
-    Copyright (c) 2021 Irene Solutions SL
+    Copyright (c) 2022 Irene Solutions SL
     Autores: Manuel Diago García, Juan Bautista Garcia Traver.
 
     Este programa es software libre; lo puede distribuir y/o modificar
@@ -41,14 +41,15 @@
     Para más información, contacte con la dirección: info@irenesolutions.com    
  */
 
-namespace AeatModelos.Mod303e21v103
+namespace AeatModelos.Mod303e22v100
 {
 
     /// <summary>
-    /// Página 2 modelo 303.  Diseño de registro: DR303e21v103.xlsx.
+    /// Página 1 modelo 303.  Diseño de registro: DR303e22.xlsx.
     /// </summary>
-    public class Mod303e21v103p02 : Mod303e19v10_10.Mod303e19v10_10p02
+    public class Mod303e22v100p01 : Mod303e21v103.Mod303e21v103p01
     {
+
         #region Construtores de Instancia
 
         /// <summary>
@@ -56,22 +57,11 @@ namespace AeatModelos.Mod303e21v103
         /// </summary>
         /// <param name="ejercicio">AAAA: 2018</param>
         /// <param name="periodo">Periodo: 1T, 2T...01, 02...12</param>
-        public Mod303e21v103p02(string ejercicio, string periodo) : base(ejercicio, periodo)
-        {
+        public Mod303e22v100p01(string ejercicio, string periodo) : base(ejercicio, periodo)
+        { 
         }
 
         #endregion
 
-        #region Métodos Públicos de Instancia
-
-
-        /// <summary>
-        /// Actualiza el valor de todos los campos calculados.
-        /// </summary>
-        public override void Calcular()
-        {
-        }
-
-        #endregion
     }
 }

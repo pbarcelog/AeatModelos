@@ -1,6 +1,6 @@
 ﻿/*
     Este archivo forma parte del proyecto AeatModelos(R).
-    Copyright (c) 2021 Irene Solutions SL
+    Copyright (c) 2022 Irene Solutions SL
     Autores: Manuel Diago García, Juan Bautista Garcia Traver.
 
     Este programa es software libre; lo puede distribuir y/o modificar
@@ -43,14 +43,13 @@
 
 using System.Collections.Generic;
 
-namespace AeatModelos.Mod303e21v103
+namespace AeatModelos.Mod303e21v104
 {
+
     /// <summary>
-    /// Página 3 modelo 303.  Diseño de registro: DR303e21v103.xlsx.
-    /// Añade campos reservados para la AEAT y 
-    /// subdivide casilla "Cuotas a compensar de periodos anteriores" respecto a la versión anterior.
+    /// Página 3 modelo 303. 
     /// </summary>
-    public class Mod303e21v103p03 : RegistroModPagina
+    public class Mod303e21v104p03 : Mod303e21v103.Mod303e21v103p03
     {
 
         #region Construtores de Instancia
@@ -60,7 +59,7 @@ namespace AeatModelos.Mod303e21v103
         /// </summary>
         /// <param name="ejercicio">AAAA: 2018</param>
         /// <param name="periodo">Periodo: 1T, 2T...01, 02...12</param>
-        public Mod303e21v103p03(string ejercicio, string periodo) : base(ejercicio, periodo)
+        public Mod303e21v104p03(string ejercicio, string periodo) : base(ejercicio, periodo)
         {
 
             string p = "P03";   // clave página
@@ -125,9 +124,16 @@ namespace AeatModelos.Mod303e21v103
                 {++c,    new RegistroCampo(1,  423,   11,  "An",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "Swift-Bic"                            )}, //032
                 {++c,    new RegistroCampo(1,  434,   34,  "An",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "IBAN"                                 )}, //033
                 // Reservado AEAT.
-                {++c,    new RegistroCampo(1,  468,   17,  "An",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ReservadoAEAT1"                       )}, //034
-                {++c,    new RegistroCampo(1,  485,  583,  "An",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "ReservadoAEAT2"                       )}, //035
-                {++c,    new RegistroCampo(1, 1068,   12,  "An",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,      "</T30303000>"              )}, //036
+                {++c,    new RegistroCampo(1,  468,   17,  "An",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                                   )}, //034                
+                {++c,    new RegistroCampo(1,  485,   70,  "An",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "DevolucionNombreBanco"                )}, //035
+                {++c,    new RegistroCampo(1,  555,   35,  "An",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "DevolucionDireccionBanco"             )}, //036
+                {++c,    new RegistroCampo(1,  590,   30,  "An",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "DevolucionCiudad"                     )}, //037
+                {++c,    new RegistroCampo(1,  620,    2,  "An",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "DevolucionPais"                       )}, //038
+                // "0" Vacía, "1" Cuenta España, "2" Unión Europea SEPA, "3" Resto Países
+                {++c,    new RegistroCampo(1,  622,   1,  "N",        Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "DevolucionMarcaSEPA",      0,   0     )}, //039
+
+                {++c,    new RegistroCampo(1,  623,   445,  "An",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                                   )}, //040
+                {++c,    new RegistroCampo(1, 1068,   12,  "An",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,      "</T30303000>"              )}, //041
             };
         }
 
@@ -140,9 +146,13 @@ namespace AeatModelos.Mod303e21v103
         /// </summary>
         public override void Calcular()
         {
+
+            base.Calcular();
+
         }
 
         #endregion
+
 
     }
 }

@@ -43,9 +43,8 @@
 
 using System.Collections.Generic;
 
-namespace AeatModelos.Mod303e21v103
+namespace AeatModelos.Mod303e21v104
 {
-
     /// <summary>
     /// Descripciones de campos.
     /// </summary>
@@ -58,7 +57,7 @@ namespace AeatModelos.Mod303e21v103
         /// Diccionario con las descripciones de campo
         /// según clave (página.numcampo).
         /// </summary>
-        public static Dictionary<string, string> Den = new Dictionary<string, string>() 
+        public static Dictionary<string, string> Den = new Dictionary<string, string>()
         {
 
             {"P01.001", "Inicio del identificador de modelo y página."},
@@ -169,8 +168,14 @@ namespace AeatModelos.Mod303e21v103
             {"P03.032", "Devolución. SWIFT-BIC"},
             {"P03.033", "Domiciliación/Devolución - IBAN "},
             {"P03.034", "Reservado para la AEAT"},
-            {"P03.035", "Reservado para la AEAT"},
-            {"P03.036", "Indicador de fin de registro"},
+            {"P03.035", "Devolución - Banco/Bank name"},
+            {"P03.036", "Devolución - Dirección del Banco/ Bank address"},
+            {"P03.037", "Devolución - Ciudad/City"},
+            {"P03.038", "Devolución - Código País/Country code"},
+            {"P03.039", "Devolución - Marca SEPA"},
+            {"P03.040", "Reservado para la AEAT"},
+            {"P03.041", "Indicador de fin de registro"},
+
 
             {"P04.001", "Inicio del identificador de modelo y página."},
             {"P04.002", "Modelo."},

@@ -41,10 +41,6 @@
     Para más información, contacte con la dirección: info@irenesolutions.com    
  */
 
-using AeatModelos.Configuracion;
-using System;
-using System.Collections.Generic;
-
 namespace AeatModelos.Comunicaciones
 {
 

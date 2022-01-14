@@ -64,7 +64,7 @@ namespace AeatModelos.Mod190e2017v00
 
             Modelo = "190";
 
-            string p = "P01";   // clave página
+            string p = "001";   // clave página
             int c = 0;          // contador
 
             RegistroCampos = new Dictionary<decimal, IEmpaquetable>()
@@ -92,9 +92,9 @@ namespace AeatModelos.Mod190e2017v00
                 // PERCEPCIONES EN ESPECIE NO DERIVADAS DE INCAPACIDAD LABORAL: VALORACIÓN. SIGNO NEGATIVO: "N". EN OTRO CASO SERÁ UN ESPACIO.
                 {++c,    new RegistroCampo(1, 108,   1,  "An",   Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                                                 )}, //014
                 // PERCEPCIONES EN ESPECIE NO DERIVADAS DE INCAPACIDAD LABORAL: VALORACIÓN
-                {++c,    new RegistroCampo(1, 109,  13,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,    null,     2                                 )}, //015
+                {++c,    new RegistroCampo(1, 109,  13,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "NoIncapacidadEspeciePercepcion",    null,     2     )}, //015
                 // PERCEPCIONES EN ESPECIE NO DERIVADAS DE INCAPACIDAD LABORAL: INGRESOS A CUENTA EFECTUADOS
-                {++c,    new RegistroCampo(1, 122,  13,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                                                 )}, //016
+                {++c,    new RegistroCampo(1, 122,  13,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "NoIncapacidadEspecieRetencion"                      )}, //016
                 // PERCEPCIONES EN ESPECIE NO DERIVADAS DE INCAPACIDAD LABORAL: INGRESOS A CUENTA REPERCUTIDOS
                 {++c,    new RegistroCampo(1, 135,  13,  "Num",  Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                                                 )}, //017
                 // EJERCICIO DEVENGO

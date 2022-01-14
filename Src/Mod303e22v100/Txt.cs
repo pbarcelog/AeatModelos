@@ -41,9 +41,10 @@
     Para más información, contacte con la dirección: info@irenesolutions.com    
  */
 
+
 using System.Collections.Generic;
 
-namespace AeatModelos.Mod303e21v103
+namespace AeatModelos.Mod303e22v100
 {
 
     /// <summary>
@@ -58,7 +59,7 @@ namespace AeatModelos.Mod303e21v103
         /// Diccionario con las descripciones de campo
         /// según clave (página.numcampo).
         /// </summary>
-        public static Dictionary<string, string> Den = new Dictionary<string, string>() 
+        public static Dictionary<string, string> Den = new Dictionary<string, string>()
         {
 
             {"P01.001", "Inicio del identificador de modelo y página."},
@@ -141,36 +142,40 @@ namespace AeatModelos.Mod303e21v103
             {"P03.004", "Fin de identificador de modelo. "},
             {"P03.005", "Información adicional - Entregas intracomunitarias de bienes y servicios [59]"},
             {"P03.006", "Información adicional - Exportaciones y operaciones asimiladas [60]"},
-            {"P03.007", "Información adicional - Operaciones no sujetas o con inversión del sujeto pasivo que originan el derecho a deducción [61]"},
-            {"P03.008", "Reservado para la AEAT"},
-            {"P03.009", "Reservado para la AEAT"},
-            {"P03.010", "Reservado para la AEAT"},
-            {"P03.011", "Reservado para la AEAT"},
-            {"P03.012", "Reservado para la AEAT"},
-            {"P03.013", "Información adicional - Exclusivamente para operaciones de entrega de bienes y prestaciones de servicios a las que resulte de aplicación el régimen especial del criterio de Caja. Importes devengados en período de liquidación según art. 75 LIVA. - Base Imponible [62]"},
-            {"P03.014", "Información adicional - Exclusivamente para operaciones de entrega de bienes y prestaciones de servicios a las que resulte de aplicación el régimen especial del criterio de Caja. Importes devengados en período de liquidación según art. 75 LIVA. - Cuota [63]"},
-            {"P03.015", "Información adicional - Exclusivamente para operaciones de entrega de bienes y prestaciones de servicios a las que resulte de aplicación el régimen especial del criterio de Caja. Cuotas de IVA soportados en operaciones que tributen por el régimen especial del criterio de caja conforme a la regla general de devengo contenida en el artículo 75 LIVA. - Base Imponible [74]"},
-            {"P03.016", "Información adicional - Exclusivamente para operaciones de entrega de bienes y prestaciones de servicios a las que resulte de aplicación el régimen especial del criterio de Caja. Cuotas totales de IVA soportados en operaciones que tributen por el régimen especial del criterio de caja conforme a la regla general de devengo contenida en el artículo 75 de LIVA. - Cuota [75]"},
-            {"P03.017", "Resultado - Regularización cuotas art. 80.cinco.5ª LIVA  [76]"},
-            {"P03.018", "Resultado - Suma de resultados ( [46] + [58] + [76] ) [64]"},
-            {"P03.019", "Resultado - % Atribuible a la Administración del Estado [65]"},
-            {"P03.020", "Resultado - Atribuible a la Administración del Estado [66]"},
-            {"P03.021", "Resultado - IVA a la importación liquidado por la Aduana pendiente de ingreso  [77]"},
-            {"P03.022", "Resultado - Cuotas a compensar pendientes de periodos anteriores [110]"},
-            {"P03.023", "Cuotas a compensar de periodos anteriores aplicadas en este periodo [78]"},
-            {"P03.024", "Cuotas a compensar de periodos previos pendientes para periodos posteriores ([110] - [78]) [87]"},
-            {"P03.025", "Resultado - Exclusivamente para sujetos pasivos que tributan conjuntamente a la Administración del Estado y a las Diputaciones Forales Resultado de la regularización anual [68]"},
-            {"P03.026", "Resultado - Resultado ( [66] + [77] - [78] + [68] ) [69]"},
-            {"P03.027", "Resultado - A deducir [70]"},
-            {"P03.028", "Resultado - Resultado de la liquidación ( [69] - [70] ) [71]"},
-            {"P03.029", "Declaración complementaria"},
-            {"P03.030", "Número justificante declaración anterior"},
-            {"P03.031", "Declaración Sin actividad"},
-            {"P03.032", "Devolución. SWIFT-BIC"},
-            {"P03.033", "Domiciliación/Devolución - IBAN "},
-            {"P03.034", "Reservado para la AEAT"},
-            {"P03.035", "Reservado para la AEAT"},
-            {"P03.036", "Indicador de fin de registro"},
+            {"P03.007", "Operaciones no sujetas por reglas de localización (excepto las incluidas en la casilla 123) [120]"},
+            {"P03.008", "Operaciones sujetas con inversión del sujeto pasivo [122]"},
+            {"P03.009", "OSS. Operaciones no sujetas por reglas de localización acogidas a la OSS [123]"},
+            {"P03.010", "OSS. Operaciones sujetas y acogidas a la OSS [124]"},
+            {"P03.011", "Información adicional - Exclusivamente para operaciones de entrega de bienes y prestaciones de servicios a las que resulte de aplicación el régimen especial del criterio de Caja. Importes devengados en período de liquidación según art. 75 LIVA. - Base Imponible [62]"},
+            {"P03.012", "Información adicional - Exclusivamente para operaciones de entrega de bienes y prestaciones de servicios a las que resulte de aplicación el régimen especial del criterio de Caja. Importes devengados en período de liquidación según art. 75 LIVA. - Cuota [63]"},            
+            {"P03.013", "Información adicional - Exclusivamente para operaciones de entrega de bienes y prestaciones de servicios a las que resulte de aplicación el régimen especial del criterio de Caja. Cuotas de IVA soportados en operaciones que tributen por el régimen especial del criterio de caja conforme a la regla general de devengo contenida en el artículo 75 LIVA. - Base Imponible [74]"},
+            {"P03.014", "Información adicional - Exclusivamente para operaciones de entrega de bienes y prestaciones de servicios a las que resulte de aplicación el régimen especial del criterio de Caja. Cuotas totales de IVA soportados en operaciones que tributen por el régimen especial del criterio de caja conforme a la regla general de devengo contenida en el artículo 75 de LIVA. - Cuota [75]"},
+            {"P03.015", "Resultado - Regularización cuotas art. 80.cinco.5ª LIVA  [76]"},
+            {"P03.016", "Resultado - Suma de resultados ( [46] + [58] + [76] ) [64]"},
+            {"P03.017", "Resultado - % Atribuible a la Administración del Estado [65]"},
+            {"P03.018", "Resultado - Atribuible a la Administración del Estado [66]"},
+            {"P03.019", "Resultado - IVA a la importación liquidado por la Aduana pendiente de ingreso  [77]"},
+            {"P03.020", "Resultado - Cuotas a compensar pendientes de periodos anteriores [110]"},
+            {"P03.021", "Cuotas a compensar de periodos anteriores aplicadas en este periodo [78]"},
+            {"P03.022", "Cuotas a compensar de periodos previos pendientes para periodos posteriores ([110] - [78]) [87]"},
+            {"P03.023", "Resultado - Exclusivamente para sujetos pasivos que tributan conjuntamente a la Administración del Estado y a las Diputaciones Forales Resultado de la regularización anual [68]"},
+            {"P03.024", "Resultado - Resultado ( [66] + [77] - [78] + [68] ) [69]"},
+            {"P03.025", "Resultado - A deducir [70]"},
+            {"P03.026", "Resultado - Resultado de la liquidación ( [69] - [70] ) [71]"},
+            {"P03.027", "Declaración complementaria"},
+            {"P03.028", "Número justificante declaración anterior"},
+            {"P03.029", "Declaración Sin actividad"},
+            {"P03.030", "Devolución. SWIFT-BIC"},
+            {"P03.031", "Domiciliación/Devolución - IBAN "},
+            {"P03.032", "Reservado para la AEAT"},
+            {"P03.033", "Devolución - Banco/Bank name"},
+            {"P03.034", "Devolución - Dirección del Banco/ Bank address"},
+            {"P03.035", "Devolución - Ciudad/City"},
+            {"P03.036", "Devolución - Código País/Country code"},
+            {"P03.037", "Devolución - Marca SEPA"},
+            {"P03.038", "Reservado para la AEAT"},
+            {"P03.039", "Indicador de fin de registro"},
+
 
             {"P04.001", "Inicio del identificador de modelo y página."},
             {"P04.002", "Modelo."},
@@ -289,5 +294,6 @@ namespace AeatModelos.Mod303e21v103
         #endregion
 
     }
+
 
 }

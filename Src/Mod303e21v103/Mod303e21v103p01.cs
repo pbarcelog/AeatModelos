@@ -45,12 +45,14 @@ using System.Collections.Generic;
 
 namespace AeatModelos.Mod303e21v103
 {
+
     /// <summary>
     /// Página 1 modelo 303.  Diseño de registro: DR303e21v103.xlsx.
     /// Casillas reordenadas y unifica casilla "Apellidos" con "Nombre" respecto a la versión anterior.
     /// </summary>
     public class Mod303e21v103p01 : RegistroModPagina
     {
+
         #region Construtores de Instancia
 
         /// <summary>
@@ -111,13 +113,13 @@ namespace AeatModelos.Mod303e21v103
                 {++c,    new RegistroCampo(1, 315,   17,  "N",       Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "14" ,                     0,   2, true)}, //038
                 {++c,    new RegistroCampo(1, 332,   17,  "N",       Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "15" ,                     0,   2, true)}, //039
                 {++c,    new RegistroCampo(1, 349,   17,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "16" ,                     0           )}, //040
-                {++c,    new RegistroCampo(1, 366,    5,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "17" ,                     5.2         )}, //041
+                {++c,    new RegistroCampo(1, 366,    5,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "17" ,                     0           )}, //041
                 {++c,    new RegistroCampo(1, 371,   17,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "18" ,                     0           )}, //042
                 {++c,    new RegistroCampo(1, 388,   17,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "19" ,                     0           )}, //043
                 {++c,    new RegistroCampo(1, 405,    5,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "20" ,                     1.4         )}, //044
                 {++c,    new RegistroCampo(1, 410,   17,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "21" ,                     0           )}, //045
                 {++c,    new RegistroCampo(1, 427,   17,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "22" ,                     0           )}, //046
-                {++c,    new RegistroCampo(1, 444,    5,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "23" ,                     0           )}, //047
+                {++c,    new RegistroCampo(1, 444,    5,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "23" ,                     5.2         )}, //047
                 {++c,    new RegistroCampo(1, 449,   17,  "Num",     Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "24" ,                     0           )}, //048
                 {++c,    new RegistroCampo(1, 466,   17,  "N",       Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "25" ,                     0,   2, true)}, //049
                 {++c,    new RegistroCampo(1, 483,   17,  "N",       Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    "26" ,                     0,   2, true)}, //050
@@ -145,6 +147,7 @@ namespace AeatModelos.Mod303e21v103
                 {++c,    new RegistroCampo(1,1440,   13,  "An",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null                                   )}, //072
                 {++c,    new RegistroCampo(1,1453,   12,  "An",      Txt.Den[$"{p}.{("" + c).PadLeft(3,'0')}"],    null,      "</T30301000>"              )}, //073
             };
+
         }
 
         #endregion
@@ -159,5 +162,6 @@ namespace AeatModelos.Mod303e21v103
         }
 
         #endregion
+
     }
 }

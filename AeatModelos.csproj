@@ -123,6 +123,16 @@
     <Compile Include="Src\Mod303e21v103\Mod303e21v103p04.cs" />
     <Compile Include="Src\Mod303e21v103\Mod303e21v103p05.cs" />
     <Compile Include="Src\Mod303e21v103\Txt.cs" />
+    <Compile Include="Src\Mod303e21v104\Mod303e21v104.cs" />
+    <Compile Include="Src\Mod303e21v104\Mod303e21v104p03.cs" />
+    <Compile Include="Src\Mod303e21v104\Txt.cs" />
+    <Compile Include="Src\Mod303e22v100\Mod303e22v100.cs" />
+    <Compile Include="Src\Mod303e22v100\Mod303e22v100p01.cs" />
+    <Compile Include="Src\Mod303e22v100\Mod303e22v100p02.cs" />
+    <Compile Include="Src\Mod303e22v100\Mod303e22v100p03.cs" />
+    <Compile Include="Src\Mod303e22v100\Mod303e22v100p04.cs" />
+    <Compile Include="Src\Mod303e22v100\Mod303e22v100p05.cs" />
+    <Compile Include="Src\Mod303e22v100\Txt.cs" />
     <Compile Include="Src\Mod347e20v00\Mod347e20v00.cs" />
     <Compile Include="Src\Mod347e20v00\Mod347e20v00p01.cs" />
     <Compile Include="Src\Mod347e20v00\Mod347e20v00p02.cs" />

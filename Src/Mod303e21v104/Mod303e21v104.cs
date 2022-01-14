@@ -41,14 +41,17 @@
     Para más información, contacte con la dirección: info@irenesolutions.com    
  */
 
-namespace AeatModelos.Mod303e21v103
+using System;
+
+namespace AeatModelos.Mod303e21v104
 {
 
     /// <summary>
-    /// Página 2 modelo 303.  Diseño de registro: DR303e21v103.xlsx.
+    /// Página 0 modelo 303. 
     /// </summary>
-    public class Mod303e21v103p02 : Mod303e19v10_10.Mod303e19v10_10p02
+    public class Mod303e21v104 : Mod303e21v103.Mod303e21v103
     {
+
         #region Construtores de Instancia
 
         /// <summary>
@@ -56,22 +59,38 @@ namespace AeatModelos.Mod303e21v103
         /// </summary>
         /// <param name="ejercicio">AAAA: 2018</param>
         /// <param name="periodo">Periodo: 1T, 2T...01, 02...12</param>
-        public Mod303e21v103p02(string ejercicio, string periodo) : base(ejercicio, periodo)
+        public Mod303e21v104(string ejercicio, string periodo) : base(ejercicio, periodo)
         {
+
+            PaginasMapa[3] = "AeatModelos.Mod303e21v104.Mod303e21v104p03";
+
         }
 
         #endregion
 
-        #region Métodos Públicos de Instancia
-
+        #region Métodos Privados de Instancia
 
         /// <summary>
-        /// Actualiza el valor de todos los campos calculados.
+        /// En caso de que la declaración sea a devolver realiza las operaciones necesarias.
         /// </summary>
-        public override void Calcular()
+        protected override void PreparaDevolucion()
         {
+
+            IPagina modPagina1 = RecuperaPagina(1, 0, false) as IPagina;
+            IPagina modPagina3 = RecuperaPagina(3, 0, false) as IPagina;
+
+            if (modPagina3 == null)
+                throw new ArgumentException($"Se ha seleccionado devolución ('D') como tipo de declaración y no se ha proporcionado IBAN");
+
+            if ($"{modPagina3["IBAN"].Valor}".Trim() == "")
+                throw new ArgumentException($"Se ha seleccionado devolución ('D') como tipo de declaración y no se ha proporcionado IBAN");
+
+            modPagina3["DevolucionMarcaSEPA"].Valor = 1;
+
         }
 
         #endregion
+
+
     }
 }
