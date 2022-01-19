@@ -158,7 +158,7 @@ namespace AeatModelos.Mod303e21v103
 
             // Me aseguro de informar los tipos necesarios.
 
-            int[] clavesCuota = new int[] { 3, 6, 9, 20, 23 };
+            int[] clavesCuota = new int[] { 3, 6, 9, 21, 24 };
             decimal[] tipos = new decimal[] { 4m, 10m, 21m, 1.4m, 5.2m };
 
             for (int k = 0; k < clavesCuota.Length; k++)
