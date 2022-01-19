@@ -49,6 +49,7 @@ namespace AeatModelos.Mod303e21v103
     /// </summary>
     public class Mod303e21v103p02 : Mod303e19v10_10.Mod303e19v10_10p02
     {
+
         #region Construtores de Instancia
 
         /// <summary>
@@ -73,5 +74,6 @@ namespace AeatModelos.Mod303e21v103
         }
 
         #endregion
+
     }
 }
